@@ -1,6 +1,9 @@
+import { getItemsCart } from "../utils/itemsCart";
+
 const initialState = {
   PelisAll: [],
   ProductAll: [],
+  TotalProductAll: [],
 
   GenresAll: [],
   CastAll: [],
@@ -19,8 +22,11 @@ const initialState = {
   ProductComments: [],
 
   FirebaseUsers: [],
+  newPic: [],
   DetailedUser: [],
   cartUrl:[],
+  cartID:[],
+  Retrive:[],
   itemsCart: JSON.parse(localStorage.getItem("items")) || [],
   // numberOfTickets: [],
   // costoTotalTickets: []
@@ -59,6 +65,12 @@ const reducer = (state = initialState, action) => {
         PelisDetails: action.payload.detis,
       };
     }
+    case "GETRETRIVE": {
+      return {
+        ...state,
+        Retrive: action.payload.retr,
+      };
+    }
     case "DETAILEDPRODUCT": {
       return {
         ...state,
@@ -70,26 +82,27 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
 
-        PelisAll:action.payload.pelis,
+        PelisAll: action.payload.pelis,
 
       };
     }
     case "ALLPRODUCTS": {
       return {
         ...state,
-        ProductAll:action.payload.produs,
+        ProductAll: action.payload.produs,
+        TotalProductAll: action.payload.produs,
       };
     }
     case "FUTURERELEASES": {
       return {
         ...state,
-        NextReleases:action.payload.rele,
+        NextReleases: action.payload.rele,
       };
     }
-    case "CLEANCOMMENTS":{
+    case "CLEANCOMMENTS": {
       return {
         ...state,
-        PelisComments:[]
+        PelisComments: []
       }
     }
     case "EDITMOVIEINFO": {
@@ -219,39 +232,39 @@ const reducer = (state = initialState, action) => {
       };
     }
     case "POSTBUY": {
-      console.log(action.payload)
+      console.log('Retorno recibido', action.payload)
       return{
         ...state,
-        cartUrl: action.payload
+        cartUrl: [...action.payload]
       }
     }
 
     case "PELI_NAME":
-      state = initialState;
+      //state = initialState;
       return {
         ...state,
         PelisAll: action.payload,
       };
     case "DELETEMOVIE":
-        return {
-          ...state,
-          PelisAll:state.PelisAll.filter(e=> e.id!== action.payload)
-        }
+      return {
+        ...state,
+        PelisAll: state.PelisAll.filter(e => e.id !== action.payload)
+      }
     case "DELETEGENRE":
-         return {
-          ...state,
-          GenresAll:state.GenresAll.filter(e=>e.id!==action.payload)
-         }
+      return {
+        ...state,
+        GenresAll: state.GenresAll.filter(e => e.id !== action.payload)
+      }
     case "DELETECAST":
-         return {
-          ...state,
-          CastAll:state.CastAll.filter(e=>e.id!== action.payload)
-         }
+      return {
+        ...state,
+        CastAll: state.CastAll.filter(e => e.id !== action.payload)
+      }
     case "DELETEPRODUCT":
-          return {
-            ...state,
-            ProductAll:state.ProductAll.filter(e=>e.id!== action.payload)
-          }
+      return {
+        ...state,
+        ProductAll: state.ProductAll.filter(e => e.id !== action.payload)
+      }
     case "FILTER_REVIEWBYRATING":
       let comentariosByRating;
       if (action.payload === "asc") {
@@ -301,7 +314,7 @@ const reducer = (state = initialState, action) => {
         FirebaseUsers: action.payload.users
       }
     }
-    case "CREATE_USER": {
+   case "CREATE_USER": {
       return {
         ...state
       }
@@ -309,26 +322,68 @@ const reducer = (state = initialState, action) => {
     case "DETAILED_USER": {
       return {
         ...state,
-      DetailedUser: action.payload.details,
+        DetailedUser: action.payload.details,
       }
     }
 
     case "DELETE_USER":
-         return {
-          ...state,
-          FirebaseUsers:state.FirebaseUsers.filter(e=>e.id!== action.payload)
-         }
+      return {
+        ...state,
+        FirebaseUsers: state.FirebaseUsers.filter(e => e.id !== action.payload)
+      }
 
     case "UPDATE_USER": {
+      console.log('holaaa', action.payload)
       return {
-        ...state
+        ...state,
+        newPic: action.payload
       }
     }
 
     case "UPDATE_CART": {
       return {
         ...state,
-        itemsCart: [...state.itemsCart, action.payload]
+        itemsCart: action.payload
+      }
+    }
+
+    case "FILTER_BYPRICE": {
+      let ProductsByPrice;
+      if (action.payload === "asc") {
+        ProductsByPrice = state.ProductAll.sort(function (a, b) {
+          if (a.precio < b.precio) {
+            return -1;
+          }
+          if (a.precio > b.precio) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+      if (action.payload === "des") {
+        ProductsByPrice = state.ProductAll.sort(function (a, b) {
+          if (a.precio > b.precio) {
+            return -1;
+          }
+          if (a.precio < b.precio) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+
+      return {
+        ...state,
+        ProductAll: ProductsByPrice
+      }
+    }
+
+    case "FILTER_BYCOMBO": {
+      const totalProductAll = state.TotalProductAll;
+      const comboFiltered = action.payload === "true" ? totalProductAll.filter(p => p.isCombo == true) : totalProductAll.filter(p => p.isCombo == false)
+      return {
+        ...state,
+        ProductAll: action.payload === "all" ? totalProductAll : comboFiltered
       }
     }
 

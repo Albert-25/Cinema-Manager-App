@@ -13,7 +13,7 @@ const startSession = async (req, res) => {
         price: e.price,
         quantity: e.quantity
     }))
-    console.log("Finale", Finale)
+    // console.log("Finale", Finale)
     const session = await stripe.checkout.sessions.create({
 
         line_items: Finale
@@ -22,8 +22,22 @@ const startSession = async (req, res) => {
         success_url: `${YOUR_DOMAIN}/success`,
         cancel_url: `${YOUR_DOMAIN}/cancel`,
     });
-    res.send(session.url)
-    console.log(session.url);
+    let varrita = []
+    varrita.push(session.url)
+    varrita.push(session.id)
+    res.send(varrita)
+
+    // console.log("Sesion", session);
+
+}
+
+const RetriveSesion = async (req, res) => {
+    console.log("bicennnnnnnnnnn", req.params.id)
+    const session = await stripe.checkout.sessions.retrieve(
+        req.params.id
+    );
+    console.log("sesioooooon",session)
+    res.send(session)
 }
 
 
@@ -70,6 +84,7 @@ router.get("/", getAll);
 router.post("/", insertProduct)
 router.post("/prices", insertPrice)
 router.post("/create-checkout-session", startSession)
+router.get("/retrive/:id", RetriveSesion)
 
 module.exports = router;
 

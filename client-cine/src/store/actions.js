@@ -22,6 +22,7 @@ export function postMovies(inputs) {
       );
    };
 }
+
 export const postBuy = (payload) => {
    console.log("payload", payload);
    return async (dispatch) => {
@@ -33,6 +34,21 @@ export const postBuy = (payload) => {
          type: "POSTBUY",
          payload: json.data,
       });
+   };
+};
+
+export const getRetrive = (id) => {
+   console.log("esoty enstadno al recuer", id);
+   return async (dispatch) => {
+      const response = await axios.get(
+         `http://localhost:3001/testStripe/retrive/${id}`
+      );
+      if (response?.data) {
+         dispatch({
+            type: "GETRETRIVE",
+            payload: { retr: response.data },
+         });
+      }
    };
 };
 
@@ -334,7 +350,6 @@ export const editMovie = (id, data) => {
 export const filterReviewByRating = (payload) => {
    return {
       type: "FILTER_REVIEWBYRATING",
-
       payload,
    };
 };
@@ -419,13 +434,32 @@ export const allUsers = (payload) => {
    };
 };
 
-export const createUser = (payload) => {
-   return async (dispatch) => {
-      await axios.post("http://localhost:3001/firebase");
+/*export const createUser = (data) => {
+  console.log('executing')
+  return  (dispatch) => {
+  console.log('executing2')
 
-      return dispatch({
-         type: "CREATE_USER",
-      });
+     axios.post(
+      `http://localhost:3001/firebase/create`,
+      data
+    );
+    return dispatch({
+
+    })
+  }
+}*/
+
+export const createUser = (payload) => {
+   console.log("hola", payload);
+   return async (dispatch) => {
+      console.log("entramos");
+
+      const json = await axios.post(
+         "http://localhost:3001/firebase/create",
+         payload
+      );
+
+      return dispatch(allUsers());
    };
 };
 
@@ -453,6 +487,7 @@ export const deleteUser = (id) => {
 };
 
 export const updateUser = (id, data) => {
+   console.log("here");
    return async (dispatch) => {
       const json = await axios.post(
          `http://localhost:3001/firebase/update/${id}`,
@@ -464,3 +499,5 @@ export const updateUser = (id, data) => {
       });
    };
 };
+
+export const updateCart = (payload) => ({ type: "UPDATE_CART", payload });

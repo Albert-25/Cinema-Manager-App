@@ -11,3 +11,6 @@ Moverse al directorio _api-cine_, luego ejecutar el siguiente comando para insta
 ```sh
 npm i
 ```
+## Requerimientos
+
+- PosgreSQL

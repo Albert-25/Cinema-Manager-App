@@ -17,8 +17,8 @@ const ProximosEstrenos = require("./proximosEstrenos.js");
 //   return res.json({ msg: "pong" });
 // });
 
-routes.use((_req, res) => res.status(404).json("Not found3"));
-routes.use(handleErrors); // Error catching endware.
+
+ // Error catching endware.
 
 routes.use("/pin", Pin);
 routes.use("/peliculas", Peliculas);
@@ -30,4 +30,6 @@ routes.use("/funcion", Funcion);
 routes.use("/generos", Generos);
 routes.use("/proximosEstrenos", ProximosEstrenos);
 
+routes.use((_req, res) => res.status(404).json("Not found3"));
+routes.use(handleErrors);
 module.exports = { routes };

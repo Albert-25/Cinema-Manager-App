@@ -1,19 +1,21 @@
 const { DataTypes } = require("sequelize");
 
-
 module.exports = (sequelize) => {
   sequelize.define("ProximosEstrenos", {
     titulo: {
       type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
     sinopsis: {
       type: DataTypes.TEXT,
     },
     poster: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     duracion: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     clasificacion: {
       type: DataTypes.STRING,

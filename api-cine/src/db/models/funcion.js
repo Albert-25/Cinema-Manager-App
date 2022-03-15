@@ -1,16 +1,19 @@
 const { DataTypes } = require("sequelize");
 
-
 module.exports = (sequelize) => {
   sequelize.define("Funcion", {
     sala: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true,
     },
     horario: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     asientos: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
   });
 };

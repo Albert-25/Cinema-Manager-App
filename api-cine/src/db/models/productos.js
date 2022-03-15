@@ -1,22 +1,27 @@
 const { DataTypes } = require("sequelize");
 
-
 module.exports = (sequelize) => {
   sequelize.define("Productos", {
     nombreProducto: {
       type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
     descripcion: {
       type: DataTypes.TEXT,
+      allowNull: false,
     },
     precio: {
-      type: DataTypes.STRING,
+      type: DataTypes.FLOAT,
+      allowNull: false,
     },
     stock: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     isCombo: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
     },
   });
 };

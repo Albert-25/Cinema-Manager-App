@@ -1,12 +1,9 @@
 const routes = require('express').Router()
 const handleErrors = require('./handleErrors')
-const { User } = require('../db/models/user')
+const { logIn } = require('./login')
 
-routes.get('/pin', (_req,res) => {
-  return res.json({ msg: 'pong'})
-})
-
-routes.use((_req, res) => res.status(404).json('Not found3'))
-routes.use(handleErrors) // Error catching endware.
+routes.use('/login', logIn)
+routes.use((_req, res) => res.status(404).json('Not found'))
+routes.use(handleErrors)
 
 module.exports = { routes }

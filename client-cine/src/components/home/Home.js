@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Navbar from '../Navbar/navbar.jsx'
+
 import {
   FalseInfo,
 } from "../../store/actions";
-import { useSelector, useDispatch } from "react-redux";
+
 import Movies from "../Movies/Movies.js"
 import Pagination from "../Movies/Pagination"
 
@@ -38,6 +43,14 @@ export const Home = () => {
 
   return (
     <div>
+      <div>
+        <React.Fragment>
+          <CssBaseline />
+          <Container maxWidth="ls" sx={{ height: "auto" }}>
+            <Navbar />
+          </Container>
+        </React.Fragment>
+      </div>
       <div className="Home__Wellcome!">
         <h1>Wellcome!!!</h1>
       </div>
@@ -54,10 +67,5 @@ export const Home = () => {
       </div>
 
     </div>
-
-
-
-
-
   )
 }

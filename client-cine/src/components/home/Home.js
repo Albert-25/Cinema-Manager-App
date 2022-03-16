@@ -3,16 +3,61 @@ import {
   FalseInfo,
 } from "../../store/actions";
 import { useSelector, useDispatch } from "react-redux";
+import Movies from "../Movies/Movies.js"
+import Pagination from "../Movies/Pagination"
 
 export const Home = () => {
-//*dispatch de prueba para el holiwis que luego sera usado en mostar todas laspelis
-  const dispatch = useDispatch(); 
+  //*dispatch de prueba para las pelis falas que luego sera usado en mostar todas laspelis
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(FalseInfo());
   }, [dispatch]);
   const pelisfalsas = useSelector((state) => state.PelisAll);
-  console.log(pelisfalsas) 
+  const [container, setContainer] = useState([]);
+
+  React.useEffect(() => { //luego se añadira filter aqui para decidir si se muestran los resultados filtrados o las pelis
+    if (pelisfalsas !== 0) {
+      setContainer(pelisfalsas);
+    }
+  }, [pelisfalsas]);
+
+  console.log(pelisfalsas)
   //*
 
-  return <h1>Wellcome!!!</h1>
+  //*paginado 
+  const [loading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [moviesPerPage] = useState(2);
+
+  const indexOfLastPost = currentPage * moviesPerPage;
+  const indexOfFirstPost = indexOfLastPost - moviesPerPage;
+  const currentPost = container.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  //*
+
+  return (
+    <div>
+      <div className="Home__Wellcome!">
+        <h1>Wellcome!!!</h1>
+      </div>
+      <div className="Home__PelisContainer">
+        <Movies moviesInfo={currentPost} loading={loading} />
+      </div>
+      <div>
+        <Pagination
+          className="Home__pagination__li"
+          moviesPerPage={moviesPerPage}
+          totalMovies={container.length}
+          paginate={paginate}
+        />
+      </div>
+
+    </div>
+
+
+
+
+
+  )
 }

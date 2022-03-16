@@ -1,3 +1,12 @@
+import MapView from '../mapView/MapView.js'
+
+
+
 export const Home = () => {
-  return <h1>Wellcome!!!</h1>
-}
+  return (
+  <div>
+      <h1>Wellcome!!!</h1>
+      <MapView />
+</div>
+  );
+};

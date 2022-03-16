@@ -17,4 +17,4 @@ const Comentarios = sequelize.define("Comentarios", {
   },
 });
 
-module.exports = { Comentarios };
+module.exports = Comentarios;

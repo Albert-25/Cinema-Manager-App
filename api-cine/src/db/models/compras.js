@@ -24,4 +24,4 @@ Compra.belongsToMany(Pelicula, { through: "CompraPelicula" });
 Productos.belongsToMany(Compra, { through: "CompraProductos" });
 Compra.belongsToMany(Productos, { through: "CompraProductos" });
 
-module.exports = { Compra };
+module.exports = Compra;

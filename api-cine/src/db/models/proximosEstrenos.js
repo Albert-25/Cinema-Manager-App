@@ -43,4 +43,4 @@ ProximosEstrenos.belongsToMany(Actores, { through: "ProximosEstrenosActores" });
 Generos.belongsToMany(ProximosEstrenos, { through: "ProximosEstrenosGeneros" });
 ProximosEstrenos.belongsToMany(Generos, { through: "ProximosEstrenosGeneros" });
 
-module.exports = { ProximosEstrenos };
+module.exports = ProximosEstrenos;

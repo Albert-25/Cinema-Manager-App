@@ -10,4 +10,4 @@ const Generos = sequelize.define("Generos", {
   },
 });
 
-module.exports = { Generos };
+module.exports = Generos;

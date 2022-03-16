@@ -48,10 +48,10 @@ const Pelicula = sequelize.define("Pelicula", {
   },
 });
 
-Actores.belongsToMany(Pelicula, { through: "PeliculaActor" });
-Pelicula.belongsToMany(Actores, { through: "PeliculaActor" });
-
 Generos.belongsToMany(Pelicula, { through: "PeliculaGenero" });
 Pelicula.belongsToMany(Generos, { through: "PeliculaGenero" });
 
-module.exports = { Pelicula };
+Actores.belongsToMany(Pelicula, { through: "PeliculaActor" });
+Pelicula.belongsToMany(Actores, { through: "PeliculaActor" });
+
+module.exports = Pelicula;

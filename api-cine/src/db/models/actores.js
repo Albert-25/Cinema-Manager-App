@@ -10,4 +10,4 @@ const Actores = sequelize.define("Actores", {
   },
 });
 
-module.exports = { Actores };
+module.exports = Actores;

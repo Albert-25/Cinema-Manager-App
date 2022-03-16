@@ -22,4 +22,4 @@ const Funcion = sequelize.define("Funcion", {
 Pelicula.belongsToMany(Funcion, { through: "FuncionPelicula" });
 Funcion.belongsToMany(Pelicula, { through: "FuncionPelicula" });
 
-module.exports = { Funcion };
+module.exports = Funcion;

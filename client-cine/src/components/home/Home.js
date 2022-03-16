@@ -1,3 +1,10 @@
+import SearchBar from "../SearchBar"
+
 export const Home = () => {
-  return <h1>Wellcome!!!</h1>
+  return  <div>
+  <h1>Cine!!!</h1>
+ 
+    <SearchBar/>
+    </div> 
+   
 }

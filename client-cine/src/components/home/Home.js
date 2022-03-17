@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from '../Navbar/navbar.jsx'
+import MapView from '../mapView/MapView.js'
 
 import {
   FalseInfo,
@@ -66,7 +67,9 @@ export const Home = () => {
           paginate={paginate}
         />
       </div>
-
+      <div className='mapContainer'>
+      <MapView />
+      </div>
     </div>
   )
 }

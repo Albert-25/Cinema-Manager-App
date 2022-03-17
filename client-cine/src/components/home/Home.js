@@ -12,6 +12,7 @@ import Movies from "../Movies/Movies.js"
 import Pagination from "../Movies/Pagination"
 
 export const Home = () => {
+
   //*dispatch de prueba para las pelis falas que luego sera usado en mostar todas laspelis
   const dispatch = useDispatch();
   useEffect(() => {

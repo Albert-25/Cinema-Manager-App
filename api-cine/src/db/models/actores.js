@@ -1,11 +1,12 @@
+const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
 
-module.exports = (sequelize) => {
-  sequelize.define("Actores", {
-    nombre: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-  });
-};
+const Actores = sequelize.define("Actores", {
+  nombre: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+});
+
+module.exports = { Actores };

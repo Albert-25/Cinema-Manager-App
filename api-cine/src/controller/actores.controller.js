@@ -2,7 +2,6 @@ const Actores = require("../db/models/actores");
 
 //desarrollar aqui las funciones para los pedidos a la base de datos
 
-//getAll devuelve todos los actores de la DB
 const getAll = async (req, res, next) => {
   try {
     let pedidoDB = await Actores.findAll();
@@ -12,7 +11,6 @@ const getAll = async (req, res, next) => {
   }
 };
 
-//createActor crea un nuevo actor en la DB
 const createActor = async (req, res, next) => {
   const { Actor } = req.body;
   try {
@@ -25,8 +23,6 @@ const createActor = async (req, res, next) => {
   }
 };
 
-//editActor recibe un id de actor y un nombre nuevo por body,
-//busca el actor por id y edita su nombre
 
 const editActor = async (req, res, next) => {
   const id = req.params.id;
@@ -44,8 +40,6 @@ const editActor = async (req, res, next) => {
   }
 };
 
-//deleteActor recibe un id de actor por body,
-//busca el actor por id y lo elimina
 const deleteActor = async (req, res, next) => {
   const id = req.params.id;
   try {

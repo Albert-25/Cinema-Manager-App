@@ -1,7 +1,6 @@
 const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
-const { bcrypt } = require("bcrypt");
-const Pelicula = require("./pelicula.js");
+const { Pelicula } = require("./pelicula.js");
 
 const Funcion = sequelize.define("Funcion", {
   sala: {
@@ -22,4 +21,4 @@ const Funcion = sequelize.define("Funcion", {
 Pelicula.belongsToMany(Funcion, { through: "FuncionPelicula" });
 Funcion.belongsToMany(Pelicula, { through: "FuncionPelicula" });
 
-module.exports = Funcion;
+module.exports = { Funcion };

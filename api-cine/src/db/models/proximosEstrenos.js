@@ -1,8 +1,7 @@
 const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
-const { bcrypt } = require("bcrypt");
-const Actores = require("./actores.js");
-const Generos = require("./generos.js");
+const { Actores } = require("./actores.js");
+const { Generos } = require("./generos.js");
 
 const ProximosEstrenos = sequelize.define("ProximosEstrenos", {
   titulo: {
@@ -43,4 +42,4 @@ ProximosEstrenos.belongsToMany(Actores, { through: "ProximosEstrenosActores" });
 Generos.belongsToMany(ProximosEstrenos, { through: "ProximosEstrenosGeneros" });
 ProximosEstrenos.belongsToMany(Generos, { through: "ProximosEstrenosGeneros" });
 
-module.exports = ProximosEstrenos;
+module.exports = { ProximosEstrenos };

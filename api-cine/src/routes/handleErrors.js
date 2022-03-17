@@ -1,5 +1,13 @@
 const ERRORS = {
-  Error: (res, err) => res.status(404).json({status: 404, msg: err})
+  Error: (res, err) => {
+    res.status(404).json({ [err.name]: err.message})
+  },
+  SequelizeUniqueConstraintError: (res, err) => {
+    res.status(406).json({ [err.name]: err.errors[0].message })
+  },
+  JsonWebTokenError: (res, err) => {
+    res.status(406).json(err)
+  }
 }
 
 module.exports = (err, _req, res, _next) => {

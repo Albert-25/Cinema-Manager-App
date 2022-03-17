@@ -3,11 +3,15 @@ const router = Router();
 
 //importar funciones desde el controlador aqui
 const {
-  newMovie,
+  crearEstreno,
   getAll,
+  editarEstreno,
+  eliminarEstreno,
 } = require("../controller/proximosEstrenos.controller");
 
 router.get("/", getAll);
-router.post("/", newMovie);
+router.post("/", crearEstreno);
+router.put("/:id", editarEstreno);
+router.delete("/:id", eliminarEstreno);
 
 module.exports = router;

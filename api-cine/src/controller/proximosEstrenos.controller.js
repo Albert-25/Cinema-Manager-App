@@ -1,4 +1,4 @@
-const ProximosEstrenos = require("../db/models/proximosEstrenos");
+const { ProximosEstrenos } = require("../db/models/proximosEstrenos");
 const Generos = require("../db/models/generos");
 const Actores = require("../db/models/actores");
 
@@ -15,10 +15,10 @@ const getAll = async (req, res, next) => {
   }
 };
 
-const newMovie = async (req, res, next) => {
+const crearEstreno = async (req, res, next) => {
   const { movie, genreIds, actorsIds } = req.body;
 
-//   console.log("movie: " + movie,"genres: " + genreIds, "actors: " +  actorsIds);
+  //   console.log("movie: " + movie,"genres: " + genreIds, "actors: " +  actorsIds);
 
   const testMovies = [
     {
@@ -92,20 +92,51 @@ const newMovie = async (req, res, next) => {
   ];
 
   try {
-    // let peli = await ProximosEstrenos.create(movie);
-    // await peli.addGeneros(genreIds);
-    // await peli.addActores(actorsIds);
+    let peli = await ProximosEstrenos.create(movie);
+    await peli.addGeneros(genreIds);
+    await peli.addActores(actorsIds);
 
-    let test = await ProximosEstrenos.bulkCreate(testMovies);
-    let aux = await ProximosEstrenos.findAll({ include: [Generos, Actores] });
-    res.json({ message: "creado correctamente", data: aux });
+    res.json({ message: "creado correctamente", data: peli });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const editarEstreno = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const [Estreno] = await ProximosEstrenos.update(req.body.movie, {
+      where: { id: id },
+    });
+    if (Estreno) {
+      return res.json({
+        message: "Estreno actualizado correctamente",
+        data: await ProximosEstrenos.findByPk(id),
+      });
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
+const eliminarEstreno = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const eliminado = await ProximosEstrenos.destroy({ where: { id: id } });
+    if (eliminado) {
+      return res.json({ message: "Estreno eliminado correctamente" });
+    }
+    next();
   } catch (error) {
     next(error);
   }
 };
 
 module.exports = {
-  newMovie,
+  crearEstreno,
   getAll,
+  editarEstreno,
+  eliminarEstreno
   //funciones a exportar para las rutas
 };

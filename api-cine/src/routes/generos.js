@@ -11,7 +11,7 @@ const {
 
 router.get("/", getAll);
 router.post("/", createGenre);
-router.put("/", editGenre);
-router.delete("/", deleteGenre);
+router.put("/:id", editGenre);
+router.delete("/:id", deleteGenre);
 
 module.exports = router;

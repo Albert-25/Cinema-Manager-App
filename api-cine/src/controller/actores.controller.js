@@ -29,16 +29,16 @@ const createActor = async (req, res, next) => {
 //busca el actor por id y edita su nombre
 
 const editActor = async (req, res, next) => {
-  const { actorId, newName } = req.body;
+  const id = req.params.id;
   try {
-    let selectedActor = await Actores.findByPk(actorId);
-    if (selectedActor) {
-      selectedActor.nombre = newName;
-      await selectedActor.save();
-      res.json({ message: "actor editado correctamente", data: selectedActor });
-    } else {
-      res.json({ message: "No se encontró el id del actor" });
+    const [actor] = await Actores.update(req.body, { where: { id: id } });
+    if (actor) {
+      return res.json({
+        message: "actor editado correctamente",
+        data: await Actores.findByPk(id),
+      });
     }
+    next();
   } catch (error) {
     next(error);
   }
@@ -47,9 +47,9 @@ const editActor = async (req, res, next) => {
 //deleteActor recibe un id de actor por body,
 //busca el actor por id y lo elimina
 const deleteActor = async (req, res, next) => {
-  const { actorId } = req.body;
+  const id = req.params.id;
   try {
-    let selectedActor = await Actores.findByPk(actorId);
+    let selectedActor = await Actores.findByPk(id);
     if (selectedActor) {
       await selectedActor.destroy();
       res.json({ message: "Actor eliminado correctamente" });

@@ -24,28 +24,25 @@ const createGenre = async (req, res, next) => {
 };
 
 const editGenre = async (req, res, next) => {
-  const { genreId, newName } = req.body;
+  const id = req.params.id;
   try {
-    let selectedGenre = await Generos.findByPk(genreId);
-    if (selectedGenre) {
-      selectedGenre.genero = newName;
-      await selectedGenre.save();
-      res.json({
+    const [genero] = await Generos.update(req.body, { where: { id: id } });
+    if (genero) {
+      return res.json({
         message: "genero editado correctamente",
-        data: selectedGenre,
+        data: (await Generos.findByPk(id)),
       });
-    } else {
-      res.json({ message: "No se encontró el id del genero" });
     }
+    next();
   } catch (error) {
     next(error);
   }
 };
 
 const deleteGenre = async (req, res, next) => {
-  const { genreId } = req.body;
+  const id = req.params.id;
   try {
-    let selectedGenre = await Generos.findByPk(genreId);
+    let selectedGenre = await Generos.findByPk(id);
     if (selectedGenre) {
       await selectedGenre.destroy();
       res.json({ message: "Genero eliminado correctamente" });

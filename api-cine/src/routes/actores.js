@@ -11,6 +11,6 @@ const {
 
 router.get("/", getAll);
 router.post("/", createActor);
-router.put("/", editActor);
-router.delete("/", deleteActor);
+router.put("/:id", editActor);
+router.delete("/:id", deleteActor);
 module.exports = router;

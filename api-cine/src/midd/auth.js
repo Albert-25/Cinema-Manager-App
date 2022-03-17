@@ -8,10 +8,10 @@ const auth = async (req, res, next) => {
     const [type, token] = authorization.replace("'", "").replace("'", "").split(' ')
     if (type.toLowerCase() === 'bearer' && token) {
       const decodedUser = jwt.verify(token, PRIVATEKEY)
-      const admin = await User.findOne({ where: { username: decodedUser.username } })
-      if (admin) return next()
+      const user = await User.findOne({ where: { username: decodedUser.username } })
+      if (user.role === 'admin') return next()
     }
-    return res.status(401).json({ admin: false })
+    return res.status(401).json({ msg: 'Ned authorization' })
   } catch (err) { next(err) }
 }
 

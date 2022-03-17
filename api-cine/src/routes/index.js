@@ -8,7 +8,11 @@ const Compras = require("./compras.js");
 const Funcion = require("./funcion.js");
 const Generos = require("./generos.js");
 const ProximosEstrenos = require("./proximosEstrenos.js");
+const { LogIn } = require("./login.js");
+const { SingUp } = require("./singup.js");
 
+routes.use("/login", LogIn);
+routes.use("/singup", SingUp);
 routes.use("/peliculas", Peliculas);
 routes.use("/productos", Productos);
 routes.use("/actores", Actores);

@@ -2,6 +2,8 @@ const initialState = {
     PelisAll: [],
     ProductAll: [],
 
+    GenresAll:[],
+
     PelisFiltred: [],
     ProductFiltred: [],
 
@@ -26,7 +28,9 @@ let Alien = {
     "puntuación": "4",
     "pais": "Estados Unidos",
     "distribuidora": "20th Century Fox",
-    "trailer": "https://www.youtube.com/watch?v=LjLamj-b0I8"
+    "trailer": "https://www.youtube.com/watch?v=LjLamj-b0I8",
+    "genero": "Terror",
+
 }
 
 let MiniMente = {
@@ -39,7 +43,8 @@ let MiniMente = {
     "puntuación": "5",
     "pais": "estados unidos",
     "distribuidora": "DreamWorks",
-    "trailer": "https://youtu.be/kPVbYBYN--I"
+    "trailer": "https://youtu.be/kPVbYBYN--I",
+    "genero": "Acción",
 }
 
 let Anime = {
@@ -53,6 +58,8 @@ let Anime = {
     "puntuación": "2",
     "distribuidora": "Tōhō",
     "trailer": "https://www.youtube.com/watch?v=RGHXqjCbyEQ",
+    "genero": "Animación",
+
 }
 
 let Alma = {
@@ -68,6 +75,8 @@ let Alma = {
     "trailer": "https://www.youtube.com/watch?v=xOsLIiBStEs&ab_channel=Pixar",
 }
 
+let Generos = ["Acción", "Terror", "Animación"]
+
 
 
 
@@ -78,6 +87,19 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 PelisAll: state.PelisAll.concat(Alien, MiniMente, Anime, Alma)
+            }
+        }
+         case "FALSEGENRES": {
+            return {
+                ...state,
+                GenresAll: state.GenresAll.concat(Generos)
+            }
+        }
+        case "FILTRARGENRES": {
+
+            return {
+                ...state,
+                PelisFiltred: state.PelisAll.filter((e) => e.genero === action.payload)
             }
         }
 

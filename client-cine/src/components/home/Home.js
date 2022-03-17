@@ -7,10 +7,15 @@ import MapView from '../mapView/MapView.js'
 
 import {
   FalseInfo,
+  FalseGenres,
+  FiltrarGenero
 } from "../../store/actions";
 
 import Movies from "../Movies/Movies.js"
 import Pagination from "../Movies/Pagination"
+
+import FiltroGeneros from "../filters/filterGenre.js";
+
 
 export const Home = () => {
 
@@ -20,6 +25,7 @@ export const Home = () => {
     dispatch(FalseInfo());
   }, [dispatch]);
   const pelisfalsas = useSelector((state) => state.PelisAll);
+
   const [container, setContainer] = useState([]);
 
   React.useEffect(() => { //luego se añadira filter aqui para decidir si se muestran los resultados filtrados o las pelis
@@ -28,7 +34,6 @@ export const Home = () => {
     }
   }, [pelisfalsas]);
 
-  console.log(pelisfalsas)
   //*
 
   //*paginado 
@@ -40,9 +45,20 @@ export const Home = () => {
   const indexOfFirstPost = indexOfLastPost - moviesPerPage;
   const currentPost = container.slice(indexOfFirstPost, indexOfLastPost);
 
+
+//* Filtros
+const FiltradoGeneros = (arg) => {
+    dispatch(FiltrarGenero(arg));
+  };
+  const pelisFiltradas = useSelector((state) => state.PelisFiltred);
+ /*if(pelisFiltradas.length !== 0){
+  setContainer(pelisFiltradas)
+ }*/
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   //*
 
+dispatch(FalseGenres())
   return (
     <div>
       <div>
@@ -53,9 +69,19 @@ export const Home = () => {
           </Container>
         </React.Fragment>
       </div>
+
       <div className="Home__Wellcome!">
         <h1>Wellcome!!!</h1>
       </div>
+
+      <div className='filterContainer'>
+       <FiltroGeneros
+              FalseGenres={FalseGenres}
+              FiltradoGeneros={FiltradoGeneros}
+            />
+      </div>
+
+
       <div className="Home__PelisContainer">
         <Movies moviesInfo={currentPost} loading={loading} />
       </div>

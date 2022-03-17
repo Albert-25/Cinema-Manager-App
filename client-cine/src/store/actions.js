@@ -7,3 +7,19 @@ export const FalseInfo = (arg) => {
     }
 }
 
+export const FalseGenres = (arg) => {
+
+    return {
+        type: "FALSEGENRES",
+        payload: arg
+    }
+}
+
+export const FiltrarGenero = (arg) => {
+
+    return {
+        type: "FILTRARGENRES",
+        payload: arg
+    }
+}
+

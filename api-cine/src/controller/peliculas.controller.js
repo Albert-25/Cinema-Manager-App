@@ -17,13 +17,7 @@ const getMovies = async (req, res, next) => {
 };
 
 const insertMovie = async (req, res, next) => {
-  if (
-    !req.body.titulo || !req.body.sinopsis || !req.body.poster || !req.body.duracion ||
-    !req.body.clasificacion || !req.body.director || !req.body.puntuación ||
-    !req.body.pais || !req.body.distribuidora || !req.body.trailer
-  ) {
-    return res.status(406).json({ msg: 'All atrributes are required' })
-  }
+  if (Object.keys(req.body).length !== 10) return res.status(406).json({ msg: 'All atrributes are required' })
   try {
     const movie = await Pelicula.create({
       titulo: req.body.titulo,
@@ -37,7 +31,7 @@ const insertMovie = async (req, res, next) => {
       distribuidora: req.body.distribuidora,
       trailer: req.body.trailer
     })
-    res.json(movie)
+    return res.json(movie)
   } catch (err) { next(err) }
 }
 

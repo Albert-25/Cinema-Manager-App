@@ -19,6 +19,11 @@ const Pelicula = sequelize.define("Pelicula", {
   duracion: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    validate: {
+      isInt: {
+        msg: 'Please enter INTEGER number'
+      }
+    }
   },
   clasificacion: {
     type: DataTypes.STRING,
@@ -31,6 +36,11 @@ const Pelicula = sequelize.define("Pelicula", {
   puntuación: {
     type: DataTypes.FLOAT,
     allowNull: false,
+    validate: {
+      isFloat: {
+        msg: 'Please enter FLOAT number'
+      }
+    },
   },
   pais: {
     type: DataTypes.STRING,

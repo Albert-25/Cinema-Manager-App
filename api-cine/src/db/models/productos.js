@@ -1,6 +1,5 @@
 const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
-const { bcrypt } = require("bcrypt");
 
 const Productos = sequelize.define("Productos", {
   nombreProducto: {
@@ -26,4 +25,4 @@ const Productos = sequelize.define("Productos", {
   },
 });
 
-module.exports = Productos;
+module.exports = { Productos };

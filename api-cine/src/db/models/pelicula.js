@@ -7,7 +7,6 @@ const Pelicula = sequelize.define("Pelicula", {
   titulo: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
   },
   sinopsis: {
     type: DataTypes.TEXT,

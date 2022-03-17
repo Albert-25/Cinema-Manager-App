@@ -2,10 +2,17 @@ const supertest = require('supertest')
 const { app } = require('../src/app')
 const api = supertest(app)
 
-test('GET /pin', async () => {
-  const response = await api.get('/pin')
-  expect(response.header["content-type"]).toMatch(/application\/json/);
-  expect(response.status).toEqual(200);
-  expect(response.body.msg).toEqual('pong')
-});
-
+describe('Peliculas route', () => {
+  describe('GET /peliculas', () => {
+    test('Get title, without match', async () => {
+      const response = await api.get('/peliculas/?title=title_movie')
+      expect(response.status).toEqual(404);
+      expect(response.text).toMatch(/Not found/);
+    })
+    test('Get title, with bad query', async () => {
+      const response = await api.get('/peliculas/?titulo=title_movie')
+      expect(response.status).toEqual(404);
+      expect(response.text).toMatch(/Not found/);
+    })
+  })
+})

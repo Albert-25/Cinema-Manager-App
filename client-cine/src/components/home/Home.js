@@ -4,14 +4,34 @@ import { useSelector, useDispatch } from "react-redux";
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from '../Navbar/navbar.jsx'
+
+import MapView from '../mapView/MapView.js'
+
+
 import {
-  FalseInfo, searchByName,
+
+  FalseInfo,
+  FalseGenres,
+  FalseCast,
+  FiltrarGenero,
+  FiltrarCast,
+  FiltrarGeneroAndCast,
+
+ searchByName,
+
 } from "../../store/actions";
 
 import Movies from "../Movies/Movies.js"
 import Pagination from "../Movies/Pagination"
 
+
+import FiltroGeneros from "../filters/filterGenre.js";
+
+
+
+
  const Home = () => {
+
 
 
 
@@ -21,17 +41,22 @@ import Pagination from "../Movies/Pagination"
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(FalseInfo());
+    dispatch(FalseGenres());
+    dispatch(FalseCast());  
   }, [dispatch]);
   const pelisfalsas = useSelector((state) => state.PelisAll);
+  const pelisFiltradas = useSelector((state) => state.PelisFiltred);
+console.log(pelisFiltradas)
   const [container, setContainer] = useState([]);
 
   React.useEffect(() => { //luego se añadira filter aqui para decidir si se muestran los resultados filtrados o las pelis
-    if (pelisfalsas !== 0) {
+    if (pelisfalsas.length !== 0) {
       setContainer(pelisfalsas);
+    }if(pelisFiltradas.length !== 0){
+      setContainer(pelisFiltradas)
     }
-  }, [pelisfalsas]);
+  }, [pelisfalsas, pelisFiltradas]);
 
-  console.log(pelisfalsas)
   //*
 
   const SearchName = (titulo) => {
@@ -51,8 +76,25 @@ import Pagination from "../Movies/Pagination"
   const indexOfFirstPost = indexOfLastPost - moviesPerPage;
   const currentPost = container.slice(indexOfFirstPost, indexOfLastPost);
 
+
+//* Filtros
+const FiltradoGeneros = (arg) => {
+    dispatch(FiltrarGenero(arg));
+  };
+
+  const FiltradoCast = (arg) => {
+    dispatch(FiltrarCast(arg))
+  }
+
+  const FiltradoGenreAndCast = (arg) => {
+    dispatch(FiltrarGeneroAndCast(arg))
+  }
+
+
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   //*
+
 
   return (
     <div>
@@ -65,9 +107,22 @@ import Pagination from "../Movies/Pagination"
           </Container>
         </React.Fragment>
       </div>
+
       <div className="Home__Wellcome!">
         <h1>Wellcome!!!</h1>
       </div>
+
+      <div className='filterContainer'>
+       <FiltroGeneros
+              FalseGenres={FalseGenres}
+              FalseCast={FalseCast}
+              FiltradoGeneros={FiltradoGeneros}
+              FiltradoCast={FiltradoCast}
+              FiltradoGenreAndCast={FiltradoGenreAndCast}
+            />
+      </div>
+
+
       <div className="Home__PelisContainer">
         <Movies moviesInfo={currentPost} loading={loading} />
       </div>
@@ -79,7 +134,9 @@ import Pagination from "../Movies/Pagination"
           paginate={paginate}
         />
       </div>
-
+      <div className='mapContainer'>
+      <MapView />
+      </div>
     </div>
   )
 }

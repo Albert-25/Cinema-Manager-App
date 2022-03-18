@@ -8,6 +8,45 @@ export const FalseInfo = (arg) => {
 }
 
 
+export const FalseGenres = (arg) => {
+
+    return {
+        type: "FALSEGENRES",
+        payload: arg
+    }
+}
+
+export const FalseCast = (arg) => {
+
+    return {
+        type: "FALSECAST",
+        payload: arg
+    }
+}
+
+export const FiltrarGenero = (arg) => {
+    return {
+        type: "FILTRARGENRES",
+        payload: arg
+    }
+}
+
+export const FiltrarCast  = (arg) => {
+    return {
+        type: "FILTRARCASTING",
+        payload: arg
+    }
+}
+
+
+export const  FiltrarGeneroAndCast = (arg) => {
+    return {
+        type: "FILTRARGENEROANDCASTING",
+        payload: arg
+    }
+}
+
+
 export const searchByName = (titulo) => {
 	return async function (dispatch) {
 		try {
@@ -22,3 +61,4 @@ export const searchByName = (titulo) => {
         }
     }
 }
+

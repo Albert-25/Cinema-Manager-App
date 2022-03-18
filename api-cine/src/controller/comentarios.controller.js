@@ -1,4 +1,5 @@
 const { Comentarios } = require("../db/models/comentarios");
+const { Pelicula } = require("../db/models/pelicula");
 
 
 const getComentarios = async (req, res) => {
@@ -15,6 +16,9 @@ const postComentario = async (req, res) => {
         const review = await Comentarios.create({
             nombre, comentario, puntuación
         })
+
+        // const pelicula = await Pelicula.findOne({ where: { titulo: tituloParams } });
+        // await pelicula.addGenres(review) en esta linea se debe asociar una pelicula con sus comentarios respectivos
         res.send("¡comentario enviado!")
     }
     catch (e) {

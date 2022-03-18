@@ -15,11 +15,32 @@ export const FalseGenres = (arg) => {
     }
 }
 
-export const FiltrarGenero = (arg) => {
+export const FalseCast = (arg) => {
 
+    return {
+        type: "FALSECAST",
+        payload: arg
+    }
+}
+
+export const FiltrarGenero = (arg) => {
     return {
         type: "FILTRARGENRES",
         payload: arg
     }
 }
 
+export const FiltrarCast  = (arg) => {
+    return {
+        type: "FILTRARCASTING",
+        payload: arg
+    }
+}
+
+
+export const  FiltrarGeneroAndCast = (arg) => {
+    return {
+        type: "FILTRARGENEROANDCASTING",
+        payload: arg
+    }
+}

@@ -8,7 +8,10 @@ import MapView from '../mapView/MapView.js'
 import {
   FalseInfo,
   FalseGenres,
-  FiltrarGenero
+  FalseCast,
+  FiltrarGenero,
+  FiltrarCast,
+  FiltrarGeneroAndCast
 } from "../../store/actions";
 
 import Movies from "../Movies/Movies.js"
@@ -23,16 +26,21 @@ export const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(FalseInfo());
+    dispatch(FalseGenres());
+    dispatch(FalseCast());  
   }, [dispatch]);
   const pelisfalsas = useSelector((state) => state.PelisAll);
-
+  const pelisFiltradas = useSelector((state) => state.PelisFiltred);
+console.log(pelisFiltradas)
   const [container, setContainer] = useState([]);
 
   React.useEffect(() => { //luego se añadira filter aqui para decidir si se muestran los resultados filtrados o las pelis
-    if (pelisfalsas !== 0) {
+    if (pelisfalsas.length !== 0) {
       setContainer(pelisfalsas);
+    }if(pelisFiltradas.length !== 0){
+      setContainer(pelisFiltradas)
     }
-  }, [pelisfalsas]);
+  }, [pelisfalsas, pelisFiltradas]);
 
   //*
 
@@ -50,15 +58,21 @@ export const Home = () => {
 const FiltradoGeneros = (arg) => {
     dispatch(FiltrarGenero(arg));
   };
-  const pelisFiltradas = useSelector((state) => state.PelisFiltred);
- /*if(pelisFiltradas.length !== 0){
-  setContainer(pelisFiltradas)
- }*/
+
+  const FiltradoCast = (arg) => {
+    dispatch(FiltrarCast(arg))
+  }
+
+  const FiltradoGenreAndCast = (arg) => {
+    dispatch(FiltrarGeneroAndCast(arg))
+  }
+
+
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   //*
 
-dispatch(FalseGenres())
+
   return (
     <div>
       <div>
@@ -77,7 +91,10 @@ dispatch(FalseGenres())
       <div className='filterContainer'>
        <FiltroGeneros
               FalseGenres={FalseGenres}
+              FalseCast={FalseCast}
               FiltradoGeneros={FiltradoGeneros}
+              FiltradoCast={FiltradoCast}
+              FiltradoGenreAndCast={FiltradoGenreAndCast}
             />
       </div>
 

@@ -3,6 +3,7 @@ const initialState = {
     ProductAll: [],
 
     GenresAll:[],
+    CastAll:[],
 
     PelisFiltred: [],
     ProductFiltred: [],
@@ -29,7 +30,8 @@ let Alien = {
     "pais": "Estados Unidos",
     "distribuidora": "20th Century Fox",
     "trailer": "https://www.youtube.com/watch?v=LjLamj-b0I8",
-    "genero": "Terror",
+    "genero": ["Terror", "Acción"],
+    "cast": ["Chris Pratt", "Sigourney Weaver"],
 
 }
 
@@ -44,7 +46,8 @@ let MiniMente = {
     "pais": "estados unidos",
     "distribuidora": "DreamWorks",
     "trailer": "https://youtu.be/kPVbYBYN--I",
-    "genero": "Acción",
+    "genero": ["Acción"],
+    "cast": ["Adam Sandler"],
 }
 
 let Anime = {
@@ -58,7 +61,8 @@ let Anime = {
     "puntuación": "2",
     "distribuidora": "Tōhō",
     "trailer": "https://www.youtube.com/watch?v=RGHXqjCbyEQ",
-    "genero": "Animación",
+    "genero": ["Animación"],
+    "cast": ["Jamie Lee Curtis"],
 
 }
 
@@ -73,9 +77,27 @@ let Alma = {
     "puntuación": "3",
     "distribuidora": "Disney+",
     "trailer": "https://www.youtube.com/watch?v=xOsLIiBStEs&ab_channel=Pixar",
+    'genero': ['Infantil'],
+    "cast": ["Chris Pratt", "Adam Sandler"],
 }
 
-let Generos = ["Acción", "Terror", "Animación"]
+let Misterious = {
+    "titulo": "Movie Not found",
+    "sipnosis": "???",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Orange_question_mark.svg/1200px-Orange_question_mark.svg.png",
+    "duracion": "???",
+    "pais": "???",
+    "clasificacion": "???",
+    "director": "???",
+    "puntuación": "???",
+    "distribuidora": "???",
+    "trailer": "???",
+    'genero': ['???'],
+}
+
+let Generos = ["Acción", "Terror", "Animación", "Infantil"];
+let Cast = ["Chris Pratt", "Adam Sandler", "Sigourney Weaver", "Jamie Lee Curtis", "Terror"];
+
 
 
 
@@ -95,11 +117,47 @@ const reducer = (state = initialState, action) => {
                 GenresAll: state.GenresAll.concat(Generos)
             }
         }
-        case "FILTRARGENRES": {
-
+        case "FALSECAST": {
             return {
                 ...state,
-                PelisFiltred: state.PelisAll.filter((e) => e.genero === action.payload)
+                CastAll: state.CastAll.concat(Cast)
+            }
+        }
+        case "FILTRARGENRES": {
+            let ArrayReader = (elm, action) => action.every(v => elm.includes(v))
+            let filteredArray = state.PelisAll.filter((element) => ArrayReader(element.genero, action.payload));
+            if(filteredArray.length === 0){
+                filteredArray.push(Misterious)
+            }
+            return {
+                ...state,
+                PelisFiltred: filteredArray
+            }
+        }
+        case "FILTRARCASTING": {
+             let ArrayReader = (elm, action) => action.every(v => elm.includes(v))
+            let filteredArray = state.PelisAll.filter((element) => ArrayReader(element.cast, action.payload));
+            if(filteredArray.length === 0){
+                filteredArray.push(Misterious)
+            }
+            return {
+                ...state,
+                PelisFiltred: filteredArray
+            }
+        }
+         case "FILTRARGENEROANDCASTING": {
+            console.log(action.payload)
+            let ArrayReader = (elm, action) => action.every(v => elm.includes(v))
+            let genreArray = state.PelisAll.filter((element) => ArrayReader(element.genero, action.payload[0]));
+            console.log(genreArray)
+            let castArray = state.PelisAll.filter((element) => ArrayReader(element.cast, action.payload[1]));
+            let filteredArray = genreArray.filter(value => castArray.includes(value));
+            if(genreArray.length === 0 || castArray.length === 0 || filteredArray.length === 0){
+                filteredArray.push(Misterious)
+            }
+            return {
+                ...state,
+                PelisFiltred: filteredArray
             }
         }
 

@@ -14,6 +14,12 @@ const getAll = async (req, res, next) => {
 const createGenre = async (req, res, next) => {
   const { Genre } = req.body;
   try {
+    if (Genre.genero === "") {
+      return res.status(406).json({ message: "El genero no puede ser vacío" });
+    }
+    if (await Generos.findOne({ where: { genero: Genre.genero } })) {
+      return res.status(406).json({ message: "El genero ingresado ya existe" });
+    }
     let nuevo = await Generos.create(Genre);
     if (nuevo) {
       res.json({ message: "genero creado correctamente", data: nuevo });
@@ -25,12 +31,20 @@ const createGenre = async (req, res, next) => {
 
 const editGenre = async (req, res, next) => {
   const id = req.params.id;
+  const { Genre } = req.body;
   try {
-    const [genero] = await Generos.update(req.body, { where: { id: id } });
+    if (Genre.genero === "") {
+      return res.status(406).json({ message: "El genero no puede ser vacío" });
+    }
+    if (await Generos.findOne({ where: { genero: Genre.genero } })) {
+      return res.status(406).json({ message: "El genero ingresado ya existe" });
+    }
+
+    const [genero] = await Generos.update(Genre, { where: { id: id } });
     if (genero) {
       return res.json({
         message: "genero editado correctamente",
-        data: (await Generos.findByPk(id)),
+        data: await Generos.findByPk(id),
       });
     }
     next();

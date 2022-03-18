@@ -1,20 +1,23 @@
-import SearchBar from "../SearchBar";
+import SearchBar from "../SearchBar/index.jsx";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from '../Navbar/navbar.jsx'
 import {
-  FalseInfo,
+  FalseInfo, searchByName,
 } from "../../store/actions";
 
 import Movies from "../Movies/Movies.js"
 import Pagination from "../Movies/Pagination"
 
-export const Home = () => {
+ const Home = () => {
+
+
 
 
   //*dispatch de prueba para las pelis falas que luego sera usado en mostar todas laspelis
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(FalseInfo());
@@ -30,6 +33,14 @@ export const Home = () => {
 
   console.log(pelisfalsas)
   //*
+
+  const SearchName = (titulo) => {
+    titulo === "" ? dispatch(FalseInfo()) : dispatch(searchByName(titulo))
+  }
+
+
+
+
 
   //*paginado 
   const [loading] = useState(false);
@@ -50,7 +61,7 @@ export const Home = () => {
           <CssBaseline />
           <Container maxWidth="ls" sx={{ height: "auto" }}>
             <Navbar />
-            <SearchBar/>
+            <SearchBar search={SearchName}/>
           </Container>
         </React.Fragment>
       </div>
@@ -72,3 +83,4 @@ export const Home = () => {
     </div>
   )
 }
+export default Home

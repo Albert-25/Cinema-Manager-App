@@ -17,6 +17,8 @@ const initialState = {
     PelisComments: [],
     ProductDetails: [],
     ProductComments: [],
+    // numberOfTickets: [],
+    // costoTotalTickets: []
 }
 
 /*Películas falsas*/
@@ -177,12 +179,23 @@ const reducer = (state = initialState, action) => {
             }
         }
 
+
         case "PELI_NAME":
             state = initialState
 			return {
 				...state,
 				PelisAll: action.payload
 			}
+
+        case "DetailedMovie": {
+            state = initialState;
+            return {
+                ...state,
+                PelisDetails: action.payload.detis,
+            };
+        }
+
+
 
 
 

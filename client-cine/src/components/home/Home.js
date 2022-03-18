@@ -21,7 +21,6 @@ import {
 
 import Movies from "../Movies/Movies.js"
 import Pagination from "../Movies/Pagination"
-import MapView from '../mapView/MapView.js'
 
 
 import FiltroGeneros from "../filters/filterGenre.js";

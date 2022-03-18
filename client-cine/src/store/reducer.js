@@ -19,6 +19,7 @@ const initialState = {
     ProductComments: [],
 }
 
+/*Películas falsas*/
 let Alien = {
     "titulo": "Alien: El Octavo Pasajero",
     "sipnosis": "De regreso a la Tierra, la nave de carga Nostromo interrumpe su viaje y despierta a sus siete tripulantes. El ordenador central, MADRE, ha detectado la misteriosa transmisión de una forma de vida desconocida, procedente de un planeta cercano aparentemente deshabitado. La nave se dirige entonces al extraño planeta para investigar el origen de la comunicación.",
@@ -81,6 +82,7 @@ let Alma = {
     "cast": ["Chris Pratt", "Adam Sandler"],
 }
 
+/*Película no encontrada*/
 let Misterious = {
     "titulo": "Movie Not found",
     "sipnosis": "???",
@@ -96,7 +98,7 @@ let Misterious = {
 }
 
 let Generos = ["Acción", "Terror", "Animación", "Infantil"];
-let Cast = ["Chris Pratt", "Adam Sandler", "Sigourney Weaver", "Jamie Lee Curtis", "Terror"];
+let Cast = ["Chris Pratt", "Adam Sandler", "Sigourney Weaver", "Jamie Lee Curtis"];
 
 
 

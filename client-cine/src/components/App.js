@@ -1,13 +1,13 @@
 import React from "react";
-import SearchBar from "../components/SearchBar";
-import BookData from "../components/SearchBar/Data.json";
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import { Home } from './home/Home.js'
 
- export function App() {
+export const App = () => {
   return (
-    <div className="App">
-      <SearchBar placeholder="Ingrese nombre de la pelicula..." data={BookData} />
-    </div>
-  );
+    <Router>
+      <Routes>
+          <Route path='/' element={<Home />} />
+      </Routes>
+    </Router>
+  )
 }
-
-export default App;

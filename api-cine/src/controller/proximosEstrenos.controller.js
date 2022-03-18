@@ -15,6 +15,17 @@ const getAll = async (req, res, next) => {
   }
 };
 
+const getEstreno = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const movie = await ProximosEstrenos.findByPk(id);
+    if (movie) return res.json(movie);
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
 const crearEstreno = async (req, res, next) => {
   const { movie, genreIds, actorsIds } = req.body;
 
@@ -68,5 +79,6 @@ module.exports = {
   getAll,
   editarEstreno,
   eliminarEstreno,
+  getEstreno,
   //funciones a exportar para las rutas
 };

@@ -7,9 +7,11 @@ const {
   getAll,
   editarEstreno,
   eliminarEstreno,
+  getEstreno,
 } = require("../controller/proximosEstrenos.controller");
 
 router.get("/", getAll);
+router.get("/:id", getEstreno);
 router.post("/", crearEstreno);
 router.put("/:id", editarEstreno);
 router.delete("/:id", eliminarEstreno);

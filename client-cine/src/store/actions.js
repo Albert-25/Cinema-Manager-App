@@ -10,6 +10,7 @@ export const FalseInfo = (arg) => {
 }
 
 
+
 export function getAllReview() {
     return async function (dispatch) {
         const json = await axios.get("http://localhost:3001/comentarios")
@@ -86,4 +87,18 @@ export const searchByName = (titulo) => {
     }
 }
 
+
+
+export const DetailedMovie = (id) => {
+    return async (dispatch) => {
+      try {
+        const response = await axios.get(`/Movies/${id}`);
+        if (response?.data) {
+          dispatch({ type: "DETAILEDMOVIE", payload: { detis: response.data } });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
 

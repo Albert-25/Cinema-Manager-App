@@ -177,12 +177,23 @@ const reducer = (state = initialState, action) => {
             }
         }
 
+
         case "PELI_NAME":
             state = initialState
 			return {
 				...state,
 				PelisAll: action.payload
 			}
+
+        case "DetailedMovie": {
+            state = initialState;
+            return {
+                ...state,
+                PelisDetails: action.payload.detis,
+            };
+        }
+
+
 
 
 

@@ -81,7 +81,12 @@ const reducer = (state = initialState, action) => {
             }
         }
 
-
+        case "PELI_NAME":
+            state = initialState
+			return {
+				...state,
+				PelisAll: action.payload
+			}
 
 
 

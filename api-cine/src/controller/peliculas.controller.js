@@ -6,10 +6,13 @@ const getMovies = async (req, res, next) => {
   let movies = []
   try {
     if (Object.keys(req.query).includes('title')) {
-      movies = await Pelicula.findAll({ where: { titulo: req.query.title } });
+      movies = await Pelicula.findAll({
+        where: { titulo: req.query.title },
+        include:  [Generos,Actores]
+      })
     }
     if (Object.keys(req.query).length === 0) {
-      movies = await Pelicula.findAll({ include: Generos, Actores });
+      movies = await Pelicula.findAll({ include: [Generos, Actores] });
     }
     if (movies.length !== 0) return res.send(movies);
     next()
@@ -17,7 +20,11 @@ const getMovies = async (req, res, next) => {
 };
 
 const insertMovie = async (req, res, next) => {
-  if (Object.keys(req.body).length !== 10) return res.status(406).json({ msg: 'All atrributes are required' })
+  if (Object.keys(req.body).length !== 12) {
+    return res.status(406).json({ msg: 'All atrributes are required' })
+  }
+  const gendersTds = req.body.genders
+  const actorsIds = req.body.actors
   try {
     const movie = await Pelicula.create({
       titulo: req.body.titulo,
@@ -31,14 +38,16 @@ const insertMovie = async (req, res, next) => {
       distribuidora: req.body.distribuidora,
       trailer: req.body.trailer
     })
-    return res.json(movie)
+    await movie.addGeneros(gendersTds);
+    await movie.addActores(actorsIds);
+    return res.json(await Pelicula.findByPk(movie.id, { include: [Generos, Actores] }))
   } catch (err) { next(err) }
 }
 
 const getMovie = async (req, res, next) => {
   const id = req.params.id
   try {
-    const movie = await Pelicula.findByPk(id)
+    const movie = await Pelicula.findByPk(id, { include: [Generos, Actores] })
     if (movie) return res.json(movie)
     next()
   } catch (err) { next(err) }
@@ -48,7 +57,7 @@ const updateMovie = async (req, res, next) => {
   const id = req.params.id
   try {
     const [movie] = await Pelicula.update(req.body, { where: { id: id } })
-    if (movie) return res.json(await Pelicula.findByPk(id))
+    if (movie) return res.json(await Pelicula.findByPk(id, { include: [Generos, Actores] }))
     next()
   } catch (err) { next(err) }
 }

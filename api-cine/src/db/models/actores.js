@@ -7,6 +7,6 @@ const Actores = sequelize.define("Actores", {
     allowNull: false,
     unique: true,
   },
-});
+},{  timestamps: false });
 
 module.exports = Actores;

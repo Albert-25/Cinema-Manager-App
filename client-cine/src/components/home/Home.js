@@ -23,6 +23,7 @@ import {
 
 import Movies from "../Movies/Movies.js"
 import Pagination from "../Movies/Pagination"
+import MapView from '../mapView/MapView.js'
 
 
 import FiltroGeneros from "../filters/filterGenre.js";
@@ -103,6 +104,7 @@ const FiltradoGeneros = (arg) => {
           <CssBaseline />
           <Container maxWidth="ls" sx={{ height: "auto" }}>
             <Navbar />
+
             <SearchBar search={SearchName}/>
           </Container>
         </React.Fragment>
@@ -135,7 +137,9 @@ const FiltradoGeneros = (arg) => {
         />
       </div>
       <div className='mapContainer'>
-      <MapView />
+
+        <MapView />
+
       </div>
     </div>
   )

@@ -1,10 +1,10 @@
 const { Router } = require("express");
 const router = Router();
 
-//importar funciones desde el controlador aqui
-const {} = require('../controller/comentarios.controller')
+const { getComentarios, postComentario} = require('../controller/comentarios.controller')
 
-
+router.get("/", getComentarios)
+router.post("/", postComentario)
 
 
 module.exports = router;

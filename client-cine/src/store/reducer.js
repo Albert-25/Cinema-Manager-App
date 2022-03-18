@@ -163,12 +163,27 @@ const reducer = (state = initialState, action) => {
             }
         }
 
+
+        case "GET_REVIEW": {
+            return {
+                ...state,
+                ProductComments: action.payload
+            }
+        }
+
+        case "POST_REVIEW": {
+            return {
+                ...state
+            }
+        }
+
         case "PELI_NAME":
             state = initialState
 			return {
 				...state,
 				PelisAll: action.payload
 			}
+
 
 
 

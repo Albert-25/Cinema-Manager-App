@@ -14,6 +14,8 @@ const initialState = {
     PelisComments: [],
     ProductDetails: [],
     ProductComments: [],
+    // numberOfTickets: [],
+    // costoTotalTickets: []
 }
 
 let Alien = {

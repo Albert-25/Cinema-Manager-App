@@ -5,8 +5,6 @@ import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from '../Navbar/navbar.jsx'
 
-import MapView from '../mapView/MapView.js'
-
 
 import {
 

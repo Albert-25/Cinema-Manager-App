@@ -1,6 +1,6 @@
-const SingUp = require("express").Router();
+const router = require("express").Router();
 const { singUp } = require('../controller/singup.controller');
 
-SingUp.post('/', singUp);
+router.post('/', singUp);
 
-module.exports = { SingUp };
+module.exports = router;

@@ -13,12 +13,13 @@ describe('USER model', () => {
       expect(e.name).toEqual('SequelizeValidationError')
       expect(e.message).toEqual(expect.stringMatching('User.username cannot be null'))
       expect(e.message).toEqual(expect.stringMatching('User.passwd cannot be null'))
+      expect(e.message).toEqual(expect.stringMatching('User.role cannot be null'))
     }
   })
   test('Username to be unique', async () => {
-    await User.create({ username: 'test username to be unique', passwd: 'test passwd' })
+    await User.create({ username: 'test username to be unique', passwd: 'test passwd', role: 'role' })
     try {
-      await User.create({ username: 'test username to be unique', passwd: 'test passwd' })
+      await User.create({ username: 'test username to be unique', passwd: 'test passwd', role: 'role' })
     } catch (e) {
       expect(e.name).toEqual('SequelizeUniqueConstraintError')
     }

@@ -1,9 +1,9 @@
+import SearchBar from "../SearchBar";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from '../Navbar/navbar.jsx'
-
 import {
   FalseInfo,
 } from "../../store/actions";
@@ -12,6 +12,7 @@ import Movies from "../Movies/Movies.js"
 import Pagination from "../Movies/Pagination"
 
 export const Home = () => {
+
 
   //*dispatch de prueba para las pelis falas que luego sera usado en mostar todas laspelis
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ export const Home = () => {
           <CssBaseline />
           <Container maxWidth="ls" sx={{ height: "auto" }}>
             <Navbar />
+            <SearchBar/>
           </Container>
         </React.Fragment>
       </div>

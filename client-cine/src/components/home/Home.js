@@ -10,6 +10,7 @@ import {
 
 import Movies from "../Movies/Movies.js"
 import Pagination from "../Movies/Pagination"
+import MapView from '../mapView/MapView.js'
 
 export const Home = () => {
 
@@ -50,7 +51,7 @@ export const Home = () => {
           <CssBaseline />
           <Container maxWidth="ls" sx={{ height: "auto" }}>
             <Navbar />
-            <SearchBar/>
+            <SearchBar />
           </Container>
         </React.Fragment>
       </div>
@@ -68,7 +69,9 @@ export const Home = () => {
           paginate={paginate}
         />
       </div>
-
+      <div className='mapContainer'>
+        <MapView />
+      </div>
     </div>
   )
 }

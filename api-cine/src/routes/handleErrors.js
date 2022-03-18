@@ -7,6 +7,12 @@ const ERRORS = {
   },
   JsonWebTokenError: (res, err) => {
     res.status(406).json(err)
+  },
+  SequelizeDatabaseError: (res, err) => {
+    res.status(406).json({[err.name]: err.errors[0].message})
+  },
+  SequelizeValidationError: (res, err) => {
+    res.status(406).json({[err.name]: err.message})
   }
 }
 

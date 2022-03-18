@@ -5,13 +5,13 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import MenuItem from '@mui/material/MenuItem'
-//-------------------------------------------
+import MenuItem from '@mui/material/MenuItem';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
+import CallFormCtrl from './../signInForm/formOpenControll.jsx'
 
 let pages=["page1","page2","page3","page4"]
 export default function Navbar() {
@@ -60,12 +60,11 @@ export default function Navbar() {
           </ListItem>
         ))}
       </List>
-     
     </Box>
   );
   return (
     <Box sx={{ flexGrow: 1 ,bgColor:"rgb(90, 154, 191)"}}>
-      <AppBar position="static" sx={{flexDirection:"row",justifyContent:"space-between",backgroundColor:"rgb(90, 154, 191)",boxShadow:"none",backdropFilter:"blur(10px)"}}>
+      <AppBar position="static" sx={{flexDirection:"row",padding:"0 1em",justifyContent:"space-between",backgroundColor:"rgb(90, 154, 191)",boxShadow:"none",backdropFilter:"blur(10px)"}}>
         <Toolbar variant="dense">
           <SwipeableDrawer
             anchor={"left"}
@@ -85,6 +84,7 @@ export default function Navbar() {
               )):null}
         </Toolbar>
         <div>
+        <CallFormCtrl/>
          <IconButton
           size="large"
           aria-label="account of current user"

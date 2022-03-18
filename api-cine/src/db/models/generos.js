@@ -1,5 +1,6 @@
 const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
+const { bcrypt } = require("bcrypt");
 
 const Generos = sequelize.define("Generos", {
   genero: {
@@ -9,4 +10,4 @@ const Generos = sequelize.define("Generos", {
   },
 });
 
-module.exports = { Generos };
+module.exports = Generos;

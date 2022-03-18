@@ -1,7 +1,7 @@
 const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
-const { Actores } = require("./actores.js");
-const { Generos } = require("./generos.js");
+const  Actores  = require("./actores.js");
+const  Generos  = require("./generos.js");
 
 const Pelicula = sequelize.define("Pelicula", {
   titulo: {

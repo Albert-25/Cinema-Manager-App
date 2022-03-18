@@ -1,6 +1,6 @@
 const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
-
+const { bcrypt } = require("bcrypt");
 const Actores = sequelize.define("Actores", {
   nombre: {
     type: DataTypes.STRING,
@@ -9,4 +9,4 @@ const Actores = sequelize.define("Actores", {
   },
 });
 
-module.exports = { Actores };
+module.exports = Actores;

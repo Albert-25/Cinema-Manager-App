@@ -2,6 +2,9 @@ const initialState = {
     PelisAll: [],
     ProductAll: [],
 
+    GenresAll:[],
+    CastAll:[],
+
     PelisFiltred: [],
     ProductFiltred: [],
 
@@ -16,6 +19,7 @@ const initialState = {
     ProductComments: [],
 }
 
+/*Películas falsas*/
 let Alien = {
     "titulo": "Alien: El Octavo Pasajero",
     "sipnosis": "De regreso a la Tierra, la nave de carga Nostromo interrumpe su viaje y despierta a sus siete tripulantes. El ordenador central, MADRE, ha detectado la misteriosa transmisión de una forma de vida desconocida, procedente de un planeta cercano aparentemente deshabitado. La nave se dirige entonces al extraño planeta para investigar el origen de la comunicación.",
@@ -26,7 +30,10 @@ let Alien = {
     "puntuación": "4",
     "pais": "Estados Unidos",
     "distribuidora": "20th Century Fox",
-    "trailer": "https://www.youtube.com/watch?v=LjLamj-b0I8"
+    "trailer": "https://www.youtube.com/watch?v=LjLamj-b0I8",
+    "genero": ["Terror", "Acción"],
+    "cast": ["Chris Pratt", "Sigourney Weaver"],
+
 }
 
 let MiniMente = {
@@ -39,7 +46,9 @@ let MiniMente = {
     "puntuación": "5",
     "pais": "estados unidos",
     "distribuidora": "DreamWorks",
-    "trailer": "https://youtu.be/kPVbYBYN--I"
+    "trailer": "https://youtu.be/kPVbYBYN--I",
+    "genero": ["Acción"],
+    "cast": ["Adam Sandler"],
 }
 
 let Anime = {
@@ -53,6 +62,9 @@ let Anime = {
     "puntuación": "2",
     "distribuidora": "Tōhō",
     "trailer": "https://www.youtube.com/watch?v=RGHXqjCbyEQ",
+    "genero": ["Animación"],
+    "cast": ["Jamie Lee Curtis"],
+
 }
 
 let Alma = {
@@ -66,7 +78,28 @@ let Alma = {
     "puntuación": "3",
     "distribuidora": "Disney+",
     "trailer": "https://www.youtube.com/watch?v=xOsLIiBStEs&ab_channel=Pixar",
+    'genero': ['Infantil'],
+    "cast": ["Chris Pratt", "Adam Sandler"],
 }
+
+/*Película no encontrada*/
+let Misterious = {
+    "titulo": "Movie Not found",
+    "sipnosis": "???",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Orange_question_mark.svg/1200px-Orange_question_mark.svg.png",
+    "duracion": "???",
+    "pais": "???",
+    "clasificacion": "???",
+    "director": "???",
+    "puntuación": "???",
+    "distribuidora": "???",
+    "trailer": "???",
+    'genero': ['???'],
+}
+
+let Generos = ["Acción", "Terror", "Animación", "Infantil"];
+let Cast = ["Chris Pratt", "Adam Sandler", "Sigourney Weaver", "Jamie Lee Curtis"];
+
 
 
 
@@ -80,6 +113,77 @@ const reducer = (state = initialState, action) => {
                 PelisAll: state.PelisAll.concat(Alien, MiniMente, Anime, Alma)
             }
         }
+         case "FALSEGENRES": {
+            return {
+                ...state,
+                GenresAll: state.GenresAll.concat(Generos)
+            }
+        }
+        case "FALSECAST": {
+            return {
+                ...state,
+                CastAll: state.CastAll.concat(Cast)
+            }
+        }
+        case "FILTRARGENRES": {
+            let ArrayReader = (elm, action) => action.every(v => elm.includes(v))
+            let filteredArray = state.PelisAll.filter((element) => ArrayReader(element.genero, action.payload));
+            if(filteredArray.length === 0){
+                filteredArray.push(Misterious)
+            }
+            return {
+                ...state,
+                PelisFiltred: filteredArray
+            }
+        }
+        case "FILTRARCASTING": {
+             let ArrayReader = (elm, action) => action.every(v => elm.includes(v))
+            let filteredArray = state.PelisAll.filter((element) => ArrayReader(element.cast, action.payload));
+            if(filteredArray.length === 0){
+                filteredArray.push(Misterious)
+            }
+            return {
+                ...state,
+                PelisFiltred: filteredArray
+            }
+        }
+         case "FILTRARGENEROANDCASTING": {
+            console.log(action.payload)
+            let ArrayReader = (elm, action) => action.every(v => elm.includes(v))
+            let genreArray = state.PelisAll.filter((element) => ArrayReader(element.genero, action.payload[0]));
+            console.log(genreArray)
+            let castArray = state.PelisAll.filter((element) => ArrayReader(element.cast, action.payload[1]));
+            let filteredArray = genreArray.filter(value => castArray.includes(value));
+            if(genreArray.length === 0 || castArray.length === 0 || filteredArray.length === 0){
+                filteredArray.push(Misterious)
+            }
+            return {
+                ...state,
+                PelisFiltred: filteredArray
+            }
+        }
+
+
+        case "GET_REVIEW": {
+            return {
+                ...state,
+                ProductComments: action.payload
+            }
+        }
+
+        case "POST_REVIEW": {
+            return {
+                ...state
+            }
+        }
+
+
+        case "PELI_NAME":
+            state = initialState
+			return {
+				...state,
+				PelisAll: action.payload
+			}
 
         case "DetailedMovie": {
             state = initialState;
@@ -88,6 +192,7 @@ const reducer = (state = initialState, action) => {
                 PelisDetails: action.payload.detis,
             };
         }
+
 
 
 

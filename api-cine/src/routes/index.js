@@ -1,6 +1,6 @@
 const routes = require("express").Router();
 const handleErrors = require("./handleErrors");
-const { Peliculas } = require("./peliculas.js");
+const Peliculas = require("./peliculas.js");
 const Productos = require("./productos.js");
 const Actores = require("./actores.js");
 const Comentarios = require("./comentarios.js");
@@ -8,12 +8,13 @@ const Compras = require("./compras.js");
 const Funcion = require("./funcion.js");
 const Generos = require("./generos.js");
 const ProximosEstrenos = require("./proximosEstrenos.js");
-const { LogIn } = require("./login.js");
-const { SingUp } = require("./singup.js");
+const LogIn = require("./login.js");
+const SingUp = require("./singup.js");
+
 
 routes.use("/login", LogIn);
 routes.use("/singup", SingUp);
-routes.use("/peliculas", Peliculas);
+routes.use("/peliculas",Peliculas);
 routes.use("/productos", Productos);
 routes.use("/actores", Actores);
 routes.use("/comentarios", Comentarios);

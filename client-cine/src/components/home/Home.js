@@ -1,4 +1,4 @@
-import SearchBar from "../SearchBar";
+import SearchBar from "../SearchBar/index.jsx";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Container from '@mui/material/Container';
@@ -9,24 +9,35 @@ import MapView from '../mapView/MapView.js'
 
 
 import {
+
   FalseInfo,
   FalseGenres,
   FalseCast,
   FiltrarGenero,
   FiltrarCast,
-  FiltrarGeneroAndCast
+  FiltrarGeneroAndCast,
+
+ searchByName,
+
 } from "../../store/actions";
 
 import Movies from "../Movies/Movies.js"
 import Pagination from "../Movies/Pagination"
 
+
 import FiltroGeneros from "../filters/filterGenre.js";
 
 
-export const Home = () => {
+
+
+ const Home = () => {
+
+
+
 
 
   //*dispatch de prueba para las pelis falas que luego sera usado en mostar todas laspelis
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(FalseInfo());
@@ -47,6 +58,14 @@ console.log(pelisFiltradas)
   }, [pelisfalsas, pelisFiltradas]);
 
   //*
+
+  const SearchName = (titulo) => {
+    titulo === "" ? dispatch(FalseInfo()) : dispatch(searchByName(titulo))
+  }
+
+
+
+
 
   //*paginado 
   const [loading] = useState(false);
@@ -84,7 +103,7 @@ const FiltradoGeneros = (arg) => {
           <CssBaseline />
           <Container maxWidth="ls" sx={{ height: "auto" }}>
             <Navbar />
-            <SearchBar/>
+            <SearchBar search={SearchName}/>
           </Container>
         </React.Fragment>
       </div>
@@ -121,3 +140,4 @@ const FiltradoGeneros = (arg) => {
     </div>
   )
 }
+export default Home

@@ -8,10 +8,15 @@ const User = sequelize.define("User", {
     primaryKey: true,
     autoIncrement: true,
   },
-  username: {
+  email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
+    validate: {
+      isEmail: {
+        msg: 'Please enter valid email'
+      }
+    }
   },
   passwd: {
     type: DataTypes.STRING,

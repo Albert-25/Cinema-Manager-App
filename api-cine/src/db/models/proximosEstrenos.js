@@ -1,7 +1,7 @@
 const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
-const  Actores  = require("./actores.js");
-const  Generos  = require("./generos.js");
+const { Actores } = require("./actores.js");
+const { Generos } = require("./generos.js");
 
 const ProximosEstrenos = sequelize.define("ProximosEstrenos", {
   titulo: {
@@ -34,7 +34,7 @@ const ProximosEstrenos = sequelize.define("ProximosEstrenos", {
   trailer: {
     type: DataTypes.STRING,
   },
-});
+}, { timestamps: false });
 
 Actores.belongsToMany(ProximosEstrenos, { through: "ProximosEstrenosActores" });
 ProximosEstrenos.belongsToMany(Actores, { through: "ProximosEstrenosActores" });

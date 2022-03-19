@@ -1,8 +1,6 @@
 const { ProximosEstrenos } = require("../db/models/proximosEstrenos");
-const Generos = require("../db/models/generos");
-const Actores = require("../db/models/actores");
-
-//desarrollar aqui las funciones para los pedidos a la base de datos
+const { Generos }= require("../db/models/generos");
+const { Actores } = require("../db/models/actores");
 
 const getAll = async (req, res, next) => {
   try {

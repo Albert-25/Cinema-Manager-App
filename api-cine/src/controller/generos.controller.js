@@ -1,7 +1,5 @@
 const Generos = require("../db/models/generos");
 
-//desarrollar aqui las funciones para los pedidos a la base de datos
-
 const getAll = async (req, res, next) => {
   try {
     let pedidoDB = await Generos.findAll();
@@ -73,5 +71,4 @@ module.exports = {
   createGenre,
   editGenre,
   deleteGenre,
-  //funciones a exportar para las rutas
 };

@@ -1,13 +1,16 @@
 const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
-const { bcrypt } = require("bcrypt");
 
 const Generos = sequelize.define("Generos", {
-  genero: {
+  name: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
   },
-},{  timestamps: false });
+},{ timestamps: false });
 
-module.exports = Generos;
+Generos.bulkCreate([{name:'Action'},{name: 'Fiction'}])
+  .then(r => console.log(r))
+  .catch(err => console.log(err))
+
+module.exports = { Generos };

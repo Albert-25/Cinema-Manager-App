@@ -1,4 +1,4 @@
-const Generos = require("../db/models/generos");
+const { Generos } = require("../db/models/generos");
 
 const getAll = async (req, res, next) => {
   try {

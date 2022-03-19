@@ -10,7 +10,7 @@ const start = async (conn, server) => {
     console.log('Successful Sync')
     server.listen(PORT, () => {
       console.log('Listening at %d', PORT)
-    } )
+    })
   } catch (err) { console.log(err) }
 }
 

@@ -16,9 +16,6 @@ const ERRORS = {
   },
   SequelizeForeignKeyConstraintError: (res, err) => {
     res.status(406).json({[err.name]: err.message})
-  },
-  SequelizeUniqueConstraintError: (res, err) => {
-    res.status(406).json({[err.name]: err.message})
   }
 }
 

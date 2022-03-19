@@ -9,8 +9,4 @@ const Generos = sequelize.define("Generos", {
   },
 },{ timestamps: false });
 
-Generos.bulkCreate([{name:'Action'},{name: 'Fiction'}])
-  .then(r => console.log(r))
-  .catch(err => console.log(err))
-
 module.exports = { Generos };

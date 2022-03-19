@@ -21,7 +21,7 @@ const Pelicula = sequelize.define("Pelicula", {
     allowNull: false,
     validate: {
       isInt: {
-        msg: 'Please enter INTEGER number'
+        msg: 'Please enter INTEGER number in duration'
       }
     }
   },
@@ -38,7 +38,7 @@ const Pelicula = sequelize.define("Pelicula", {
     allowNull: false,
     validate: {
       isFloat: {
-        msg: 'Please enter FLOAT number'
+        msg: 'Please enter FLOAT number in puntuación'
       }
     },
   },

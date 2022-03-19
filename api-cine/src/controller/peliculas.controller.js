@@ -8,7 +8,7 @@ const getMovies = async (req, res, next) => {
     if (Object.keys(req.query).includes('title')) {
       movies = await Pelicula.findAll({
         where: { titulo: req.query.title },
-        include:  [Generos,Actores]
+        include: [Generos, Actores]
       })
     }
     if (Object.keys(req.query).length === 0) {
@@ -20,8 +20,10 @@ const getMovies = async (req, res, next) => {
 };
 
 const insertMovie = async (req, res, next) => {
-  if (Object.keys(req.body).length !== 12) {
-    return res.status(406).json({ msg: 'All atrributes are required' })
+  for (const key in req.body) {
+    if (!req.body[key] || ((key === 'genders' || key === 'actors') && req.body[key].length === 0)) {
+      return res.status(406).json({ msg: 'All atrributes are required' })
+    }
   }
   const gendersTds = req.body.genders
   const actorsIds = req.body.actors

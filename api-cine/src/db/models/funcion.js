@@ -16,7 +16,7 @@ const Funcion = sequelize.define("Funcion", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-});
+}, { timestamps: false });
 
 Pelicula.belongsToMany(Funcion, { through: "FuncionPelicula" });
 Funcion.belongsToMany(Pelicula, { through: "FuncionPelicula" });

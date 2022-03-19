@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Movie.css";
 
-export default function Movie({ titulo, director, poster, puntuacion, clasificacion }) {
+export default function Movie({ id, titulo, director, poster, puntuacion, clasificacion }) {
     return (
         <div>
-            <Link to={`details/${titulo}`}>
+            <Link to={`details/${id}`}>
                 <div
                     className="Movie__All"
                     style={{ backgroundImage: `url('${poster}')` }}>

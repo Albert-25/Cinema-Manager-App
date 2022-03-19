@@ -1,6 +1,4 @@
-const Actores = require("../db/models/actores");
-
-//desarrollar aqui las funciones para los pedidos a la base de datos
+const { Actores } = require("../db/models/actores");
 
 const getAll = async (req, res, next) => {
   try {
@@ -73,6 +71,5 @@ module.exports = {
   getAll,
   createActor,
   editActor,
-  deleteActor,
-  //funciones a exportar para las rutas
+  deleteActor
 };

@@ -17,6 +17,8 @@ const initialState = {
     PelisComments: [],
     ProductDetails: [],
     ProductComments: [],
+    // numberOfTickets: [],
+    // costoTotalTickets: []
 }
 
 /*Películas falsas*/

@@ -3,12 +3,11 @@ const jwt = require('jsonwebtoken')
 const { PRIVATEKEY } = require('../../config')
 
 const singUp = async (req, res, next) => {
-  if (!req.body.username) return res.status(406).json({ msg: 'The username is required.' })
+  if (!req.body.email) return res.status(406).json({ msg: 'The email is required.' })
   if (!req.body.passwd) return res.status(406).json({ msg: 'The password is required.' })
-  if (!req.body.role) return res.status(406).json({ msg: 'The role is required.' })
-  if (!['admin', 'portal'].includes(req.body.role)) return res.status(406).json({ msg: 'The role must be admin or portal.' })
+  const role = req.body.role || 'portal'
   try {
-    const user = await User.create({ username: req.body.username, passwd: req.body.passwd, role: req.body.role })
+    const user = await User.create({ email: req.body.email, passwd: req.body.passwd, role: role })
     return res.send({ token: jwt.sign({ id: user.id, role: user.role }, PRIVATEKEY) })
   } catch (err) { next(err) }
 }

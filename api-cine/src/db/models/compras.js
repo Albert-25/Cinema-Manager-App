@@ -15,7 +15,7 @@ const Compra = sequelize.define("Compra", {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-});
+}, { timestamps: false });
 
 Pelicula.belongsToMany(Compra, { through: "CompraPelicula" });
 Compra.belongsToMany(Pelicula, { through: "CompraPelicula" });

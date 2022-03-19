@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
-    "dev": "nodemon -L",
-    "test": "jest --verbose --detectOpenHandles"
+    "start": "NODE_ENV=production node .",
+    "dev": "NODE_ENV=development nodemon -L",
+    "test": "NODE_ENV=development jest --verbose --detectOpenHandles"
   },
   "keywords": [],
   "author": "",

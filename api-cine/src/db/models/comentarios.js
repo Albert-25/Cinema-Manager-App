@@ -14,6 +14,6 @@ const Comentarios = sequelize.define("Comentarios", {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-});
+}, { timestamps: false });
 
 module.exports = { Comentarios };

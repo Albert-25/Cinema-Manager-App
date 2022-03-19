@@ -1,7 +1,7 @@
 const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
-const  Actores  = require("./actores.js");
-const  Generos  = require("./generos.js");
+const { Actores } = require("./actores.js");
+const { Generos } = require("./generos.js");
 
 const Pelicula = sequelize.define("Pelicula", {
   titulo: {
@@ -21,7 +21,7 @@ const Pelicula = sequelize.define("Pelicula", {
     allowNull: false,
     validate: {
       isInt: {
-        msg: 'Please enter INTEGER number'
+        msg: 'Please enter INTEGER number in duration'
       }
     }
   },
@@ -38,7 +38,7 @@ const Pelicula = sequelize.define("Pelicula", {
     allowNull: false,
     validate: {
       isFloat: {
-        msg: 'Please enter FLOAT number'
+        msg: 'Please enter FLOAT number in puntuación'
       }
     },
   },
@@ -54,7 +54,7 @@ const Pelicula = sequelize.define("Pelicula", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-});
+}, { timestamps: false });
 
 Generos.belongsToMany(Pelicula, { through: "PeliculaGenero" });
 Pelicula.belongsToMany(Generos, { through: "PeliculaGenero" });

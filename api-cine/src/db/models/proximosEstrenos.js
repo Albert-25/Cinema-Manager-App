@@ -34,7 +34,7 @@ const ProximosEstrenos = sequelize.define("ProximosEstrenos", {
   trailer: {
     type: DataTypes.STRING,
   },
-});
+}, { timestamps: false });
 
 Actores.belongsToMany(ProximosEstrenos, { through: "ProximosEstrenosActores" });
 ProximosEstrenos.belongsToMany(Actores, { through: "ProximosEstrenosActores" });

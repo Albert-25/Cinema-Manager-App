@@ -7,6 +7,6 @@ const Generos = sequelize.define("Generos", {
     allowNull: false,
     unique: true,
   },
-});
+},{ timestamps: false });
 
 module.exports = { Generos };

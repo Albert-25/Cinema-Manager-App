@@ -7,7 +7,6 @@ const Pelicula = sequelize.define("Pelicula", {
   titulo: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
   },
   sinopsis: {
     type: DataTypes.TEXT,
@@ -20,6 +19,11 @@ const Pelicula = sequelize.define("Pelicula", {
   duracion: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    validate: {
+      isInt: {
+        msg: 'Please enter INTEGER number in duration'
+      }
+    }
   },
   clasificacion: {
     type: DataTypes.STRING,
@@ -32,6 +36,11 @@ const Pelicula = sequelize.define("Pelicula", {
   puntuación: {
     type: DataTypes.FLOAT,
     allowNull: false,
+    validate: {
+      isFloat: {
+        msg: 'Please enter FLOAT number in puntuación'
+      }
+    },
   },
   pais: {
     type: DataTypes.STRING,
@@ -45,7 +54,7 @@ const Pelicula = sequelize.define("Pelicula", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-});
+}, { timestamps: false });
 
 Generos.belongsToMany(Pelicula, { through: "PeliculaGenero" });
 Pelicula.belongsToMany(Generos, { through: "PeliculaGenero" });

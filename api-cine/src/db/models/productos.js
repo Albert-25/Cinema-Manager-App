@@ -23,6 +23,6 @@ const Productos = sequelize.define("Productos", {
     type: DataTypes.BOOLEAN,
     allowNull: false,
   },
-});
+}, { timestamps: false });
 
 module.exports = { Productos };

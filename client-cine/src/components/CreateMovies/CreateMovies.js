@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { postMovies } from "../../store/actions";
+import "./CreateMovies.css";
 const CreateMovies = () => {
    const [inputs, setInputs] = useState({
       titulo: "",
@@ -8,14 +10,17 @@ const CreateMovies = () => {
       duracion: Number,
       clasificacion: "",
       director: "",
-      puntuacion: "",
+      puntuación: "",
       pais: "",
       distribuidora: "",
       trailer: "",
+      genders: "test",
+      actors: "test",
    });
-   const [poster, setPoster] = useState([]);
+   //const [poster, setPoster] = useState([]);
+   const dispatch = useDispatch();
 
-   useEffect(() => {
+   /* useEffect(() => {
       fetch("http://localhost:3001/peliculas")
          .then((res) => res.json())
          .then((data) => {
@@ -23,10 +28,11 @@ const CreateMovies = () => {
             if (data.hasOwnProperty("msg")) {
                console.log("error message");
             } else {
+               console.log(data);
                return setPoster([...data]);
             }
          });
-   }, []);
+   }, []); */
 
    const handleChange = (e) => {
       setInputs({
@@ -37,7 +43,7 @@ const CreateMovies = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      const url = "http://localhost:3001/peliculas";
+      /* const url = "http://localhost:3001/peliculas";
       fetch(url, {
          method: "POST", // or 'PUT'
          body: JSON.stringify(inputs), // data can be `string` or {object}!
@@ -47,10 +53,11 @@ const CreateMovies = () => {
       })
          .then((res) => res.json())
          .then((data) => console.log(data));
-      console.log(inputs);
+      console.log(inputs); */
+      dispatch(postMovies(inputs));
    };
    return (
-      <div>
+      <div className="Create__Movies">
          <form
             onSubmit={(e) => handleSubmit(e)}
             onChange={(e) => handleChange(e)}
@@ -75,10 +82,13 @@ const CreateMovies = () => {
             <input type="text" name="trailer" placeholder="Trailer" />
             <input type="submit" value="Crear pelicula" />
          </form>
-         {poster
-            ? poster.map((el) => {
+         {/* {poster.length !== 0
+            ? poster.map((el, index) => {
                  return (
-                    <div key={Date.now()}>
+                    <div
+                       key={`${Date.now()}${el.titulo}${index}`}
+                       className="Check__Movies"
+                    >
                        <span>{el.titulo} </span>
                        <span>{el.sinopsis} </span>
                        <span>{el.director} </span>
@@ -88,7 +98,7 @@ const CreateMovies = () => {
                     </div>
                  );
               })
-            : null}
+            : null} */}
       </div>
    );
 };

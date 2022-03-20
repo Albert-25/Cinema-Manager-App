@@ -7,7 +7,6 @@ const getMovies = async (req, res, next) => {
   let movies = []
   try {
     if (Object.keys(req.query).includes('title')) {
-      console.log('%'+req.query.title+'%')
       movies = await Pelicula.findAll({
         where: { 
           titulo: {

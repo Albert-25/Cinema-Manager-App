@@ -10,6 +10,33 @@ export const FalseInfo = (arg) => {
 }
 
 
+export const AllMovies = () => {
+    return async (dispatch) => {
+        const response = await axios.get(`http://localhost:3001/peliculas`)
+        if (response?.data){
+            dispatch({
+                type: "ALLMOVIES",
+                payload: { pelis: response.data }
+            })
+        }
+    }
+}
+
+
+export const DetailedMovie = (id) => {
+    return async (dispatch) => {
+      try {
+        const response = await axios.get(`http://localhost:3001/peliculas/${id}`);
+        if (response?.data) {
+          dispatch({ type: "DETAILEDMOVIE", payload: { detis: response.data } });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
+
+
 
 export function getAllReview() {
     return async function (dispatch) {
@@ -100,16 +127,4 @@ export const searchByName = (titulo) => {
 
 
 
-export const DetailedMovie = (id) => {
-    return async (dispatch) => {
-      try {
-        const response = await axios.get(`/Movies/${id}`);
-        if (response?.data) {
-          dispatch({ type: "DETAILEDMOVIE", payload: { detis: response.data } });
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  };
 

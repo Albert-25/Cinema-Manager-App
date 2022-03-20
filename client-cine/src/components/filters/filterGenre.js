@@ -1,5 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import {
+
+  // FalseInfo,
+AllMovies
+
+
+} from "../../store/actions";
 
 //Llamamos al archivo api creado con axios
 
@@ -8,9 +15,10 @@ export default function FiltroGeneros({ Generos, FiltradoGeneros, FiltradoCast, 
   const Cast = useSelector((state) => state.CastAll);
 
 
+
   const [selectedGenres, setSelectedGenres] = React.useState([]);
   const [selectedCast, setSelectedCast] = React.useState([]);
-    console.log(selectedCast)
+
 
   const handleOnSubmit = (evt) => {
     evt.preventDefault()
@@ -29,52 +37,73 @@ export default function FiltroGeneros({ Generos, FiltradoGeneros, FiltradoCast, 
       setTimeout(() => {
           FiltradoGenreAndCast(completeArray)
         }, 1000)
+    }else{
+      FiltradoGeneros();
     }
+  }
+
+  const changeCast = (evt) => {
+    setSelectedCast((newCast) => [...newCast, evt.target.value])
+  document.getElementById(evt.target.value).setAttribute('disabled', 'disabled');
+  }
+
+  const changeGenres = (evt) => {
+    setSelectedGenres((newGenre) => [...newGenre, evt.target.value])
+  document.getElementById(evt.target.value).setAttribute('disabled', 'disabled');
   }
 
   const handleOnClickGenres = (item) => {
 let index = selectedGenres.indexOf(item);
 let newArr = selectedGenres.filter((e) => selectedGenres.indexOf(e) !== index);
 setSelectedGenres(newArr)
+    document.getElementById(item).removeAttribute('disabled');
+    document.getElementById('defaultGenres').selectedIndex = 0;
   }
 
    const handleOnClickCast = (item) => {
 let index = selectedCast.indexOf(item);
 let newArr = selectedCast.filter((e) => selectedCast.indexOf(e) !== index);
 setSelectedCast(newArr)
+    document.getElementById(item).removeAttribute('disabled');
+    document.getElementById('defaultCast').selectedIndex = 0;
+
   }
+
+
 
   return (
     <div>
-    <form onSubmit={handleOnSubmit}>
+    <form id='formDefault' onSubmit={handleOnSubmit}>
       <select
+      id='defaultGenres'
         className="selectGenres"
         defaultValue={"DEFAULT"}
-        onChange={(evt) => 
-          setSelectedGenres((newGenre) => [...newGenre, evt.target.value])}
+        onChange={(evt) => changeGenres(evt)}
       >
-        <option className="selectFop">Sort by Genre!</option>
+        <option value="DEFAULT" disabled className="selectFop">Sort by Genre!</option>
         {Genres && Genres.length &&
           Genres.map((item, index) => {
           return (
-            <option className="selectFop" key={index} value={item}>
+            <option id={item} className="selectFop" key={index} value={item}>
               {item}
             </option>
           );
         })}
       </select>
 
+
       <select
+        id='defaultCast'
         className="selectCast"
         defaultValue={"DEFAULT"}
-        onChange={(evt) => 
-          setSelectedCast((newCast) => [...newCast, evt.target.value])}
+        
+        onChange={(evt) => changeCast(evt)}
       >
-        <option className="selectFop">Sort by Cast!</option>
+        <option disabled value="DEFAULT" className="selectFop">Sort by Cast!</option>
         {Cast && Cast.length &&
           Cast.map((item, index) => {
           return (
-            <option className="selectFop" key={index} value={item}>
+            <option id={item} className="selectFop" key={index} value={item}>
               {item}
             </option>
           );

@@ -13,8 +13,8 @@ import {
 
   // FalseInfo,
   AllMovies,
-  FalseGenres,
-  FalseCast,
+  GetAllGenres,
+  GetAllCast,
   FiltrarGenero,
   FiltrarCast,
   FiltrarGeneroAndCast,
@@ -40,8 +40,8 @@ const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(AllMovies());
-    dispatch(FalseGenres());
-    dispatch(FalseCast());
+    dispatch(GetAllGenres());
+    dispatch(GetAllCast());
   }, [dispatch]);
   const pelisTotales = useSelector((state) => state.PelisAll);
   const pelisFiltradas = useSelector((state) => state.PelisFiltred);
@@ -79,7 +79,11 @@ const Home = () => {
 
   //* Filtros
   const FiltradoGeneros = (arg) => {
-    dispatch(FiltrarGenero(arg));
+    if(arg){
+      dispatch(FiltrarGenero(arg));
+    }else{
+      setContainer(pelisTotales)
+    }
   };
 
   const FiltradoCast = (arg) => {
@@ -115,8 +119,8 @@ const Home = () => {
 
       <div className='filterContainer'>
         <FiltroGeneros
-          FalseGenres={FalseGenres}
-          FalseCast={FalseCast}
+          GetAllGenres={GetAllGenres}
+          GetAllCast={GetAllCast}
           FiltradoGeneros={FiltradoGeneros}
           FiltradoCast={FiltradoCast}
           FiltradoGenreAndCast={FiltradoGenreAndCast}

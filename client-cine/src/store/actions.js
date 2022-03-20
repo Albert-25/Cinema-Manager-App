@@ -11,6 +11,7 @@ export const FalseInfo = (arg) => {
 
 
 export const AllMovies = () => {
+
     return async (dispatch) => {
         const response = await axios.get(`http://localhost:3001/peliculas`)
         if (response?.data){
@@ -38,6 +39,7 @@ export const DetailedMovie = (id) => {
 
 
 
+
 export function getAllReview() {
     return async function (dispatch) {
         const json = await axios.get("http://localhost:3001/comentarios")
@@ -59,16 +61,31 @@ export const postReview = (payload) => {
     }
 }
 
-export const getAllGenres = (payload) => {
-    return async dispatch => {
-        const json = await axios.post("http://localhost:3001/generos")
-        return dispatch({
-            type: "GENRES",
-            payload: json
-        })
+
+export const GetAllGenres = () => {
+    return async (dispatch) => {
+        const response = await axios.get(`http://localhost:3001/generos`)
+        if (response?.data){
+            dispatch({
+                type: "GENRES",
+                payload: { generos: response.data }
+            })
+        }
     }
 }
 
+
+export const GetAllCast = () => {
+    return async (dispatch) => {
+        const response = await axios.get(`http://localhost:3001/actores`)
+        if (response?.data){
+            dispatch({
+                type: "CAST",
+                payload: { actores: response.data }
+            })
+        }
+    }
+}
 
 
 export const FalseGenres = (arg) => {

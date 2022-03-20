@@ -11,9 +11,10 @@ export default function Movies({ moviesInfo, loading }) {
           moviesInfo.map((e, index) => (
             <Movie
               key={index}
+              id={e.id}
               titulo={e.titulo}
               poster={e.poster}
-              puntuacion={e.puntuacion}
+              puntuación={e.puntuación}
               clasificacion={e.clasificacion}
               director={e.director}
             />

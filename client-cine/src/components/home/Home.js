@@ -10,7 +10,8 @@ import MapView from '../mapView/MapView.js'
 
 import {
 
-  FalseInfo,
+  // FalseInfo,
+  AllMovies,
   FalseGenres,
   FalseCast,
   FiltrarGenero,
@@ -22,10 +23,7 @@ import {
 
 import Movies from "../Movies/Movies.js"
 import Pagination from "../Movies/Pagination"
-
-
 import FiltroGeneros from "../filters/filterGenre.js";
-
 
 
 
@@ -40,27 +38,28 @@ const Home = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(FalseInfo());
+    dispatch(AllMovies());
     dispatch(FalseGenres());
     dispatch(FalseCast());
   }, [dispatch]);
-  const pelisfalsas = useSelector((state) => state.PelisAll);
+  const pelisTotales = useSelector((state) => state.PelisAll);
   const pelisFiltradas = useSelector((state) => state.PelisFiltred);
-  console.log(pelisFiltradas)
+  // console.log(pelisFiltradas)
   const [container, setContainer] = useState([]);
 
   React.useEffect(() => { //luego se añadira filter aqui para decidir si se muestran los resultados filtrados o las pelis
-    if (pelisfalsas.length !== 0) {
-      setContainer(pelisfalsas);
+    if (pelisTotales.length !== 0) {
+      setContainer(pelisTotales);
     } if (pelisFiltradas.length !== 0) {
       setContainer(pelisFiltradas)
     }
-  }, [pelisfalsas, pelisFiltradas]);
+  }, [pelisTotales, pelisFiltradas]);
 
   //*
+  // console.log(pelisTotales)
 
   const SearchName = (titulo) => {
-    titulo === "" ? dispatch(FalseInfo()) : dispatch(searchByName(titulo))
+    titulo === "" ? dispatch(AllMovies()) : dispatch(searchByName(titulo))
   }
 
 

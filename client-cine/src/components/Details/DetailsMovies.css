@@ -1,6 +1,6 @@
 .Background__Details {
   height: 100vh;
-  /* background-image: url(""); */
+  background-image: url("https://img.freepik.com/vector-gratis/fondo-sala-cine_1017-8728.jpg?size=626&ext=jpg");
   background-position: center;
   /* background-repeat: no-repeat; */
   background-size: cover;
@@ -62,7 +62,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.Details__sipnosis {
+.Details__sinopsis {
   font-size: 2vh;
   padding-top: 25px;
   font-family: 'Poppins', sans-serif;
@@ -109,15 +109,25 @@
   padding-top: 60px;
   font-family: 'Poppins', sans-serif;
 }
+.Details__genero {
+  font-size: 2vh;
+  padding-top: 60px;
+  font-family: 'Poppins', sans-serif;
+}
+.Details__actores {
+  font-size: 2vh;
+  padding-top: 60px;
+  font-family: 'Poppins', sans-serif;
+}
 
 .Details__rightdown {
-  border: 3px solid rgba(17, 17, 17, 0);
+  border: 3px solid rgb(17, 17, 17);
   position: absolute;
   border-radius: 6rem;
   top: 36.5rem;
   left: 81.5rem;
-  height: 19rem;
-  width: 27rem;
+  height: 10rem;
+  width: 20rem;
 }
 
 .Details__rightdown:hover {
@@ -129,9 +139,9 @@
 
 
 .Details__rightdown__text {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
-  top: 13.8rem;
-  left: 8rem;
+  top: 2rem;
+  left: 3rem;
   position: absolute;
 }

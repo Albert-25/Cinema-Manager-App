@@ -1,26 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DetailedMovie } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
 import "./DetailsMovies.css";
 
 const DetailsMovies = (props) => {
-    let id = props.match.params.id;
-    // console.log("props", props)
+    let { id: code } = useParams();
+    let [id] = useState(code);
     const dispatch = useDispatch();
     const detailed = useSelector((state) => state.PelisDetails);
+    console.log(detailed)
 
     useEffect(() => {
         dispatch(DetailedMovie(id));
     }, [id, dispatch]);
 
-    // let TempArray = []
+
 
     // console.log("la ide detalles : ", id)
     let Mooovie = [];
     if (detailed[0]) {
         Mooovie = detailed[0];
     }
+
+
+
+    let GenArray = detailed.Generos && detailed.Generos.length ? detailed.Generos.map((e) => e.genero) : ["no genres"]
+    let ActArray = detailed.Actores && detailed.Actores.length ? detailed.Actores.map((e) => e.nombre) : ["no actors"]
 
     return (
         <body className="Background__Details">
@@ -36,8 +43,11 @@ const DetailsMovies = (props) => {
                 <div className="Details__title">
                     {detailed.titulo || Mooovie.titulo}
                 </div>
-                <div className="Details__sipnosis">
-                    💖sipnosis: {detailed.sipnosis || Mooovie.sipnosis}
+                <div className="Details__sinopsis">
+                    💖sinopsis: {detailed.sinopsis || Mooovie.sinopsis}
+                </div>
+                <div className="Details__duracion">
+                    💖duracion: {detailed.duracion || Mooovie.duracion}
                 </div>
                 <div className="Details__duracion">
                     💖duracion: {detailed.duracion || Mooovie.duracion}
@@ -60,9 +70,38 @@ const DetailsMovies = (props) => {
                 <div className="Details__trailer">
                     💖trailer: {detailed.trailer || Mooovie.trailer}
                 </div>
+
+                <div className="Details__genero">
+                    <div className="Details__trailer">
+                        {Array.isArray(GenArray) ? (
+                            GenArray.map((a) => (
+                                <li key={a}>
+                                    <span>{a} </span>
+                                </li>
+                            ))
+                        ) : (
+                            <span>No genres yet</span>
+                        )}
+                    </div>
+                </div>
+
+                <div className="Details__actores">
+                    <div className="Details__trailer">
+                        {Array.isArray(ActArray) ? (
+                            ActArray.map((a) => (
+                                <li key={a}>
+                                    <span>{a} </span>
+                                </li>
+                            ))
+                        ) : (
+                            <span>No genres yet</span>
+                        )}
+                    </div>
+                </div>
+
             </div>
             <div className="">
-                <Link to="/home" className="Details__rightdown">
+                <Link to="/" className="Details__rightdown">
                     <p className="Details__rightdown__text">👉 Go back 👈</p>
                 </Link>
             </div>

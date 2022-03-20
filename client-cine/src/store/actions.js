@@ -32,6 +32,17 @@ export const postReview = (payload) => {
     }
 }
 
+export const getAllGenres = (payload) => {
+    return async dispatch => {
+        const json = await axios.post("http://localhost:3001/generos")
+        return dispatch({
+            type: "GENRES",
+            payload: json
+        })
+    }
+}
+
+
 
 export const FalseGenres = (arg) => {
 

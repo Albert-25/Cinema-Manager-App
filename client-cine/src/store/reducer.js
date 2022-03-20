@@ -115,7 +115,7 @@ const reducer = (state = initialState, action) => {
                 PelisAll: state.PelisAll.concat(Alien, MiniMente, Anime, Alma)
             }
         }
-         case "FALSEGENRES": {
+         case "GENRES": {
             return {
                 ...state,
                 GenresAll: state.GenresAll.concat(Generos)

@@ -10,9 +10,7 @@ const getAll = async (req, res, next) => {
 };
 
 const createGenre = async (req, res, next) => {
-
-  let  Genre  = req.body;
-  console.log(Genre)
+  const { Genre } = req.body;
   try {
     if (Genre.genero === "") {
       return res.status(406).json({ message: "El genero no puede ser vacío" });

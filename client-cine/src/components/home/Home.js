@@ -17,7 +17,7 @@ import {
   GetAllCast,
   FiltrarGenero,
   FiltrarCast,
-  FiltrarGeneroAndCast,
+  FiltrarGeneroYCast,
   searchByName,
 
 } from "../../store/actions";
@@ -91,7 +91,7 @@ const Home = () => {
   }
 
   const FiltradoGenreAndCast = (arg) => {
-    dispatch(FiltrarGeneroAndCast(arg))
+    dispatch(FiltrarGeneroYCast(arg))
   }
 
 

@@ -84,7 +84,8 @@ export default function Navbar() {
               )):null}
         </Toolbar>
         <div>
-        <CallFormCtrl/>
+        <CallFormCtrl txt={'SingUp'}/>
+        <CallFormCtrl txt={'LogIn'}/>
          <IconButton
           size="large"
           aria-label="account of current user"

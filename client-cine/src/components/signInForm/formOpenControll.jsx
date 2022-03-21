@@ -1,21 +1,24 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import Button from '@mui/material/Button';
 import SignIn from './signInForm.jsx'
 
-export default function CallFormCtrl(){
-	const [open,setOpen]=useState(false)
-	const handleClose=(e)=>{
+export default function CallFormCtrl({ txt }) {
+	const [open, setOpen] = useState(false)
+	const handleClose = (e) => {
 		setOpen(!open)
 	}
 
 	return (<>
 		<Button
-		variant="contained"
-		size="small"
-		onClick={handleClose}
+			variant="contained"
+			size="small"
+			onClick={handleClose}
 		>
-		SignIn
+			{txt}
 		</Button>
-		{open?<SignIn status={open} handleClose={handleClose}/>:null}
-		</>)
+		{open
+			? <SignIn status={open} handleClose={handleClose} txt={txt}/>
+			: null
+		}
+	</>)
 } 

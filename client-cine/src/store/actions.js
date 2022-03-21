@@ -1,17 +1,17 @@
 import axios from "axios";
 
 export function postMovies(inputs) {
-   return function (dispatch) {
-      fetch("http://localhost:3001/peliculas", {
-         method: "POST", // or 'PUT'
-         body: JSON.stringify(inputs), // data can be `string` or {object}!
-         headers: {
-            "Content-Type": "application/json",
-         },
-      })
-         .then(() => console.log({ msg: "Success" }))
-         .catch((err) => console.log(err.message));
-   };
+    return function (dispatch) {
+        fetch("http://localhost:3001/peliculas", {
+            method: "POST", // or 'PUT'
+            body: JSON.stringify(inputs), // data can be `string` or {object}!
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then(() => console.log({ msg: "Success" }))
+            .catch((err) => console.log(err.message));
+    };
 }
 
 
@@ -115,20 +115,3 @@ export const FiltrarGeneroYCast = (arg) => {
         payload: arg,
     };
 };
-
-export const searchByName = (titulo) => {
-    return async function (dispatch) {
-        try {
-            const json = await axios.get(
-                "http://localhost:3001/peliculas/?title=" + titulo
-            );
-            return dispatch({
-                type: "PELI_NAME",
-                payload: json.data,
-            });
-        } catch (error) {
-            console.log("No se pudo obtener las peliculas", error);
-        }
-    };
-};
-

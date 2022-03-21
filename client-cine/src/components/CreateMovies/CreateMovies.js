@@ -1,10 +1,20 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { postMovies } from "../../store/actions";
 import "./CreateMovies.css";
+import { GetAllGenres, GetAllCast } from "../../store/actions";
 import { validate } from "./validate";
 import Swal from "sweetalert2";
 const CreateMovies = () => {
+   const dispatch = useDispatch();
+   useEffect(() => {
+      dispatch(GetAllGenres());
+      dispatch(GetAllCast());
+   }, [dispatch]);
+
+   const Genres = useSelector((state) => state.GenresAll);
+   const Cast = useSelector((state) => state.CastAll);
+
    const [inputs, setInputs] = useState({
       titulo: "",
       sinopsis: "",
@@ -16,8 +26,8 @@ const CreateMovies = () => {
       pais: "",
       distribuidora: "",
       trailer: "",
-      genders: "",
-      actors: "",
+      genders: [],
+      actors: [],
    });
    const [errors, setErrors] = useState({
       titulo: "",
@@ -34,35 +44,47 @@ const CreateMovies = () => {
       actors: "",
       error: false,
    });
-   //const [poster, setPoster] = useState([]);
-   const dispatch = useDispatch();
 
-   /* useEffect(() => {
-      fetch("http://localhost:3001/peliculas")
-         .then((res) => res.json())
-         .then((data) => {
-            console.log(data);
-            if (data.hasOwnProperty("msg")) {
-               console.log("error message");
-            } else {
-               console.log(data);
-               return setPoster([...data]);
-            }
-         });
-   }, []); */
-
-   const handleChange = (e) => {
+   const changeArrayGenders = (evt) => {
       setInputs({
          ...inputs,
-         [e.target.name]: e.target.value,
+         [evt.target.name]: inputs.genders.concat(evt.target.value),
       });
+      document
+         .getElementById(evt.target.value)
+         .setAttribute("disabled", "disabled");
+   };
 
-      setErrors(
-         validate({
-            [e.target.name]: e.target.value,
-         })
+   const changeArrayCast = (evt) => {
+      setInputs({
+         ...inputs,
+         [evt.target.name]: inputs.actors.concat(evt.target.value),
+      });
+      document
+         .getElementsByName(evt.target.value)[0]
+         .setAttribute("disabled", "disabled");
+   };
+
+   const handleOnClickGenres = (item) => {
+      let index = inputs.genders.indexOf(item);
+      let newArr = inputs.genders.filter(
+         (e) => inputs.genders.indexOf(e) !== index
       );
-      console.log(errors);
+      setInputs({ ...inputs, genders: newArr });
+
+      document.getElementById(item).removeAttribute("disabled");
+      document.getElementById("defaultGenres").selectedIndex = 0;
+   };
+
+   const handleOnClickCast = (item) => {
+      let index = inputs.actors.indexOf(item);
+      let newArr = inputs.actors.filter(
+         (e) => inputs.actors.indexOf(e) !== index
+      );
+      setInputs({ ...inputs, actors: newArr });
+
+      document.getElementsByName(item)[0].removeAttribute("disabled");
+      document.getElementById("defaultGenres").selectedIndex = 0;
    };
 
    const handleClick = (e) => {
@@ -71,9 +93,10 @@ const CreateMovies = () => {
             ...inputs,
          })
       );
+
       console.log(errors);
    };
-
+   console.log(errors);
    const handleSubmit = (e) => {
       e.preventDefault();
       /* const url = "http://localhost:3001/peliculas";
@@ -114,24 +137,61 @@ const CreateMovies = () => {
    };
    return (
       <div className="Create__Movies">
-         <form
-            onSubmit={(e) => handleSubmit(e)}
-            onChange={(e) => handleChange(e)}
-         >
+         <form onSubmit={(e) => handleSubmit(e)}>
             <div className="input__with__error">
-               <input type="text" name="titulo" placeholder="Titulo" />
+               <input
+                  type="text"
+                  name="titulo"
+                  onChange={(evt) =>
+                     setInputs({
+                        ...inputs,
+                        [evt.target.name]: evt.target.value,
+                     })
+                  }
+                  placeholder="Titulo"
+               />
                {errors.titulo ? <span>{errors.titulo}</span> : null}
             </div>
             <div className="input__with__error">
-               <input type="text" name="sinopsis" placeholder="Sipnosis" />
+               <input
+                  type="text"
+                  name="sinopsis"
+                  onChange={(evt) =>
+                     setInputs({
+                        ...inputs,
+                        [evt.target.name]: evt.target.value,
+                     })
+                  }
+                  placeholder="Sipnosis"
+               />
                {errors.sinopsis ? <span>{errors.sinopsis}</span> : null}
             </div>
             <div className="input__with__error">
-               <input type="text" name="poster" placeholder="Poster" />
+               <input
+                  type="text"
+                  name="poster"
+                  onChange={(evt) =>
+                     setInputs({
+                        ...inputs,
+                        [evt.target.name]: evt.target.value,
+                     })
+                  }
+                  placeholder="Poster"
+               />
                {errors.poster ? <span>{errors.poster}</span> : null}
             </div>
             <div className="input__with__error">
-               <input type="text" name="duracion" placeholder="Duracion" />
+               <input
+                  type="text"
+                  name="duracion"
+                  onChange={(evt) =>
+                     setInputs({
+                        ...inputs,
+                        [evt.target.name]: evt.target.value,
+                     })
+                  }
+                  placeholder="Duracion"
+               />
                {errors.duracion ? <span>{errors.duracion}</span> : null}
             </div>
             <div className="input__with__error">
@@ -139,21 +199,57 @@ const CreateMovies = () => {
                   type="text"
                   name="clasificacion"
                   placeholder="Clasificacion"
+                  onChange={(evt) =>
+                     setInputs({
+                        ...inputs,
+                        [evt.target.name]: evt.target.value,
+                     })
+                  }
                />
                {errors.clasificacion ? (
                   <span>{errors.clasificacion}</span>
                ) : null}
             </div>
             <div className="input__with__error">
-               <input type="text" name="director" placeholder="Director" />
+               <input
+                  type="text"
+                  name="director"
+                  onChange={(evt) =>
+                     setInputs({
+                        ...inputs,
+                        [evt.target.name]: evt.target.value,
+                     })
+                  }
+                  placeholder="Director"
+               />
                {errors.director ? <span>{errors.director}</span> : null}
             </div>
             <div className="input__with__error">
-               <input type="text" name="puntuación" placeholder="Puntuación" />
+               <input
+                  type="text"
+                  name="puntuación"
+                  onChange={(evt) =>
+                     setInputs({
+                        ...inputs,
+                        [evt.target.name]: evt.target.value,
+                     })
+                  }
+                  placeholder="Puntuación"
+               />
                {errors.puntuación ? <span>{errors.puntuación}</span> : null}
             </div>
             <div className="input__with__error">
-               <input type="text" name="pais" placeholder="Pais" />
+               <input
+                  type="text"
+                  name="pais"
+                  onChange={(evt) =>
+                     setInputs({
+                        ...inputs,
+                        [evt.target.name]: evt.target.value,
+                     })
+                  }
+                  placeholder="Pais"
+               />
                {errors.pais ? <span>{errors.pais}</span> : null}
             </div>
             <div className="input__with__error">
@@ -161,21 +257,82 @@ const CreateMovies = () => {
                   type="text"
                   name="distribuidora"
                   placeholder="Distribuidora"
+                  onChange={(evt) =>
+                     setInputs({
+                        ...inputs,
+                        [evt.target.name]: evt.target.value,
+                     })
+                  }
                />
                {errors.distribuidora ? (
                   <span>{errors.distribuidora}</span>
                ) : null}
             </div>
             <div className="input__with__error">
-               <input type="text" name="trailer" placeholder="Trailer" />
+               <input
+                  type="text"
+                  name="trailer"
+                  onChange={(evt) =>
+                     setInputs({
+                        ...inputs,
+                        [evt.target.name]: evt.target.value,
+                     })
+                  }
+                  placeholder="Trailer"
+               />
                {errors.trailer ? <span>{errors.trailer}</span> : null}
             </div>
             <div className="input__with__error">
-               <input type="text" name="genders" placeholder="Genders" />
+               <select
+                  id="defaultGenres"
+                  name="genders"
+                  defaultValue={"DEFAULT"}
+                  onChange={(evt) => changeArrayGenders(evt)}
+               >
+                  <option value="DEFAULT" disabled>
+                     Generos
+                  </option>
+                  {Genres &&
+                     Genres.map((item) => {
+                        return (
+                           <option
+                              id={item.id}
+                              className="elemSelect"
+                              key={item.genero}
+                              value={item.id}
+                           >
+                              {item.genero}
+                           </option>
+                        );
+                     })}
+               </select>
                {errors.genders ? <span>{errors.genders}</span> : null}
             </div>
             <div className="input__with__error">
-               <input type="text" name="actors" placeholder="Actors" />
+               <select
+                  id="defaultCast"
+                  name="actors"
+                  defaultValue={"DEFAULT"}
+                  onChange={(evt) => changeArrayCast(evt)}
+               >
+                  <option value="DEFAULT" disabled>
+                     Cast
+                  </option>
+                  {Cast &&
+                     Cast.map((item) => {
+                        return (
+                           <option
+                              name={item.id}
+                              className="elemSelect"
+                              key={item.nombre}
+                              value={item.id}
+                           >
+                              {item.nombre}
+                           </option>
+                        );
+                     })}
+               </select>
+
                {errors.actors ? <span>{errors.actors}</span> : null}
             </div>
             <input
@@ -184,6 +341,45 @@ const CreateMovies = () => {
                onClick={(e) => handleClick(e)}
             />
          </form>
+
+         <div className="SelectedFilters">
+            <div className="gendersChoosenContainer">
+               {inputs.genders &&
+                  inputs.genders.length !== 0 &&
+                  inputs.genders.map((item, index) => {
+                     return (
+                        <div key={index}>
+                           <p id="selectedG">{Genres[item - 1].genero}</p>
+
+                           <button
+                              className="close"
+                              onClick={() => handleOnClickGenres(item)}
+                           >
+                              X
+                           </button>
+                        </div>
+                     );
+                  })}
+            </div>
+            <div className="castChoosenContainer">
+               {inputs.actors &&
+                  inputs.actors.length !== 0 &&
+                  inputs.actors.map((item, index) => {
+                     return (
+                        <div key={index}>
+                           <p id="selectedC">{Cast[item - 1].nombre}</p>
+                           <button
+                              className="close"
+                              onClick={() => handleOnClickCast(item)}
+                           >
+                              X
+                           </button>
+                        </div>
+                     );
+                  })}
+            </div>
+         </div>
+
          {/* {poster.length !== 0
             ? poster.map((el, index) => {
                  return (

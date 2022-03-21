@@ -68,12 +68,12 @@ export function validate(input) {
       errors.error = true;
    }
 
-   if (!input.genders && input.genders !== undefined) {
+   if (input.genders.length === 0) {
       errors.genders = "El genero es requerido";
       errors.error = true;
    }
 
-   if (!input.actors && input.actors !== undefined) {
+      if (input.actors.length === 0) {
       errors.actors = "Los actores son requeridos";
       errors.error = true;
    }

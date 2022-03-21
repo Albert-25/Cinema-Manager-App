@@ -16,6 +16,8 @@ export default function FiltroGeneros({
 }) {
   const Genres = useSelector((state) => state.GenresAll);
   const Cast = useSelector((state) => state.CastAll);
+  let GenresName = Genres.map((e) => e.genero)
+  let CastName = Cast.map((e) => e.nombre)
 
   const [selectedGenres, setSelectedGenres] = React.useState([]);
   const [selectedCast, setSelectedCast] = React.useState([]);
@@ -87,9 +89,9 @@ export default function FiltroGeneros({
           <option value="DEFAULT" disabled className="selectFop">
             Sort by Genre!
           </option>
-          {Genres &&
-            Genres.length &&
-            Genres.map((item, index) => {
+          {GenresName &&
+            GenresName.length &&
+            GenresName.map((item, index) => {
               return (
                 <option
                   id={item}
@@ -112,9 +114,9 @@ export default function FiltroGeneros({
           <option disabled value="DEFAULT" className="selectFop">
             Sort by Cast!
           </option>
-          {Cast &&
-            Cast.length &&
-            Cast.map((item, index) => {
+          {CastName &&
+            CastName.length &&
+            CastName.map((item, index) => {
               return (
                 <option
                   id={item}

@@ -10,7 +10,7 @@ import { Admin } from "./admin/Admin.js";
 import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
-
+import Admin from './AdminPanel/Admin.jsx';
 export const App = () => {
   return (
     <Router>
@@ -20,6 +20,7 @@ export const App = () => {
         <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
         <Route path="/shoppingcart" element={<ShoppingCart />} />
         <Route path="/about" element={<SobreNosotros />} />
+        <Route path="/admin" element={<Admin/>}/>
         <Route path="/create-movies" element={<CreateMovies />} />
         <Route path="/admin/crearActor" element={<CreateActor />} />
         <Route path="/admin/crearGenero" element={<CreateGenre />} />

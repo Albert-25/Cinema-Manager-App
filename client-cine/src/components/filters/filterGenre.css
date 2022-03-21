@@ -1,0 +1,21 @@
+/*#filterOptionsContainer{
+	display: flex;
+	justify-content: center;
+	margin-top: 5px;
+}
+
+.SelectedFilters{
+	    position: absolute;
+    left: 85%;
+    max-height: 12vh;
+    border: 1px solid black;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    overflow: scroll;
+}
+
+#selectedG,
+#selectedC{
+	display: inline-block;
+	padding: 0.5vw;
+}*/

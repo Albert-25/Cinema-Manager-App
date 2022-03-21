@@ -10,7 +10,6 @@ const DetailsMovies = (props) => {
     let [id] = useState(code);
     const dispatch = useDispatch();
     const detailed = useSelector((state) => state.PelisDetails);
-    console.log(detailed)
 
     useEffect(() => {
         dispatch(DetailedMovie(id));

@@ -89,7 +89,9 @@ const Home = () => {
           </Container>
         </React.Fragment>
       </div>
+
       <Search />
+
       <div className="filterContainer">
         <FiltroGeneros
           GetAllGenres={GetAllGenres}

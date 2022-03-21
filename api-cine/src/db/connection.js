@@ -4,10 +4,7 @@ const sequelize = new Sequelize(DATABASE_URI, {
    logging: false,
    native: false,
    dialectOptions: {
-      ssl: {
-         require: true,
-         rejectUnauthorized: false,
-      },
+ 
    },
 });
 

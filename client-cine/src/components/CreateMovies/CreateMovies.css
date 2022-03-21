@@ -10,3 +10,9 @@
 .Create__Movies input {
    margin: 1rem;
 }
+
+.input__with__error span {
+   margin: auto;
+   color: #df1313;
+   letter-spacing: 1px;
+}

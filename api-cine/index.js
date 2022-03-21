@@ -4,6 +4,8 @@ const { PORT } = require('./config.js')
 
 const start = async (conn, server) => {
   try {
+    await conn.authenticate()
+    console.log("Connection has been established successfully.")
     await conn.sync({ force: false })
     console.log('Successful Sync')
     server.listen(PORT, () => {

@@ -5,6 +5,7 @@ import CreateGenre from "./CreateGenre/CreateGenre.jsx";
 import CreateMovies from "./CreateMovies/CreateMovies.js";
 import DetailsMovies from "./Details/DetailsMovies";
 import Home from "./home/Home.js";
+import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
 
@@ -16,6 +17,7 @@ export const App = () => {
         <Route path="/review" element={<Review />} />
         <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
         <Route path="/shoppingcart" element={<ShoppingCart />} />
+        <Route path="/about" element={<SobreNosotros />} />
         <Route path="/create-movies" element={<CreateMovies />} />
         <Route path="/admin/crearActor" element={<CreateActor />} />
         <Route path="/admin/crearGenero" element={<CreateGenre />} />

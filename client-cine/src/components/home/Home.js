@@ -5,8 +5,6 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "../Navbar/navbar.jsx";
 
-import MapView from "../mapView/MapView.js";
-
 import {
   AllMovies,
   GetAllGenres,
@@ -111,9 +109,6 @@ const Home = () => {
           totalMovies={container.length}
           paginate={paginate}
         />
-      </div>
-      <div className="mapContainer">
-        <MapView />
       </div>
     </div>
   );

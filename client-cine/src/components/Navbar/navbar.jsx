@@ -12,8 +12,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import CallFormCtrl from './../signInForm/formOpenControll.jsx'
+import {Link} from 'react-router-dom';
 
-let pages=["page1","page2","page3","page4"]
+let pages=["about"]
 export default function Navbar() {
   const [state, setState] = React.useState({
     top: false,
@@ -79,7 +80,7 @@ export default function Navbar() {
           </Typography>
             {sizeScreen>=1024?pages.map((page) => (
                 <MenuItem key={page}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center"><Link to={`/${page.toLowerCase()}`}>{page}</Link></Typography>
                 </MenuItem>
               )):null}
         </Toolbar>

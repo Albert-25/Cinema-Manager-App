@@ -1,0 +1,8 @@
+.list {
+  background-color: rgb(90, 154, 191);
+  width: 20vw;
+}
+
+.item_list {
+  cursor: pointer;
+}

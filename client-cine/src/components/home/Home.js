@@ -1,4 +1,4 @@
-import SearchBar from "../SearchBar/index.jsx";
+import Search from "../SearchBar/Search.jsx";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Container from "@mui/material/Container";
@@ -8,14 +8,12 @@ import Navbar from "../Navbar/navbar.jsx";
 import MapView from "../mapView/MapView.js";
 
 import {
-  // FalseInfo,
   AllMovies,
   GetAllGenres,
   GetAllCast,
   FiltrarGenero,
   FiltrarCast,
   FiltrarGeneroYCast,
-  searchByName,
 } from "../../store/actions";
 
 import Movies from "../Movies/Movies.js";
@@ -55,12 +53,6 @@ const Home = () => {
     }
   }, [pelisTotales, pelisFiltradas]);
 
-  //*
-
-  const SearchName = (titulo) => {
-    titulo === "" ? dispatch(AllMovies()) : dispatch(searchByName(titulo));
-  };
-
   //*paginado
   const [loading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -88,7 +80,6 @@ const Home = () => {
   };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  //*
 
   return (
     <div>
@@ -97,16 +88,10 @@ const Home = () => {
           <CssBaseline />
           <Container maxWidth="ls" sx={{ height: "auto" }}>
             <Navbar />
-
-            <SearchBar search={SearchName} />
           </Container>
         </React.Fragment>
       </div>
-
-      <div className="Home__Wellcome!">
-        <h1>Wellcome!!!</h1>
-      </div>
-
+      <Search />
       <div className="filterContainer">
         <FiltroGeneros
           GetAllGenres={GetAllGenres}
@@ -116,7 +101,6 @@ const Home = () => {
           FiltradoGenreAndCast={FiltradoGenreAndCast}
         />
       </div>
-
       <div className="Home__PelisContainer">
         <Movies moviesInfo={currentPost} loading={loading} />
       </div>

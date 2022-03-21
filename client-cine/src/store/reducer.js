@@ -2,8 +2,8 @@ const initialState = {
     PelisAll: [],
     ProductAll: [],
 
-    GenresAll:[],
-    CastAll:[],
+    GenresAll: [],
+    CastAll: [],
 
     PelisFiltred: [],
     ProductFiltred: [],
@@ -19,30 +19,21 @@ const initialState = {
     ProductComments: [],
     // numberOfTickets: [],
     // costoTotalTickets: []
-}
-
+};
 
 /*Película no encontrada*/
 let Misterious = {
-    "titulo": "Movie Not found",
-    "sipnosis": "???",
-    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Orange_question_mark.svg/1200px-Orange_question_mark.svg.png",
-    "duracion": "???",
-    "pais": "???",
-    "clasificacion": "???",
-    "director": "???",
-    "puntuación": "???",
-    "distribuidora": "???",
-    "trailer": "???",
-    'genero': ['???'],
-}
-
-let Generos = ["Acción", "Terror", "Animación", "Infantil"];
-let Cast = ["Chris Pratt", "Adam Sandler", "Sigourney Weaver", "Jamie Lee Curtis"];
-
-
-
-
+    titulo: "Movie Not found",
+    sipnosis: "???",
+    poster: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Orange_question_mark.svg/1200px-Orange_question_mark.svg.png",
+    duracion: "???",
+    pais: "???",
+    clasificacion: "???",
+    director: "???",
+    puntuación: "???",
+    distribuidora: "???",
+    genero: ["???"],
+};
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -55,11 +46,10 @@ const reducer = (state = initialState, action) => {
         // }
 
         case "ALLMOVIES": {
-            state = initialState;
             return {
                 ...state,
-                PelisAll: state.PelisAll.concat(action.payload.pelis)
-            }
+                PelisAll: state.PelisAll.concat(action.payload.pelis),
+            };
         }
 
         case "DETAILEDMOVIE": {
@@ -70,89 +60,121 @@ const reducer = (state = initialState, action) => {
             };
         }
 
-         case "FALSEGENRES": {
+        case "GENRES": {
+            const allGenres = action.payload.generos.map((e) => e.genero);
             return {
                 ...state,
-                GenresAll: state.GenresAll.concat(Generos)
-            }
-        }
-        case "FALSECAST": {
-            return {
-                ...state,
-                CastAll: state.CastAll.concat(Cast)
-            }
-        }
-        case "FILTRARGENRES": {
-            let ArrayReader = (elm, action) => action.every(v => elm.includes(v))
-            let filteredArray = state.PelisAll.filter((element) => ArrayReader(element.genero, action.payload));
-            if(filteredArray.length === 0){
-                filteredArray.push(Misterious)
-            }
-            return {
-                ...state,
-                PelisFiltred: filteredArray
-            }
-        }
-        case "FILTRARCASTING": {
-             let ArrayReader = (elm, action) => action.every(v => elm.includes(v))
-            let filteredArray = state.PelisAll.filter((element) => ArrayReader(element.cast, action.payload));
-            if(filteredArray.length === 0){
-                filteredArray.push(Misterious)
-            }
-            return {
-                ...state,
-                PelisFiltred: filteredArray
-            }
-        }
-         case "FILTRARGENEROANDCASTING": {
-            console.log(action.payload)
-            let ArrayReader = (elm, action) => action.every(v => elm.includes(v))
-            let genreArray = state.PelisAll.filter((element) => ArrayReader(element.genero, action.payload[0]));
-            console.log(genreArray)
-            let castArray = state.PelisAll.filter((element) => ArrayReader(element.cast, action.payload[1]));
-            let filteredArray = genreArray.filter(value => castArray.includes(value));
-            if(genreArray.length === 0 || castArray.length === 0 || filteredArray.length === 0){
-                filteredArray.push(Misterious)
-            }
-            return {
-                ...state,
-                PelisFiltred: filteredArray
-            }
+                GenresAll: state.GenresAll.concat(allGenres),
+            };
         }
 
+        case "CAST": {
+            const allCast = action.payload.actores.map((e) => e.nombre);
+            return {
+                ...state,
+                CastAll: state.CastAll.concat(allCast),
+            };
+        }
+
+        case "FILTRARGENRES": {
+            let ArrayReader = (elm, action) => {
+                let completeArray = [];
+                for (let i = 0; i < elm.length; i++) {
+                    completeArray.push(elm[i].genero);
+                }
+                return action.every((v) => completeArray.includes(v));
+            };
+            let filteredArray = state.PelisAll.filter((element) =>
+                ArrayReader(element.Generos, action.payload)
+            );
+            if (filteredArray.length === 0) {
+                filteredArray.push(Misterious);
+            }
+            return {
+                ...state,
+                PelisFiltred: filteredArray,
+            };
+        }
+
+        case "FILTRARCASTING": {
+            let ArrayReader = (elm, action) => {
+                let completeArray = [];
+                for (let i = 0; i < elm.length; i++) {
+                    completeArray.push(elm[i].nombre);
+                }
+                return action.every((v) => completeArray.includes(v));
+            };
+            let filteredArray = state.PelisAll.filter((element) =>
+                ArrayReader(element.Actores, action.payload)
+            );
+            if (filteredArray.length === 0) {
+                filteredArray.push(Misterious);
+            }
+            return {
+                ...state,
+                PelisFiltred: filteredArray,
+            };
+        }
+        case "FILTRARGENEROYCASTING": {
+            let ArrayReaderGenero = (elm, action) => {
+                let completeArray = [];
+                for (let i = 0; i < elm.length; i++) {
+                    completeArray.push(elm[i].genero);
+                }
+                return action.every((v) => completeArray.includes(v));
+            };
+            let ArrayReaderCast = (elm, action) => {
+                let completeArray = [];
+                for (let i = 0; i < elm.length; i++) {
+                    completeArray.push(elm[i].nombre);
+                }
+                return action.every((v) => completeArray.includes(v));
+            };
+            let genreArray = state.PelisAll.filter((element) =>
+                ArrayReaderGenero(element.Generos, action.payload[0])
+            );
+            let castArray = state.PelisAll.filter((element) =>
+                ArrayReaderCast(element.Actores, action.payload[1])
+            );
+            let filteredArray = genreArray.filter((value) =>
+                castArray.includes(value)
+            );
+            if (
+                genreArray.length === 0 ||
+                castArray.length === 0 ||
+                filteredArray.length === 0
+            ) {
+                filteredArray.push(Misterious);
+            }
+            return {
+                ...state,
+                PelisFiltred: filteredArray,
+            };
+        }
 
         case "GET_REVIEW": {
             return {
                 ...state,
-                ProductComments: action.payload
-            }
+                ProductComments: action.payload,
+            };
         }
 
         case "POST_REVIEW": {
             return {
-                ...state
-            }
+                ...state,
+            };
         }
 
-
         case "PELI_NAME":
-            state = initialState
-			return {
-				...state,
-				PelisAll: action.payload
-			}
-
-
-
-
-
-
-
-
+            state = initialState;
+            return {
+                ...state,
+                PelisAll: action.payload,
+            };
 
         default: {
             return state;
         }
     }
-}
+};
 export default reducer;

@@ -1,0 +1,18 @@
+.Create__Movies {
+   width: 100%;
+   max-width: 1200px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.Create__Movies input {
+   margin: 1rem;
+}
+
+.input__with__error span {
+   margin: auto;
+   color: #df1313;
+   letter-spacing: 1px;
+}

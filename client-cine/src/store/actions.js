@@ -1,12 +1,5 @@
 import axios from "axios";
 
-export const FalseInfo = (arg) => {
-  return {
-    type: "FALSEINFO",
-    payload: arg,
-  };
-};
-
 export function postMovies(inputs) {
   return function (dispatch) {
     fetch("http://localhost:3001/peliculas", {
@@ -38,7 +31,10 @@ export const DetailedMovie = (id) => {
     try {
       const response = await axios.get(`http://localhost:3001/peliculas/${id}`);
       if (response?.data) {
-        dispatch({ type: "DETAILEDMOVIE", payload: { detis: response.data } });
+        dispatch({
+          type: "DETAILEDMOVIE",
+          payload: { detis: response.data },
+        });
       }
     } catch (error) {
       console.log(error);
@@ -66,17 +62,27 @@ export const postReview = (payload) => {
   };
 };
 
-export const FalseGenres = (arg) => {
-  return {
-    type: "FALSEGENRES",
-    payload: arg,
+export const GetAllGenres = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`http://localhost:3001/generos`);
+    if (response?.data) {
+      dispatch({
+        type: "GENRES",
+        payload: { generos: response.data },
+      });
+    }
   };
 };
 
-export const FalseCast = (arg) => {
-  return {
-    type: "FALSECAST",
-    payload: arg,
+export const GetAllCast = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`http://localhost:3001/actores`);
+    if (response?.data) {
+      dispatch({
+        type: "CAST",
+        payload: { actores: response.data },
+      });
+    }
   };
 };
 
@@ -94,9 +100,9 @@ export const FiltrarCast = (arg) => {
   };
 };
 
-export const FiltrarGeneroAndCast = (arg) => {
+export const FiltrarGeneroYCast = (arg) => {
   return {
-    type: "FILTRARGENEROANDCASTING",
+    type: "FILTRARGENEROYCASTING",
     payload: arg,
   };
 };
@@ -134,17 +140,17 @@ export const uploadGenre = (info) => {
 };
 
 export const uploadActor = (info) => {
-   return async function postActor() {
-     let body = {
-       Actor: {
-         nombre: info.nombre,
-       },
-     };
-     try {
-       await axios.post("http://localhost:3001/actores", body);
-       alert("Actor creado satisfactoriamente");
-     } catch (error) {
-       alert("Error, el actor ya se encuentra en la base de datos");
-     }
-   };
- };
+  return async function postActor() {
+    let body = {
+      Actor: {
+        nombre: info.nombre,
+      },
+    };
+    try {
+      await axios.post("http://localhost:3001/actores", body);
+      alert("Actor creado satisfactoriamente");
+    } catch (error) {
+      alert("Error, el actor ya se encuentra en la base de datos");
+    }
+  };
+};

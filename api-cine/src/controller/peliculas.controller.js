@@ -1,13 +1,18 @@
 const { Pelicula } = require("../db/models/pelicula");
 const { Generos } = require("../db/models/generos");
 const { Actores } = require("../db/models/actores");
+const { Op } = require("sequelize");
 
 const getMovies = async (req, res, next) => {
   let movies = []
   try {
     if (Object.keys(req.query).includes('title')) {
       movies = await Pelicula.findAll({
-        where: { titulo: req.query.title },
+        where: { 
+          titulo: {
+            [Op.iLike]: '%' + req.query.title + '%'
+          } 
+        },
         include: [Generos, Actores]
       })
     }

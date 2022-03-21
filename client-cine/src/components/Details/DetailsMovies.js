@@ -49,9 +49,6 @@ const DetailsMovies = (props) => {
                 <div className="Details__duracion">
                     💖duracion: {detailed.duracion || Mooovie.duracion}
                 </div>
-                <div className="Details__duracion">
-                    💖duracion: {detailed.duracion || Mooovie.duracion}
-                </div>
                 <div className="Details__clasificacion">
                     💖clasificacion: {detailed.clasificacion || Mooovie.clasificacion}
                 </div>

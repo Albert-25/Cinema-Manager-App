@@ -1,11 +1,19 @@
 import axios from "axios";
 
-export const FalseInfo = (arg) => {
-    return {
-        type: "FALSEINFO",
-        payload: arg,
-    };
-};
+export function postMovies(inputs) {
+   return function (dispatch) {
+      fetch("http://localhost:3001/peliculas", {
+         method: "POST", // or 'PUT'
+         body: JSON.stringify(inputs), // data can be `string` or {object}!
+         headers: {
+            "Content-Type": "application/json",
+         },
+      })
+         .then(() => console.log({ msg: "Success" }))
+         .catch((err) => console.log(err.message));
+   };
+}
+
 
 export const AllMovies = () => {
     return async (dispatch) => {
@@ -18,6 +26,7 @@ export const AllMovies = () => {
         }
     };
 };
+
 
 export const DetailedMovie = (id) => {
     return async (dispatch) => {
@@ -37,7 +46,9 @@ export const DetailedMovie = (id) => {
     };
 };
 
+
 export function getAllReview() {
+
     return async function (dispatch) {
         const json = await axios.get("http://localhost:3001/comentarios");
         return dispatch({
@@ -120,3 +131,4 @@ export const searchByName = (titulo) => {
         }
     };
 };
+

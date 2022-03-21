@@ -103,10 +103,6 @@ const Home = () => {
         </React.Fragment>
       </div>
 
-      <div className="Home__Wellcome!">
-        <h1>Wellcome!!!</h1>
-      </div>
-
       <div className="filterContainer">
         <FiltroGeneros
           GetAllGenres={GetAllGenres}

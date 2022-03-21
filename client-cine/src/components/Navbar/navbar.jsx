@@ -9,12 +9,12 @@ import MenuItem from '@mui/material/MenuItem';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import CallFormCtrl from './../signInForm/formOpenControll.jsx'
 import {Link} from 'react-router-dom';
+import logo from "../../assets/popcorn.png"
 
-let pages=["about"]
+let pages=["About"]
 export default function Navbar() {
   const [state, setState] = React.useState({
     top: false,
@@ -55,9 +55,10 @@ export default function Navbar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Link1', 'Link2', 'Link3', 'Link4'].map((text, index) => (
+        {['About'].map((text) => (
           <ListItem button key={text}>
-            <ListItemText primary={text} />
+            {/* <ListItemText primary={text} /> */}
+            <Link to={`/${text.toLowerCase()}`}>{text}</Link>
           </ListItem>
         ))}
       </List>
@@ -76,7 +77,7 @@ export default function Navbar() {
             {list("left")}
           </SwipeableDrawer>
           <Typography variant="h6" color="inherit" component="div">
-            Logo
+            <img src={logo} alt="L2ogo"/>
           </Typography>
             {sizeScreen>=1024?pages.map((page) => (
                 <MenuItem key={page}>

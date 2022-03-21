@@ -1,73 +1,67 @@
 import SearchBar from "../SearchBar/index.jsx";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import Navbar from '../Navbar/navbar.jsx'
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import Navbar from "../Navbar/navbar.jsx";
 
-import MapView from '../mapView/MapView.js'
-
+import MapView from "../mapView/MapView.js";
 
 import {
-
-  FalseInfo,
-  FalseGenres,
-  FalseCast,
+  // FalseInfo,
+  AllMovies,
+  GetAllGenres,
+  GetAllCast,
   FiltrarGenero,
   FiltrarCast,
-  FiltrarGeneroAndCast,
-
- searchByName,
-
+  FiltrarGeneroYCast,
+  searchByName,
 } from "../../store/actions";
 
-import Movies from "../Movies/Movies.js"
-import Pagination from "../Movies/Pagination"
-
-
+import Movies from "../Movies/Movies.js";
+import Pagination from "../Movies/Pagination";
 import FiltroGeneros from "../filters/filterGenre.js";
 
-
-
-
- const Home = () => {
-
-
-
-
-
+const Home = () => {
   //*dispatch de prueba para las pelis falas que luego sera usado en mostar todas laspelis
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(FalseInfo());
-    dispatch(FalseGenres());
-    dispatch(FalseCast());  
+    dispatch(AllMovies());
+    dispatch(GetAllGenres());
+    dispatch(GetAllCast());
   }, [dispatch]);
-  const pelisfalsas = useSelector((state) => state.PelisAll);
+  const pelisTotales = useSelector((state) => state.PelisAll);
   const pelisFiltradas = useSelector((state) => state.PelisFiltred);
-console.log(pelisFiltradas)
+  // console.log(pelisFiltradas)
   const [container, setContainer] = useState([]);
 
-  React.useEffect(() => { //luego se añadira filter aqui para decidir si se muestran los resultados filtrados o las pelis
-    if (pelisfalsas.length !== 0) {
-      setContainer(pelisfalsas);
-    }if(pelisFiltradas.length !== 0){
-      setContainer(pelisFiltradas)
+  React.useEffect(() => {
+    //luego se añadira filter aqui para decidir si se muestran los resultados filtrados o las pelis
+    if (pelisTotales.length !== 0) {
+      setContainer(pelisTotales);
     }
-  }, [pelisfalsas, pelisFiltradas]);
+    if (pelisFiltradas.length !== 0) {
+      //Si no hay pelis encontradas popea una alerta y vacía el estado
+      if (
+        pelisFiltradas[0].titulo &&
+        pelisFiltradas[0].titulo === "Movie Not found"
+      ) {
+        alert("No movie found with that sorting");
+        pelisFiltradas.pop();
+      } else {
+        setContainer(pelisFiltradas);
+      }
+    }
+  }, [pelisTotales, pelisFiltradas]);
 
   //*
 
   const SearchName = (titulo) => {
-    titulo === "" ? dispatch(FalseInfo()) : dispatch(searchByName(titulo))
-  }
+    titulo === "" ? dispatch(AllMovies()) : dispatch(searchByName(titulo));
+  };
 
-
-
-
-
-  //*paginado 
+  //*paginado
   const [loading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [moviesPerPage] = useState(2);
@@ -76,25 +70,25 @@ console.log(pelisFiltradas)
   const indexOfFirstPost = indexOfLastPost - moviesPerPage;
   const currentPost = container.slice(indexOfFirstPost, indexOfLastPost);
 
-
-//* Filtros
-const FiltradoGeneros = (arg) => {
-    dispatch(FiltrarGenero(arg));
+  //* Filtros
+  const FiltradoGeneros = (arg) => {
+    if (arg) {
+      dispatch(FiltrarGenero(arg));
+    } else {
+      setContainer(pelisTotales);
+    }
   };
 
   const FiltradoCast = (arg) => {
-    dispatch(FiltrarCast(arg))
-  }
+    dispatch(FiltrarCast(arg));
+  };
 
   const FiltradoGenreAndCast = (arg) => {
-    dispatch(FiltrarGeneroAndCast(arg))
-  }
-
-
+    dispatch(FiltrarGeneroYCast(arg));
+  };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   //*
-
 
   return (
     <div>
@@ -104,7 +98,7 @@ const FiltradoGeneros = (arg) => {
           <Container maxWidth="ls" sx={{ height: "auto" }}>
             <Navbar />
 
-            <SearchBar search={SearchName}/>
+            <SearchBar search={SearchName} />
           </Container>
         </React.Fragment>
       </div>
@@ -113,16 +107,15 @@ const FiltradoGeneros = (arg) => {
         <h1>Wellcome!!!</h1>
       </div>
 
-      <div className='filterContainer'>
-       <FiltroGeneros
-              FalseGenres={FalseGenres}
-              FalseCast={FalseCast}
-              FiltradoGeneros={FiltradoGeneros}
-              FiltradoCast={FiltradoCast}
-              FiltradoGenreAndCast={FiltradoGenreAndCast}
-            />
+      <div className="filterContainer">
+        <FiltroGeneros
+          GetAllGenres={GetAllGenres}
+          GetAllCast={GetAllCast}
+          FiltradoGeneros={FiltradoGeneros}
+          FiltradoCast={FiltradoCast}
+          FiltradoGenreAndCast={FiltradoGenreAndCast}
+        />
       </div>
-
 
       <div className="Home__PelisContainer">
         <Movies moviesInfo={currentPost} loading={loading} />
@@ -135,12 +128,10 @@ const FiltradoGeneros = (arg) => {
           paginate={paginate}
         />
       </div>
-      <div className='mapContainer'>
-
+      <div className="mapContainer">
         <MapView />
-
       </div>
     </div>
-  )
-}
-export default Home
+  );
+};
+export default Home;

@@ -20,5 +20,6 @@
     background-color: rgba(0, 0, 0, 0.794);
     color: white;
     border-radius: 3rem;
+    top: 5vh;
     font-family: 'Courier New', Courier, monospace
   }

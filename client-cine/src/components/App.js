@@ -9,6 +9,7 @@ import { Profile } from "./profile/Profile.js";
 import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
+
 import Admin from "./AdminPanel/Admin.jsx";
 
 //Changes
@@ -21,9 +22,14 @@ import PrivateUpdate from "./PrivateUpdate";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 
+import ReviewToShow from "./ReviewToShow/ReviewToShow.jsx";
+import Admin from './AdminPanel/Admin.jsx';
+
+
 export const App = () => {
   return (
     <Router>
+
       <AuthProvider>
         <Routes>
           /*Rutas agregadas*/
@@ -92,6 +98,18 @@ export const App = () => {
           <Route path="/portal" element={<Profile />} />
         </Routes>
       </AuthProvider>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/review/:id" element={<Review />} />
+        <Route path="/reviewtoshow/:id" element={<ReviewToShow />} />
+        <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
+        <Route path="/shoppingcart" element={<ShoppingCart />} />
+        <Route path="/about" element={<SobreNosotros />} />
+
+        <Route path="/portal" element={<Profile />} />
+      </Routes>
+
     </Router>
   );
 };

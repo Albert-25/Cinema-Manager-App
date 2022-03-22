@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { DetailedMovie } from "../../store/actions";
+import { DetailedMovie, getAllReviewByIdOfMovie } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import ReviewToShow from "../ReviewToShow/ReviewToShow.jsx"
 import "./DetailsMovies.css";
 
 const DetailsMovies = (props) => {
@@ -10,9 +11,17 @@ const DetailsMovies = (props) => {
     let [id] = useState(code);
     const dispatch = useDispatch();
     const detailed = useSelector((state) => state.PelisDetails);
+    const comentarios = useSelector(state => state.PelisComments);
+    const puntuacionArray = comentarios.map(c => c.puntuación)
+    const sumaPuntuaciones = puntuacionArray.reduce((contador, puntuacion) => contador + puntuacion, 0);
+    const numeroPuntuaciones = puntuacionArray.length;
+    const promedioPuntuacion = (sumaPuntuaciones / numeroPuntuaciones).toFixed(1)
+    console.log(detailed)
+
 
     useEffect(() => {
         dispatch(DetailedMovie(id));
+        dispatch(getAllReviewByIdOfMovie(id));
     }, [id, dispatch]);
 
 
@@ -57,6 +66,9 @@ const DetailsMovies = (props) => {
                 <div className="Details__puntuación">
                     💖puntuación: {detailed.puntuación || Mooovie.puntuación}
                 </div>
+                <div className="Details__puntuación">
+                    ★puntuación: {promedioPuntuacion && promedioPuntuacion}
+                </div>
                 <div className="Details__pais">
                     💖pais: {detailed.pais || Mooovie.pais}
                 </div>
@@ -96,10 +108,18 @@ const DetailsMovies = (props) => {
                 </div>
 
             </div>
+            <div>
+                <Link to={`/review/${id}`}>
+                    <button>Escribir un comentario</button>
+                </Link>
+            </div>
             <div className="">
                 <Link to="/" className="Details__rightdown">
                     <p className="Details__rightdown__text">👉 Go back 👈</p>
                 </Link>
+            </div>
+            <div>
+                <ReviewToShow id={id} />
             </div>
         </body>
     );

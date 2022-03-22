@@ -152,10 +152,10 @@ const reducer = (state = initialState, action) => {
             };
         }
 
-        case "GET_REVIEW": {
+        case "GET_REVIEW_BY_MOVIEID": {
             return {
                 ...state,
-                ProductComments: action.payload,
+                PelisComments: action.payload,
             };
         }
 

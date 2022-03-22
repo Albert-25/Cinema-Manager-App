@@ -23,11 +23,6 @@ const Home = () => {
   //*dispatch de prueba para las pelis falas que luego sera usado en mostar todas laspelis
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(AllMovies());
-    dispatch(GetAllGenres());
-    dispatch(GetAllCast());
-  }, [dispatch]);
   const pelisTotales = useSelector((state) => state.PelisAll);
   const pelisFiltradas = useSelector((state) => state.PelisFiltred);
   // console.log(pelisFiltradas)

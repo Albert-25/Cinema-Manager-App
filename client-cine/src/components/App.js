@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useEffect}from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import CreateActor from "./CreateActor/CreateActor.jsx";
 import CreateGenre from "./CreateGenre/CreateGenre.jsx";
@@ -10,7 +10,26 @@ import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
 import Admin from './AdminPanel/Admin.jsx';
+import {useDispatch} from 'react-redux'
+import {
+  AllMovies,
+  GetAllGenres,
+  GetAllCast,
+  FiltrarGenero,
+  FiltrarCast,
+  FiltrarGeneroYCast,
+} from "./../store/actions";
+
 export const App = () => {
+
+const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(AllMovies());
+    dispatch(GetAllGenres());
+    dispatch(GetAllCast());
+  }, [dispatch]);
+
+
   return (
     <Router>
       <Routes>

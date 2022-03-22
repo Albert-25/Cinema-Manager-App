@@ -5,15 +5,15 @@ import Tab from '@mui/material/Tab';
 import { AdminContext } from '../admincontext'
 
 
-let status = ['generos', 'actores', 'peliculas']
+let status = ['movies', 'actors', 'genres']
 
 export default function SelcetSectionBar() {
   const [value, setValue] = React.useState(0);
-  const {state, dispatch} = useContext(AdminContext)
+  const {dispatch} = useContext(AdminContext)
 
   useEffect(() => {
     dispatch({ type: 'sectionSelect', payload: status[value]})    
-  }, [value])
+  }, [value,dispatch])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -26,9 +26,9 @@ export default function SelcetSectionBar() {
         scrollButtons
         allowScrollButtonsMobile
         aria-label="scrollable force tabs example">
-        <Tab label="generos" sx={{ color: 'white' }} />
-        <Tab label="actores" sx={{ color: 'white' }} />
         <Tab label="peliculas" sx={{ color: 'white' }} />
+        <Tab label="actores" sx={{ color: 'white' }} />
+        <Tab label="generos" sx={{ color: 'white' }} />
       </Tabs>
     </Box>
   );

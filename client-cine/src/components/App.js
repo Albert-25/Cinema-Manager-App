@@ -57,36 +57,36 @@ export const App = () => {
           <Route
             path="/admin"
             element={
-              <PrivateRoute>
+    
                 
                 <Admin />
-              </PrivateRoute>
+     
             }
           />
           <Route
             path="/admin/createmovies"
             element={
-              <PrivateRoute>
+       
                 <CreateMovies />
-              </PrivateRoute>
+          
             }
           />
           <Route
             path="/admin/createactor"
             element={
-              <PrivateRoute>
+            
               
                 <CreateActor />
-              </PrivateRoute>
+            
             }
           />
           <Route
             path="/admin/creategenero"
             element={
-              <PrivateRoute>
+         
               
                 <CreateGenre />
-              </PrivateRoute>
+             
             }
           />
           /*Rutas privadas*/

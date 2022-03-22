@@ -39,7 +39,7 @@ export function validate(input) {
    }
 
    if (!input.clasificacion && input.clasificacion !== undefined) {
-      errors.clasificacion = "Defina la clasicacion de la pelicula";
+      errors.clasificacion = "Defina la clasificación de la pelicula";
       errors.error = true;
    }
 

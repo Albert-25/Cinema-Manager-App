@@ -99,18 +99,6 @@ const CreateMovies = () => {
    console.log(errors);
    const handleSubmit = (e) => {
       e.preventDefault();
-      /* const url = "http://localhost:3001/peliculas";
-      fetch(url, {
-         method: "POST", // or 'PUT'
-         body: JSON.stringify(inputs), // data can be `string` or {object}!
-         headers: {
-            "Content-Type": "application/json",
-         },
-      })
-         .then((res) => res.json())
-         .then((data) => console.log(data));
-      console.log(inputs); */
-
       if (errors.error === false) {
          Swal.fire({
             title: "Do you want to save the changes?",
@@ -131,7 +119,7 @@ const CreateMovies = () => {
          Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Ingrese correctamente los datos",
+            text: "Ingrese correctamente los datos por favor.",
          });
       }
    };
@@ -145,7 +133,7 @@ const CreateMovies = () => {
                   onChange={(evt) =>
                      setInputs({
                         ...inputs,
-                        [evt.target.name]: evt.target.value,
+                        [evt.target.name]: evt.target.value.trim(),
                      })
                   }
                   placeholder="Titulo"
@@ -159,7 +147,7 @@ const CreateMovies = () => {
                   onChange={(evt) =>
                      setInputs({
                         ...inputs,
-                        [evt.target.name]: evt.target.value,
+                        [evt.target.name]: evt.target.value.trim(),
                      })
                   }
                   placeholder="Sipnosis"
@@ -173,7 +161,7 @@ const CreateMovies = () => {
                   onChange={(evt) =>
                      setInputs({
                         ...inputs,
-                        [evt.target.name]: evt.target.value,
+                        [evt.target.name]: evt.target.value.trim(),
                      })
                   }
                   placeholder="Poster"
@@ -182,12 +170,13 @@ const CreateMovies = () => {
             </div>
             <div className="input__with__error">
                <input
-                  type="text"
+                  type="number"
+                  min="0"
                   name="duracion"
                   onChange={(evt) =>
                      setInputs({
                         ...inputs,
-                        [evt.target.name]: evt.target.value,
+                        [evt.target.name]: evt.target.value.trim(),
                      })
                   }
                   placeholder="Duracion"
@@ -202,7 +191,7 @@ const CreateMovies = () => {
                   onChange={(evt) =>
                      setInputs({
                         ...inputs,
-                        [evt.target.name]: evt.target.value,
+                        [evt.target.name]: evt.target.value.trim(),
                      })
                   }
                />
@@ -217,7 +206,7 @@ const CreateMovies = () => {
                   onChange={(evt) =>
                      setInputs({
                         ...inputs,
-                        [evt.target.name]: evt.target.value,
+                        [evt.target.name]: evt.target.value.trim(),
                      })
                   }
                   placeholder="Director"
@@ -226,12 +215,14 @@ const CreateMovies = () => {
             </div>
             <div className="input__with__error">
                <input
-                  type="text"
+                  type="number"
+                  min="0"
+                  max="10"
                   name="puntuación"
                   onChange={(evt) =>
                      setInputs({
                         ...inputs,
-                        [evt.target.name]: evt.target.value,
+                        [evt.target.name]: evt.target.value.trim(),
                      })
                   }
                   placeholder="Puntuación"
@@ -245,7 +236,7 @@ const CreateMovies = () => {
                   onChange={(evt) =>
                      setInputs({
                         ...inputs,
-                        [evt.target.name]: evt.target.value,
+                        [evt.target.name]: evt.target.value.trim(),
                      })
                   }
                   placeholder="Pais"
@@ -260,7 +251,7 @@ const CreateMovies = () => {
                   onChange={(evt) =>
                      setInputs({
                         ...inputs,
-                        [evt.target.name]: evt.target.value,
+                        [evt.target.name]: evt.target.value.trim(),
                      })
                   }
                />
@@ -275,7 +266,7 @@ const CreateMovies = () => {
                   onChange={(evt) =>
                      setInputs({
                         ...inputs,
-                        [evt.target.name]: evt.target.value,
+                        [evt.target.name]: evt.target.value.trim(),
                      })
                   }
                   placeholder="Trailer"

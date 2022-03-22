@@ -6,6 +6,9 @@ import { styled } from '@mui/material/styles';
 import {BsPlusCircle,BsPencilFill,BsTrash} from 'react-icons/bs'
 import IconButton from '@mui/material/IconButton';
 import {AdminContext} from './../admincontext.jsx'
+import Swal from "sweetalert2";
+import { useNavigate } from 'react-router-dom';
+
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -15,7 +18,15 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-let listMovies=["movie1","movie2","movie3","movie4","movie5","movie6","movie7","movie8","movie9"]
+const items = {
+  peliculas: 'createmovies',
+  generos: 'creategenero',
+  actores: 'createactor',
+}
+
+let listMovies=["movie_example"]
+
+
 
 const Items=({name,handleDelete})=>{
   return (<Item sx={{display:"flex",flexDirection:"rows",justifyContent:"space-between"}}>
@@ -29,32 +40,21 @@ const Items=({name,handleDelete})=>{
 
 
 export default function ItemsContainer() {
-
   let {state}= useContext(AdminContext)
-  console.log(state)
+  const navigate = useNavigate()
 
+  const handleDelete = () => {}
 
+  const handleCreate=()=>{ 
+    console.log(items[state.section])
+    navigate(`/admin/${items[state.section]}`)
+   }
 
-  const handleDelete=(e)=>{
-    console.log(e.currentTarget.className.split(" ")[3])
-    if(window.confirm(`Quieres eliminar el item: ${e.currentTarget.className.split(" ")[3]}`)){
-      alert("Borrado")
-    }else{
-      alert("uff safo la peli")
-    }
-  }
-  const handleCreate=(e)=>{
-    if(window.confirm("Quieres crear algo?")){
-      alert(" jodete, no se puede !")
-    }else{
-      alert("Bien ,igual no se puede XD")
-    }
-  }
   return (
     <Box sx={{ width: '100%',height:"100%",position:"relative",padding:"1em"}}>
     <IconButton onClick={handleCreate} sx={{position:"absolute",top:"-30px",left:"40px" }}> <BsPlusCircle style={{color:"green",fontSize:"1.2em"}}/></IconButton>
       <Stack spacing={2} sx={{height:"100%",overflow:"auto"}}>
-        {listMovies.map(movie=><Items key={movie} name={movie} handleDelete={handleDelete}/>)}
+        {listMovies && listMovies.map(movie=><Items key={movie} name={movie} handleDelete={handleDelete}/>)}
       </Stack>
     </Box>
   );

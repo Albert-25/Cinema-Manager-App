@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "../Navbar/navbar.jsx";
+import Swal from "sweetalert2";
 
 import {
   AllMovies,
@@ -43,7 +44,8 @@ const Home = () => {
         pelisFiltradas[0].titulo &&
         pelisFiltradas[0].titulo === "Movie Not found"
       ) {
-        alert("No movie found with that sorting");
+        Swal.fire("No se encontro peliculas con estos filtros.", "", "error");
+        // alert("No movie found with that sorting");
         pelisFiltradas.pop();
       } else {
         setContainer(pelisFiltradas);
@@ -101,17 +103,13 @@ const Home = () => {
           FiltradoGenreAndCast={FiltradoGenreAndCast}
         />
       </div>
-      <div className="Home__PelisContainer">
-        <Movies moviesInfo={currentPost} loading={loading} />
-      </div>
-      <div>
-        <Pagination
-          className="Home__pagination__li"
-          moviesPerPage={moviesPerPage}
-          totalMovies={container.length}
-          paginate={paginate}
-        />
-      </div>
+      <Movies moviesInfo={currentPost} loading={loading} />
+      <Pagination
+        className="Home__pagination__li"
+        moviesPerPage={moviesPerPage}
+        totalMovies={container.length}
+        paginate={paginate}
+      />
     </div>
   );
 };

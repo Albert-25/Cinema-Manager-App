@@ -57,7 +57,6 @@ export default function Navbar() {
       <List>
         {['About'].map((text) => (
           <ListItem button key={text}>
-            {/* <ListItemText primary={text} /> */}
             <Link to={`/${text.toLowerCase()}`}>{text}</Link>
           </ListItem>
         ))}

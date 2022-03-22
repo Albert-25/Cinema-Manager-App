@@ -182,7 +182,8 @@ const CreateMovies = () => {
             </div>
             <div className="input__with__error">
                <input
-                  type="text"
+                  type="number"
+                  min="0"
                   name="duracion"
                   onChange={(evt) =>
                      setInputs({
@@ -226,7 +227,8 @@ const CreateMovies = () => {
             </div>
             <div className="input__with__error">
                <input
-                  type="text"
+                  type="number"
+                  min="0"
                   name="puntuación"
                   onChange={(evt) =>
                      setInputs({

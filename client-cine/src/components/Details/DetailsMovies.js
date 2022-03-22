@@ -18,6 +18,7 @@ const DetailsMovies = (props) => {
     const promedioPuntuacion = (sumaPuntuaciones / numeroPuntuaciones).toFixed(1)
     console.log(detailed)
 
+
     useEffect(() => {
         dispatch(DetailedMovie(id));
         dispatch(getAllReviewByIdOfMovie(id));
@@ -52,9 +53,6 @@ const DetailsMovies = (props) => {
                 </div>
                 <div className="Details__sinopsis">
                     💖sinopsis: {detailed.sinopsis || Mooovie.sinopsis}
-                </div>
-                <div className="Details__duracion">
-                    💖duracion: {detailed.duracion || Mooovie.duracion}
                 </div>
                 <div className="Details__duracion">
                     💖duracion: {detailed.duracion || Mooovie.duracion}

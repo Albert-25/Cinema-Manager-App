@@ -1,20 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import {
-  // FalseInfo,
-  AllMovies,
-} from "../../store/actions";
-
-//Llamamos al archivo api creado con axios
+import "./filterGenre.css";
 
 export default function FiltroGeneros({
-  Generos,
   FiltradoGeneros,
   FiltradoCast,
   FiltradoGenreAndCast,
 }) {
   const Genres = useSelector((state) => state.GenresAll);
   const Cast = useSelector((state) => state.CastAll);
+  let GenresName = Genres.map((e) => e.genero)
+  let CastName = Cast.map((e) => e.nombre)
 
   const [selectedGenres, setSelectedGenres] = React.useState([]);
   const [selectedCast, setSelectedCast] = React.useState([]);
@@ -75,6 +71,7 @@ export default function FiltroGeneros({
 
   return (
     <div>
+    <div id='filterOptionsContainer'> 
       <form id="formDefault" onSubmit={handleOnSubmit}>
         <select
           id="defaultGenres"
@@ -85,9 +82,9 @@ export default function FiltroGeneros({
           <option value="DEFAULT" disabled className="selectFop">
             Sort by Genre!
           </option>
-          {Genres &&
-            Genres.length &&
-            Genres.map((item, index) => {
+          {GenresName &&
+            GenresName.length &&
+            GenresName.map((item, index) => {
               return (
                 <option
                   id={item}
@@ -110,9 +107,9 @@ export default function FiltroGeneros({
           <option disabled value="DEFAULT" className="selectFop">
             Sort by Cast!
           </option>
-          {Cast &&
-            Cast.length &&
-            Cast.map((item, index) => {
+          {CastName &&
+            CastName.length &&
+            CastName.map((item, index) => {
               return (
                 <option
                   id={item}
@@ -127,25 +124,27 @@ export default function FiltroGeneros({
         </select>
         <button type="submit">Apply filters</button>
       </form>
+      </div>
       <div className="SelectedFilters">
         {selectedGenres &&
-          selectedGenres.length &&
+          selectedGenres.length !== 0 &&
           selectedGenres.map((item, index) => {
             return (
-              <li key={index}>
-                <ul>{item}</ul>
+              <div key={index}>
+                <p id='selectedG'>{item}</p>
+                
                 <button onClick={() => handleOnClickGenres(item)}>X</button>
-              </li>
+              </div>
             );
           })}
         {selectedCast &&
-          selectedCast.length &&
+          selectedCast.length !== 0 &&
           selectedCast.map((item, index) => {
             return (
-              <li key={index}>
-                <ul>{item}</ul>
+              <div key={index}>
+                <p id='selectedC'>{item}</p>
                 <button onClick={() => handleOnClickCast(item)}>X</button>
-              </li>
+              </div>
             );
           })}
       </div>

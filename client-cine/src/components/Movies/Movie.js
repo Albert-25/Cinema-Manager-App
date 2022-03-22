@@ -4,7 +4,7 @@ import "./Movie.css";
 
 export default function Movie({ id, titulo, director, poster, puntuación, clasificacion }) {
     return (
-        <div>
+        <>
             <Link to={`MovieDetails/${id}`}>
                 <div
                     className="Movie__All"
@@ -19,6 +19,6 @@ export default function Movie({ id, titulo, director, poster, puntuación, clasi
                     </div>
                 </div>
             </Link>
-        </div>
+        </>
     )
 }

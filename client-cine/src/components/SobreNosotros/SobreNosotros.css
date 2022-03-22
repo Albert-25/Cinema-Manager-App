@@ -1,0 +1,70 @@
+*{
+   margin: 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Hubballi&family=Shizuru&display=swap');
+/* font-family: 'Hubballi', cursive;
+font-family: 'Shizuru', cursive; */
+
+
+.SobreNosotros{
+    display: flex;
+    /* width: 100vh; */
+    height: 100vh;
+    align-items: center;
+    flex-direction: column;
+    background-image: url("https://i.pinimg.com/originals/1e/85/d8/1e85d8904f8af9c266c552889058ce0e.jpg");
+    background-size: cover;
+}
+
+.SobreNosotros__title{
+    font-family: 'Hubballi', cursive;
+    font-size: 7vh;
+}
+.SobreNosotros__info{
+    font-family: 'Hubballi', cursive;
+    font-style: italic;
+    font-size: 3vh;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.945);
+    padding: 5vh;
+    border-radius: 200px;
+}
+.SobreNosotros__divisor{
+    display: flex;
+    align-items: center;
+    margin: 4vh;
+}
+.SobreNosotros__back{
+    transition: all 1s;
+    border: 2px solid black;
+    padding: 2vh;
+    border-radius: 200px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.63);
+}
+.SobreNosotros__back:hover{
+    transition: all 1s;
+    border: 2px solid black;
+    padding: 2vh;
+    border-radius: 200px;
+    font-size: 2.5vh;
+    background-color: rgb(0, 0, 0);
+}
+
+.SobreNosotros__map{
+    font-family: 'Hubballi', cursive;
+    padding-right: 30vh;
+}
+
+.SobreNosotros__programmers{
+    transition: all 1s;
+    font-family: 'Hubballi', cursive;
+    font-size: 2vh;
+}
+.SobreNosotros__programmers:hover{
+    transition: all 1s;
+    font-family: 'Hubballi', cursive;
+    font-size: 3vh;
+    letter-spacing: 1vh;
+}

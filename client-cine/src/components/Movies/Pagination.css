@@ -2,15 +2,17 @@
     list-style-type: none;
     padding: 10px;
     display: flex;
+    justify-content: center;
     overflow: scroll;
   }
-  .Pagination__Li {
-    padding: 10px;
-    
-  }
-  .Pagination__Button{
-      height: 80px;
-      width: 80px;
-      border-radius: 3rem;
-  }
+
+.Pagination__Li {
+  padding: 10px;
   
+}
+
+.Pagination__Button{
+    height: 80px;
+    width: 80px;
+    border-radius: 3rem;
+}

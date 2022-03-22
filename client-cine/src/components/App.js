@@ -5,9 +5,12 @@ import CreateGenre from "./CreateGenre/CreateGenre.jsx";
 import CreateMovies from "./CreateMovies/CreateMovies.js";
 import DetailsMovies from "./Details/DetailsMovies";
 import Home from "./home/Home.js";
+import { Profile } from "./profile/Profile.js";
+import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
 import ReviewToShow from "./ReviewToShow/ReviewToShow.jsx";
+import Admin from './AdminPanel/Admin.jsx';
 
 export const App = () => {
   return (
@@ -18,9 +21,12 @@ export const App = () => {
         <Route path="/reviewtoshow/:id" element={<ReviewToShow />} />
         <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
         <Route path="/shoppingcart" element={<ShoppingCart />} />
-        <Route path="/create-movies" element={<CreateMovies />} />
-        <Route path="/admin/crearActor" element={<CreateActor />} />
-        <Route path="/admin/crearGenero" element={<CreateGenre />} />
+        <Route path="/about" element={<SobreNosotros />} />
+        <Route path="/admin" element={<Admin/>}/>
+        <Route path="/admin/createmovies" element={<CreateMovies />} />
+        <Route path="/admin/createactor" element={<CreateActor />} />
+        <Route path="/admin/creategenero" element={<CreateGenre />} />
+        <Route path="/portal" element={<Profile />} />
       </Routes>
     </Router>
   );

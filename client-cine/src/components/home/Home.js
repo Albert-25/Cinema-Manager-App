@@ -1,21 +1,18 @@
-import SearchBar from "../SearchBar/index.jsx";
+import Search from "../SearchBar/Search.jsx";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "../Navbar/navbar.jsx";
-
-import MapView from "../mapView/MapView.js";
+import Swal from "sweetalert2";
 
 import {
-  // FalseInfo,
   AllMovies,
   GetAllGenres,
   GetAllCast,
   FiltrarGenero,
   FiltrarCast,
   FiltrarGeneroYCast,
-  searchByName,
 } from "../../store/actions";
 
 import Movies from "../Movies/Movies.js";
@@ -47,19 +44,14 @@ const Home = () => {
         pelisFiltradas[0].titulo &&
         pelisFiltradas[0].titulo === "Movie Not found"
       ) {
-        alert("No movie found with that sorting");
+        Swal.fire("No se encontro peliculas con estos filtros.", "", "error");
+        // alert("No movie found with that sorting");
         pelisFiltradas.pop();
       } else {
         setContainer(pelisFiltradas);
       }
     }
   }, [pelisTotales, pelisFiltradas]);
-
-  //*
-
-  const SearchName = (titulo) => {
-    titulo === "" ? dispatch(AllMovies()) : dispatch(searchByName(titulo));
-  };
 
   //*paginado
   const [loading] = useState(false);
@@ -88,7 +80,6 @@ const Home = () => {
   };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  //*
 
   return (
     <div>
@@ -97,11 +88,11 @@ const Home = () => {
           <CssBaseline />
           <Container maxWidth="ls" sx={{ height: "auto" }}>
             <Navbar />
-
-            <SearchBar search={SearchName} />
           </Container>
         </React.Fragment>
       </div>
+
+      <Search />
 
       <div className="filterContainer">
         <FiltroGeneros
@@ -112,21 +103,13 @@ const Home = () => {
           FiltradoGenreAndCast={FiltradoGenreAndCast}
         />
       </div>
-
-      <div className="Home__PelisContainer">
-        <Movies moviesInfo={currentPost} loading={loading} />
-      </div>
-      <div>
-        <Pagination
-          className="Home__pagination__li"
-          moviesPerPage={moviesPerPage}
-          totalMovies={container.length}
-          paginate={paginate}
-        />
-      </div>
-      <div className="mapContainer">
-        <MapView />
-      </div>
+      <Movies moviesInfo={currentPost} loading={loading} />
+      <Pagination
+        className="Home__pagination__li"
+        moviesPerPage={moviesPerPage}
+        totalMovies={container.length}
+        paginate={paginate}
+      />
     </div>
   );
 };

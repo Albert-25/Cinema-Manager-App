@@ -1,15 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import {
-  // FalseInfo,
-  AllMovies,
-} from "../../store/actions";
 import "./filterGenre.css";
 
-//Llamamos al archivo api creado con axios
-
 export default function FiltroGeneros({
-  Generos,
   FiltradoGeneros,
   FiltradoCast,
   FiltradoGenreAndCast,

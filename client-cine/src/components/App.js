@@ -9,13 +9,16 @@ import { Profile } from "./profile/Profile.js";
 import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
+import ReviewToShow from "./ReviewToShow/ReviewToShow.jsx";
 import Admin from './AdminPanel/Admin.jsx';
+
 export const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/review" element={<Review />} />
+        <Route path="/review/:id" element={<Review />} />
+        <Route path="/reviewtoshow/:id" element={<ReviewToShow />} />
         <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
         <Route path="/shoppingcart" element={<ShoppingCart />} />
         <Route path="/about" element={<SobreNosotros />} />

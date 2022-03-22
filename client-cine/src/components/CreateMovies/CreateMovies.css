@@ -1,0 +1,44 @@
+.Create__Movies {
+   width: 100%;
+   max-width: 1200px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.Create__Movies input {
+   margin: 1rem;
+}
+
+.Create__Movies select {
+   margin: 1rem;
+   width: 172px;
+}
+
+.input__with__error span {
+   margin: auto;
+   color: #df1313;
+   letter-spacing: 1px;
+}
+
+.SelectedFilters {
+   max-height: 15vh;
+   display: flex;
+   margin-bottom: 1rem;
+   overflow: scroll;
+}
+
+.close {
+   margin: 1rem;
+}
+
+.gendersChoosenContainer,
+.castChoosenContainer {
+   padding: 3rem;
+}
+
+.gendersChoosenContainer div,
+.castChoosenContainer div {
+   display: flex;
+}

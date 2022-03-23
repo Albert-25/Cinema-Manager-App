@@ -1,5 +1,6 @@
 const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
+const { Pelicula } = require("../models/pelicula.js")
 
 const Comentarios = sequelize.define("Comentarios", {
   nombre: {
@@ -14,6 +15,9 @@ const Comentarios = sequelize.define("Comentarios", {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-}, { timestamps: false });
+}, { timestamps: true });
+
+Pelicula.belongsToMany(Comentarios, { through: "PeliculaComentario" });
+Comentarios.belongsToMany(Pelicula, { through: "PeliculaComentario" });
 
 module.exports = { Comentarios };

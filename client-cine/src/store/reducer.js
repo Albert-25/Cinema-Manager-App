@@ -77,18 +77,16 @@ const reducer = (state = initialState, action) => {
         }
 
         case "GENRES": {
-            const allGenres = action.payload.generos.map((e) => e.genero);
             return {
                 ...state,
-                GenresAll: state.GenresAll.concat(allGenres),
+                GenresAll: state.GenresAll.concat(action.payload.generos),
             };
         }
 
         case "CAST": {
-            const allCast = action.payload.actores.map((e) => e.nombre);
             return {
                 ...state,
-                CastAll: state.CastAll.concat(allCast),
+                CastAll: state.CastAll.concat(action.payload.actores),
             };
         }
 
@@ -168,10 +166,10 @@ const reducer = (state = initialState, action) => {
             };
         }
 
-        case "GET_REVIEW": {
+        case "GET_REVIEW_BY_MOVIEID": {
             return {
                 ...state,
-                ProductComments: action.payload,
+                PelisComments: action.payload,
             };
         }
 

@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { List } from "./List";
+import s from './search.module.css'
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function Search() {
@@ -16,9 +17,10 @@ export default function Search() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!title) return null
+    const parseTitle = title.trim()
+    if (parseTitle === '') return null
     try {
-      const res = await axios.get(`${REACT_APP_BASE_URL}/peliculas/?title=${title}`);
+      const res = await axios.get(`${REACT_APP_BASE_URL}/peliculas/?title=${parseTitle}`);
       if (res.status === 200) {
         setMovies(res.data)
       }
@@ -34,7 +36,7 @@ export default function Search() {
   }
 
   return (
-    <div>
+    <div className={s.container}>
       <form onSubmit={(e) => handleSubmit(e)} >
         <input placeholder="Ingrese nombre de la pelicula..." type="text" value={title}
           onChange={(e) => handleInputChange(e)} 

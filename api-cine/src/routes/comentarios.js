@@ -1,9 +1,10 @@
 const { Router } = require("express");
 const router = Router();
 
-const { getComentarios, postComentario} = require('../controller/comentarios.controller')
+const { getComentariosByIdOfMovie, postComentario, getComentariosTotal} = require('../controller/comentarios.controller')
 
-router.get("/", getComentarios)
+router.get("/:id", getComentariosByIdOfMovie)
+router.get("/", getComentariosTotal)
 router.post("/", postComentario)
 
 

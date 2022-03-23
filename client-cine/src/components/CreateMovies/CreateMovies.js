@@ -48,7 +48,7 @@ const CreateMovies = () => {
    const handleChange = (e) => {
       setInputs({
          ...inputs,
-         [e.target.name]: e.target.value,
+         [e.target.name]: e.target.value.trim(),
       });
 
       setErrors(
@@ -136,18 +136,6 @@ const CreateMovies = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      /* const url = "http://localhost:3001/peliculas";
-      fetch(url, {
-         method: "POST", // or 'PUT'
-         body: JSON.stringify(inputs), // data can be `string` or {object}!
-         headers: {
-            "Content-Type": "application/json",
-         },
-      })
-         .then((res) => res.json())
-         .then((data) => console.log(data));
-      console.log(inputs); */
-
       if (errors.error === false) {
          Swal.fire({
             title: "¿Quieres guardar la pelicula?",
@@ -168,7 +156,7 @@ const CreateMovies = () => {
          Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Ingrese correctamente los datos",
+            text: "Ingrese correctamente los datos por favor.",
          });
       }
    };
@@ -204,7 +192,8 @@ const CreateMovies = () => {
             </div>
             <div className="input__with__error">
                <input
-                  type="text"
+                  type="number"
+                  min="0"
                   name="duracion"
                   onChange={(evt) => handleChange(evt)}
                   placeholder="Duracion"
@@ -233,7 +222,9 @@ const CreateMovies = () => {
             </div>
             <div className="input__with__error">
                <input
-                  type="text"
+                  type="number"
+                  min="0"
+                  max="10"
                   name="puntuación"
                   onChange={(evt) => handleChange(evt)}
                   placeholder="Puntuación"

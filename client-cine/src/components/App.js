@@ -10,7 +10,7 @@ import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
 
-import Admin from "./AdminPanel/Admin.jsx";
+
 
 //Changes
 import { AuthProvider } from "../contexts/AuthContext";

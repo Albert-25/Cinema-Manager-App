@@ -16,7 +16,7 @@ const DetailsMovies = (props) => {
     const sumaPuntuaciones = puntuacionArray.reduce((contador, puntuacion) => contador + puntuacion, 0);
     const numeroPuntuaciones = puntuacionArray.length;
     const promedioPuntuacion = (sumaPuntuaciones / numeroPuntuaciones).toFixed(1)
-    console.log(detailed)
+    // console.log(detailed)
 
 
     useEffect(() => {
@@ -67,7 +67,7 @@ const DetailsMovies = (props) => {
                     💖puntuación: {detailed.puntuación || Mooovie.puntuación}
                 </div>
                 <div className="Details__puntuación">
-                    ★puntuación: {promedioPuntuacion && promedioPuntuacion}
+                    {`★puntuación: ${isNaN(promedioPuntuacion) ? "Todavia sin puntuación" : promedioPuntuacion}`}
                 </div>
                 <div className="Details__pais">
                     💖pais: {detailed.pais || Mooovie.pais}

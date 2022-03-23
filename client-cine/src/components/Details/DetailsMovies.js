@@ -67,7 +67,7 @@ const DetailsMovies = (props) => {
                     💖puntuación: {detailed.puntuación || Mooovie.puntuación}
                 </div>
                 <div className="Details__puntuación">
-                    {/* {`★puntuación: ${isNaN(promedioPuntuacion) ? "Todavia sin puntuación" : promedioPuntuacion}`} */}
+                    {`★puntuación: ${isNaN(promedioPuntuacion) ? "Todavia sin puntuación" : promedioPuntuacion}`}
                 </div> 
                 <div className="Details__pais">
                     💖pais: {detailed.pais || Mooovie.pais}

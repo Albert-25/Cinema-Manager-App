@@ -37,7 +37,7 @@ export const App = () => {
             exact
             path="/dash"
             element={
-              <PrivateRoute>
+              <PrivateRoute component={Dashboard}>
                 <Dashboard />
               </PrivateRoute>
             }
@@ -57,36 +57,36 @@ export const App = () => {
           <Route
             path="/admin"
             element={
-    
+    <PrivateRoute component={Admin}>
                 
                 <Admin />
-     
+     </PrivateRoute>
             }
           />
           <Route
             path="/admin/createmovies"
             element={
-       
+       <PrivateRoute component={CreateMovies}>
                 <CreateMovies />
-          
+          </PrivateRoute>
             }
           />
           <Route
             path="/admin/createactor"
             element={
             
-              
+              <PrivateRoute component={CreateActor}>
                 <CreateActor />
-            
+            </PrivateRoute>
             }
           />
           <Route
             path="/admin/creategenero"
             element={
          
-              
+              <PrivateRoute component={CreateGenre }>
                 <CreateGenre />
-             
+             </PrivateRoute>
             }
           />
           /*Rutas privadas*/

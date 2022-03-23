@@ -1,79 +1,118 @@
-export function validate(input) {
+export function validate(input, stateErrors, name) {
    let errors = {
-      titulo: "",
-      sinopsis: "",
-      poster: "",
-      duracion: "",
-      clasificacion: "",
-      director: "",
-      puntuación: "",
-      pais: "",
-      distribuidora: "",
-      trailer: "",
-      genders: "",
-      actors: "",
+      titulo: stateErrors.titulo,
+      sinopsis: stateErrors.sinopsis,
+      poster: stateErrors.poster,
+      duracion: stateErrors.duracion,
+      clasificacion: stateErrors.clasificacion,
+      director: stateErrors.director,
+      puntuación: stateErrors.puntuación,
+      pais: stateErrors.pais,
+      distribuidora: stateErrors.distribuidora,
+      trailer: stateErrors.trailer,
+      genders: stateErrors.genders,
+      actors: stateErrors.actors,
       error: false,
    };
-
-   if (!input.titulo && input.titulo !== undefined) {
-      errors.titulo = "Nombre del titulo es requerido";
-      errors.error = true;
-   } else if (!/^[a-z ,.'-]+$/i.test(input.name)) {
-      errors.name = "Actividad invalida";
-      errors.error = true;
+   if (name === "titulo" || name === "submit") {
+      if (!input.titulo && input.titulo !== undefined) {
+         errors.titulo = "Nombre del titulo es requerido";
+         errors.error = true;
+      } else if (!/^[a-z ,.'-]+$/i.test(input.name)) {
+         errors.name = "Actividad invalida";
+         errors.error = true;
+      } else {
+         errors.titulo = "";
+      }
    }
 
-   if (!input.sinopsis && input.sinopsis !== undefined) {
-      errors.sinopsis = "La sinopsis o resumen es requerida";
-      errors.error = true;
+   if (name === "sinopsis" || name === "submit") {
+      if (!input.sinopsis && input.sinopsis !== undefined) {
+         errors.sinopsis = "La sinopsis o resumen es requerida";
+         errors.error = true;
+      } else {
+         errors.sinopsis = "";
+      }
    }
 
-   if (!input.duracion && input.duracion !== undefined) {
-      errors.duracion = "Ingrese un numero para la duracion";
-      errors.error = true;
+   if (name === "duracion" || name === "submit") {
+      if (!input.duracion && input.duracion !== undefined) {
+         errors.duracion = "Ingrese un numero para la duracion";
+         errors.error = true;
+      } else {
+         errors.duracion = "";
+      }
    }
 
-   if (!input.poster && input.poster !== undefined) {
-      errors.poster = "Ingrese un poster para mostrar";
-      errors.error = true;
+   if (name === "poster" || name === "submit") {
+      if (!input.poster && input.poster !== undefined) {
+         errors.poster = "Ingrese un poster para mostrar";
+         errors.error = true;
+      } else {
+         errors.poster = "";
+      }
    }
 
-   if (!input.clasificacion && input.clasificacion !== undefined) {
-      errors.clasificacion = "Defina la clasicacion de la pelicula";
-      errors.error = true;
+   if (name === "clasificacion" || name === "submit") {
+      if (!input.clasificacion && input.clasificacion !== undefined) {
+         errors.clasificacion = "Defina la clasicacion de la pelicula";
+         errors.error = true;
+      } else {
+         errors.clasificacion = "";
+      }
    }
 
-   if (!input.puntuación && input.puntuación !== undefined) {
-      errors.puntuación = "La puntuacion de la pelicula es requerida";
-      errors.error = true;
+   if (name === "puntuación" || name === "submit") {
+      if (!input.puntuación && input.puntuación !== undefined) {
+         errors.puntuación = "La puntuacion de la pelicula es requerida";
+         errors.error = true;
+      } else {
+         errors.puntuación = "";
+      }
    }
 
-   if (!input.pais && input.pais !== undefined) {
-      errors.pais = "El pais de origen del titulo es requerido";
-      errors.error = true;
+   if (name === "pais" || name === "submit") {
+      if (!input.pais && input.pais !== undefined) {
+         errors.pais = "El pais de origen del titulo es requerido";
+         errors.error = true;
+      } else {
+         errors.pais = "";
+      }
    }
 
-   if (!input.director && input.director !== undefined) {
-      errors.director = "El nombre del director es requerido";
-      errors.error = true;
+   if (name === "director" || name === "submit") {
+      if (!input.director && input.director !== undefined) {
+         errors.director = "El nombre del director es requerido";
+         errors.error = true;
+      } else {
+         errors.director = "";
+      }
    }
 
-   if (!input.distribuidora && input.distribuidora !== undefined) {
-      errors.distribuidora = "El distribuidor de la pelicula es requerido";
-      errors.error = true;
+   if (name === "distribuidora" || name === "submit") {
+      if (!input.distribuidora && input.distribuidora !== undefined) {
+         errors.distribuidora = "El distribuidor de la pelicula es requerido";
+         errors.error = true;
+      } else {
+         errors.distribuidora = "";
+      }
    }
 
-   if (!input.trailer && input.trailer !== undefined) {
-      errors.trailer = "El trailer del titulo es requerido";
-      errors.error = true;
+   if (name === "trailer" || name === "submit") {
+      if (!input.trailer && input.trailer !== undefined) {
+         errors.trailer = "El trailer del titulo es requerido";
+         errors.error = true;
+      } else {
+         errors.trailer = "";
+      }
    }
 
-   if (input.genders.length === 0) {
+   if (!input.genders && input.genders !== undefined) {
       errors.genders = "El genero es requerido";
       errors.error = true;
    }
 
-      if (input.actors.length === 0) {
+   if (!input.actors && input.actors !== undefined) {
       errors.actors = "Los actores son requeridos";
       errors.error = true;
    }

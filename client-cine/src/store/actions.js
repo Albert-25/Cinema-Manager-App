@@ -52,6 +52,15 @@ export function getAllReview() {
   };
 }
 
+
+export const BestMovies = (arg) => {
+  // console.log("howdy im action")
+  return {
+      type: "BESTMOVIES",
+      payload: arg,
+  }
+}
+
 export const postReview = (payload) => {
   return async (dispatch) => {
     const json = await axios.post("http://localhost:3001/comentarios", payload);

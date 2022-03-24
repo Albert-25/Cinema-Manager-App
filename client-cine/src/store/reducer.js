@@ -173,6 +173,16 @@ const reducer = (state = initialState, action) => {
         default: {
             return state;
         }
+
+        // case "DELETE_REVIEW": {
+        //     return {
+        //         ...state,
+        //         PelisComments: state.PelisComments.filter(p =>{
+        //             console.log(p)
+        //             return  p !== action.payload
+        //         })
+        //     };
+        // }
     }
 };
 export default reducer;

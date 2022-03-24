@@ -1,19 +1,23 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { getAllReviewByIdOfMovie } from "../../store/actions"
+import { getAllReviewByIdOfMovie, deleteReview } from "../../store/actions"
 import styles from "./ReviewToShow.module.css"
 import { DivStar } from "./styled"
-import { useParams } from "react-router-dom"
+
 
 const ReviewToShow = ({ id }) => {
-    // const id = useParams().id;
+
     const comentarios = useSelector(state => state.PelisComments);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getAllReviewByIdOfMovie(id))
     }, [dispatch])
+
+    // const handleDelete = (idOfComment) => {
+    //     dispatch(deleteReview(idOfComment))
+    // }
 
     return (
         <div className={styles.container_main}>
@@ -29,6 +33,7 @@ const ReviewToShow = ({ id }) => {
                             <DivStar value="4" puntuacion={c.puntuación} className={styles.star} >★</DivStar>
                             <DivStar value="5" puntuacion={c.puntuación} className={styles.star} >★</DivStar>
                             <div><p>{c.comentario}</p></div>
+                            {/* <button onClick={() => handleDelete(c.id)}>delete</button> */}
                         </div>
                     )
                 })

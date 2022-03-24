@@ -12,6 +12,7 @@ const initialState = {
     NextReleases: [],
     Promotions: [],
     ShoppingCart: [],
+    TopPelis: [],
 
     PelisDetails: [],
     PelisComments: [],
@@ -59,6 +60,23 @@ const reducer = (state = initialState, action) => {
                 PelisDetails: action.payload.detis,
             };
         }
+
+
+          case "BESTMOVIES": {
+            // console.log("howdy soy reducer")
+            let pelis = [...state.PelisAll]
+            let arreglar = pelis.sort((a, b) =>
+                a.puntuación < b.puntuación ? 1 : b.puntuación < a.puntuación ? -1 : 0
+            )
+            // console.log("arreglar",arreglar)
+            let arregloFinal = arreglar.slice(0,3)
+            return {
+                ...state,
+                TopPelis: arregloFinal,
+            };
+
+        }
+
 
         case "GENRES": {
             return {

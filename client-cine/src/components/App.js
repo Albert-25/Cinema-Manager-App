@@ -9,7 +9,7 @@ import { Profile } from "./profile/Profile.js";
 import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
-
+import Admin from "./AdminPanel/Admin.jsx"
 
 
 //Changes
@@ -57,36 +57,36 @@ export const App = () => {
           <Route
             path="/admin"
             element={
-    <PrivateRoute component={Admin}>
-                
+              <PrivateRoute component={Admin}>
+
                 <Admin />
-     </PrivateRoute>
+              </PrivateRoute>
             }
           />
           <Route
             path="/admin/createmovies"
             element={
-       <PrivateRoute component={CreateMovies}>
+              <PrivateRoute component={CreateMovies}>
                 <CreateMovies />
-          </PrivateRoute>
+              </PrivateRoute>
             }
           />
           <Route
             path="/admin/createactor"
             element={
-            
+
               <PrivateRoute component={CreateActor}>
                 <CreateActor />
-            </PrivateRoute>
+              </PrivateRoute>
             }
           />
           <Route
             path="/admin/creategenero"
             element={
-         
-              <PrivateRoute component={CreateGenre }>
+
+              <PrivateRoute component={CreateGenre}>
                 <CreateGenre />
-             </PrivateRoute>
+              </PrivateRoute>
             }
           />
           /*Rutas privadas*/
@@ -99,7 +99,7 @@ export const App = () => {
         </Routes>
       </AuthProvider>
 
-     
+
 
     </Router>
   );

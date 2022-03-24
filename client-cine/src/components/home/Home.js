@@ -106,12 +106,6 @@ const Home = () => {
             <Navbar />
           </Container>
         </React.Fragment>
-
-        <div className="carrousel__home">
-        {/* <Carousel
-      BestMovies={BestMovies}
-      /> */}
-        </div>
       </div>
 
       <div className="carrousel__home">

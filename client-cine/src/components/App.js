@@ -28,7 +28,7 @@ export const App = () => {
       <Router>
          <AuthProvider>
             <Routes>
-               /*Rutas agregadas*/
+               {/*Rutas agregadas*/}
                <Route
                   exact
                   path="/dash"
@@ -64,7 +64,7 @@ export const App = () => {
             </Routes>
          </AuthProvider>
 
-         <Routes>
+         {/* <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/review/:id" element={<Review />} />
             <Route path="/reviewtoshow/:id" element={<ReviewToShow />} />
@@ -73,7 +73,7 @@ export const App = () => {
             <Route path="/about" element={<SobreNosotros />} />
 
             <Route path="/portal" element={<Profile />} />
-         </Routes>
+         </Routes> */}
       </Router>
    );
 };

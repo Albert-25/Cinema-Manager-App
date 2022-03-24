@@ -4,7 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "../Navbar/navbar.jsx";
+import "./Home.css"
 import Swal from "sweetalert2";
+
 
 import {
   AllMovies,
@@ -22,7 +24,7 @@ import FiltroGeneros from "../filters/filterGenre.js";
 import Carousel from "../Carousel/Carousel.js"
 
 const Home = () => {
-  //*dispatch de prueba para las pelis falas que luego sera usado en mostar todas laspelis
+
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -35,9 +37,12 @@ const Home = () => {
 
   const [container, setContainer] = useState([]);
 
+
+
   React.useEffect(() => {
-    //luego se añadira filter aqui para decidir si se muestran los resultados filtrados o las pelis
+
     if (pelisTotales.length !== 0) {
+      console.log(pelisTotales)
       setContainer(pelisTotales);
     }
     if (pelisFiltradas.length !== 0) {
@@ -84,7 +89,7 @@ const Home = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>
+    <div className="Home__Background">
       <div>
         <React.Fragment>
           <CssBaseline />

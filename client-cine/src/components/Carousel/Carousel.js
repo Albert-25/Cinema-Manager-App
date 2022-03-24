@@ -1,7 +1,9 @@
 
 import Slider from "infinite-react-carousel"
 import { useSelector } from "react-redux";
+
 // import "./Carousel.css"
+
 import { Link } from 'react-router-dom';
 import React, { useEffect } from "react";
 
@@ -51,10 +53,12 @@ const Carousel = (AllMovies) => {
     //             a.puntuación < b.puntuación ? 1 : b.puntuación < a.puntuación ? -1 : 0
     //         )
 
+
     //         arregloFinal = arreglar.slice(0, 3)
     //         console.log("arreglo final", arregloFinal)
     //     }
     // }, [AllPelis]);
+
 
 
     return (<section className='slider'>

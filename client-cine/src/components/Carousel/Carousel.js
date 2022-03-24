@@ -49,6 +49,7 @@ const Carousel = (AllMovies) => {
             setAuxilio(arregloFinal)
         }
     }, [AllPelis]);
+
     return (<section className='slider'>
         <h1 className='slider__title'>
             Estrenos imperdibles!

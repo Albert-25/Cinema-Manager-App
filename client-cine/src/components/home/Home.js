@@ -34,9 +34,9 @@ const Home = () => {
   }, [dispatch]);
   const pelisTotales = useSelector((state) => state.PelisAll);
   const pelisFiltradas = useSelector((state) => state.PelisFiltred);
-  const BestPelis = useSelector((state) => state.TopPelis)
-
-  console.log(BestPelis)
+   const BestPelis = useSelector((state) => state.TopPelis)
+   console.log('mejores', BestPelis)
+  // console.log(pelisFiltradas)
   const [container, setContainer] = useState([]);
 
 
@@ -62,12 +62,12 @@ const Home = () => {
     }
   }, [pelisTotales, pelisFiltradas]);
 
-  React.useEffect(() => {
+
+    React.useEffect(() => {
   dispatch(BestMovies())
 
   },[dispatch, pelisTotales])
 
-console.log(BestPelis)
 
   //*paginado
   const [loading] = useState(false);
@@ -113,6 +113,13 @@ console.log(BestPelis)
       /> */}
         </div>
       </div>
+
+      <div className="carrousel__home">
+        <Carousel
+      BestMovies={BestMovies}
+      />
+        </div>
+
 
       <Search />
 

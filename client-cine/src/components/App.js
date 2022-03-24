@@ -10,7 +10,7 @@ import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
 
-import Admin from "./AdminPanel/Admin.jsx";
+
 
 //Changes
 import { AuthProvider } from "../contexts/AuthContext";
@@ -37,7 +37,7 @@ export const App = () => {
             exact
             path="/dash"
             element={
-              <PrivateRoute>
+              <PrivateRoute component={Dashboard}>
                 <Dashboard />
               </PrivateRoute>
             }
@@ -57,36 +57,36 @@ export const App = () => {
           <Route
             path="/admin"
             element={
-
-
-              <Admin />
-
+    <PrivateRoute component={Admin}>
+                
+                <Admin />
+     </PrivateRoute>
             }
           />
           <Route
             path="/admin/createmovies"
             element={
-
-              <CreateMovies />
-
+       <PrivateRoute component={CreateMovies}>
+                <CreateMovies />
+          </PrivateRoute>
             }
           />
           <Route
             path="/admin/createactor"
             element={
-
-
-              <CreateActor />
-
+            
+              <PrivateRoute component={CreateActor}>
+                <CreateActor />
+            </PrivateRoute>
             }
           />
           <Route
             path="/admin/creategenero"
             element={
-
-
-              <CreateGenre />
-
+         
+              <PrivateRoute component={CreateGenre }>
+                <CreateGenre />
+             </PrivateRoute>
             }
           />
           /*Rutas privadas*/
@@ -99,16 +99,7 @@ export const App = () => {
         </Routes>
       </AuthProvider>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/review/:id" element={<Review />} />
-        <Route path="/reviewtoshow/:id" element={<ReviewToShow />} />
-        <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
-        <Route path="/shoppingcart" element={<ShoppingCart />} />
-        <Route path="/about" element={<SobreNosotros />} />
-
-        <Route path="/portal" element={<Profile />} />
-      </Routes>
+     
 
     </Router>
   );

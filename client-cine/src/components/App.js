@@ -99,16 +99,7 @@ export const App = () => {
         </Routes>
       </AuthProvider>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/review/:id" element={<Review />} />
-        <Route path="/reviewtoshow/:id" element={<ReviewToShow />} />
-        <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
-        <Route path="/shoppingcart" element={<ShoppingCart />} />
-        <Route path="/about" element={<SobreNosotros />} />
-
-        <Route path="/portal" element={<Profile />} />
-      </Routes>
+     
 
     </Router>
   );

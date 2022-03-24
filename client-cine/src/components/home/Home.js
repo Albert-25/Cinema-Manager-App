@@ -100,9 +100,9 @@ const Home = () => {
       </div>
 
       <div className="carrousel__home">
-        {/* <Carousel
+        <Carousel
       AllMovies={AllMovies}
-      /> */}
+      />
         </div>
 
 

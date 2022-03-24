@@ -12,7 +12,6 @@ const initialState = {
     NextReleases: [],
     Promotions: [],
     ShoppingCart: [],
-    TopPelis: [],
 
     PelisDetails: [],
     PelisComments: [],

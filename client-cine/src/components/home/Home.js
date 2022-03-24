@@ -13,11 +13,13 @@ import {
   FiltrarGenero,
   FiltrarCast,
   FiltrarGeneroYCast,
+  BestMovies,
 } from "../../store/actions";
 
 import Movies from "../Movies/Movies.js";
 import Pagination from "../Movies/Pagination";
 import FiltroGeneros from "../filters/filterGenre.js";
+import Carousel from "../Carousel/Carousel.js"
 
 const Home = () => {
   //*dispatch de prueba para las pelis falas que luego sera usado en mostar todas laspelis
@@ -30,6 +32,8 @@ const Home = () => {
   }, [dispatch]);
   const pelisTotales = useSelector((state) => state.PelisAll);
   const pelisFiltradas = useSelector((state) => state.PelisFiltred);
+   const BestPelis = useSelector((state) => state.TopPelis)
+   console.log('mejores', BestPelis)
   // console.log(pelisFiltradas)
   const [container, setContainer] = useState([]);
 
@@ -52,6 +56,13 @@ const Home = () => {
       }
     }
   }, [pelisTotales, pelisFiltradas]);
+
+
+    React.useEffect(() => {
+  dispatch(BestMovies())
+
+  },[dispatch, pelisTotales])
+
 
   //*paginado
   const [loading] = useState(false);
@@ -91,6 +102,13 @@ const Home = () => {
           </Container>
         </React.Fragment>
       </div>
+
+      <div className="carrousel__home">
+        <Carousel
+      BestMovies={BestMovies}
+      />
+        </div>
+
 
       <Search />
 

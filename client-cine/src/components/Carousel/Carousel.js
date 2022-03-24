@@ -30,9 +30,6 @@ const Carousel = (BestMovies) => {
         return (<></>)
     }
 
-<<<<<<< Updated upstream
-
-=======
     React.useEffect(() => {
         if (AllPelis.length !== 0 && auxilio.length === 2) {
             // console.log('all', AllPelis)
@@ -58,7 +55,6 @@ const Carousel = (BestMovies) => {
                         <Link to={`MovieDetails/${elm.id}`}>
                             <p className='slider-description'>{elm.titulo}</p>
                         </Link>
->>>>>>> Stashed changes
 
 }
 

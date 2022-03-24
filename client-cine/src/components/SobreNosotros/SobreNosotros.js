@@ -31,7 +31,7 @@ const SobreNosotros = () => {
                         Programado por:<br></br>
                         Agustin .(*￣０￣)ノ<br></br>
                         Dani  (。_。)<br></br>
-                        Vicen（*゜ー゜*）<br></br>
+                        Vicen(*゜ー゜*）<br></br>
                         Jonathan Σ(っ °Д °;)っ<br></br>
                         Alberto (ﾉ*･ω･)ﾉ<br></br>
                         Elian (´･ω･`)?<br></br>

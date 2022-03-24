@@ -108,9 +108,9 @@ console.log(BestPelis)
         </React.Fragment>
 
         <div className="carrousel__home">
-        <Carousel
+        {/* <Carousel
       BestMovies={BestMovies}
-      />
+      /> */}
         </div>
       </div>
 

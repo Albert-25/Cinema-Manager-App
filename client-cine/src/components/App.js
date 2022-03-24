@@ -23,7 +23,7 @@ import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 
 import ReviewToShow from "./ReviewToShow/ReviewToShow.jsx";
-import Admin from './AdminPanel/Admin.jsx';
+
 
 
 export const App = () => {
@@ -57,36 +57,36 @@ export const App = () => {
           <Route
             path="/admin"
             element={
-    
-                
-                <Admin />
-     
+
+
+              <Admin />
+
             }
           />
           <Route
             path="/admin/createmovies"
             element={
-       
-                <CreateMovies />
-          
+
+              <CreateMovies />
+
             }
           />
           <Route
             path="/admin/createactor"
             element={
-            
-              
-                <CreateActor />
-            
+
+
+              <CreateActor />
+
             }
           />
           <Route
             path="/admin/creategenero"
             element={
-         
-              
-                <CreateGenre />
-             
+
+
+              <CreateGenre />
+
             }
           />
           /*Rutas privadas*/

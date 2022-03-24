@@ -7,8 +7,10 @@
 }
 
 .carousel-track{
-height: 200px ! important;
+
+    height: 100% !important;
 }
+
 
 .slider__title {
     position: absolute;

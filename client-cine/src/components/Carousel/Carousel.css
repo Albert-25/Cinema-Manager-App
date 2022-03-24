@@ -6,6 +6,10 @@
     position: relative;
 }
 
+.carousel-track{
+height: 200px ! important;
+}
+
 .slider__title {
     position: absolute;
     font-family: 'Hubballi', cursive;

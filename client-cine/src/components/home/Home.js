@@ -100,10 +100,10 @@ const Home = () => {
       </div>
 
       <div className="carrousel__home">
-        {/* <Carousel
-      AllMovies={AllMovies}
-      /> */}
-        </div>
+        <Carousel
+          AllMovies={AllMovies}
+        />
+      </div>
 
 
       <Search />

@@ -45,11 +45,37 @@ const CreateMovies = () => {
       error: false,
    });
 
+   const handleChange = (e) => {
+      setInputs({
+         ...inputs,
+         [e.target.name]: e.target.value.trim(),
+      });
+
+      setErrors(
+         validate(
+            {
+               [e.target.name]: e.target.value,
+            },
+            errors,
+            e.target.name
+         )
+      );
+   };
+
    const changeArrayGenders = (evt) => {
       setInputs({
          ...inputs,
          [evt.target.name]: inputs.genders.concat(evt.target.value),
       });
+      setErrors(
+         validate(
+            {
+               ...inputs,
+            },
+            errors,
+            "genders"
+         )
+      );
       document
          .getElementById(evt.target.value)
          .setAttribute("disabled", "disabled");
@@ -60,6 +86,15 @@ const CreateMovies = () => {
          ...inputs,
          [evt.target.name]: inputs.actors.concat(evt.target.value),
       });
+      setErrors(
+         validate(
+            {
+               ...inputs,
+            },
+            errors,
+            "actors"
+         )
+      );
       document
          .getElementsByName(evt.target.value)[0]
          .setAttribute("disabled", "disabled");
@@ -89,19 +124,21 @@ const CreateMovies = () => {
 
    const handleClick = (e) => {
       setErrors(
-         validate({
-            ...inputs,
-         })
+         validate(
+            {
+               ...inputs,
+            },
+            errors,
+            "submit"
+         )
       );
-
-      console.log(errors);
    };
-   console.log(errors);
+
    const handleSubmit = (e) => {
       e.preventDefault();
       if (errors.error === false) {
          Swal.fire({
-            title: "Do you want to save the changes?",
+            title: "¿Quieres guardar la pelicula?",
             showDenyButton: true,
             showCancelButton: true,
             confirmButtonText: "Guardar",
@@ -130,12 +167,7 @@ const CreateMovies = () => {
                <input
                   type="text"
                   name="titulo"
-                  onChange={(evt) =>
-                     setInputs({
-                        ...inputs,
-                        [evt.target.name]: evt.target.value.trim(),
-                     })
-                  }
+                  onChange={(evt) => handleChange(evt)}
                   placeholder="Titulo"
                />
                {errors.titulo ? <span>{errors.titulo}</span> : null}
@@ -144,12 +176,7 @@ const CreateMovies = () => {
                <input
                   type="text"
                   name="sinopsis"
-                  onChange={(evt) =>
-                     setInputs({
-                        ...inputs,
-                        [evt.target.name]: evt.target.value.trim(),
-                     })
-                  }
+                  onChange={(evt) => handleChange(evt)}
                   placeholder="Sipnosis"
                />
                {errors.sinopsis ? <span>{errors.sinopsis}</span> : null}
@@ -158,12 +185,7 @@ const CreateMovies = () => {
                <input
                   type="text"
                   name="poster"
-                  onChange={(evt) =>
-                     setInputs({
-                        ...inputs,
-                        [evt.target.name]: evt.target.value.trim(),
-                     })
-                  }
+                  onChange={(evt) => handleChange(evt)}
                   placeholder="Poster"
                />
                {errors.poster ? <span>{errors.poster}</span> : null}
@@ -173,12 +195,7 @@ const CreateMovies = () => {
                   type="number"
                   min="0"
                   name="duracion"
-                  onChange={(evt) =>
-                     setInputs({
-                        ...inputs,
-                        [evt.target.name]: evt.target.value.trim(),
-                     })
-                  }
+                  onChange={(evt) => handleChange(evt)}
                   placeholder="Duracion"
                />
                {errors.duracion ? <span>{errors.duracion}</span> : null}
@@ -188,12 +205,7 @@ const CreateMovies = () => {
                   type="text"
                   name="clasificacion"
                   placeholder="Clasificacion"
-                  onChange={(evt) =>
-                     setInputs({
-                        ...inputs,
-                        [evt.target.name]: evt.target.value.trim(),
-                     })
-                  }
+                  onChange={(evt) => handleChange(evt)}
                />
                {errors.clasificacion ? (
                   <span>{errors.clasificacion}</span>
@@ -203,12 +215,7 @@ const CreateMovies = () => {
                <input
                   type="text"
                   name="director"
-                  onChange={(evt) =>
-                     setInputs({
-                        ...inputs,
-                        [evt.target.name]: evt.target.value.trim(),
-                     })
-                  }
+                  onChange={(evt) => handleChange(evt)}
                   placeholder="Director"
                />
                {errors.director ? <span>{errors.director}</span> : null}
@@ -219,12 +226,7 @@ const CreateMovies = () => {
                   min="0"
                   max="10"
                   name="puntuación"
-                  onChange={(evt) =>
-                     setInputs({
-                        ...inputs,
-                        [evt.target.name]: evt.target.value.trim(),
-                     })
-                  }
+                  onChange={(evt) => handleChange(evt)}
                   placeholder="Puntuación"
                />
                {errors.puntuación ? <span>{errors.puntuación}</span> : null}
@@ -233,12 +235,7 @@ const CreateMovies = () => {
                <input
                   type="text"
                   name="pais"
-                  onChange={(evt) =>
-                     setInputs({
-                        ...inputs,
-                        [evt.target.name]: evt.target.value.trim(),
-                     })
-                  }
+                  onChange={(evt) => handleChange(evt)}
                   placeholder="Pais"
                />
                {errors.pais ? <span>{errors.pais}</span> : null}
@@ -248,12 +245,7 @@ const CreateMovies = () => {
                   type="text"
                   name="distribuidora"
                   placeholder="Distribuidora"
-                  onChange={(evt) =>
-                     setInputs({
-                        ...inputs,
-                        [evt.target.name]: evt.target.value.trim(),
-                     })
-                  }
+                  onChange={(evt) => handleChange(evt)}
                />
                {errors.distribuidora ? (
                   <span>{errors.distribuidora}</span>
@@ -263,12 +255,7 @@ const CreateMovies = () => {
                <input
                   type="text"
                   name="trailer"
-                  onChange={(evt) =>
-                     setInputs({
-                        ...inputs,
-                        [evt.target.name]: evt.target.value.trim(),
-                     })
-                  }
+                  onChange={(evt) => handleChange(evt)}
                   placeholder="Trailer"
                />
                {errors.trailer ? <span>{errors.trailer}</span> : null}
@@ -284,12 +271,12 @@ const CreateMovies = () => {
                      Generos
                   </option>
                   {Genres &&
-                     Genres.map((item) => {
+                     Genres.map((item, index) => {
                         return (
                            <option
                               id={item.id}
                               className="elemSelect"
-                              key={item.genero}
+                              key={`${item.genero}${index}`}
                               value={item.id}
                            >
                               {item.genero}

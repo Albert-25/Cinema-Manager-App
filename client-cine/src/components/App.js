@@ -10,6 +10,8 @@ import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
 
+
+
 //Changes
 import { AuthProvider } from "../contexts/AuthContext";
 import Signup from "./Signup";
@@ -19,6 +21,7 @@ import PrivateRoute from "./PrivateRoute";
 import PrivateUpdate from "./PrivateUpdate";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
+
 
 import Admin from "./AdminPanel/Admin.jsx";
 
@@ -100,3 +103,4 @@ export const App = () => {
      </Router>
    );
  };
+

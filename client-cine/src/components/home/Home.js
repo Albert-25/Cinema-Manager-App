@@ -15,7 +15,6 @@ import {
   FiltrarGenero,
   FiltrarCast,
   FiltrarGeneroYCast,
-  // BestMovies,
 } from "../../store/actions";
 
 import Movies from "../Movies/Movies.js";
@@ -101,10 +100,9 @@ const Home = () => {
 
       <div className="carrousel__home">
         <Carousel
-      AllMovies={AllMovies}
-      />
-        </div>
-
+          AllMovies={AllMovies}
+        />
+      </div>
 
       <Search />
 

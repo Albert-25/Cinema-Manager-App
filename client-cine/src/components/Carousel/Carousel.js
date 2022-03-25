@@ -54,7 +54,7 @@ const Carousel = (AllMovies) => {
         <h1 className='slider__title'>
             Estrenos imperdibles!
         </h1>
-        <Slider className="slider__content" >
+        <Slider className="slider__content" autoplay={true} autoplaySpeed={4000}>
             {
                 auxilio.map(elm => {
                     return (<div className='slider__content--item' key={elm.id}>

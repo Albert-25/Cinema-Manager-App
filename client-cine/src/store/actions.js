@@ -52,14 +52,13 @@ export function getAllReviewByIdOfMovie(id) {
   };
 }
 
-
 export const BestMovies = (arg) => {
   // console.log("howdy im action")
   return {
-      type: "BESTMOVIES",
-      payload: arg,
-  }
-}
+    type: "BESTMOVIES",
+    payload: arg,
+  };
+};
 
 export const postReview = (payload) => {
   return async (dispatch) => {
@@ -144,6 +143,30 @@ export const uploadActor = (info) => {
       alert("Actor creado satisfactoriamente");
     } catch (error) {
       alert("Error, el actor ya se encuentra en la base de datos");
+    }
+  };
+};
+
+export const uploadProduct = (info) => {
+  if(info.imagenProducto === ""){
+    info.imagenProducto = "https://www.feednavigator.com/var/wrbm_gb_food_pharma/storage/images/9/2/8/5/235829-6-eng-GB/Feed-Test-SIC-Feed-20142.jpg"
+  }
+  return async function postProduct() {
+    let body = {
+      Product: {
+        nombreProducto: info.nombreProducto,
+        imagenProducto: info.imagenProducto,
+        descripcion: info.descripcion,
+        precio: info.precio,
+        stock: info.stock,
+        isCombo: info.isCombo,
+      },
+    };
+    try {
+      await axios.post("http://localhost:3001/productos", body);
+      alert("Producto creado satisfactoriamente");
+    } catch (error) {
+      alert("Datos erroneos o el producto ya existe en la base de datos");
     }
   };
 };

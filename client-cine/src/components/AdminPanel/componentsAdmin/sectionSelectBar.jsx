@@ -1,36 +1,30 @@
 import React, { useEffect, useContext } from 'react';
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import {Nav} from 'react-bootstrap';
 import { AdminContext } from '../admincontext'
-
+import './sectionSelectBar.css'
 
 let status = ['movies', 'actors', 'genres']
 
-export default function SelcetSectionBar() {
-  const [value, setValue] = React.useState(0);
+export default function SelectSectionBar() {
+  const [value, setValue] = React.useState("movies");
   const {dispatch} = useContext(AdminContext)
 
   useEffect(() => {
-    dispatch({ type: 'sectionSelect', payload: status[value]})    
+    dispatch({ type: 'sectionSelect', payload:value})    
   }, [value,dispatch])
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleChange = (value) => {
+    setValue(value);
   };
 
   return (
-    <Box sx={{ width: '100%', bgcolor: 'transparent', maxWidth: '350px', margin: "0 auto" }}>
-      <Tabs value={value} onChange={handleChange}
-        variant="scrollable"
-        scrollButtons
-        allowScrollButtonsMobile
-        aria-label="scrollable force tabs example">
-        <Tab label="peliculas" sx={{ color: 'white' }} />
-        <Tab label="actores" sx={{ color: 'white' }} />
-        <Tab label="generos" sx={{ color: 'white' }} />
-      </Tabs>
-    </Box>
+    <div className="section_admin_select_container">
+       <Nav justify variant="tabs" defaultActiveKey="movies" onSelect={handleChange}>
+          {status.map(e=><Nav.Item key={e+"f"}>
+              <Nav.Link eventKey={e}  >{e.toUpperCase()}</Nav.Link>
+          </Nav.Item>)}
+        </Nav>
+    </div>
   );
 
 }

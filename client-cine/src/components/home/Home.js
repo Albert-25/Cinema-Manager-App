@@ -1,9 +1,7 @@
 import { Search } from "../SearchBar/Search.jsx";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Container from "@mui/material/Container";
-import CssBaseline from "@mui/material/CssBaseline";
-import Navbar from "../Navbar/navbar.jsx";
+import NavBar from "../Navbar/navbar.jsx";
 import "./Home.css"
 import Swal from "sweetalert2";
 
@@ -32,6 +30,11 @@ const Home = () => {
 
   const [container, setContainer] = useState([]);
 
+  useEffect(() => {
+    dispatch(AllMovies());
+    dispatch(GetAllGenres());
+    dispatch(GetAllCast());
+  }, [dispatch]);
 
 
   React.useEffect(() => {
@@ -85,15 +88,9 @@ const Home = () => {
 
   return (
     <div className="Home__Background">
-      <div>
         <React.Fragment>
-          <CssBaseline />
-          <Container maxWidth="ls" sx={{ height: "auto" }}>
-            <Navbar />
-          </Container>
+            <NavBar />
         </React.Fragment>
-      </div>
-
       <div className="carrousel__home">
         {/* <Carousel
       AllMovies={AllMovies}

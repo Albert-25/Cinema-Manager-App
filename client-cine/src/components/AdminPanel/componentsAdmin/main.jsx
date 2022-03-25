@@ -1,17 +1,23 @@
 import React from 'react'
-import Box from '@mui/material/Box';
-import SelcetSectionBar from './sectionSelectBar.jsx'
+import SelectSectionBar from './sectionSelectBar.jsx'
 import ItemsContainer from './itemcontainer.jsx'
-
+import {BsArrowLeftShort} from 'react-icons/bs'
+import {Button} from 'react-bootstrap';
+import {useNavigate} from 'react-router-dom'
+import './main.css'
 export default function  Main(){
-	
+    let nagivate= useNavigate()	
 	return (
-		<Box sx={{display:"flex",alignItems:"center",justifyContent:"center",height:"90vh",width:"100%",backgroundColor:"lightgray"}}>
-		<Box sx={{height:"90%",width:"90%",backgroundColor:"rgba(41, 35, 94,0.7)",display:"inline-flex",flexDirection:"column"}}>
-		  <SelcetSectionBar/>
-		  <Box sx={{width:"100%",height:"fill-available",backgroundColor:"white",padding:"2em 1em 1em 0"}}>
+		<div className="main_admin_panel">
+		<div className="main_container_panel_admin">
+		  <Button bsPrefix="main_back_to_home_btn"  onClick={()=>nagivate('/')}>
+		    <BsArrowLeftShort/>
+		    <span style={{fontSize:"18px"}}>home</span>
+		  </Button>
+		  <SelectSectionBar/>
+		  <div className="main_items_container_admin">
 		   <ItemsContainer/>
-		  </Box>
-		</Box>
-	</Box>)
+		  </div>
+		</div>
+	</div>)
 }

@@ -57,8 +57,8 @@ const Review = () => {
     }
 
     useEffect(() => {
-        if (comentario.length >= 6) {
-            setErrorComentario("se permiten como maximo 5 carácteres")
+        if (comentario.length >= 11) {
+            setErrorComentario("se permiten como maximo 10 carácteres")
         }
         else {
             setErrorComentario("")

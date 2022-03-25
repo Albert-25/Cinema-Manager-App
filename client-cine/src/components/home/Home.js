@@ -1,9 +1,8 @@
-import Search from "../SearchBar/Search.jsx";
+import { Search } from "../SearchBar/Search.jsx";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Container from "@mui/material/Container";
-import CssBaseline from "@mui/material/CssBaseline";
-import Navbar from "../Navbar/navbar.jsx";
+import NavBar from "../Navbar/navbar.jsx";
+import "./Home.css";
 import Swal from "sweetalert2";
 
 import {
@@ -18,24 +17,24 @@ import {
 import Movies from "../Movies/Movies.js";
 import Pagination from "../Movies/Pagination";
 import FiltroGeneros from "../filters/filterGenre.js";
+import Carousel from "../Carousel/Carousel.js";
 
 const Home = () => {
-   //*dispatch de prueba para las pelis falas que luego sera usado en mostar todas laspelis
-
    const dispatch = useDispatch();
+   const pelisTotales = useSelector((state) => state.PelisAll);
+   const pelisFiltradas = useSelector((state) => state.PelisFiltred);
+
+   const [container, setContainer] = useState([]);
+
    useEffect(() => {
       dispatch(AllMovies());
       dispatch(GetAllGenres());
       dispatch(GetAllCast());
    }, [dispatch]);
-   const pelisTotales = useSelector((state) => state.PelisAll);
-   const pelisFiltradas = useSelector((state) => state.PelisFiltred);
-   // console.log(pelisFiltradas)
-   const [container, setContainer] = useState([]);
 
    React.useEffect(() => {
-      //luego se añadira filter aqui para decidir si se muestran los resultados filtrados o las pelis
       if (pelisTotales.length !== 0) {
+         console.log(pelisTotales);
          setContainer(pelisTotales);
       }
       if (pelisFiltradas.length !== 0) {
@@ -86,14 +85,12 @@ const Home = () => {
    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
    return (
-      <div>
-         <div>
-            <React.Fragment>
-               <CssBaseline />
-               <Container maxWidth="ls" sx={{ height: "auto" }}>
-                  <Navbar />
-               </Container>
-            </React.Fragment>
+      <div className="Home__Background">
+         <React.Fragment>
+            <NavBar />
+         </React.Fragment>
+         <div className="carrousel__home">
+            <Carousel AllMovies={AllMovies} />
          </div>
 
          <Search />

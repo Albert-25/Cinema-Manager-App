@@ -1,0 +1,7 @@
+.nav_admin{
+	background-color:rgba(108, 26, 214, 0.5);
+	backdrop-filter: blur(10px);
+}
+.nav_admin_title{
+	color: white !important;
+}

@@ -38,6 +38,7 @@ const insertMovie = async (req, res, next) => {
       titulo: req.body.titulo,
       sinopsis: req.body.sinopsis,
       poster: req.body.poster,
+      background: req.body.background,
       duracion: req.body.duracion,
       clasificacion: req.body.clasificacion,
       director: req.body.director,

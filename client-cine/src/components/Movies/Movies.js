@@ -17,6 +17,7 @@ export default function Movies({ moviesInfo, loading }) {
               puntuación={e.puntuación}
               clasificacion={e.clasificacion}
               director={e.director}
+              sinopsis={e.sinopsis}
             />
           ))}
       </div>

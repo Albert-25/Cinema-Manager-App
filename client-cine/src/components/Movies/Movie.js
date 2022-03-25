@@ -13,17 +13,21 @@ export default function Movie({
    clasificacion,
    sinopsis,
 }) {
+   console.log(sinopsis);
    return (
       <>
-         <Card style={{ width: "15rem", marginBottom: "1rem" }}>
+         <Card style={{ width: "17rem", marginBottom: "1rem" }}>
             <Card.Img variant="top" src={poster} />
-            <Card.Body>
-               <Card.Title>{titulo}</Card.Title>
-               <Card.Text>{sinopsis}</Card.Text>
-               <Link to={`MovieDetails/${id}`}>
-                  <Button variant="primary">Ver detalles</Button>
-               </Link>
-            </Card.Body>
+            <Card.ImgOverlay>
+               <Card.Body>
+                  <Card.Title>{titulo}</Card.Title>
+                  <Card.Text>{`Puntuación: ${puntuación}`}</Card.Text>
+                  <Card.Text>{`Clasificacion: ${clasificacion}`}</Card.Text>
+                  <Link to={`MovieDetails/${id}`}>
+                     <Button variant="primary">Ver detalles</Button>
+                  </Link>
+               </Card.Body>
+            </Card.ImgOverlay>
          </Card>
       </>
    );

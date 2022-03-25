@@ -1,0 +1,32 @@
+.btn_menu_nav{
+	display: flex;
+	width: 100px;
+	justify-content: space-between;
+}
+.navbar_hm{
+	background-color:rgba(108, 26, 214, 0.5);
+	backdrop-filter: blur(10px);
+}
+.btn_navbar_actions {
+	background-color: transparent;
+	border: none;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 7px 10px;
+	font-size: 1.2em;
+	border-radius: 4em;
+}
+.btn_navbar_actions:hover{
+	border: none;
+	background-color: transparent;
+	transition: 400ms;
+	font-size: 1.4em;
+	
+}
+.btn_navbar_actions:focus{
+	color: #5D90F6;
+	box-shadow: -1px -1px 1px rgba(248, 249, 251,0.5),
+	    1px 1px 1px rgba(0, 0, 0,0.5);
+}

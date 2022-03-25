@@ -1,4 +1,4 @@
-import Slider from "infinite-react-carousel";
+import Slider from "infinite-react-carousel"
 import { useSelector } from "react-redux";
 import "./Carousel.css"
 import { Link } from 'react-router-dom';
@@ -63,5 +63,11 @@ const Carousel = (AllMovies) => {
                             <p className='slider-description'>{elm.titulo}</p>
                         </Link>
 
+                    </div>)
+                })
+            }
+        </Slider>
+    </section>)
+}
 
-export default Carousel;
+export default Carousel

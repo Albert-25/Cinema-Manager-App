@@ -54,13 +54,11 @@ export default function Navbar() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {['About'].map((text) => (
-          <ListItem button key={text}>
-            <Link to={`/${text.toLowerCase()}`}>{text}</Link>
-          </ListItem>
-        ))}
-      </List>
+       <div className="">
+                <a href='/about' >
+                    <p >About</p>
+                </a>
+            </div>
     </Box>
   );
   return (
@@ -85,8 +83,18 @@ export default function Navbar() {
               )):null}
         </Toolbar>
         <div>
-        <CallFormCtrl txt={'SingUp'}/>
-        <CallFormCtrl txt={'LogIn'}/>
+
+         <div className="">
+                <a href='/signup' >
+                    <p >Signup</p>
+                </a>
+            </div>
+             <div className="">
+                <a href='/login' >
+                    <p >Login</p>
+                </a>
+            </div>
+
          <IconButton
           size="large"
           aria-label="account of current user"

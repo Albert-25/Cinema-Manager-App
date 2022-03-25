@@ -114,9 +114,9 @@ const DetailsMovies = (props) => {
                 </Link>
             </div>
             <div className="">
-                <Link to="/" className="Details__rightdown">
+                <a href="/" className="Details__rightdown">
                     <p className="Details__rightdown__text">👉 Go back 👈</p>
-                </Link>
+                </a>
             </div>
             <div>
                 <ReviewToShow id={id} />

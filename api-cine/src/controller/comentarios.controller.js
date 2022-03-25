@@ -19,7 +19,7 @@ const postComentario = async (req, res) => {
             nombre, comentario, puntuación, id
         } = req.body
 
-        if (comentario.trim() && comentario.length <= 10 && puntuación) {
+        if (comentario.trim() && comentario.length <= 600 && puntuación) {
             const review = await Comentarios.create({
                 nombre, comentario, puntuación
             })

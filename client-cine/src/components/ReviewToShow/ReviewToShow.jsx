@@ -26,14 +26,15 @@ const ReviewToShow = ({ id }) => {
 
                     return (
                         <div className={styles.container} key={c.id}>
-                            <div><h3>{c.nombre}</h3></div>
+                            <div className={styles.nombre}> Por {c.nombre}</div>
                             <DivStar value="1" puntuacion={c.puntuación} className={styles.star} >★</DivStar>
                             <DivStar value="2" puntuacion={c.puntuación} className={styles.star} >★</DivStar>
                             <DivStar value="3" puntuacion={c.puntuación} className={styles.star} >★</DivStar>
                             <DivStar value="4" puntuacion={c.puntuación} className={styles.star} >★</DivStar>
                             <DivStar value="5" puntuacion={c.puntuación} className={styles.star} >★</DivStar>
-                            <div><p>{c.comentario}</p></div>
+                            <div className={styles.comentario}><p>{c.comentario}</p></div>
                             {/* <button onClick={() => handleDelete(c.id)}>delete</button> */}
+                            <hr></hr>
                         </div>
                     )
                 })

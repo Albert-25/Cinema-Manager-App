@@ -39,87 +39,111 @@ const DetailsMovies = (props) => {
 
     return (
         <body className="Background__Details">
-            <div className="Details__left">
-                <img
-                    className="MovieImg__img"
-                    src={detailed.poster || Mooovie.poster}
-                    alt="background"
-                ></img>
+            <div className="Details__title">
+                <h1>{detailed.titulo || Mooovie.titulo}</h1>
             </div>
-
             <div className="Details__right">
-                <div className="Details__title">
-                    {detailed.titulo || Mooovie.titulo}
+                <div className="Details__left">
+                    <img
+                        className="MovieImg__img"
+                        src={detailed.poster || Mooovie.poster}
+                        alt="background"
+                    ></img>
                 </div>
                 <div className="Details__sinopsis">
-                    💖sinopsis: {detailed.sinopsis || Mooovie.sinopsis}
+                    <h3>Sinopsis: </h3>
+                    <p>{detailed.sinopsis || Mooovie.sinopsis}</p>
                 </div>
-                <div className="Details__duracion">
-                    💖duracion: {detailed.duracion || Mooovie.duracion}
+                <div className="Details__duracion grid__child">
+                    <h4>Duracion:</h4>
+                    <span>{detailed.duracion || Mooovie.duracion}</span>
                 </div>
-                <div className="Details__clasificacion">
-                    💖clasificacion: {detailed.clasificacion || Mooovie.clasificacion}
+                <div className="Details__clasificacion grid__child">
+                    <h4>Clasificacion:</h4>
+                    <span>{detailed.clasificacion || Mooovie.clasificacion}</span>
                 </div>
-                <div className="Details__director">
-                    💖director: {detailed.director || Mooovie.director}
+                <div className="Details__director grid__child">
+                    <h4>Director:</h4>
+                    <span> {detailed.director || Mooovie.director}</span>
                 </div>
-                <div className="Details__puntuación">
-                    💖puntuación: {detailed.puntuación || Mooovie.puntuación}
+                <div className="Details__puntuación grid__child">
+                    <h4>Puntuación: </h4>
+                    <span>{isNaN(promedioPuntuacion) ? "Todavia sin puntuación" : promedioPuntuacion}</span>
                 </div>
-                <div className="Details__puntuación">
-                    {`★puntuación: ${isNaN(promedioPuntuacion) ? "Todavia sin puntuación" : promedioPuntuacion}`}
-                </div> 
-                <div className="Details__pais">
-                    💖pais: {detailed.pais || Mooovie.pais}
+                <div className="Details__pais grid__child">
+                    <h4>Pais:</h4>
+                    <span>{detailed.pais || Mooovie.pais}</span>
                 </div>
-                <div className="Details__distribuidora">
-                    💖distribuidora: {detailed.distribuidora || Mooovie.distribuidora}
+                <div className="Details__distribuidora grid__child">
+                    <h4>Distribuidora:</h4>
+                    <span>{detailed.distribuidora || Mooovie.distribuidora}</span>
                 </div>
-                <div className="Details__trailer">
-                    💖trailer: {detailed.trailer || Mooovie.trailer}
-                </div>
-
-                <div className="Details__genero">
+                <div className="Details__genero grid__child">
+                    <h4>Generos</h4>
                     <div className="Details__trailer">
                         {Array.isArray(GenArray) ? (
-                            GenArray.map((a) => (
-                                <li key={a}>
-                                    <span>{a} </span>
-                                </li>
-                            ))
+                            GenArray.map((a, i) => {
+                                if (i == GenArray.length - 1) {
+
+                                    return (
+                                        <span key={a}>
+                                            {a}
+                                        </span>
+                                    )
+                                }
+                                return (
+                                    <span key={a}>
+                                        {a + ", "}
+                                    </span>
+                                )
+                            })
                         ) : (
                             <span>No genres yet</span>
                         )}
                     </div>
                 </div>
 
-                <div className="Details__actores">
+                <div className="Details__actores grid__child">
+                    <h4>Actores</h4>
                     <div className="Details__trailer">
                         {Array.isArray(ActArray) ? (
-                            ActArray.map((a) => (
-                                <li key={a}>
-                                    <span>{a} </span>
-                                </li>
-                            ))
+                            ActArray.map((a, i) => {
+                                if (i == GenArray.length - 1) {
+                                    return (
+                                        <span key={a}>
+                                            {a}
+                                        </span>
+                                    )
+                                }
+                                return (
+                                    <span key={a}>
+                                        {a + ", "}
+                                    </span>
+                                )
+                            })
                         ) : (
                             <span>No genres yet</span>
                         )}
                     </div>
                 </div>
+                <div className="Details__trailer grid__child">
+                    <h4>Trailer:</h4>
+                    <p>{detailed.trailer || Mooovie.trailer}</p>
+                </div>
+            </div>
 
-            </div>
-            <div>
-                <Link to={`/review/${id}`}>
-                    <button>Escribir un comentario</button>
-                </Link>
-            </div>
-            <div className="">
-                <Link to="/" className="Details__rightdown">
-                    <p className="Details__rightdown__text">👉 Go back 👈</p>
-                </Link>
-            </div>
-            <div>
-                <ReviewToShow id={id} />
+            <div className="container_footer">
+                <div className="buttons">
+                    <Link to={`/review/${id}`}>
+                        <button>Escribir un comentario</button>
+                    </Link>
+                    <Link to="/" className="Details__rightdown">
+                        <button className="Details__rightdown__text">👉 Go back 👈</button>
+                    </Link>
+                </div>
+                <div className="comentarios">
+                    <ReviewToShow id={id} />
+                </div>
             </div>
         </body>
     );

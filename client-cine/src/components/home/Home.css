@@ -8,3 +8,12 @@ html {
     width: 100%;
     background-color: #11072F;
 }
+
+.Home__MoviesContainer{
+    display: flex;
+    /* border: 2px solid black; */
+    justify-content: center
+}
+.Home__Movies{
+    display: flex;
+}

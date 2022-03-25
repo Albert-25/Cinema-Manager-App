@@ -44,9 +44,9 @@ export const App = () => {
              exact
              path="/dash"
              element={
-               <PrivateRoute component={Dashboard}>
+               <PrivateUpdate component={Dashboard} rol={'user'}>
                  <Dashboard />
-               </PrivateRoute>
+               </PrivateUpdate>
              }
            />
            <Route path="/signup" element={<Signup />} />
@@ -64,7 +64,7 @@ export const App = () => {
            <Route
              path="/admin"
              element={
-     <PrivateRoute component={Admin}>
+     <PrivateRoute component={Admin} rol={'admin'}>
                  
                  <Admin />
       </PrivateRoute>
@@ -73,7 +73,7 @@ export const App = () => {
            <Route
              path="/admin/createmovies"
              element={
-        <PrivateRoute component={CreateMovies}>
+        <PrivateRoute component={CreateMovies} rol={'admin'}>
                  <CreateMovies />
            </PrivateRoute>
              }
@@ -82,7 +82,7 @@ export const App = () => {
              path="/admin/createactor"
              element={
              
-               <PrivateRoute component={CreateActor}>
+               <PrivateRoute component={CreateActor} rol={'admin'}>
                  <CreateActor />
              </PrivateRoute>
              }
@@ -91,7 +91,7 @@ export const App = () => {
              path="/admin/creategenero"
              element={
           
-               <PrivateRoute component={CreateGenre }>
+               <PrivateRoute component={CreateGenre } rol={'admin'}>
                  <CreateGenre />
               </PrivateRoute>
              }

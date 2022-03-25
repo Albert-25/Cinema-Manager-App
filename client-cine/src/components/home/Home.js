@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import NavBar from "../Navbar/navbar.jsx";
 import "./Home.css"
 import Swal from "sweetalert2";
+import { useAuth } from "../../contexts/AuthContext";
 
 
 import {
@@ -22,6 +23,7 @@ import Carousel from "../Carousel/Carousel.js"
 
 const Home = () => {
 
+  
 
   const dispatch = useDispatch();
   const pelisTotales = useSelector((state) => state.PelisAll);

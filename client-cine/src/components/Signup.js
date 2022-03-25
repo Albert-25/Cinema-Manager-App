@@ -7,6 +7,7 @@ export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+  const rolRef = useRef()
   const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -20,7 +21,8 @@ export default function Signup() {
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      console.log('recibidiro', rolRef.current.value)
+      await signup(emailRef.current.value, passwordRef.current.value, rolRef.current.value);
       navigate("/");
     } catch {
       setError("Failed to create an account");
@@ -47,6 +49,17 @@ export default function Signup() {
             <Form.Group id="password-confirm">
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
+            </Form.Group>
+              <Form.Group id="password">
+            <label>
+          Rol:
+          <Form.Select aria-label="Default select example" ref={rolRef}>
+  <option>Open this select menu</option>
+  <option value="admin">Admin</option>
+  <option value="user">User</option>
+
+</Form.Select>
+        </label>
             </Form.Group>
             <Button className="w-100" disabled={loading} type="submit">
               Sign up

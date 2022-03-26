@@ -4,11 +4,13 @@ import CreateActor from "./CreateActor/CreateActor.jsx";
 import CreateGenre from "./CreateGenre/CreateGenre.jsx";
 import CreateMovies from "./CreateMovies/CreateMovies.js";
 import DetailsMovies from "./Details/DetailsMovies";
+import ProductDetail from "./Products/ProductDetail";
 import Home from "./home/Home.js";
 import { Profile } from "./profile/Profile.js";
 import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
+import ProductsPage from "./Products/ProductsPage"
 
 
 
@@ -35,6 +37,7 @@ import {
 } from "./../store/actions";
 
 export const App = () => {
+
 
   return (
     <Router>
@@ -102,17 +105,17 @@ export const App = () => {
           />
            /*Rutas privadas*/
           <Route path="/" element={<Home />} />
+          <Route path="/productpage" element={<ProductsPage />} />
           <Route path="/review/:id" element={<Review />} />
           <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
+          <Route path="/productpage/Products/:id" element={<ProductDetail />} />
           <Route path="/shoppingcart" element={<ShoppingCart />} />
           <Route path="/about" element={<SobreNosotros />} />
           <Route path="/portal" element={<Profile />} />
-        </Routes >
-      </AuthProvider >
+        </Routes>
+      </AuthProvider>
+    </Router>
 
-
-
-    </Router >
   );
 };
 

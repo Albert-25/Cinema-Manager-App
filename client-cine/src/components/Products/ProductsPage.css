@@ -9,11 +9,11 @@ html {
     background-color: #11072F;
 }
 
-.Home__MoviesContainer{
+.Product__Productos__container{
     display: flex;
     /* border: 2px solid black; */
     justify-content: center
 }
-.Home__Movies{
+.Product__Productos{
     display: flex;
 }

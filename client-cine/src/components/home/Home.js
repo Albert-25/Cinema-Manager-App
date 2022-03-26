@@ -60,7 +60,7 @@ const Home = () => {
   //*paginado
   const [loading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [moviesPerPage] = useState(2);
+  const [moviesPerPage] = useState(4);
 
   const indexOfLastPost = currentPage * moviesPerPage;
   const indexOfFirstPost = indexOfLastPost - moviesPerPage;
@@ -87,9 +87,9 @@ const Home = () => {
 
   return (
     <div className="Home__Background">
-        <React.Fragment>
-            <NavBar />
-        </React.Fragment>
+      <React.Fragment>
+        <NavBar />
+      </React.Fragment>
       <div className="carrousel__home">
         <Carousel
      AllMovies={AllMovies}
@@ -110,13 +110,16 @@ const Home = () => {
           FiltradoGenreAndCast={FiltradoGenreAndCast}
         />
       </div>
-      <Movies moviesInfo={currentPost} loading={loading} />
+      <div className="Home__MoviesContainer">
+        <Movies className="Home__Movies" moviesInfo={currentPost} loading={loading} />
+      </div>
       <Pagination
-        className="Home__pagination__li"
-        moviesPerPage={moviesPerPage}
-        totalMovies={container.length}
-        paginate={paginate}
-      />
+          className="Home__pagination__li"
+          moviesPerPage={moviesPerPage}
+          totalMovies={container.length}
+          paginate={paginate}
+        />
+
     </div>
   );
 };

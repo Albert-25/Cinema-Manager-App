@@ -25,6 +25,17 @@ export const AllMovies = () => {
     }
   };
 };
+export const AllProducts = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`http://localhost:3001/productos`);
+    if (response?.data) {
+      dispatch({
+        type: "ALLPRODUCTS",
+        payload: { produs: response.data },
+      });
+    }
+  };
+};
 
 export const DetailedMovie = (id) => {
   return async (dispatch) => {
@@ -34,6 +45,22 @@ export const DetailedMovie = (id) => {
         dispatch({
           type: "DETAILEDMOVIE",
           payload: { detis: response.data },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const DetailedProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/productos/${id}`);
+      if (response?.data) {
+        dispatch({
+          type: "DETAILEDPRODUCT",
+          payload: { produs: response.data },
         });
       }
     } catch (error) {

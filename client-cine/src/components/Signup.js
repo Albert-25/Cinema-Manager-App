@@ -33,7 +33,7 @@ console.log('Us', roles)
         nombreRef.current.value,
         imagenRef.current.value
       );
-      navigate("/");
+      navigate("/login");
     } catch {
       setError("Failed to create an account");
     }

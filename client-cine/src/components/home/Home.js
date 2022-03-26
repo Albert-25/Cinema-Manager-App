@@ -87,9 +87,10 @@ const Home = () => {
 
   return (
     <div className="Home__Background">
-   
-        <NavBar />
 
+      <React.Fragment>
+        <NavBar />
+      </React.Fragment> 
       <div className="carrousel__home">
         <Carousel
           AllMovies={AllMovies}

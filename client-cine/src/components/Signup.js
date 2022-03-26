@@ -35,7 +35,7 @@ export default function Signup() {
         nombreRef.current.value,
         imagenRef.current.value
       );
-      navigate("/");
+      navigate("/login");
     } catch {
       setError("Failed to create an account");
     }

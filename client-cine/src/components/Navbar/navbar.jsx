@@ -9,32 +9,34 @@ import {Navbar,Container,Nav,NavDropdown,Button,Image} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './navbar.css'
 
-let Invitado = {
-  uid: 9999999,
-  nombre: "Invitado",
-  email: "aaaaaaaaaaa@gmail.com",
-  password: "abcdefgh",
-  rol: "user",
-}
+
+
 
 
 
 export default function NavBar(){
 
   const { user, currentUser } = useAuth();
-    console.log(user)
-    if (user === null){
-      user = Invitado
-    }
+
+  let imagen = 'http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png'
+  let saludo = ''
+
+  if(user && user.nombre){
+    saludo = user.nombre;
+  }
+  if(user && user.imagen){
+    imagen = user.imagen
+  }
+
   return(
     <React.Fragment>
     <Navbar className="navbar_hm" fixed="top">
     <Container>
     <Navbar.Brand >Navbar</Navbar.Brand>
     <Nav className="me-end btn_menu_nav">
-    <p>Hola {user.nombre || "invitado"}</p>
+    <p>Hola {saludo}</p>
       <Button bsPrefix="btn_navbar_actions account_btn_navbar" >
-      <img className='profilePic' src={user.imagen} alt='' />
+      <img className='profilePic' src={imagen} alt='' />
         <FaUserAlt/>
       </Button>
       <Button bsPrefix="btn_navbar_actions menu_btn" >

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import NavBar from "../Navbar/navbar.jsx";
 import "./Home.css"
 import Swal from "sweetalert2";
+import { useAuth } from "../../contexts/AuthContext";
 
 
 import {
@@ -21,7 +22,6 @@ import FiltroGeneros from "../filters/filterGenre.js";
 import Carousel from "../Carousel/Carousel.js"
 
 const Home = () => {
-
 
   const dispatch = useDispatch();
   const pelisTotales = useSelector((state) => state.PelisAll);
@@ -92,9 +92,12 @@ const Home = () => {
         </React.Fragment>
       <div className="carrousel__home">
         <Carousel
-          AllMovies={AllMovies}
-        />
-      </div>
+     AllMovies={AllMovies}
+      /> 
+
+        </div>
+
+
 
       <Search />
 

@@ -42,59 +42,61 @@ export const App = () => {
       <AuthProvider>
         <Routes>
            /*Rutas agregadas*/
-          <Route
-            exact
-            path="/dash"
-            element={
-              <PrivateRoute component={Dashboard}>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route
-            path="/update-profile"
-            element={
-              <PrivateUpdate>
-                <UpdateProfile />
-              </PrivateUpdate>
-            }
-          />
+
+           <Route
+             exact
+             path="/dash"
+             element={
+               <PrivateUpdate component={Dashboard} rol={'user'}>
+                 <Dashboard />
+               </PrivateUpdate>
+             }
+           />
+           <Route path="/signup" element={<Signup />} />
+           <Route path="/login" element={<Login />} />
+           <Route path="/forgot-password" element={<ForgotPassword />} />
+           <Route
+             path="/update-profile"
+             element={
+               <PrivateUpdate component={UpdateProfile}>
+                 <UpdateProfile />
+               </PrivateUpdate>
+             }
+           />
            /*Rutas agregadas*/ /*Rutas privadas*/
-          <Route
-            path="/admin"
-            element={
-              <PrivateRoute component={Admin}>
+           <Route
+             path="/admin"
+             element={
+     <PrivateRoute component={Admin} rol={'admin'}>
+                 
+                 <Admin />
+      </PrivateRoute>
+             }
+           />
+           <Route
+             path="/admin/createmovies"
+             element={
+        <PrivateRoute component={CreateMovies} rol={'admin'}>
+                 <CreateMovies />
+           </PrivateRoute>
+             }
+           />
+           <Route
+             path="/admin/createactor"
+             element={
+             
+               <PrivateRoute component={CreateActor} rol={'admin'}>
+                 <CreateActor />
+             </PrivateRoute>
+             }
+           />
+           <Route
+             path="/admin/creategenero"
+             element={
+          
+               <PrivateRoute component={CreateGenre } rol={'admin'}>
+                 <CreateGenre />
 
-                <Admin />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/admin/createmovies"
-            element={
-              <PrivateRoute component={CreateMovies}>
-                <CreateMovies />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/admin/createactor"
-            element={
-
-              <PrivateRoute component={CreateActor}>
-                <CreateActor />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/admin/creategenero"
-            element={
-
-              <PrivateRoute component={CreateGenre}>
-                <CreateGenre />
               </PrivateRoute>
             }
           />

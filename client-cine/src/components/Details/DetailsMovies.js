@@ -137,6 +137,7 @@ const DetailsMovies = (props) => {
                 </div>
             </div>
 
+
             <div className="container_footer">
                 <div className="h3">
                     <h5>Comentarios</h5>
@@ -156,14 +157,15 @@ const DetailsMovies = (props) => {
                     </div>
                 </div>
                 <div>
-                <Link to="/" className="Details__rightdown">
-                    <button className="Details__rightdown__text">👉 Go back 👈</button>
-                </Link>
+                <a href="/" className="Details__rightdown">
+                    <p className="Details__rightdown__text">👉 Go back 👈</p>
+                </a>
                 </div>
                 <div className="comentarios">
                     <ReviewToShow id={id} />
                 </div>
                 {console.log(comentarios)}
+
             </div>
 
 

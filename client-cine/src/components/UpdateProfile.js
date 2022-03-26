@@ -6,8 +6,10 @@ import { Link, useNavigate } from "react-router-dom";
 export default function UpdateProfile() {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const nameRef = useRef()
+  const imagenRef = useRef()
   const passwordConfirmRef = useRef();
-  const { currentUser, updatePassword, updateEmail } = useAuth();
+  const { user, currentUser, updatePassword, updateEmail, updateName } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -26,6 +28,9 @@ export default function UpdateProfile() {
     }
     if (passwordRef.current.value) {
       promises.push(updatePassword(passwordRef.current.value));
+    }
+    if(nameRef.current.value !== user.nombre || imagenRef.current.value !== user.imagen){
+      promises.push(updateName(nameRef.current.value, imagenRef.current.value, user))
     }
     Promise.all(promises)
       .then(() => {
@@ -68,6 +73,22 @@ export default function UpdateProfile() {
               <Form.Control
                 type="password"
                 ref={passwordConfirmRef}
+                placeholder="Leave blank to keep the same"
+              />
+            </Form.Group>
+             <Form.Group id="name">
+              <Form.Label>Cambio de nombre</Form.Label>
+              <Form.Control
+                type="text"
+                ref={nameRef}
+                placeholder="Leave blank to keep the same"
+              />
+            </Form.Group>
+             <Form.Group id="picture">
+              <Form.Label>Cambiar foto de perfil</Form.Label>
+              <Form.Control
+                type="text"
+                ref={imagenRef}
                 placeholder="Leave blank to keep the same"
               />
             </Form.Group>

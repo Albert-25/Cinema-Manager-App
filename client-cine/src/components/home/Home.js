@@ -23,8 +23,6 @@ import Carousel from "../Carousel/Carousel.js"
 
 const Home = () => {
 
-  
-
   const dispatch = useDispatch();
   const pelisTotales = useSelector((state) => state.PelisAll);
   const pelisFiltradas = useSelector((state) => state.PelisFiltred);

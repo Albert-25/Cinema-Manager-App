@@ -55,7 +55,7 @@ export const App = () => {
            <Route
              path="/update-profile"
              element={
-               <PrivateUpdate>
+               <PrivateUpdate component={UpdateProfile}>
                  <UpdateProfile />
                </PrivateUpdate>
              }

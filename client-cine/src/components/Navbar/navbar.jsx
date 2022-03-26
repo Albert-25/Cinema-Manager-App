@@ -23,8 +23,9 @@ export default function NavBar(){
     <Container>
     <Navbar.Brand >Navbar</Navbar.Brand>
     <Nav className="me-end btn_menu_nav">
-    <p>Hola {user.email}</p>
+    <p>Hola {user.nombre}</p>
       <Button bsPrefix="btn_navbar_actions account_btn_navbar" >
+      <img className='profilePic' src={user.imagen} alt='' />
         <FaUserAlt/>
       </Button>
       <Button bsPrefix="btn_navbar_actions menu_btn" >

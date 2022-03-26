@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  async function signup(email, password, rol) {
+  async function signup(email, password, rol, nombre, imagen) {
     const infoUsuario = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -44,7 +44,7 @@ export function AuthProvider({ children }) {
     });
     console.log(infoUsuario.user.uid);
     const docuRef = doc(firestore, `usuarios/${infoUsuario.user.uid}`);
-    setDoc(docuRef, { correo: email, rol: rol });
+    setDoc(docuRef, { correo: email, rol: rol, nombre: nombre, imagen: imagen });
   }
   async function login(email, password) {
     await signInWithEmailAndPassword(auth, email, password);
@@ -61,13 +61,19 @@ export function AuthProvider({ children }) {
   function updatePassword(password) {
     return currentUser.updatePassword(password);
   }
+  function updateName(name, imagen, user) {
+    const docuRef = doc(firestore, `usuarios/${user.uid}`);
+
+    setDoc(docuRef, {nombre: name || user.nombre, imagen :  imagen || user.imagen, rol: user.rol });
+  }
   //No hay necesidad de setear al usuario porque Firebase te lo notifica con el siguiente método:
   async function getRol(uid) {
     const docuRef = doc(firestore, `usuarios/${uid}`);
     const docuCifrada = await getDoc(docuRef);
     const infoFinal = docuCifrada.data().rol;
+    const infoTotal = [docuCifrada.data().rol, docuCifrada.data().nombre, docuCifrada.data().imagen]
     console.log("terminé");
-    return infoFinal;
+    return infoTotal;
   }
 
   async function setUserWithFirebaseAndRol(usuarioFirebase) {
@@ -76,7 +82,9 @@ export function AuthProvider({ children }) {
       const userData = {
         uid: usuarioFirebase.uid,
         email: usuarioFirebase.email,
-        rol: rol,
+        rol: rol[0],
+        nombre: rol[1],
+        imagen: rol[2],
       };
       setUser(userData);
       console.log("userData fianl", userData);
@@ -106,6 +114,7 @@ export function AuthProvider({ children }) {
     updateEmail,
     updatePassword,
     user,
+    updateName,
     // listAllUsers
   };
   return (

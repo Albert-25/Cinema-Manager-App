@@ -145,3 +145,20 @@
     left: 3rem;
     position: absolute;
   }
+
+
+
+
+
+   /*display: grid;
+    overflow: hidden;
+    width: 100%;
+    grid-auto-rows: 10rem;
+    grid-template-columns: repeat(auto-fill,minmax(18rem,1fr));
+    gap:1em;
+    justify-content: space-around;
+    background-color: #50301a51;
+    padding:3em 4em;
+    border-radius: 5px;
+    backdrop-filter: blur(15px);
+    height:auto;*/

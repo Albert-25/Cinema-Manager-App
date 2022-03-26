@@ -1,19 +1,11 @@
 html {
     background-color: #11072F;
 }
-
-.Home__Background {
-    margin: 0;
-    height: 100%;
-    width: 100%;
+.products_main_container{
+    height: 100vh !important;
     background-color: #11072F;
-}
-
-.Product__Productos__container{
-    display: flex;
-    /* border: 2px solid black; */
-    justify-content: center
-}
-.Product__Productos{
-    display: flex;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw !important;
 }

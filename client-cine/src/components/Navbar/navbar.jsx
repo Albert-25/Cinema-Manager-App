@@ -4,7 +4,7 @@ import AccountView from './../accountview.js'
 import { useAuth } from "../../contexts/AuthContext";
 import {FaUserAlt} from 'react-icons/fa';
 import {IoMenuSharp} from 'react-icons/io5';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate,Link} from 'react-router-dom';
 import {Navbar,Container,Nav,NavDropdown,Button,Image} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './navbar.css'
@@ -21,7 +21,7 @@ export default function NavBar(){
     <React.Fragment>
     <Navbar className="navbar_hm" fixed="top">
     <Container>
-    <Navbar.Brand >Navbar</Navbar.Brand>
+    <Navbar.Brand ><Link style={{textDecoration:"none"}} to="/">Navbar</Link></Navbar.Brand>
     <Nav className="me-end btn_menu_nav">
       {currentUser? <AccountView/>:
         <Button bsPrefix="btn_navbar_actions account_btn_navbar" onClick={(e)=>navigate('/login')}>

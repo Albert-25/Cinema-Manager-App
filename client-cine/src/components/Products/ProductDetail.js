@@ -26,33 +26,33 @@ const ProductDetail = (props) => {
     }
 
     return (
-        <body className="Background__Details">
-            <div className="Details__left">
+        <body className="Background__Product">
+            <div className="Product__left">
                 <img
-                    className="MovieImg__img"
+                    className="ProductImg__img"
                     src={detailed.imagenProducto || Produuct.imagenProducto}
                     alt="background"
                 ></img>
             </div>
 
-            <div className="Details__right">
-                <div className="Details__title">
+            <div className="Product__right">
+                <div className="Product__title">
                     {detailed.nombreProducto || Produuct.nombreProducto}
                 </div>
-                <div className="Details__sinopsis">
+                <div className="Product__sinopsis">
                     💖descripcion: {detailed.descripcion || Produuct.descripcion}
                 </div>
-                <div className="Details__duracion">
+                <div className="Product__duracion">
                     💖precio: {detailed.precio || Produuct.precio}
                 </div>
-                <div className="Details__clasificacion">
+                <div className="Product__clasificacion">
                     💖stock: {detailed.stock || Produuct.stock}
                 </div>
 
             </div>
             <div className="">
-                <Link to="/" className="Details__rightdown">
-                    <p className="Details__rightdown__text">👉 Go back 👈</p>
+                <Link to="/" className="Product__rightdown">
+                    <p className="Product__rightdown__text">👉 Go back 👈</p>
                 </Link>
             </div>
         </body>

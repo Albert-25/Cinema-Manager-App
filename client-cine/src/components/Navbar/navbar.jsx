@@ -9,7 +9,13 @@ import {Navbar,Container,Nav,NavDropdown,Button,Image} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './navbar.css'
 
-
+let Invitado = {
+  uid: 9999999,
+  nombre: "Invitado",
+  email: "aaaaaaaaaaa@gmail.com",
+  password: "abcdefgh",
+  rol: "user",
+}
 
 
 
@@ -17,13 +23,16 @@ export default function NavBar(){
 
   const { user, currentUser } = useAuth();
     console.log(user)
+    if (user === null){
+      user = Invitado
+    }
   return(
     <React.Fragment>
     <Navbar className="navbar_hm" fixed="top">
     <Container>
     <Navbar.Brand >Navbar</Navbar.Brand>
     <Nav className="me-end btn_menu_nav">
-    <p>Hola {user.nombre}</p>
+    <p>Hola {user.nombre || "invitado"}</p>
       <Button bsPrefix="btn_navbar_actions account_btn_navbar" >
       <img className='profilePic' src={user.imagen} alt='' />
         <FaUserAlt/>

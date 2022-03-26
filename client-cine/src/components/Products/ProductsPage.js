@@ -51,7 +51,7 @@ const ProductsPage = () => {
     return (
         <div className="Product__Background">
             <div>
-                <NavBar></NavBar>
+                {/* <NavBar></NavBar> */}
             </div>
             <div><h1>"-"</h1></div>
             <div>

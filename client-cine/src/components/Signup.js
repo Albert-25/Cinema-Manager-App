@@ -7,31 +7,29 @@ export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const rolRef = useRef();
+
   const nombreRef = useRef();
   const imagenRef = useRef();
   const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [roles, setRoles] = useState("user");
   const navigate = useNavigate();
-
+console.log('Us', roles)
   async function handleSubmit(e) {
     e.preventDefault();
-    if(rolRef.current.value = ''){
-      rolRef = 'user'
-    }
-    console.log('Us', rolRef)
+    
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords dont match");
     }
     try {
       setError("");
       setLoading(true);
-      console.log("recibidiro", rolRef.current.value);
+      console.log("recibidiro", roles);
       await signup(
         emailRef.current.value,
         passwordRef.current.value,
-        rolRef.current.value,
+        roles,
         nombreRef.current.value,
         imagenRef.current.value
       );
@@ -70,16 +68,23 @@ export default function Signup() {
               <Form.Label>Imagen</Form.Label>
               <Form.Control type="text" ref={imagenRef} required />
             </Form.Group>
-            <Form.Group id="roles">
-              <label>
-                Rol:
-                <Form.Select aria-label="Default select example" ref={rolRef}>
-                  <option>Open this select menu</option>
-                  <option value="admin">Admin</option>
-                  <option value="user">User</option>
-                </Form.Select>
-              </label>
-            </Form.Group>
+            <div className="form-group">
+            <select
+                defaultValue={"DEFAULT"}
+                name="Difficulty"
+                onChange={(evt) => setRoles(evt.target.value)}
+              >
+                <option className="elemSelect" value="DEFAULT" disabled>
+                  Seleccionar roles
+                </option>
+                <option className="elemSelect" value="admin" type="text">
+                  Admin
+                </option>
+                <option className="elemSelect" value="user">
+                  User
+                </option>
+              </select>
+            </div>
             <Button className="w-100" disabled={loading} type="submit">
               Sign up
             </Button>

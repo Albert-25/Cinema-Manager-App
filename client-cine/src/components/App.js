@@ -47,16 +47,6 @@ export const App = () => {
       <AuthProvider>
         <Routes>
            /*Rutas agregadas*/
-
-           {/*<Route
-             exact
-             path="/dash"
-             element={
-               <PrivateUpdate component={Dashboard} rol={'user'}>
-                 <Dashboard />
-               </PrivateUpdate>
-             }
-           />*/}
            <Route path="/signup" element={<Signup />} />
            <Route path="/login" element={<Login />} />
            <Route path="/forgot-password" element={<ForgotPassword />} />

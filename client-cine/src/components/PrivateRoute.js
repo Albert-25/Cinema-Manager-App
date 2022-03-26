@@ -9,7 +9,7 @@ export default function PrivateRoute({
   ...rest
 }) {
   const { user, currentUser } = useAuth();
-  console.log("soy user", Rol);
+  console.log("soy user", user.role,currentUser.role);
 
-  return <>{user?.rol === `${Rol}` ? <Component /> : <Navigate to="/" />}</>;
+  return <>{currentUser?.role? <Component /> : <Navigate to="/" />}</>;
 }

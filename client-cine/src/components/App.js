@@ -16,7 +16,7 @@ import ProductsPage from "./Products/ProductsPage"
 //Changes
 import { AuthProvider } from "../contexts/AuthContext";
 import Signup from "./Signup";
-import Dashboard from "./Dashboard";
+//import Dashboard from "./Dashboard";
 import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import PrivateUpdate from "./PrivateUpdate";
@@ -47,16 +47,6 @@ export const App = () => {
       <AuthProvider>
         <Routes>
            /*Rutas agregadas*/
-
-           <Route
-             exact
-             path="/dash"
-             element={
-               <PrivateUpdate component={Dashboard} rol={'user'}>
-                 <Dashboard />
-               </PrivateUpdate>
-             }
-           />
            <Route path="/signup" element={<Signup />} />
            <Route path="/login" element={<Login />} />
            <Route path="/forgot-password" element={<ForgotPassword />} />

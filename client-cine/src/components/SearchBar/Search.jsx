@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import { Link } from 'react-router-dom';
 import s from './search.module.css'
 
@@ -7,10 +6,9 @@ const searchTitle = (t, a) => {
   if (t !== '') return a.filter(m => m.titulo.toLowerCase().includes(t.toLowerCase()))
 }
 
-export const Search = () => {
-  const [title, setTitle] = useState("");
-  const pelisTotales = useSelector((state) => state.PelisAll);
-  const movies = searchTitle(title.trim(), pelisTotales) || []
+export const Search = ({title,setTitle, items}) => {
+
+  const movies = searchTitle(title.trim(), items) || []
 
   return (
     <div className={s.container}>

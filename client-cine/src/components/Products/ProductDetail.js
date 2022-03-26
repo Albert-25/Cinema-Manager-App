@@ -13,7 +13,6 @@ const ProductDetail = (props) => {
 
     console.log(detailed)
 
-
     useEffect(() => {
         dispatch(DetailedProduct(id));
     }, [id, dispatch]);

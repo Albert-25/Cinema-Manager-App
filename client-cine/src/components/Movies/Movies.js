@@ -1,14 +1,12 @@
 import React from "react";
 import Movie from "./Movie";
 
-export default function Movies({ moviesInfo, loading }) {
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
+export default function Movies({ items }) {
+
   return (
     <div className="moviesInfo">
-      {moviesInfo && moviesInfo &&
-        moviesInfo.map((e, index) => (
+      {
+        items.map((e, index) => (
           <Movie
             key={index}
             id={e.id}

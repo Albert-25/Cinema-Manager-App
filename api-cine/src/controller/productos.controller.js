@@ -9,6 +9,21 @@ const getAll = async (req, res, next) => {
   }
 };
 
+const getOne = async (req, res, next) => {
+  let id = req.params.id;
+  try {
+    let pedidoDB = await Productos.findByPk(id);
+    if (pedidoDB) {
+      return res.json(pedidoDB);
+    } else {
+      return res.status(404).json({ message: "No se encontro el producto" });
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
 const createProduct = async (req, res, next) => {
   const { Product } = req.body;
   try {
@@ -44,10 +59,11 @@ const editProduct = async (req, res, next) => {
         .status(406)
         .json({ message: "El nombre del producto no puede ser vacío" });
     }
-    if ( Product.nombreProducto &&
-      await Productos.findOne({
+    if (
+      Product.nombreProducto &&
+      (await Productos.findOne({
         where: { nombreProducto: Product.nombreProducto },
-      })
+      }))
     ) {
       return res
         .status(406)
@@ -84,6 +100,7 @@ const deleteProduct = async (req, res, next) => {
 
 module.exports = {
   getAll,
+  getOne,
   createProduct,
   editProduct,
   deleteProduct,

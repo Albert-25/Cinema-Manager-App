@@ -1,16 +1,8 @@
 import axios from "axios";
 
 export function postMovies(inputs) {
-  return function (dispatch) {
-    fetch("http://localhost:3001/peliculas", {
-      method: "POST", // or 'PUT'
-      body: JSON.stringify(inputs), // data can be `string` or {object}!
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(() => console.log({ msg: "Success" }))
-      .catch((err) => console.log(err.message));
+  return async (dispatch) => {
+    await axios.post("http://localhost:3001/peliculas", inputs);
   };
 }
 
@@ -79,14 +71,15 @@ export function getAllReviewByIdOfMovie(id) {
   };
 }
 
-
 export const BestMovies = (arg) => {
   // console.log("howdy im action")
   return {
     type: "BESTMOVIES",
     payload: arg,
-  }
-}
+
+  };
+};
+
 
 export const postReview = (payload) => {
   return async (dispatch) => {
@@ -175,6 +168,32 @@ export const uploadActor = (info) => {
   };
 };
 
+
+export const uploadProduct = (info) => {
+  if (info.imagenProducto === "") {
+    info.imagenProducto =
+      "https://www.feednavigator.com/var/wrbm_gb_food_pharma/storage/images/9/2/8/5/235829-6-eng-GB/Feed-Test-SIC-Feed-20142.jpg";
+  }
+  return async function postProduct() {
+    let body = {
+      Product: {
+        nombreProducto: info.nombreProducto,
+        imagenProducto: info.imagenProducto,
+        descripcion: info.descripcion,
+        precio: info.precio,
+        stock: info.stock,
+        isCombo: info.isCombo,
+      },
+    };
+    try {
+      await axios.post("http://localhost:3001/productos", body);
+      alert("Producto creado satisfactoriamente");
+    } catch (error) {
+      alert("Datos erroneos o el producto ya existe en la base de datos");
+    }
+  };
+};
+
 export const filterReviewByRating = payload => {
   return {
     type: "FILTER_REVIEWBYRATING",
@@ -190,3 +209,4 @@ export const filterReviewByRating = payload => {
 //     });
 //   };
 // }
+

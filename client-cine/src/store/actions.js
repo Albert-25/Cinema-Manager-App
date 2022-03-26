@@ -56,8 +56,8 @@ export function getAllReviewByIdOfMovie(id) {
 export const BestMovies = (arg) => {
   // console.log("howdy im action")
   return {
-      type: "BESTMOVIES",
-      payload: arg,
+    type: "BESTMOVIES",
+    payload: arg,
   }
 }
 
@@ -147,3 +147,19 @@ export const uploadActor = (info) => {
     }
   };
 };
+
+export const filterReviewByRating = payload => {
+  return {
+    type: "FILTER_REVIEWBYRATING",
+    payload
+  }
+}
+// export function deleteReview(id) {
+//   return async function (dispatch) {
+//     const json = await axios.delete(`http://localhost:3001/comentarios/${id}`);
+//     return dispatch({
+//       type: "DELETE_REVIEW",
+//       payload: json.data,
+//     });
+//   };
+// }

@@ -1,4 +1,4 @@
-import React ,{useEffect}from "react";
+import React, { useEffect } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import CreateActor from "./CreateActor/CreateActor.jsx";
 import CreateGenre from "./CreateGenre/CreateGenre.jsx";
@@ -24,7 +24,7 @@ import UpdateProfile from "./UpdateProfile";
 
 import ReviewToShow from "./ReviewToShow/ReviewToShow.jsx";
 import Admin from './AdminPanel/Admin.jsx';
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
   AllMovies,
   GetAllGenres,
@@ -35,11 +35,14 @@ import {
 } from "./../store/actions";
 
 export const App = () => {
-   return (      
-     <Router>
-       <AuthProvider>
-         <Routes>
+
+  return (
+    <Router>
+
+      <AuthProvider>
+        <Routes>
            /*Rutas agregadas*/
+
            <Route
              exact
              path="/dash"
@@ -93,19 +96,23 @@ export const App = () => {
           
                <PrivateRoute component={CreateGenre } rol={'admin'}>
                  <CreateGenre />
+
               </PrivateRoute>
-             }
-           />
+            }
+          />
            /*Rutas privadas*/
-           <Route path="/" element={<Home />} />
-           <Route path="/review" element={<Review />} />
-           <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
-           <Route path="/shoppingcart" element={<ShoppingCart />} />
-           <Route path="/about" element={<SobreNosotros />} />
-           <Route path="/portal" element={<Profile />} />
-         </Routes>
-       </AuthProvider>
-     </Router>
-   );
- };
+          <Route path="/" element={<Home />} />
+          <Route path="/review/:id" element={<Review />} />
+          <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
+          <Route path="/shoppingcart" element={<ShoppingCart />} />
+          <Route path="/about" element={<SobreNosotros />} />
+          <Route path="/portal" element={<Profile />} />
+        </Routes >
+      </AuthProvider >
+
+
+
+    </Router >
+  );
+};
 

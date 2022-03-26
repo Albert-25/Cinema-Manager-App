@@ -147,6 +147,7 @@ const CreateMovies = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("heyyyyyyyyyyyyyyy",errors)
     if (errors.error === false) {
       Swal.fire({
         title: "¿Quieres guardar la pelicula?",

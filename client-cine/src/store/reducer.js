@@ -51,12 +51,25 @@ const reducer = (state = initialState, action) => {
                 PelisAll: state.PelisAll.concat(action.payload.pelis),
             };
         }
+        case "ALLPRODUCTS": {
+            return {
+                ...state,
+                ProductAll: state.ProductAll.concat(action.payload.produs),
+            };
+        }
 
         case "DETAILEDMOVIE": {
             state = initialState;
             return {
                 ...state,
                 PelisDetails: action.payload.detis,
+            };
+        }
+        case "DETAILEDPRODUCT": {
+            state = initialState;
+            return {
+                ...state,
+                ProductDetails: action.payload.produs,
             };
         }
         // ----------------------------------------------------------------------------------------------------

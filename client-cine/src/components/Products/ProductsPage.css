@@ -1,0 +1,19 @@
+html {
+    background-color: #11072F;
+}
+
+.Home__Background {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #11072F;
+}
+
+.Product__Productos__container{
+    display: flex;
+    /* border: 2px solid black; */
+    justify-content: center
+}
+.Product__Productos{
+    display: flex;
+}

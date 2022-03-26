@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Hubballi&family=Shizuru&display=swap');
+
+.Product__All {
+    margin: 5px;
+    width: 16vw;
+    height: 45vh;
+    /* border: 2px solid #111; */
+    border-radius: 15px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: 0.5s all;
+    z-index: 1;
+    margin: 0 0 0 2vh;
+  }
+  .Product__All:hover {
+    transition: 0.5s all;
+    z-index: 100;
+    margin-left: 30px;
+    margin-bottom: 30px;
+  }
+
+
+  .Product__title{
+    background-color: rgba(0, 0, 0, 0.794);
+    color: white;
+    border-radius: 0.7rem;
+    justify-content: center;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    top: 5vh;
+    font-family: 'Hubballi', cursive;
+    display: flex;
+  }
+
+
+  .productsInfo{
+    background-color: rgba(0, 0, 0, 0.794);
+    color: white;
+    border-radius: 1rem;
+    font-family: 'Hubballi', cursive;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 0 0 25vh;
+    display: flex;
+  }
+
+  .Product__info{
+    background-color: rgba(0, 0, 0, 0.794);
+    color: white;
+    border-radius: 1rem;
+    font-family: 'Hubballi', cursive;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 0 0 25vh;
+  }
+  
+  .Product__director{
+    background-color: rgba(0, 0, 0, 0.794);
+    color: white;
+    border-radius: 2rem;
+    top: 28vh;
+    display: flex;
+    position: relative;
+    font-family: 'Hubballi', cursive;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+  }
+
+
+
+.ProductsInfo {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+}

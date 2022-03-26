@@ -13,10 +13,25 @@ import './navbar.css'
 
 
 
+
+
 export default function NavBar(){
-  let {currentUser}= useAuth()
+  
   let navigate= useNavigate()
-  console.log(currentUser)
+
+  const { user, currentUser } = useAuth();
+
+  let imagen = 'http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png'
+  let saludo = ''
+
+  if(user && user.nombre){
+    saludo = user.nombre;
+  }
+  if(user && user.imagen){
+    imagen = user.imagen
+  }
+
+
   return(
     <React.Fragment>
     <Navbar className="navbar_hm" fixed="top">
@@ -28,6 +43,9 @@ export default function NavBar(){
            <FaUserAlt/>
          </Button>
       }
+      <Button bsPrefix="btn_navbar_actions account_btn_navbar" >
+        <FaUserAlt/>
+      </Button>
       <Button bsPrefix="btn_navbar_actions menu_btn" >
         <IoMenuSharp />
       </Button>

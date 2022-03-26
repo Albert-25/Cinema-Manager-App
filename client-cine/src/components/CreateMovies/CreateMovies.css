@@ -1,20 +1,21 @@
 .Create__Movies {
-   width: 100%;
+   width: 90%;
    max-width: 1200px;
-   display: flex;
+   margin-top: 3rem;
+   /* display: flex;
    flex-direction: column;
    justify-content: center;
-   align-items: center;
+   align-items: center; */
 }
 
-.Create__Movies input {
+/* .Create__Movies input {
    margin: 1rem;
 }
 
 .Create__Movies select {
    margin: 1rem;
    width: 172px;
-}
+} */
 
 .input__with__error span {
    margin: auto;

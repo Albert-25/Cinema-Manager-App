@@ -1,21 +1,18 @@
 import React from 'react'
-import {Container} from '@mui/material'
-import CssBaseline from "@mui/material/CssBaseline";
 import NavAdmin from './componentsAdmin/navadmin'
 import Main from './componentsAdmin/main.jsx'
 import {AdminContextProvider} from './admincontext.jsx'
-
+import './Admin.css'
 
 
 export default function Admin (){
 	return (
 		
        <AdminContextProvider>
-          <CssBaseline />
-          <Container maxWidth="ls" sx={{ height: "100vh",backgroundColor:"lightgray"}}>
+          <div id="admin_section_container">
             <NavAdmin/>
             <Main/>
-          </Container>
+          </div>
        </AdminContextProvider>
    )
 }

@@ -1,0 +1,38 @@
+.item_admin_stack{
+	background-color: #fff;
+	padding: 0.5em;
+	text-align: center;
+	color: gray;
+	display:flex;
+	flex-direction:rows;
+	justify-content:space-between;
+	box-shadow: -1px -1px 2px gray,
+	1px 1px 2px gray;
+}
+.item_admin_container_all{
+	width:100%;
+	height:100%;
+	position:relative;
+	padding:1em;
+}
+.item_admin_data_left{
+	display:flex;
+	flex-direction:rows;
+	align-items:center;
+	gap:0 1em;
+}
+.item_admin_data_buttons_options{
+	display:flex;
+	gap: 0 1em;
+	flex-direction:rows;
+	align-items:center;
+}
+.item_admin_btn_create{
+	position:absolute;
+	top:-30px;
+	left:40px ;
+}
+.item_admin_stack_container{
+	height:100%;
+	overflow:auto;
+}

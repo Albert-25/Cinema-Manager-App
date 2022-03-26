@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { DetailedMovie, getAllReviewByIdOfMovie } from "../../store/actions";
+import { DetailedMovie, getAllReviewByIdOfMovie, filterReviewByRating } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import ReviewToShow from "../ReviewToShow/ReviewToShow.jsx"
+import { BodyBackground } from "./styled.js"
 import "./DetailsMovies.css";
+import ReactPlayer from "react-player"
 
 const DetailsMovies = (props) => {
     let { id: code } = useParams();
@@ -12,19 +14,21 @@ const DetailsMovies = (props) => {
     const dispatch = useDispatch();
     const detailed = useSelector((state) => state.PelisDetails);
     const comentarios = useSelector(state => state.PelisComments);
-    const puntuacionArray = comentarios.map(c => c.puntuación)
-    const sumaPuntuaciones = puntuacionArray.reduce((contador, puntuacion) => contador + puntuacion, 0);
-    const numeroPuntuaciones = puntuacionArray.length;
+    const puntuacionArray = comentarios && comentarios.map(c => c.puntuación)
+    const sumaPuntuaciones = puntuacionArray && puntuacionArray.reduce((contador, puntuacion) => contador + puntuacion, 0);
+    const numeroPuntuaciones = puntuacionArray && puntuacionArray.length;
     const promedioPuntuacion = (sumaPuntuaciones / numeroPuntuaciones).toFixed(1)
-    // console.log(detailed)
-
+    const [ordenRating, setOrdenRating] = useState("")
 
     useEffect(() => {
         dispatch(DetailedMovie(id));
         dispatch(getAllReviewByIdOfMovie(id));
-    }, [id, dispatch]);
+    }, [dispatch]);
 
-
+    const handleFilterRating = e => {
+        dispatch(filterReviewByRating(e.target.value))
+        setOrdenRating(`ordenado ${e.target.value}`)
+    }
 
     // console.log("la ide detalles : ", id)
     let Mooovie = [];
@@ -38,7 +42,12 @@ const DetailsMovies = (props) => {
     let ActArray = detailed.Actores && detailed.Actores.length ? detailed.Actores.map((e) => e.nombre) : ["no actors"]
 
     return (
-        <body className="Background__Details">
+        <BodyBackground image={detailed.background} className="Background__Details">
+            <ReactPlayer
+                url={detailed.trailer}
+                width="100%"
+                height="400px"
+            />
             <div className="Details__title">
                 <h1>{detailed.titulo || Mooovie.titulo}</h1>
             </div>
@@ -126,26 +135,39 @@ const DetailsMovies = (props) => {
                         )}
                     </div>
                 </div>
-                <div className="Details__trailer grid__child">
-                    <h4>Trailer:</h4>
-                    <p>{detailed.trailer || Mooovie.trailer}</p>
-                </div>
             </div>
 
             <div className="container_footer">
+                <div className="h3">
+                    <h5>Comentarios</h5>
+                    <hr></hr>
+                </div>
                 <div className="buttons">
-                    <Link to={`/review/${id}`}>
-                        <button>Escribir un comentario</button>
-                    </Link>
-                    <Link to="/" className="Details__rightdown">
-                        <button className="Details__rightdown__text">👉 Go back 👈</button>
-                    </Link>
+                    <div className="div_lef">
+                        <div>Ordenar por rating:</div>
+                        <select className="filterByRating" onChange={handleFilterRating}>
+                            <option selected disabled={true}>Select rating</option>
+                            <option value="asc">Ascendente</option>
+                            <option value="des">Descendente</option>
+                        </select>
+                        <Link className="button_comentar" to={`/review/${id}`}>
+                            <button>Escribir un comentario</button>
+                        </Link>
+                    </div>
+                </div>
+                <div>
+                <Link to="/" className="Details__rightdown">
+                    <button className="Details__rightdown__text">👉 Go back 👈</button>
+                </Link>
                 </div>
                 <div className="comentarios">
                     <ReviewToShow id={id} />
                 </div>
+                {console.log(comentarios)}
             </div>
-        </body>
+
+
+        </BodyBackground>
     );
 };
 

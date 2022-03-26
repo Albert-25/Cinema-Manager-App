@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import CreateActor from "./CreateActor/CreateActor.jsx";
 import CreateGenre from "./CreateGenre/CreateGenre.jsx";
@@ -22,10 +22,20 @@ import PrivateUpdate from "./PrivateUpdate";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 
-
-import Admin from "./AdminPanel/Admin.jsx";
+import ReviewToShow from "./ReviewToShow/ReviewToShow.jsx";
+import Admin from './AdminPanel/Admin.jsx';
+import { useDispatch } from 'react-redux'
+import {
+  AllMovies,
+  GetAllGenres,
+  GetAllCast,
+  FiltrarGenero,
+  FiltrarCast,
+  FiltrarGeneroYCast,
+} from "./../store/actions";
 
 export const App = () => {
+
   return (
     <Router>
 
@@ -95,12 +105,12 @@ export const App = () => {
           <Route path="/shoppingcart" element={<ShoppingCart />} />
           <Route path="/about" element={<SobreNosotros />} />
           <Route path="/portal" element={<Profile />} />
-        </Routes>
-      </AuthProvider>
+        </Routes >
+      </AuthProvider >
 
 
 
-    </Router>
+    </Router >
   );
 };
 

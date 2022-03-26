@@ -1,16 +1,8 @@
 import axios from "axios";
 
 export function postMovies(inputs) {
-  return function (dispatch) {
-    fetch("http://localhost:3001/peliculas", {
-      method: "POST", // or 'PUT'
-      body: JSON.stringify(inputs), // data can be `string` or {object}!
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(() => console.log({ msg: "Success" }))
-      .catch((err) => console.log(err.message));
+  return async (dispatch) => {
+    await axios.post("http://localhost:3001/peliculas", inputs);
   };
 }
 
@@ -148,8 +140,9 @@ export const uploadActor = (info) => {
 };
 
 export const uploadProduct = (info) => {
-  if(info.imagenProducto === ""){
-    info.imagenProducto = "https://www.feednavigator.com/var/wrbm_gb_food_pharma/storage/images/9/2/8/5/235829-6-eng-GB/Feed-Test-SIC-Feed-20142.jpg"
+  if (info.imagenProducto === "") {
+    info.imagenProducto =
+      "https://www.feednavigator.com/var/wrbm_gb_food_pharma/storage/images/9/2/8/5/235829-6-eng-GB/Feed-Test-SIC-Feed-20142.jpg";
   }
   return async function postProduct() {
     let body = {

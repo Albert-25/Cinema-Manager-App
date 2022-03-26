@@ -6,7 +6,10 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const rolRef = useRef();
+
   const { login } = useAuth();
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -18,8 +21,8 @@ export default function Login() {
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
       navigate("/");
-    } catch {
-      setError("Failed to sign in");
+    } catch (e) {
+      console.log("Failed to sign in", e);
     }
 
     setLoading(false);
@@ -40,6 +43,7 @@ export default function Login() {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
+
             <Button className="w-100" disabled={loading} type="submit">
               Log in
             </Button>

@@ -1,0 +1,147 @@
+.Background__Details {
+    height: 100vh;
+    background-image: url("https://img.freepik.com/vector-gratis/fondo-sala-cine_1017-8728.jpg?size=626&ext=jpg");
+    background-position: center;
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    display: Flex;
+    justify-content: space-between;
+  }
+  
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+  
+  /* font-family: 'Poppins', sans-serif; */
+  
+  .Details__left {
+    width: 100vh;
+    height: 80vh;
+    align-self: center;
+    margin-left: 40px;
+    /* border: 3px solid #111; */
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .Details__right {
+    border: 3px solid rgba(17, 17, 17, 0.226);
+    border-radius: 2rem;
+    border-top-right-radius: 0rem;
+    border-bottom-right-radius: 0rem;
+    padding: 50px;
+    margin-right: 20px;
+    margin-top: 20px;
+    overflow: overlay;
+    width: 80vh;
+    height: 37vh;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.171);
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(189, 37, 37, 0.151);
+  }
+  
+  .MovieImg__img {
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+    border: 1px solid #111;
+  }
+  
+  .Details__title {
+    font-size: 6vh;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .Details__sinopsis {
+    font-size: 2vh;
+    padding-top: 25px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .Details__clasificacion {
+    font-size: 2vh;
+    padding-top: 25px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .Details__director {
+    font-size: 2vh;
+    padding-top: 25px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .Details__duracion {
+    font-size: 2vh;
+    padding-top: 25px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .Details__puntuación {
+    font-size: 2vh;
+    padding-top: 25px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .Details__pais {
+    font-size: 2vh;
+    padding-top: 60px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .Details__distribuidora {
+    font-size: 2vh;
+    padding-top: 60px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .Details__trailer {
+    font-size: 2vh;
+    padding-top: 60px;
+    font-family: 'Poppins', sans-serif;
+  }
+  .Details__genero {
+    font-size: 2vh;
+    padding-top: 60px;
+    font-family: 'Poppins', sans-serif;
+  }
+  .Details__actores {
+    font-size: 2vh;
+    padding-top: 60px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .Details__rightdown {
+    border: 3px solid rgb(17, 17, 17);
+    position: absolute;
+    border-radius: 6rem;
+    top: 36.5rem;
+    left: 81.5rem;
+    height: 10rem;
+    width: 20rem;
+  }
+  
+  .Details__rightdown:hover {
+    transition: all 1s;
+    border: 3px solid #904d1a9d;
+    border-radius: 18rem;
+    color: #84347F;
+  }
+  
+  
+  .Details__rightdown__text {
+    font-size: 2rem;
+    font-weight: bold;
+    top: 2rem;
+    left: 3rem;
+    position: absolute;
+  }

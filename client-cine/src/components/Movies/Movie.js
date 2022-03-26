@@ -10,10 +10,13 @@ export default function Movie({ id, titulo, director, poster, puntuación, clasi
                     className="Movie__All"
                     style={{ backgroundImage: `url('${poster}')` }}>
                     <div className="Movie__ContainerImg">
+                        <div className="Movie__title">
+                        {titulo}
+                        </div>
                         <div className="Movie__info">
-                            {titulo}<br></br>
-                            Estrellas: {puntuación},<br></br>
-                            clasificacion: {clasificacion},
+                            
+                            ⭐: {puntuación}<br></br>
+                            ®: {clasificacion}
                         </div>
                         <div><span className="Movie__director">{director}</span></div>
                     </div>

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Hubballi&family=Shizuru&display=swap');
 
-.Movie__All {
+.Product__All {
     margin: 5px;
     width: 16vw;
     height: 45vh;
@@ -10,8 +10,9 @@
     background-size: cover;
     transition: 0.5s all;
     z-index: 1;
+    margin: 0 0 0 2vh;
   }
-  .Movie__All:hover {
+  .Product__All:hover {
     transition: 0.5s all;
     z-index: 100;
     margin-left: 30px;
@@ -19,7 +20,7 @@
   }
 
 
-  .Movie__title{
+  .Product__title{
     background-color: rgba(0, 0, 0, 0.794);
     color: white;
     border-radius: 0.7rem;
@@ -30,11 +31,20 @@
     font-family: 'Hubballi', cursive;
     display: flex;
   }
-  .Movie___All:hover > .Movie__title {
-    display: none;
+
+
+  .productsInfo{
+    background-color: rgba(0, 0, 0, 0.794);
+    color: white;
+    border-radius: 1rem;
+    font-family: 'Hubballi', cursive;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 0 0 25vh;
+    display: flex;
   }
 
-  .Movie__info{
+  .Product__info{
     background-color: rgba(0, 0, 0, 0.794);
     color: white;
     border-radius: 1rem;
@@ -44,7 +54,7 @@
     margin: 0 0 0 25vh;
   }
   
-  .Movie__director{
+  .Product__director{
     background-color: rgba(0, 0, 0, 0.794);
     color: white;
     border-radius: 2rem;
@@ -59,7 +69,7 @@
 
 
 
-.moviesInfo {
+.ProductsInfo {
   display: flex;
   /* flex-direction: column; */
   align-items: center;

@@ -17,6 +17,17 @@ export const AllMovies = () => {
     }
   };
 };
+export const AllProducts = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`http://localhost:3001/productos`);
+    if (response?.data) {
+      dispatch({
+        type: "ALLPRODUCTS",
+        payload: { produs: response.data },
+      });
+    }
+  };
+};
 
 export const DetailedMovie = (id) => {
   return async (dispatch) => {
@@ -26,6 +37,22 @@ export const DetailedMovie = (id) => {
         dispatch({
           type: "DETAILEDMOVIE",
           payload: { detis: response.data },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const DetailedProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/productos/${id}`);
+      if (response?.data) {
+        dispatch({
+          type: "DETAILEDPRODUCT",
+          payload: { produs: response.data },
         });
       }
     } catch (error) {
@@ -49,8 +76,10 @@ export const BestMovies = (arg) => {
   return {
     type: "BESTMOVIES",
     payload: arg,
+
   };
 };
+
 
 export const postReview = (payload) => {
   return async (dispatch) => {
@@ -139,6 +168,7 @@ export const uploadActor = (info) => {
   };
 };
 
+
 export const uploadProduct = (info) => {
   if (info.imagenProducto === "") {
     info.imagenProducto =
@@ -163,3 +193,20 @@ export const uploadProduct = (info) => {
     }
   };
 };
+
+export const filterReviewByRating = payload => {
+  return {
+    type: "FILTER_REVIEWBYRATING",
+    payload
+  }
+}
+// export function deleteReview(id) {
+//   return async function (dispatch) {
+//     const json = await axios.delete(`http://localhost:3001/comentarios/${id}`);
+//     return dispatch({
+//       type: "DELETE_REVIEW",
+//       payload: json.data,
+//     });
+//   };
+// }
+

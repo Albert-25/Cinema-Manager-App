@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import NavBar from "../Navbar/navbar.jsx";
 import "./Home.css"
 import Swal from "sweetalert2";
+import { useAuth } from "../../contexts/AuthContext";
 
 
 import {
@@ -21,7 +22,6 @@ import FiltroGeneros from "../filters/filterGenre.js";
 import Carousel from "../Carousel/Carousel.js"
 
 const Home = () => {
-
 
   const dispatch = useDispatch();
   const pelisTotales = useSelector((state) => state.PelisAll);
@@ -60,7 +60,7 @@ const Home = () => {
   //*paginado
   const [loading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [moviesPerPage] = useState(2);
+  const [moviesPerPage] = useState(4);
 
   const indexOfLastPost = currentPage * moviesPerPage;
   const indexOfFirstPost = indexOfLastPost - moviesPerPage;
@@ -87,14 +87,17 @@ const Home = () => {
 
   return (
     <div className="Home__Background">
-        <React.Fragment>
-            <NavBar />
-        </React.Fragment>
+      <React.Fragment>
+        <NavBar />
+      </React.Fragment>
       <div className="carrousel__home">
         <Carousel
-          AllMovies={AllMovies}
-        />
-      </div>
+     AllMovies={AllMovies}
+      /> 
+
+        </div>
+
+
 
       <Search />
 
@@ -107,13 +110,16 @@ const Home = () => {
           FiltradoGenreAndCast={FiltradoGenreAndCast}
         />
       </div>
-      <Movies moviesInfo={currentPost} loading={loading} />
+      <div className="Home__MoviesContainer">
+        <Movies className="Home__Movies" moviesInfo={currentPost} loading={loading} />
+      </div>
       <Pagination
-        className="Home__pagination__li"
-        moviesPerPage={moviesPerPage}
-        totalMovies={container.length}
-        paginate={paginate}
-      />
+          className="Home__pagination__li"
+          moviesPerPage={moviesPerPage}
+          totalMovies={container.length}
+          paginate={paginate}
+        />
+
     </div>
   );
 };

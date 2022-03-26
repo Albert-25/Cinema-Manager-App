@@ -51,12 +51,25 @@ const reducer = (state = initialState, action) => {
                 PelisAll: state.PelisAll.concat(action.payload.pelis),
             };
         }
+        case "ALLPRODUCTS": {
+            return {
+                ...state,
+                ProductAll: state.ProductAll.concat(action.payload.produs),
+            };
+        }
 
         case "DETAILEDMOVIE": {
             state = initialState;
             return {
                 ...state,
                 PelisDetails: action.payload.detis,
+            };
+        }
+        case "DETAILEDPRODUCT": {
+            state = initialState;
+            return {
+                ...state,
+                ProductDetails: action.payload.produs,
             };
         }
         // ----------------------------------------------------------------------------------------------------
@@ -68,7 +81,7 @@ const reducer = (state = initialState, action) => {
                 a.puntuación < b.puntuación ? 1 : b.puntuación < a.puntuación ? -1 : 0
             )
             // console.log("arreglar",arreglar)
-            let arregloFinal = arreglar.slice(0,3)
+            let arregloFinal = arreglar.slice(0, 3)
             return {
                 ...state,
                 TopPelis: arregloFinal,
@@ -77,14 +90,14 @@ const reducer = (state = initialState, action) => {
         }
 
 
-          case "BESTMOVIES": {
+        case "BESTMOVIES": {
             // console.log("howdy soy reducer")
             let pelis = [...state.PelisAll]
             let arreglar = pelis.sort((a, b) =>
                 a.puntuación < b.puntuación ? 1 : b.puntuación < a.puntuación ? -1 : 0
             )
             // console.log("arreglar",arreglar)
-            let arregloFinal = arreglar.slice(0,3)
+            let arregloFinal = arreglar.slice(0, 3)
             return {
                 ...state,
                 TopPelis: arregloFinal,
@@ -202,10 +215,51 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 PelisAll: action.payload,
             };
+            
+        case "FILTER_REVIEWBYRATING":
+            let comentariosByRating;
+            if (action.payload === "asc") {
+                console.log(action.payload)
+                comentariosByRating = state.PelisComments.sort(function (a, b) {
+                    if (a.puntuación < b.puntuación) {
+                        return -1
+                    }
+                    if (a.puntuación > b.puntuación) {
+                        return 1
+                    }
+                    return 0
+                })
+            }
+            if (action.payload === "des") {
+                console.log(action.payload)
+                comentariosByRating = state.PelisComments.sort(function (a, b) {
+                    if (a.puntuación > b.puntuación) {
+                        return -1
+                    }
+                    if (a.puntuación < b.puntuación) {
+                        return 1
+                    }
+                    return 0
+                })
+            }
+            return {
+                ...state,
+                PelisComments: comentariosByRating
+            }
 
         default: {
             return state;
         }
+
+        // case "DELETE_REVIEW": {
+        //     return {
+        //         ...state,
+        //         PelisComments: state.PelisComments.filter(p =>{
+        //             console.log(p)
+        //             return  p !== action.payload
+        //         })
+        //     };
+        // }
     }
 };
 export default reducer;

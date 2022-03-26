@@ -1,0 +1,14 @@
+.container .comentario p {
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: lowercase;
+    text-align: justify;
+}
+
+.container .comentario p::first-letter{
+    text-transform: uppercase;
+}
+
+.container .nombre {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}

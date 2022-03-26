@@ -4,10 +4,12 @@ import { postReview } from "../../store/actions"
 import styles from "./Review.module.css"
 import { DivStar } from "./styled"
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 
 const Review = () => {
 
+    let navigate = useNavigate();
     const id = useParams().id;
     const dispatch = useDispatch()
     const [comentario, setComentario] = useState("")
@@ -54,11 +56,13 @@ const Review = () => {
         if (puntuación == null) setErrorPuntuacion("es necesario calificar esta pelicula")
         if (!comentario.trim()) setError2Comentario("es necesario rellenar este campo")
         dispatch(postReview({ nombre, comentario, puntuación, id }))
+        alert("¡Comentario publicado!")
+        navigate(-1)
     }
 
     useEffect(() => {
-        if (comentario.length >= 11) {
-            setErrorComentario("se permiten como maximo 10 carácteres")
+        if (comentario.length >= 601) {
+            setErrorComentario("se permiten como maximo 600 carácteres")
         }
         else {
             setErrorComentario("")

@@ -1,14 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .container .comentario p {
     font-family: Arial, Helvetica, sans-serif;
     text-transform: lowercase;
     text-align: justify;
 }
 
-.container .comentario p::first-letter{
+.container .comentario p::first-letter {
     text-transform: uppercase;
 }
 
 .container .nombre {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
+}
+
+.container {
+    margin-bottom: 30px;
+    background-color: #f2f2f257;
+    padding-left: 3px;
+    border-radius: 8px;
+    border: 1px solid #f2f2f2;
 }

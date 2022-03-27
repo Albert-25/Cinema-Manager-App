@@ -34,7 +34,6 @@ const ReviewToShow = ({ id }) => {
                             <DivStar value="5" puntuacion={c.puntuación} className={styles.star} >★</DivStar>
                             <div className={styles.comentario}><p>{c.comentario}</p></div>
                             {/* <button onClick={() => handleDelete(c.id)}>delete</button> */}
-                            <hr></hr>
                         </div>
                     )
                 })

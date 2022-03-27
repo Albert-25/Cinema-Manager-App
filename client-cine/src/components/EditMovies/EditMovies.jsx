@@ -6,16 +6,20 @@ import { GetAllGenres, GetAllCast } from "../../store/actions";
 //import { validate } from "../CreateMovies/validate";
 import Swal from "sweetalert2";
 import Axios from "axios";
+import { useParams } from "react-router";
 import { Image } from "cloudinary-react";
 const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
-const EditMovies = ({ id }) => {
+const EditMovies = () => {
   const dispatch = useDispatch();
+  const id = useParams().id;
   useEffect(() => {
     dispatch(GetAllGenres());
     dispatch(GetAllCast());
     dispatch(getMovieInfo(id));
   }, [dispatch]);
+
+  
 
   const Genres = useSelector((state) => state.GenresAll);
   const Cast = useSelector((state) => state.CastAll);

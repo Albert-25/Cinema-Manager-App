@@ -106,7 +106,14 @@ export const App = () => {
               </PrivateRoute>
             }
           />
-          <Route path="/editpelicula" element={<EditMovies id={1} />} />
+          <Route
+            path="/admin/editpelicula/:id"
+            element={
+              <PrivateRoute component={EditMovies}>
+                <EditMovies />
+              </PrivateRoute>
+            }
+          />
           /*Rutas privadas*/
           <Route path="/" element={<Home />} />
           <Route path="/productpage" element={<ProductsPage />} />

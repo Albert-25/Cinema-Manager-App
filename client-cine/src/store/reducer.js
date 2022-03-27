@@ -59,14 +59,12 @@ const reducer = (state = initialState, action) => {
         }
 
         case "DETAILEDMOVIE": {
-            state = initialState;
             return {
                 ...state,
                 PelisDetails: action.payload.detis,
             };
         }
         case "DETAILEDPRODUCT": {
-            state = initialState;
             return {
                 ...state,
                 ProductDetails: action.payload.produs,

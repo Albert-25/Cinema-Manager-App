@@ -8,6 +8,11 @@
    align-items: center; */
 }
 
+.Create__Movies label {
+   color: var(--text-light-color);
+   letter-spacing: 1px;
+}
+
 /* .Create__Movies input {
    margin: 1rem;
 }
@@ -23,17 +28,24 @@
    letter-spacing: 1px;
 }
 
-.SelectedFilters {
-   max-height: 15vh;
+/* .SelectedFilters {
    display: flex;
    margin-bottom: 1rem;
-   overflow: scroll;
+   margin-right: 1rem;
+} */
+
+/* .Selected__Genders {
+   width: 47%;
 }
 
-.close {
+.Selected__Actors {
+   width: 47%;
+} */
+
+/* .close {
    margin: 1rem;
-}
-
+} */
+/* 
 .gendersChoosenContainer,
 .castChoosenContainer {
    padding: 3rem;
@@ -42,4 +54,4 @@
 .gendersChoosenContainer div,
 .castChoosenContainer div {
    display: flex;
-}
+} */

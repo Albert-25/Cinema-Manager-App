@@ -7,7 +7,7 @@ import { validate } from "./validate";
 import Swal from "sweetalert2";
 import Axios from "axios";
 import { Image } from "cloudinary-react";
-import { Form, Col, Row, Container } from "react-bootstrap";
+import { Form, Col, Row, Container, Button, Stack } from "react-bootstrap";
 const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
 const CreateMovies = () => {
@@ -196,8 +196,14 @@ const CreateMovies = () => {
          className="Create__Movies"
          style={{ backgroundColor: "inherit" }}
       >
+         <h1
+            className="text-center mb-4"
+            style={{ color: "var(--text-light-color)" }}
+         >
+            Crea una pelicula
+         </h1>
          <form onSubmit={(e) => handleSubmit(e)}>
-            <Row className="justify-content-between mb-3">
+            <Row className="justify-content-between mb-4">
                <Col md="5">
                   <div className="input__with__error">
                      <Form.Control
@@ -213,6 +219,221 @@ const CreateMovies = () => {
                   <div className="input__with__error">
                      <Form.Control
                         type="text"
+                        name="director"
+                        onChange={(evt) => handleChange(evt)}
+                        placeholder="Director"
+                     />
+                     {errors.director ? <span>{errors.director}</span> : null}
+                  </div>
+               </Col>
+            </Row>
+            <Row className="justify-content-between mb-4">
+               <Col md="5">
+                  <div className="image_upload_poster">
+                     <Form.Label column sm="2">
+                        Poster:
+                     </Form.Label>
+                     <Form.Control
+                        type="file"
+                        name="poster"
+                        onChange={(event) => {
+                           setImagesSelected({
+                              ...imagesSelected,
+                              [event.target.name]: event.target.files[0],
+                           });
+                        }}
+                     />
+                     <Button
+                        type="button"
+                        name="poster"
+                        onClick={(event) => uploadImage(event)}
+                     >
+                        Subir Imagen
+                     </Button>
+                     {inputs.poster && <span>imagen cargada:</span>}
+                     <Image
+                        style={{ width: 200 }}
+                        cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
+                        publicId={inputs.poster}
+                     />
+                  </div>
+               </Col>
+               <Col md="5">
+                  <div className="image_upload_background">
+                     <Form.Label column sm="2">
+                        Background:
+                     </Form.Label>
+                     <Form.Control
+                        type="file"
+                        name="background"
+                        onChange={(event) => {
+                           setImagesSelected({
+                              ...imagesSelected,
+                              [event.target.name]: event.target.files[0],
+                           });
+                        }}
+                     />
+                     <Button
+                        type="button"
+                        name="background"
+                        onClick={(event) => uploadImage(event)}
+                     >
+                        Subir Imagen
+                     </Button>
+                     {inputs.background && <span>imagen cargada:</span>}
+                     <Image
+                        style={{ width: 400 }}
+                        cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
+                        publicId={inputs.background}
+                     />
+                  </div>
+               </Col>
+            </Row>
+            <Row className="justify-content-between mb-4">
+               <Col md="5">
+                  <div className="input__with__error">
+                     <Form.Control
+                        type="text"
+                        name="clasificacion"
+                        placeholder="Clasificacion"
+                        onChange={(evt) => handleChange(evt)}
+                     />
+                     {errors.clasificacion ? (
+                        <span>{errors.clasificacion}</span>
+                     ) : null}
+                  </div>
+               </Col>
+               <Col md="5">
+                  <div className="input__with__error">
+                     <Form.Control
+                        type="number"
+                        min="0"
+                        name="duracion"
+                        onChange={(evt) => handleChange(evt)}
+                        placeholder="Duracion"
+                     />
+                     {errors.duracion ? <span>{errors.duracion}</span> : null}
+                  </div>
+               </Col>
+            </Row>
+            <Row className="justify-content-between mb-4">
+               <Col md="5">
+                  <div className="input__with__error">
+                     <Form.Control
+                        type="number"
+                        min="0"
+                        max="10"
+                        name="puntuación"
+                        onChange={(evt) => handleChange(evt)}
+                        placeholder="Puntuación"
+                     />
+                     {errors.puntuación ? (
+                        <span>{errors.puntuación}</span>
+                     ) : null}
+                  </div>
+               </Col>
+               <Col md="5">
+                  <div className="input__with__error">
+                     <Form.Control
+                        type="text"
+                        name="pais"
+                        onChange={(evt) => handleChange(evt)}
+                        placeholder="Pais"
+                     />
+                     {errors.pais ? <span>{errors.pais}</span> : null}
+                  </div>
+               </Col>
+            </Row>
+            <Row className="justify-content-between mb-4">
+               <Col md="5">
+                  <div className="input__with__error">
+                     <Form.Control
+                        type="text"
+                        name="distribuidora"
+                        placeholder="Distribuidora"
+                        onChange={(evt) => handleChange(evt)}
+                     />
+                     {errors.distribuidora ? (
+                        <span>{errors.distribuidora}</span>
+                     ) : null}
+                  </div>
+               </Col>
+               <Col md="5">
+                  <div className="input__with__error">
+                     <Form.Control
+                        type="text"
+                        name="trailer"
+                        onChange={(evt) => handleChange(evt)}
+                        placeholder="Trailer"
+                     />
+                     {errors.trailer ? <span>{errors.trailer}</span> : null}
+                  </div>
+               </Col>
+            </Row>
+            <Row className="justify-content-between mb-4">
+               <Col md="5">
+                  <div className="input__with__error">
+                     <Form.Select
+                        id="defaultGenres"
+                        name="genders"
+                        defaultValue={"DEFAULT"}
+                        onChange={(evt) => changeArrayGenders(evt)}
+                     >
+                        <option value="DEFAULT" disabled>
+                           Generos
+                        </option>
+                        {Genres &&
+                           Genres.map((item, index) => {
+                              return (
+                                 <option
+                                    id={item.id}
+                                    className="elemSelect"
+                                    key={`${item.genero}${index}`}
+                                    value={item.id}
+                                 >
+                                    {item.genero}
+                                 </option>
+                              );
+                           })}
+                     </Form.Select>
+                     {errors.genders ? <span>{errors.genders}</span> : null}
+                  </div>
+               </Col>
+               <Col md="5">
+                  <div className="input__with__error">
+                     <Form.Select
+                        id="defaultCast"
+                        name="actors"
+                        defaultValue={"DEFAULT"}
+                        onChange={(evt) => changeArrayCast(evt)}
+                     >
+                        <option value="DEFAULT" disabled>
+                           Cast
+                        </option>
+                        {Cast &&
+                           Cast.map((item) => {
+                              return (
+                                 <option
+                                    name={item.id}
+                                    className="elemSelect"
+                                    key={item.nombre}
+                                    value={item.id}
+                                 >
+                                    {item.nombre}
+                                 </option>
+                              );
+                           })}
+                     </Form.Select>
+
+                     {errors.actors ? <span>{errors.actors}</span> : null}
+                  </div>
+               </Col>
+            </Row>
+            <Row className="justify-content-between mb-4">
+               <Col md="12">
+                  <div className="input__with__error">
+                     <Form.Control
+                        type="text"
                         name="sinopsis"
                         onChange={(evt) => handleChange(evt)}
                         placeholder="Sipnosis"
@@ -221,235 +442,70 @@ const CreateMovies = () => {
                   </div>
                </Col>
             </Row>
-            <div className="image_upload_poster">
-               <Form.Label column sm="2">
-                  Poster:
-               </Form.Label>
-               <br />
-               <Form.Control
-                  type="file"
-                  name="poster"
-                  onChange={(event) => {
-                     setImagesSelected({
-                        ...imagesSelected,
-                        [event.target.name]: event.target.files[0],
-                     });
-                  }}
-               />
-               <button
-                  type="button"
-                  name="poster"
-                  onClick={(event) => uploadImage(event)}
-               >
-                  Subir Imagen
-               </button>
-               <br />
-               {inputs.poster && <span>imagen cargada:</span>}
-               <br />
-               <Image
-                  style={{ width: 200 }}
-                  cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
-                  publicId={inputs.poster}
-               />
-            </div>
-            <div className="image_upload_background">
-               <Form.Label column sm="2">
-                  background:
-               </Form.Label>
-               <br />
-               <Form.Control
-                  type="file"
-                  name="background"
-                  onChange={(event) => {
-                     setImagesSelected({
-                        ...imagesSelected,
-                        [event.target.name]: event.target.files[0],
-                     });
-                  }}
-               />
-               <button
-                  type="button"
-                  name="background"
-                  onClick={(event) => uploadImage(event)}
-               >
-                  Subir Imagen
-               </button>
-               <br />
-               {inputs.background && <span>imagen cargada:</span>}
-               <br />
-               <Image
-                  style={{ width: 400 }}
-                  cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
-                  publicId={inputs.background}
-               />
-            </div>
-            <div className="input__with__error">
-               <Form.Control
-                  type="number"
-                  min="0"
-                  name="duracion"
-                  onChange={(evt) => handleChange(evt)}
-                  placeholder="Duracion"
-               />
-               {errors.duracion ? <span>{errors.duracion}</span> : null}
-            </div>
-            <div className="input__with__error">
-               <Form.Control
-                  type="text"
-                  name="clasificacion"
-                  placeholder="Clasificacion"
-                  onChange={(evt) => handleChange(evt)}
-               />
-               {errors.clasificacion ? (
-                  <span>{errors.clasificacion}</span>
-               ) : null}
-            </div>
-            <div className="input__with__error">
-               <Form.Control
-                  type="text"
-                  name="director"
-                  onChange={(evt) => handleChange(evt)}
-                  placeholder="Director"
-               />
-               {errors.director ? <span>{errors.director}</span> : null}
-            </div>
-            <div className="input__with__error">
-               <Form.Control
-                  type="number"
-                  min="0"
-                  max="10"
-                  name="puntuación"
-                  onChange={(evt) => handleChange(evt)}
-                  placeholder="Puntuación"
-               />
-               {errors.puntuación ? <span>{errors.puntuación}</span> : null}
-            </div>
-            <div className="input__with__error">
-               <Form.Control
-                  type="text"
-                  name="pais"
-                  onChange={(evt) => handleChange(evt)}
-                  placeholder="Pais"
-               />
-               {errors.pais ? <span>{errors.pais}</span> : null}
-            </div>
-            <div className="input__with__error">
-               <Form.Control
-                  type="text"
-                  name="distribuidora"
-                  placeholder="Distribuidora"
-                  onChange={(evt) => handleChange(evt)}
-               />
-               {errors.distribuidora ? (
-                  <span>{errors.distribuidora}</span>
-               ) : null}
-            </div>
-            <div className="input__with__error">
-               <Form.Control
-                  type="text"
-                  name="trailer"
-                  onChange={(evt) => handleChange(evt)}
-                  placeholder="Trailer"
-               />
-               {errors.trailer ? <span>{errors.trailer}</span> : null}
-            </div>
-            <div className="input__with__error">
-               <select
-                  id="defaultGenres"
-                  name="genders"
-                  defaultValue={"DEFAULT"}
-                  onChange={(evt) => changeArrayGenders(evt)}
-               >
-                  <option value="DEFAULT" disabled>
-                     Generos
-                  </option>
-                  {Genres &&
-                     Genres.map((item, index) => {
-                        return (
-                           <option
-                              id={item.id}
-                              className="elemSelect"
-                              key={`${item.genero}${index}`}
-                              value={item.id}
-                           >
-                              {item.genero}
-                           </option>
-                        );
-                     })}
-               </select>
-               {errors.genders ? <span>{errors.genders}</span> : null}
-            </div>
-            <div className="input__with__error">
-               <select
-                  id="defaultCast"
-                  name="actors"
-                  defaultValue={"DEFAULT"}
-                  onChange={(evt) => changeArrayCast(evt)}
-               >
-                  <option value="DEFAULT" disabled>
-                     Cast
-                  </option>
-                  {Cast &&
-                     Cast.map((item) => {
-                        return (
-                           <option
-                              name={item.id}
-                              className="elemSelect"
-                              key={item.nombre}
-                              value={item.id}
-                           >
-                              {item.nombre}
-                           </option>
-                        );
-                     })}
-               </select>
-
-               {errors.actors ? <span>{errors.actors}</span> : null}
-            </div>
             <Form.Control
                type="submit"
                value="Crear pelicula"
                onClick={(e) => handleClick(e)}
+               style={{ width: "50%", margin: "auto" }}
             />
          </form>
 
-         <div className="SelectedFilters">
-            <div className="gendersChoosenContainer">
-               {inputs.genders &&
-                  inputs.genders.length !== 0 &&
-                  inputs.genders.map((item, index) => {
-                     return (
-                        <div key={index}>
-                           <p id="selectedG">{Genres[item - 1].genero}</p>
-
-                           <button
-                              className="close"
-                              onClick={() => handleOnClickGenres(item)}
+         <Container className="SelectedFilters justify-content-between mt-4">
+            <Row className="justify-content-between ">
+               <Col md="6">
+                  {inputs.genders &&
+                     inputs.genders.length !== 0 &&
+                     inputs.genders.map((item, index) => {
+                        return (
+                           <div
+                              className="d-inline-block mr-2 mb-3"
+                              key={index}
                            >
-                              X
-                           </button>
-                        </div>
-                     );
-                  })}
-            </div>
-            <div className="castChoosenContainer">
-               {inputs.actors &&
-                  inputs.actors.length !== 0 &&
-                  inputs.actors.map((item, index) => {
-                     return (
-                        <div key={index}>
-                           <p id="selectedC">{Cast[item - 1].nombre}</p>
-                           <button
-                              className="close"
-                              onClick={() => handleOnClickCast(item)}
+                              <span
+                                 className="mr-1"
+                                 id="selectedG"
+                                 style={{
+                                    color: "var(--text-light-color)",
+                                    letterSpacing: "1px",
+                                 }}
+                              >
+                                 {Genres[item - 1].genero}
+                              </span>
+                              <Button onClick={() => handleOnClickGenres(item)}>
+                                 X
+                              </Button>
+                           </div>
+                        );
+                     })}
+               </Col>
+               <Col md="6">
+                  {inputs.actors &&
+                     inputs.actors.length !== 0 &&
+                     inputs.actors.map((item, index) => {
+                        return (
+                           <div
+                              className="d-inline-block mr-2 mb-3"
+                              key={index}
                            >
-                              X
-                           </button>
-                        </div>
-                     );
-                  })}
-            </div>
-         </div>
+                              <span
+                                 className="mr-1"
+                                 id="selectedC"
+                                 style={{
+                                    color: "var(--text-light-color)",
+                                    letterSpacing: "1px",
+                                 }}
+                              >
+                                 {Cast[item - 1].nombre}
+                              </span>
+                              <Button onClick={() => handleOnClickCast(item)}>
+                                 X
+                              </Button>
+                           </div>
+                        );
+                     })}
+               </Col>
+            </Row>
+         </Container>
 
          {/* {poster.length !== 0
             ? poster.map((el, index) => {

@@ -62,6 +62,7 @@ export function AuthProvider({ children }) {
     return currentUser.updatePassword(password);
   }
   function updateName(name, imagen, user) {
+    console.log(user)
     const docuRef = doc(firestore, `usuarios/${user.uid}`);
 
     setDoc(docuRef, {nombre: name || user.nombre, imagen :  imagen || user.imagen, rol: user.rol });
@@ -70,14 +71,11 @@ export function AuthProvider({ children }) {
   async function getRol(uid) {
     const docuRef = doc(firestore, `usuarios/${uid}`);
     const docuCifrada = await getDoc(docuRef);
-    const infoFinal = docuCifrada.data().rol;
     const infoTotal = [docuCifrada.data().rol, docuCifrada.data().nombre, docuCifrada.data().imagen]
-    console.log("terminé");
     return infoTotal;
   }
 
   async function setUserWithFirebaseAndRol(usuarioFirebase) {
-    console.log("llega");
     await getRol(usuarioFirebase.uid).then((rol) => {
       const userData = {
         uid: usuarioFirebase.uid,
@@ -87,7 +85,6 @@ export function AuthProvider({ children }) {
         imagen: rol[2],
       };
       setUser(userData);
-      console.log("userData fianl", userData);
     });
   }
 
@@ -96,7 +93,6 @@ export function AuthProvider({ children }) {
       if (user) {
         setUserWithFirebaseAndRol(user);
       }
-      console.log("holaaa");
       setTimeout(function () {
         setCurrentUser(user);
         setLoading(false);

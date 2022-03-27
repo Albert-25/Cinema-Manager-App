@@ -1,5 +1,4 @@
 import * as React from 'react';
-//import CallFormCtrl from './../signInForm/formOpenControll.jsx'
 import AccountView from './../accountview.js'
 import { useAuth } from "../../contexts/AuthContext";
 import {FaUserAlt} from 'react-icons/fa';
@@ -22,12 +21,11 @@ export default function NavBar(){
 
   const { user, currentUser } = useAuth();
 
-
   return(
     <React.Fragment>
     <Navbar className="navbar_hm" fixed="top" >
     <Container>
-    <Navbar.Brand ><Link style={{textDecoration:"none",color:"white"}} to="/">{user?.rol==="admin"?`Welcome admin ${user.nombre}`:"Y el logo?"}</Link></Navbar.Brand>
+    <Navbar.Brand ><Link style={{textDecoration:"none",color:"white"}} to="/">{user?.rol==="admin"?`Admin: @${user.nombre}`:"Y el logo?"}</Link></Navbar.Brand>
     <Nav className="me-end btn_menu_nav">
       {currentUser? <AccountView/>:
         <Button bsPrefix="btn_navbar_actions account_btn_navbar" onClick={(e)=>navigate('/login')}>

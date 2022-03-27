@@ -22,7 +22,6 @@ export default function AccountView() {
       setError("Failed to Log out");
     }
   }
-  console.log(user)
   return (
     <>
       <Dropdown className="drop_account_container">

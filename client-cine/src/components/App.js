@@ -18,6 +18,8 @@ import { AuthProvider } from "../contexts/AuthContext";
 import Signup from "./Signup";
 import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
+import PrivateComment from "./PrivateComment";
+
 import PrivateUpdate from "./PrivateUpdate";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
@@ -102,10 +104,15 @@ export const App = () => {
               </PrivateRoute>
             }
           />
+
+          <Route path="/review/:id" element={
+            <PrivateComment component={Review}>
+            <Review />
+            </ PrivateComment>
+          } />
            /*Rutas privadas*/
           <Route path="/" element={<Home />} />
           <Route path="/productpage" element={<ProductsPage />} />
-          <Route path="/review/:id" element={<Review />} />
           <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
           <Route path="/productpage/Products/:id" element={<ProductDetail />} />
           <Route path="/shoppingcart" element={<ShoppingCart />} />

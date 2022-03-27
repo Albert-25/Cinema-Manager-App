@@ -7,7 +7,9 @@ import { validate } from "./validate";
 import Swal from "sweetalert2";
 import Axios from "axios";
 import { Image } from "cloudinary-react";
-import { Form, Col, Row, Container, Button, Stack } from "react-bootstrap";
+import { Form, Col, Row, Container, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { MdKeyboardBackspace } from "react-icons/md";
 const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
 const CreateMovies = () => {
@@ -194,8 +196,14 @@ const CreateMovies = () => {
    return (
       <Container
          className="Create__Movies"
-         style={{ backgroundColor: "inherit" }}
+         style={{ backgroundColor: "inherit", position: "relative" }}
       >
+         <Link to="/" className="position-absolute top-0 start-0">
+            <Button>
+               <MdKeyboardBackspace className="mr-3" />
+               <span style={{ marginLeft: "0.75rem" }}>Regresar al Home</span>
+            </Button>
+         </Link>
          <h2
             className="text-center mb-4"
             style={{ color: "var(--text-light-color)" }}

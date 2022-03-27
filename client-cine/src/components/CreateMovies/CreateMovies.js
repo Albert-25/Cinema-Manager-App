@@ -196,12 +196,12 @@ const CreateMovies = () => {
          className="Create__Movies"
          style={{ backgroundColor: "inherit" }}
       >
-         <h1
+         <h2
             className="text-center mb-4"
             style={{ color: "var(--text-light-color)" }}
          >
             Crea una pelicula
-         </h1>
+         </h2>
          <form onSubmit={(e) => handleSubmit(e)}>
             <Row className="justify-content-between mb-4">
                <Col md="5">

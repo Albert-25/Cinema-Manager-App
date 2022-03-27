@@ -48,7 +48,7 @@ const reducer = (state = initialState, action) => {
         case "ALLMOVIES": {
             return {
                 ...state,
-                PelisAll: state.PelisAll.concat(action.payload.pelis),
+                PelisAll:action.payload.pelis,
             };
         }
         case "ALLPRODUCTS": {
@@ -57,7 +57,13 @@ const reducer = (state = initialState, action) => {
                 ProductAll:action.payload.produs,
             };
         }
-
+        case "DELETECAST":{
+            console.log("delete CastAll")
+            return {
+                ...state,
+                CastAll: state.CastAll.filter(e=> e.id!== action.payload)
+            }
+        }
         case "DETAILEDMOVIE": {
             state = initialState;
             return {
@@ -92,14 +98,14 @@ const reducer = (state = initialState, action) => {
         case "GENRES": {
             return {
                 ...state,
-                GenresAll: state.GenresAll.concat(action.payload.generos),
+                GenresAll:action.payload.generos,
             };
         }
 
         case "CAST": {
             return {
                 ...state,
-                CastAll: state.CastAll.concat(action.payload.actores),
+                CastAll:action.payload.actores,
             };
         }
 

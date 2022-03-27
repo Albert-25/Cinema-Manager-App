@@ -1,11 +1,13 @@
 .btn_menu_nav{
 	display: flex;
-	width: 100px;
+	width: 120px;
 	justify-content: space-between;
 }
 .navbar_hm{
 	background-color:rgba(108, 26, 214, 0.5);
 	backdrop-filter: blur(10px);
+	display: flex;
+	flex-direction: column;
 }
 .btn_navbar_actions {
 	background-color: transparent;
@@ -22,15 +24,25 @@
 	border: none;
 	background-color: transparent;
 	transition: 400ms;
-	font-size: 1.4em;
 	
-}
-.btn_navbar_actions:focus{
 	color: #5D90F6;
 	box-shadow: -1px -1px 1px rgba(248, 249, 251,0.5),
 	    1px 1px 1px rgba(0, 0, 0,0.5);
+	
 }
-
+.menu_btn{
+	font-size: 1.4em;
+}
+.nav_link_bar_bottom{
+	color: white;
+}
+.link_nav_items{
+	color: white;
+	text-decoration: none;
+}
+.link_nav_items:hover{
+	text-decoration: none;
+}
 .profilePic{
 	max-height: 5vh;
 	border-radius: 50%;

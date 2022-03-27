@@ -8,7 +8,7 @@ export default function Login() {
   const passwordRef = useRef();
   const rolRef = useRef();
 
-  const { login } = useAuth();
+  const { login,user } = useAuth();
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,15 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/");
+      let next= new Promise((resolve,rejected)=>{
+        if(user?.rol==="user"|| !user.rol){
+          resolve("/")
+        }else if(user?.rol==="admin"){
+          resolve("/admin")
+        }
+      })
+      next.then((res)=>navigate(res))
+      
     } catch (e) {
       console.log("Failed to sign in", e);
     }

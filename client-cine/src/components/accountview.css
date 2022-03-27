@@ -1,4 +1,6 @@
-
+.drop_account_container{
+	max-width: 60px;
+}
 #dropdown-basic{
 	border-radius: 4em !important;
 	padding: 0;

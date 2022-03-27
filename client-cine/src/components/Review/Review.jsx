@@ -12,6 +12,7 @@ const Review = () => {
 
     let navigate = useNavigate();
     const id = useParams().id;
+    console.log(id)
     const dispatch = useDispatch()
     const [comentario, setComentario] = useState("")
     const [puntuación, setPuntuación] = useState()
@@ -25,6 +26,7 @@ const Review = () => {
     console.log(user)
 
     const onChange = (e) => {
+        console.log(e.target.value)
         setComentario(e.target.value)
         setError2Comentario("")
     }
@@ -88,7 +90,7 @@ const Review = () => {
                 <div className={styles.error}>{errorPuntuacion}</div>
                 <div>
                     <h4>¡Cuéntanos que te pareció la pelicula!</h4>
-                    <textarea cols="20" rows="10" onChange={onChange}></textarea>
+                    <textarea cols="20" rows="10" onChange={(e) => onChange(e)}></textarea>
                 </div>
                 <div className={styles.error}>{errorComentario}</div>
                 <div className={styles.error}>{error2Comentario}</div>

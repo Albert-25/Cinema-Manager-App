@@ -23,6 +23,7 @@ export default function NavBar(){
 
   let imagen = 'http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png'
   let saludo = ''
+  console.log(user)
 
   if(user && user.nombre){
     saludo = user.nombre;
@@ -30,7 +31,7 @@ export default function NavBar(){
   if(user && user.imagen){
     imagen = user.imagen
   }
-
+console.log(imagen)
 
   return(
     <React.Fragment>
@@ -49,6 +50,7 @@ export default function NavBar(){
       <Button bsPrefix="btn_navbar_actions menu_btn" >
         <IoMenuSharp />
       </Button>
+
     </Nav>
     </Container>
   </Navbar>

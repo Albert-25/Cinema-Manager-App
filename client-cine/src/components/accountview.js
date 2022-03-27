@@ -21,12 +21,11 @@ export default function AccountView() {
       setError("Failed to Log out");
     }
   }
-  console.log(user)
   return (
     <>
       <Dropdown>
          <Dropdown.Toggle variant="success" id="dropdown-basic">
-           {user.nombre}
+           // {user.nombre}
          </Dropdown.Toggle>
          <Dropdown.Menu>
            <Dropdown.Item onClick={()=>navigate('/update-profile')}>update profile</Dropdown.Item>

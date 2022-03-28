@@ -1,28 +1,24 @@
 import * as React from 'react';
 import AccountView from './../accountview.js'
 import { useAuth } from "../../contexts/AuthContext";
-import {FaUserAlt} from 'react-icons/fa';
-import {IoMenuSharp} from 'react-icons/io5';
-import {useNavigate,Link} from 'react-router-dom';
-import {Navbar,Container,Nav,Button,Breadcrumb} from 'react-bootstrap';
+import { FaUserAlt } from 'react-icons/fa';
+import { IoMenuSharp } from 'react-icons/io5';
+import { useNavigate, Link } from 'react-router-dom';
+import { Navbar, Container, Nav, Button, Breadcrumb } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './navbar.css'
 
 
+export default function NavBar() {
+  let [open, setOpen] = React.useState(false)
+  let navigate = useNavigate()
 
-
-
-
-
-export default function NavBar(){
-  let [open,setOpen]= React.useState(false)
-  let navigate= useNavigate()
-  
 
   const { user, currentUser } = useAuth();
 
-  return(
+  return (
     <React.Fragment>
+
     <Navbar className="navbar_hm" fixed="top" >
     <Container>
     <Navbar.Brand ><Link style={{textDecoration:"none",color:"white"}} to="/">{currentUser&&user?.rol==="admin"?`Admin: @${user.nombre}`:"Y el logo?"}</Link></Navbar.Brand>

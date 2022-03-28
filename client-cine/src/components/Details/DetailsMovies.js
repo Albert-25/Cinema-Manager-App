@@ -7,7 +7,7 @@ import ReviewToShow from "../ReviewToShow/ReviewToShow.jsx"
 import { BodyBackground } from "./styled.js"
 import "./DetailsMovies.css";
 import ReactPlayer from "react-player"
-import { Form, Button} from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 const DetailsMovies = (props) => {
     let { id: code } = useParams();
@@ -166,13 +166,13 @@ const DetailsMovies = (props) => {
                     <div className="comentarios">
                         <ReviewToShow id={id} />
                     </div>
-                    {console.log(comentarios)}
+                    {/* {console.log(comentarios)} */}
 
                 </div>
 
 
             </div>
-        </div>
+        </div >
     );
 };
 

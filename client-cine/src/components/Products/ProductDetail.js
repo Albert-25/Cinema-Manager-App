@@ -59,7 +59,7 @@ const ProductDetail = (props) => {
                 </div>
             </div>
             <div className="container__button">
-                <Link to="/" className="Product__rightdown">
+                <Link to="/productpage" className="Product__rightdown">
                     <button className="Product__rightdown__text">👉 Go back 👈</button>
                 </Link>
             </div>

@@ -95,26 +95,11 @@ export const App = () => {
               </PrivateRoute>
             }
           />
-          <Route
-            path="/admin/createactor"
-            element={
-              <PrivateRoute component={CreateActor} rol={"admin"}>
-                <CreateActor />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/admin/creategenero"
-            element={
-              <PrivateRoute component={CreateGenre} rol={"admin"}>
-                <CreateGenre />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/admin/createproducto"
-            element={
-              <PrivateRoute component={CreateProduct}>
+
+            <Route
+             path="/admin/createproducto"
+             element={
+              <PrivateRoute component={CreateProduct} rol={'admin'}>
                 <CreateProduct />
               </PrivateRoute>
             }

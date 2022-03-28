@@ -27,32 +27,40 @@ const ProductDetail = (props) => {
 
     return (
         <body className="Background__Product">
-            <div className="Product__left">
-                <img
-                    className="ProductImg__img"
-                    src={detailed.imagenProducto || Produuct.imagenProducto}
-                    alt="background"
-                ></img>
+            <div className="Product__titl">
+                {detailed.nombreProducto || Produuct.nombreProducto}
             </div>
 
-            <div className="Product__right">
-                <div className="Product__title">
-                    {detailed.nombreProducto || Produuct.nombreProducto}
-                </div>
-                <div className="Product__sinopsis">
-                    💖descripcion: {detailed.descripcion || Produuct.descripcion}
-                </div>
-                <div className="Product__duracion">
-                    💖precio: {detailed.precio || Produuct.precio}
-                </div>
-                <div className="Product__clasificacion">
-                    💖stock: {detailed.stock || Produuct.stock}
+            <div className="product__container">
+                <div className="Product__left">
+                    <img
+                        className="ProductImg__img"
+                        src={detailed.imagenProducto || Produuct.imagenProducto}
+                        alt="background"
+                    ></img>
                 </div>
 
+                <div className="Product__right">
+                    <div className="Product__sinopsis">
+                        <h5>Descripcion:</h5>
+                        {detailed.descripcion || Produuct.descripcion}
+                    </div>
+                    <div className="Product__duracion">
+                        <h5>Precio: </h5>
+                        {detailed.precio || Produuct.precio}
+                        {" "}dolares
+                    </div>
+                    <div className="Product__clasificacion">
+                        <h5>Stock: </h5>
+                        {detailed.stock || Produuct.stock}
+                        {" "} unidades
+                    </div>
+
+                </div>
             </div>
-            <div className="">
+            <div className="container__button">
                 <Link to="/" className="Product__rightdown">
-                    <p className="Product__rightdown__text">👉 Go back 👈</p>
+                    <button className="Product__rightdown__text">👉 Go back 👈</button>
                 </Link>
             </div>
         </body>

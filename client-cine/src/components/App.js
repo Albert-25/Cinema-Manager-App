@@ -136,7 +136,7 @@ export const App = () => {
          </Router>
 
          );
-   );
+   
 };
 
 

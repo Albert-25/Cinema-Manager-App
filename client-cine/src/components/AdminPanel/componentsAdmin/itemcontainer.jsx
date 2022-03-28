@@ -16,7 +16,7 @@ const items = {
   products: 'createproducto'
 }
 
-const Items=({nombre,titulo,genero,nombreProducto,id,image,handleDelete})=>{
+const Items=({nombre,titulo,genero,nombreProducto,id,image,handleDelete,stock})=>{
   return (
     <div className="item_admin_stack">
       <span className="item_admin_data_left">
@@ -28,7 +28,7 @@ const Items=({nombre,titulo,genero,nombreProducto,id,image,handleDelete})=>{
          />}
          {titulo&&<span className="Item_movie_data_admin"><p><b>Titulo: </b>{titulo}</p></span>}
          {nombre&&<span className="Item_movie_data_admin"><p><b>Nombre: </b>{nombre}</p></span>}
-        {genero&&<span className="Item_movie_data_admin"><p><b>Genero: </b>{genero}</p></span>}
+         {genero&&<span className="Item_movie_data_admin"><p><b>Genero: </b>{genero}</p></span>}
         {nombreProducto&&<span className="Item_movie_data_admin"><p><b>Nombre: </b>{nombreProducto}</p></span>}
         <h4>id: {id}</h4>
       </span>  

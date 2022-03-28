@@ -6,7 +6,6 @@ import { useAuth } from "../contexts/AuthContext";
 
 export default function PrivateUpdate({rol: Rol, component: Component, ...rest }) {
   const { user, currentUser } = useAuth();
-  console.log('soy user', Rol)
 
-  return <>{currentUser ? <Component /> : <Navigate to="/" />}</>;
+  return <>{currentUser ? <Component /> : <Navigate to="/login" />}</>;
 }

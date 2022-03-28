@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import CreateActor from "./CreateActor/CreateActor.jsx";
 import CreateGenre from "./CreateGenre/CreateGenre.jsx";
 import CreateMovies from "./CreateMovies/CreateMovies.js";
+import EditMovies from "./EditMovies/EditMovies.jsx";
 import CreateProduct from "./CreateProduct/CreateProduct.jsx";
 import DetailsMovies from "./Details/DetailsMovies";
 import ProductDetail from "./Products/ProductDetail";
@@ -18,6 +19,8 @@ import Signup from "./Signup";
 //import Dashboard from "./Dashboard";
 import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
+import PrivateComment from "./PrivateComment";
+
 import PrivateUpdate from "./PrivateUpdate";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
@@ -27,14 +30,14 @@ import ReviewToShow from "./ReviewToShow/ReviewToShow.jsx";
 import Admin from "./AdminPanel/Admin.jsx";
 import { useDispatch } from "react-redux";
 import {
-   AllMovies,
-   GetAllGenres,
-   GetAllCast,
-   FiltrarGenero,
-   FiltrarCast,
-   FiltrarGeneroYCast,
+  AllMovies,
+  GetAllGenres,
+  GetAllCast,
+  FiltrarGenero,
+  FiltrarCast,
+  FiltrarGeneroYCast,
+  editMovie,
 } from "./../store/actions";
-
 
 export const App = () => {
 
@@ -62,62 +65,43 @@ export const App = () => {
                      element={
                         <PrivateRoute component={Admin} rol={'admin'}>
 
-                           <Admin />
-                        </PrivateRoute>
-                     }
-                  />
-                  <Route
-                     path="/admin/createmovies"
-                     element={
-                        <PrivateRoute component={CreateMovies} rol={'admin'}>
-                           <CreateMovies />
-                        </PrivateRoute>
-                     }
-                  />
-                  <Route
-                     path="/admin/createactor"
-                     element={
+              </PrivateRoute>
+            }
+          />
 
-                        <PrivateRoute component={CreateActor} rol={'admin'}>
-                           <CreateActor />
-                        </PrivateRoute>
-                     }
-                  />
-                  <Route
-                     path="/admin/creategenero"
-                     element={
-
-                        <PrivateRoute component={CreateGenre} rol={'admin'}>
-                           <CreateGenre />
-
-                        </PrivateRoute>
-                     }
-                  />
-                  <Route
-                     path="/admin/createproducto"
-                     element={
-                        <PrivateRoute component={CreateProduct}>
-                           <CreateProduct />
-                        </PrivateRoute>
-                     }
-                  />
+            <Route
+             path="/admin/createproducto"
+             element={
+              <PrivateRoute component={CreateProduct} rol={'admin'}>
+                <CreateProduct />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/editpelicula/:id"
+            element={
+              <PrivateRoute component={EditMovies}>
+                <EditMovies />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/review/:id" element={
+            <PrivateComment component={Review}>
+            <Review />
+            </ PrivateComment>
+          } />
            /*Rutas privadas*/
-                  <Route path="/" element={<Home />} />
-                  <Route path="/productpage" element={<ProductsPage />} />
-                  <Route path="/review/:id" element={<Review />} />
-                  <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
-                  <Route path="/productpage/Products/:id" element={<ProductDetail />} />
-                  <Route path="/shoppingcart" element={<ShoppingCart />} />
-                  <Route path="/about" element={<SobreNosotros />} />
-                  <Route path="/portal" element={<Profile />} />
-               </Routes>
-            </AuthProvider>
-         </Router>
 
-      </div>
-
-
-   );
+          <Route path="/" element={<Home />} />
+          <Route path="/productpage" element={<ProductsPage />} />
+          <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
+          <Route path="/productpage/Products/:id" element={<ProductDetail />} />
+          <Route path="/shoppingcart" element={<ShoppingCart />} />
+          <Route path="/about" element={<SobreNosotros />} />
+          <Route path="/portal" element={<Profile />} />
+        </Routes>
+      </AuthProvider>
+    </Router>
+    </div>
+  );
 };
-
-

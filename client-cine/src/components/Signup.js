@@ -2,6 +2,9 @@ import React, { useRef, useState } from "react";
 import { Card, Form, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import Axios from "axios";
+import { Image } from "cloudinary-react";
+const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
 export default function Signup() {
   const emailRef = useRef();
@@ -15,7 +18,8 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const [roles, setRoles] = useState("user");
   const navigate = useNavigate();
-console.log('Us', roles)
+  const [picProfile, setPicProfile] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");
   async function handleSubmit(e) {
     e.preventDefault();
     
@@ -31,9 +35,9 @@ console.log('Us', roles)
         passwordRef.current.value,
         roles,
         nombreRef.current.value,
-        imagenRef.current.value
+        picProfile
       );
-      navigate("/login");
+      navigate("/");
     } catch {
       setError("Failed to create an account");
     }
@@ -41,6 +45,22 @@ console.log('Us', roles)
     setLoading(false);
   }
 
+  const uploadImage = async (event) => {
+    const formData = new FormData();
+
+    formData.append("file", selectedImage);
+    formData.append("upload_preset", "pyfniocg");
+    await Axios.post(
+      `https://api.cloudinary.com/v1_1/${REACT_APP_CLOUDINARY_CLOUDNAME}/image/upload`,
+      formData
+    ).then((response) => {
+      setPicProfile(response.data.url);
+      /*setInputs({
+        ...inputs,
+        [event.target.name]: response.data.url,
+      });*/
+    });
+  };
   return (
     <>
       <Card>
@@ -64,15 +84,38 @@ console.log('Us', roles)
               <Form.Label>Nombre</Form.Label>
               <Form.Control type="text" ref={nombreRef} required />
             </Form.Group>
-            <Form.Group id="text">
-              <Form.Label>Imagen</Form.Label>
-              <Form.Control type="text" ref={imagenRef} required />
+          <Form.Group id="picture">
+              <Form.Label>Cambiar foto de perfil</Form.Label>
+              <Form.Control
+                type="file"
+                name='profilePic'
+                onChange={(event) => {
+              setSelectedImage(event.target.files[0])
+            }}
+                placeholder="Leave blank to keep the same"
+              />
+              <button
+            type="button"
+            name="profilePic"
+            onClick={(event) => uploadImage(event)}
+          >
+            Subir Imagen
+          </button>
+          <br/>
+          {picProfile && <span>imagen cargada:</span>}
+          <br/>
+          <Image
+            style={{ width: 200 }}
+            cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
+            publicId={picProfile}
+          />
             </Form.Group>
             <div className="form-group">
             <select
                 defaultValue={"DEFAULT"}
-                name="Difficulty"
+                name="Rol"
                 onChange={(evt) => setRoles(evt.target.value)}
+                required
               >
                 <option className="elemSelect" value="DEFAULT" disabled>
                   Seleccionar roles

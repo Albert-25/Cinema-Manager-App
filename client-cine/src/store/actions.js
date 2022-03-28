@@ -76,10 +76,8 @@ export const BestMovies = (arg) => {
   return {
     type: "BESTMOVIES",
     payload: arg,
-
   };
 };
-
 
 export const postReview = (payload) => {
   return async (dispatch) => {
@@ -168,7 +166,6 @@ export const uploadActor = (info) => {
   };
 };
 
-
 export const uploadProduct = (info) => {
   if (info.imagenProducto === "") {
     info.imagenProducto =
@@ -194,9 +191,38 @@ export const uploadProduct = (info) => {
   };
 };
 
-export const filterReviewByRating = payload => {
+export const getMovieInfo = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/peliculas/${id}`);
+      if (response?.data) {
+        dispatch({
+          type: "EDITMOVIEINFO",
+          payload: { info: response.data },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const editMovie = (id, data) => {
+  console.log("actiondata: " + JSON.stringify(data));
+  return async () => {
+    try {
+      axios.put(`http://localhost:3001/peliculas/${id}`, data);
+      console.log(data);
+    } catch (error) {
+      alert(error);
+    }
+  };
+};
+
+export const filterReviewByRating = (payload) => {
   return {
     type: "FILTER_REVIEWBYRATING",
+
     payload
   }
 }
@@ -208,8 +234,8 @@ export const removeActors=(id)=>{
     .then(res=>dispatch({type:"DELETECAST",payload:id}))
     .catch(err=>console.log(err.response))
   }
-}
 
+};
 
 // export function deleteReview(id) {
 //   return async function (dispatch) {
@@ -220,4 +246,3 @@ export const removeActors=(id)=>{
 //     });
 //   };
 // }
-

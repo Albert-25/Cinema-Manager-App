@@ -147,7 +147,6 @@ const CreateMovies = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("heyyyyyyyyyyyyyyy",errors)
     if (errors.error === false) {
       Swal.fire({
         title: "¿Quieres guardar la pelicula?",
@@ -175,6 +174,7 @@ const CreateMovies = () => {
 
   const uploadImage = async (event) => {
     const formData = new FormData();
+    console.log(imagesSelected[event.target.name])
     formData.append("file", imagesSelected[event.target.name]);
     formData.append("upload_preset", "pyfniocg");
     await Axios.post(

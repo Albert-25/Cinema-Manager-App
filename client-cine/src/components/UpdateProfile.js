@@ -2,6 +2,9 @@ import React, { useRef, useState } from "react";
 import { Card, Form, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import Axios from "axios";
+import { Image } from "cloudinary-react";
+const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
 export default function UpdateProfile() {
   const emailRef = useRef();
@@ -11,8 +14,12 @@ export default function UpdateProfile() {
   const passwordConfirmRef = useRef();
   const { user, currentUser, updatePassword, updateEmail, updateName } = useAuth();
   const [error, setError] = useState("");
+  const [picProfile, setPicProfile] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const [selectedImage, setSelectedImage] = useState("");
+ 
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -29,8 +36,9 @@ export default function UpdateProfile() {
     if (passwordRef.current.value) {
       promises.push(updatePassword(passwordRef.current.value));
     }
-    if(nameRef.current.value !== user.nombre || imagenRef.current.value !== user.imagen){
-      promises.push(updateName(nameRef.current.value, imagenRef.current.value, user))
+    if(nameRef.current.value !== user.nombre || picProfile !== user.imagen){
+
+      promises.push(updateName(nameRef.current.value, picProfile, user))
     }
     Promise.all(promises)
       .then(() => {
@@ -43,6 +51,23 @@ export default function UpdateProfile() {
         setLoading(false);
       });
   }
+
+   const uploadImage = async (event) => {
+    const formData = new FormData();
+
+    formData.append("file", selectedImage);
+    formData.append("upload_preset", "pyfniocg");
+    await Axios.post(
+      `https://api.cloudinary.com/v1_1/${REACT_APP_CLOUDINARY_CLOUDNAME}/image/upload`,
+      formData
+    ).then((response) => {
+      setPicProfile(response.data.url);
+      /*setInputs({
+        ...inputs,
+        [event.target.name]: response.data.url,
+      });*/
+    });
+  };
 
   return (
     <>
@@ -87,10 +112,28 @@ export default function UpdateProfile() {
              <Form.Group id="picture">
               <Form.Label>Cambiar foto de perfil</Form.Label>
               <Form.Control
-                type="text"
-                ref={imagenRef}
+                type="file"
+                name='profilePic'
+                onChange={(event) => {
+              setSelectedImage(event.target.files[0])
+            }}
                 placeholder="Leave blank to keep the same"
               />
+              <button
+            type="button"
+            name="profilePic"
+            onClick={(event) => uploadImage(event)}
+          >
+            Subir Imagen
+          </button>
+          <br/>
+          {picProfile && <span>imagen cargada:</span>}
+          <br/>
+          <Image
+            style={{ width: 200 }}
+            cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
+            publicId={picProfile}
+          />
             </Form.Group>
             <Button className="w-100" disabled={loading} type="submit">
               Update

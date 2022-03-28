@@ -161,6 +161,21 @@ const CreateMovies = () => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                dispatch(postMovies(inputs));
+               setInputs({
+                  titulo: "",
+                  sinopsis: "",
+                  poster: "",
+                  background: "",
+                  duracion: "",
+                  clasificacion: "",
+                  director: "",
+                  puntuación: "",
+                  pais: "",
+                  distribuidora: "",
+                  trailer: "",
+                  genders: [],
+                  actors: [],
+               })
                Swal.fire("La pelicula fue agregada!", "", "success");
             } else if (result.isDenied) {
                Swal.fire("La pelicula no fue agregada", "", "info");
@@ -196,7 +211,7 @@ const CreateMovies = () => {
    return (
       <Container
          className="Create__Movies"
-         style={{ backgroundColor: "inherit", position: "relative" }}
+         style={{ backgroundColor: "var(--first-color)", position: "relative" }}
       >
          <Link to="/" className="position-absolute top-0 start-0">
             <Button>

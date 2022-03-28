@@ -92,13 +92,18 @@
   padding-left: 3px;
   border-radius: 8px;
 }
-.container_footer .h3 h5{
+
+.container_footer .h3 h5 {
   font-weight: 900;
 }
 
-.Details__rightdown {
+.Details__rightdown__container {
   display: flex;
   justify-content: end;
+}
+
+.Details__rightdown {
+  display: inline-block;
 }
 
 .button_comentar {
@@ -118,6 +123,10 @@
   margin-top: 30px;
 }
 
-.container_footer{
+.container_footer {
   background-color: #11072F;
+}
+.filterByRating{
+  display: inline !important;
+  width: auto !important;
 }

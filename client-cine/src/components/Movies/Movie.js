@@ -6,31 +6,37 @@ import "./Movie.css";
 import { getAllReviewByIdOfMovie } from "../../store/actions";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function Movie({
-   id,
-   titulo,
-   director,
-   poster,
-   puntuación,
-   clasificacion,
-   sinopsis,
-}) {
-   console.log(sinopsis);
-   return (
-      <>
-         <Card style={{ width: "17rem", marginBottom: "1rem" }}>
-            <Card.Img variant="top" src={poster} />
-            <Card.ImgOverlay>
-               <Card.Body>
-                  <Card.Title>{titulo}</Card.Title>
-                  <Card.Text>{`Puntuación: ${puntuación}`}</Card.Text>
-                  <Card.Text>{`Clasificacion: ${clasificacion}`}</Card.Text>
-                  <Link to={`MovieDetails/${id}`}>
-                     <Button variant="primary">Ver detalles</Button>
-                  </Link>
-               </Card.Body>
-            </Card.ImgOverlay>
-         </Card>
-      </>
-   );
+export default function Movie({ id, titulo, director, poster, puntuación, clasificacion }) {
+
+    const dispatch = useDispatch();
+    const comentarios = useSelector(state => state.PelisComments);
+    const puntuacionArray = comentarios && comentarios.map(c => c.puntuación)
+    const sumaPuntuaciones = puntuacionArray && puntuacionArray.reduce((contador, puntuacion) => contador + puntuacion, 0);
+    const numeroPuntuaciones = puntuacionArray && puntuacionArray.length;
+    const promedioPuntuacion = (sumaPuntuaciones / numeroPuntuaciones).toFixed(1)
+
+    useEffect(() => {
+        dispatch(getAllReviewByIdOfMovie(id));
+    }, [dispatch]);
+
+    return (
+        <>
+            <Link to={`MovieDetails/${id}`}>
+                <div
+                    className="Movie__All"
+                    style={{ backgroundImage: `url('${poster}')` }}>
+                    <div className="Movie__ContainerImg">
+                        <div className="Movie__title">
+                            {titulo}
+                        </div>
+                        <div className="Movie__info">
+                            ⭐: {isNaN(promedioPuntuacion) ? "--" : promedioPuntuacion}<br></br>
+                            ®: {clasificacion}
+                        </div>
+                        <div><span className="Movie__director">{director}</span></div>
+                    </div>
+                </div>
+            </Link>
+        </>
+    )
 }

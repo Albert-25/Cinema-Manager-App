@@ -2,7 +2,7 @@
 
 /* font-family: 'Poppins', sans-serif;  */
 .Background__Product {
-<<<<<<< HEAD
+
     height: 100vh;
     background-image: url("https://img.freepik.com/vector-gratis/fondo-sala-cine_1017-8728.jpg?size=626&ext=jpg");
     background-position: center;
@@ -11,10 +11,6 @@
     display: Flex;
     justify-content: space-between;
   }
-  
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
-  
-  /* font-family: 'Poppins', sans-serif; */
   
   .Product__left {
     width: 100vh;
@@ -166,9 +162,7 @@
     border-radius: 5px;
     backdrop-filter: blur(15px);
     height:auto;*/
-=======
-  background-color: #11072F;
-}
+
 
 .Product__titl {
   text-align: center;
@@ -217,4 +211,4 @@
   grid-column: 1/3;
 }
 
->>>>>>> c1ccb47505424b0d9aa2af07953f508103853a94
+

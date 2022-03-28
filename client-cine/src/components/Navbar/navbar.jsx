@@ -25,7 +25,7 @@ export default function NavBar(){
     <React.Fragment>
     <Navbar className="navbar_hm" fixed="top" >
     <Container>
-    <Navbar.Brand ><Link style={{textDecoration:"none",color:"white"}} to="/">{user?.rol==="admin"?`Admin: @${user.nombre}`:"Y el logo?"}</Link></Navbar.Brand>
+    <Navbar.Brand ><Link style={{textDecoration:"none",color:"white"}} to="/">{currentUser&&user?.rol==="admin"?`Admin: @${user.nombre}`:"Y el logo?"}</Link></Navbar.Brand>
     <Nav className="me-end btn_menu_nav">
       {currentUser? <AccountView/>:
         <Button bsPrefix="btn_navbar_actions account_btn_navbar" onClick={(e)=>navigate('/login')}>

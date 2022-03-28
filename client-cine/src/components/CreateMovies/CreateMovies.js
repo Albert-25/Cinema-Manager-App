@@ -161,21 +161,8 @@ const CreateMovies = () => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                dispatch(postMovies(inputs));
-               setInputs({
-                  titulo: "",
-                  sinopsis: "",
-                  poster: "",
-                  background: "",
-                  duracion: "",
-                  clasificacion: "",
-                  director: "",
-                  puntuación: "",
-                  pais: "",
-                  distribuidora: "",
-                  trailer: "",
-                  genders: [],
-                  actors: [],
-               })
+               document.getElementById("ChupaUnLimon").reset();
+
                Swal.fire("La pelicula fue agregada!", "", "success");
             } else if (result.isDenied) {
                Swal.fire("La pelicula no fue agregada", "", "info");
@@ -213,10 +200,10 @@ const CreateMovies = () => {
          className="Create__Movies"
          style={{ backgroundColor: "var(--first-color)", position: "relative" }}
       >
-         <Link to="/" className="position-absolute top-0 start-0">
+         <Link to="/admin" className="position-absolute top-0 start-0">
             <Button>
                <MdKeyboardBackspace className="mr-3" />
-               <span style={{ marginLeft: "0.75rem" }}>Regresar al Home</span>
+               <span style={{ marginLeft: "0.75rem" }}>Regresar al Admin</span>
             </Button>
          </Link>
          <h2
@@ -225,7 +212,7 @@ const CreateMovies = () => {
          >
             Crea una pelicula
          </h2>
-         <form onSubmit={(e) => handleSubmit(e)}>
+         <form id="ChupaUnLimon" onSubmit={(e) => handleSubmit(e)}>
             <Row className="justify-content-between mb-4">
                <Col md="5">
                   <div className="input__with__error">
@@ -529,24 +516,6 @@ const CreateMovies = () => {
                </Col>
             </Row>
          </Container>
-
-         {/* {poster.length !== 0
-            ? poster.map((el, index) => {
-                 return (
-                    <div
-                       key={`${Date.now()}${el.titulo}${index}`}
-                       className="Check__Movies"
-                    >
-                       <span>{el.titulo} </span>
-                       <span>{el.sinopsis} </span>
-                       <span>{el.director} </span>
-                       <span>{el.pais} </span>
-                       <span>{el.duracion} </span>
-                       <span>{el.trailer} </span>
-                    </div>
-                 );
-              })
-            : null} */}
       </Container>
    );
 };

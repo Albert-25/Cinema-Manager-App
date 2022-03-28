@@ -39,6 +39,13 @@ import {
 
 
 export const App = () => {
+   
+   let dispatch= useDispatch()
+   useEffect(()=>{
+      dispatch(AllMovies())
+      dispatch(GetAllGenres())
+      dispatch(GetAllCast())
+   },[])
 
 
    return (
@@ -127,8 +134,8 @@ export const App = () => {
                </Routes>
             </AuthProvider>
          </Router>
-         </div>
-         );
+      </div>
+   );
 };
 
 

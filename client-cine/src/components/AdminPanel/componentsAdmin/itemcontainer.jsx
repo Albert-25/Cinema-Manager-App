@@ -19,13 +19,14 @@ const Items=({nombre,titulo,genero,id,image,handleDelete})=>{
     <div className="item_admin_stack">
       <span className="item_admin_data_left">
         {image&&<Image
+          className="image_item_Adm_movies"
           src={image}
-          thumbnail={true}
+          thumbnail
           alt="Live from space album cover"
          />}
-         {titulo&&<span style={{display:"flex",alignItems:"flex-end",fontSize:"1.2em",gap:"0 0.5em"}}><h3>Titulo:</h3><p>{titulo}</p></span>}
-         {nombre&&<span style={{display:"flex",alignItems:"flex-end",fontSize:"1.2em",gap:"0 0.5em"}}><h3>Nombre:</h3><p>{nombre}</p></span>}
-        {genero&&<span style={{display:"flex",alignItems:"flex-end",fontSize:"1.2em",gap:"0 0.5em"}}><h3>Genero:</h3><p>{genero}</p></span>}
+         {titulo&&<span className="Item_movie_data_admin"><p><b>Titulo: </b>{titulo}</p></span>}
+         {nombre&&<span className="Item_movie_data_admin"><p><b>Nombre: </b>{nombre}</p></span>}
+        {genero&&<span className="Item_movie_data_admin"><p>Genero: {genero}</p></span>}
         <h4>ID: {id}</h4>
       </span>  
       <span className="item_admin_data_buttons_options" >

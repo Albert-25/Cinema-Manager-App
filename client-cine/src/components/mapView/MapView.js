@@ -7,7 +7,7 @@ import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import "./MapView.css";
 
 const MapView = () => {
-	const center = [-30.742675938688745, -64.790517707388];
+	const center = [-30.743551942205695, -64.79012074048444];
 	const marker =
 		"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png";
 	return (

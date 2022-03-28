@@ -30,6 +30,7 @@ function CreateGenre() {
       e.preventDefault();
       document.getElementById("1").value = "";
       dispatch(uploadGenre(info));
+      document.getElementById("HUHU").reset();
    }
 
    return (
@@ -48,7 +49,7 @@ function CreateGenre() {
          >
             Crear Genero
          </h2>
-         <form onSubmit={handleSubmit} style={{ width: "90%" }}>
+         <form id="HUHU" onSubmit={handleSubmit} style={{ width: "90%" }}>
             <Row className="justify-content-center">
                <Col md="6">
                   <Form.Label style={{ letterSpacing: "1px" }}>
@@ -80,8 +81,8 @@ function CreateGenre() {
                      />
                   </div>
                   <div>
-                     <Link to="/">
-                        <Button>Regresar a Home</Button>
+                     <Link to="/admin">
+                        <Button>Regresar a Admin</Button>
                      </Link>
                   </div>
                </Col>

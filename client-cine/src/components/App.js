@@ -39,11 +39,13 @@ import {
 
 
 export const App = () => {
-   // const dispatch = useDispatch()
-
-   // useEffect(() => {
-   //    dispatch(AllMovies());
-   // }, []);
+   
+   let dispatch= useDispatch()
+   useEffect(()=>{
+      dispatch(AllMovies())
+      dispatch(GetAllGenres())
+      dispatch(GetAllCast())
+   },[])
 
 
    return (

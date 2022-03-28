@@ -56,7 +56,24 @@ const Carousel = (AllMovies) => {
                 })
             }
         </Slider>
-    </section>:null}
+    </section>:<section className='slider'>
+        <h1 className='slider__title'>
+            Estrenos imperdibles!
+        </h1>
+        <Slider className="slider__content" autoplay={true} autoplaySpeed={4000}>
+            {
+                axiliar.map(elm => {
+                    return (<div className='slider__content--item' key={elm.id}>
+                        <img src={elm.background} alt={elm.titulo}></img>
+                        <Link to={`MovieDetails/${elm.id}`}>
+                            <p className='slider-description'>{elm.titulo}</p>
+                        </Link>
+
+                    </div>)
+                })
+            }
+        </Slider>
+    </section>}
         </>)
 }
 

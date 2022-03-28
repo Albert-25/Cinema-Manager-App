@@ -48,6 +48,12 @@ export default function NavBar(){
              </Nav.Item>
              /
              {user?.rol==="admin"&&<Nav.Item as="li"><Link className="link_nav_items" to="/admin">Admin</Link></Nav.Item>}
+             {user?.rol==="admin"&& "/"}
+              <Nav.Item as="li">
+                  <Link className="link_nav_items" to="/about">About</Link>
+             </Nav.Item>
+             
+
       </Nav>:null}
   </Navbar>
     </React.Fragment>)

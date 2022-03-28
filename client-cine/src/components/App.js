@@ -3,7 +3,6 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import CreateActor from "./CreateActor/CreateActor.jsx";
 import CreateGenre from "./CreateGenre/CreateGenre.jsx";
 import CreateMovies from "./CreateMovies/CreateMovies.js";
-import EditMovies from "./EditMovies/EditMovies.jsx";
 import CreateProduct from "./CreateProduct/CreateProduct.jsx";
 import DetailsMovies from "./Details/DetailsMovies";
 import ProductDetail from "./Products/ProductDetail";
@@ -16,11 +15,8 @@ import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
 //Changes
 import { AuthProvider } from "../contexts/AuthContext";
 import Signup from "./Signup";
-//import Dashboard from "./Dashboard";
 import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
-import PrivateComment from "./PrivateComment";
-
 import PrivateUpdate from "./PrivateUpdate";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
@@ -38,6 +34,7 @@ import {
    FiltrarGeneroYCast,
    editMovie,
 } from "./../store/actions";
+
 
 export const App = () => {
 
@@ -131,3 +128,5 @@ export const App = () => {
          </div>
          );
 };
+
+

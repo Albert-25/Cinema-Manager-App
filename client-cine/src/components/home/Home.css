@@ -1,10 +1,19 @@
 html {
-   background-color: var(--first-color);
+    background-color: var(--first-color);
 }
 
 .Home__Background {
-   margin: 0;
-   height: 100%;
-   width: 100%;
-   background-color: var(--first-color);
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--first-color);
+}
+
+.Home__MoviesContainer {
+    display: flex;
+    justify-content: center
+}
+
+.Home__Movies {
+    display: flex;
 }

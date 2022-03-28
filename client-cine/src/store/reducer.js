@@ -120,19 +120,20 @@ const reducer = (state = initialState, action) => {
       };
     }
 
-    case "GENRES": {
-      return {
-        ...state,
-        GenresAll: state.GenresAll.concat(action.payload.generos),
-      };
-    }
 
-    case "CAST": {
-      return {
-        ...state,
-        CastAll: state.CastAll.concat(action.payload.actores),
-      };
-    }
+        case "GENRES": {
+            return {
+                ...state,
+                GenresAll:action.payload.generos,
+            };
+        }
+
+        case "CAST": {
+            return {
+                ...state,
+                CastAll:action.payload.actores,
+            };
+        }
 
     case "FILTRARGENRES": {
       let ArrayReader = (elm, action) => {
@@ -276,4 +277,5 @@ const reducer = (state = initialState, action) => {
     // }
   }
 };
-export default reducer;
+
+export default reducer

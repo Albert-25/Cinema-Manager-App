@@ -1,25 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {Card} from 'react-bootstrap'
 import "./Product.css";
 
 export default function Product({ id, nombreProducto, imagenProducto, precio, stock }) {
     return (
         <>
             <Link to={`Products/${id}`}>
-                <div
-                    className="Product__All"
-                    style={{ backgroundImage: `url('${imagenProducto}')` }}>
-                    <div className="Product__ContainerImg">
-                        <div className="Product__title">
-                        {nombreProducto}
-                        </div>
-                        <div className="Product__info">
-                            
-                             {precio} $<br></br>
-                            Quedan: {stock}!
-                        </div>
-                    </div>
-                </div>
+                 <Card className="bg-dark text-black">
+                    <Card.Img src={imagenProducto} alt="Card image" />
+                    <Card.ImgOverlay>
+                    <Card.Title>{nombreProducto}</Card.Title>
+                    <Card.Text>
+                         Precio :{precio}
+                    </Card.Text>
+                   <Card.Text>Stock: {stock}!</Card.Text>
+                      </Card.ImgOverlay>
+                 </Card>
             </Link>
         </>
     )

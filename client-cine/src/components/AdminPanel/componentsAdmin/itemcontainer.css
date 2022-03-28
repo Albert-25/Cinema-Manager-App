@@ -21,6 +21,18 @@
 	align-items:center;
 	gap:0 1em;
 }
+.image_item_Adm_movies{
+	width: 80px !important;
+}
+.Item_movie_data_admin{
+	display:flex;
+	fontSize:1.2em;
+	gap:0 0.5em;
+}
+.Item_movie_data_admin> h3 ,p{
+	margin: 0;
+	
+}
 .btnCreateAdminM{
 	font-size: 2em;
 	color: green;

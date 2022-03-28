@@ -64,7 +64,8 @@ const reducer = (state = initialState, action) => {
     case "ALLMOVIES": {
       return {
         ...state,
-        PelisAll: state.PelisAll.concat(action.payload.pelis),
+        // PelisAll: state.PelisAll.concat(action.payload.pelis),
+        PelisAll: action.payload.pelis,
       };
     }
     case "ALLPRODUCTS": {

@@ -11,7 +11,9 @@ export const filterByActors = (array, actors) => {
   const newA = []
   for (const item of array) {
     const actMovie = item.Actores.map(a => (a.nombre))
-    if (compare(actMovie, actors)) newA.push(item)
+    // if (compare(actMovie, actors)) newA.push(item)
+    if (actors.every((v) => actMovie.includes(v))) newA.push(item)
+
   }
   return newA
 }
@@ -22,7 +24,8 @@ export const filterByGenders = (array, genders) => {
   const newA = []
   for (const item of array) {
     const genMovie = item.Generos.map(g => (g.genero))
-    if (compare(genMovie, genders)) newA.push(item)
+    // if (compare(genMovie, genders)) newA.push(item)
+    if (genders.every((v) => genMovie.includes(v))) newA.push(item)
   }
   return newA
 };

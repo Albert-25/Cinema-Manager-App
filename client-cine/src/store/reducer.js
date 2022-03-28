@@ -48,18 +48,18 @@ const reducer = (state = initialState, action) => {
     // }
 
 
-        case "DETAILEDMOVIE": {
-            return {
-                ...state,
-                PelisDetails: action.payload.detis,
-            };
-        }
-        case "DETAILEDPRODUCT": {
-            return {
-                ...state,
-                ProductDetails: action.payload.produs,
-            };
-        }
+    case "DETAILEDMOVIE": {
+      return {
+        ...state,
+        PelisDetails: action.payload.detis,
+      };
+    }
+    case "DETAILEDPRODUCT": {
+      return {
+        ...state,
+        ProductDetails: action.payload.produs,
+      };
+    }
 
     case "ALLMOVIES": {
       return {
@@ -121,19 +121,19 @@ const reducer = (state = initialState, action) => {
     }
 
 
-        case "GENRES": {
-            return {
-                ...state,
-                GenresAll:action.payload.generos,
-            };
-        }
+    case "GENRES": {
+      return {
+        ...state,
+        GenresAll: action.payload.generos,
+      };
+    }
 
-        case "CAST": {
-            return {
-                ...state,
-                CastAll:action.payload.actores,
-            };
-        }
+    case "CAST": {
+      return {
+        ...state,
+        CastAll: action.payload.actores,
+      };
+    }
 
     case "FILTRARGENRES": {
       let ArrayReader = (elm, action) => {
@@ -174,6 +174,7 @@ const reducer = (state = initialState, action) => {
         PelisFiltred: filteredArray,
       };
     }
+    
     case "FILTRARGENEROYCASTING": {
       let ArrayReaderGenero = (elm, action) => {
         let completeArray = [];

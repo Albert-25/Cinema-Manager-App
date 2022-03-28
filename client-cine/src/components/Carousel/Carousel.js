@@ -39,7 +39,7 @@ const Carousel = (AllMovies) => {
 
     React.useEffect(() => {
         if (AllPelis.length !== 0 && auxilio.length === 2) {
-            // console.log('all', AllPelis)
+            console.log('all', AllPelis)
             // console.log('arrais: ', arrais)
             let pelis = [...AllPelis]
             let arreglar = pelis.sort((a, b) =>

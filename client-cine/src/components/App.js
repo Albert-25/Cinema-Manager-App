@@ -11,6 +11,8 @@ import { Profile } from "./profile/Profile.js";
 import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
+import EditMovies from "./EditMovies/EditMovies.jsx"
+import PrivateComment from "./PrivateComment.js"
 
 //Changes
 import { AuthProvider } from "../contexts/AuthContext";

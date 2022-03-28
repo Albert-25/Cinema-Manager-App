@@ -13,7 +13,7 @@ export const filterByActors = (array, actors) => {
     const actMovie = item.Actores.map(a => (a.nombre))
     // if (compare(actMovie, actors)) newA.push(item)
     if (actors.every((v) => actMovie.includes(v))) newA.push(item)
-
+    
   }
   return newA
 }

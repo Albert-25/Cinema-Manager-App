@@ -64,7 +64,9 @@ const reducer = (state = initialState, action) => {
     case "ALLMOVIES": {
       return {
         ...state,
+
         PelisAll:action.payload.pelis,
+
       };
     }
     case "ALLPRODUCTS": {
@@ -151,7 +153,7 @@ const reducer = (state = initialState, action) => {
         PelisFiltred: filteredArray,
       };
     }
-    
+
     case "FILTRARGENEROYCASTING": {
       let ArrayReaderGenero = (elm, action) => {
         let completeArray = [];

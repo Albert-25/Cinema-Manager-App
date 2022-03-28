@@ -134,7 +134,9 @@ export const App = () => {
                </Routes>
             </AuthProvider>
          </Router>
+
          );
+   );
 };
 
 

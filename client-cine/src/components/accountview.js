@@ -16,7 +16,7 @@ export default function AccountView() {
       if(!user?.rol){
         navigate("/");
       }else if(user?.rol){
-        navigate('/login')
+        navigate('/')
       }
     } catch {
       setError("Failed to Log out");

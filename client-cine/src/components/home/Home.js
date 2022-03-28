@@ -8,13 +8,6 @@ import "./Home.css"
 
 const Home = () => {
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(AllMovies());
-    dispatch(GetAllGenres());
-    dispatch(GetAllCast());
-  }, []);
-
   return (
     <div className="Home__Background">
       <NavBar />

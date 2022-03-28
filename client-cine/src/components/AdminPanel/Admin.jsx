@@ -8,21 +8,7 @@ import './Admin.css'
 
 
 export default function Admin() {
-  let dispatch = useDispatch()
-  let { PelisAll } = useSelector(state => state)
-  let { GenresAll } = useSelector(state => state)
-  let { CastAll } = useSelector(state => state)
-  useEffect(() => {
-    if (PelisAll.length < 1) {
-      dispatch(AllMovies())
-    }
-    if (GenresAll.length < 1) {
-      dispatch(GetAllGenres())
-    }
-    if (CastAll.length < 1) {
-      dispatch(GetAllCast())
-    }
-  }, [PelisAll, GenresAll, CastAll])
+
   
   return (
     <AdminContextProvider>

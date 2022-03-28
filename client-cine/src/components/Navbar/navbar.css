@@ -35,6 +35,8 @@
 }
 .nav_link_bar_bottom{
 	color: white;
+	display: flex;
+	gap: 0 0.5em;
 }
 .link_nav_items{
 	color: white;

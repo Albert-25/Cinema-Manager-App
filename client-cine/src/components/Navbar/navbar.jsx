@@ -18,27 +18,40 @@ export default function NavBar() {
 
   return (
     <React.Fragment>
-      <Navbar className="navbar_hm" fixed="top" >
-        <Container>
-          <Navbar.Brand ><Link style={{ textDecoration: "none", color: "white" }} to="/">{currentUser && user?.rol === "admin" ? `Admin: @${user.nombre}` : "Y el logo?"}</Link></Navbar.Brand>
-          <Nav className="me-end btn_menu_nav">
-            {currentUser ? <AccountView /> :
-              <Button bsPrefix="btn_navbar_actions account_btn_navbar" onClick={(e) => navigate('/login')}>
-                <FaUserAlt />
-              </Button>
-            }
-            <Button bsPrefix="btn_navbar_actions menu_btn" onClick={(e) => setOpen(!open)}  >
-              <IoMenuSharp />
-            </Button>
-          </Nav>
-        </Container>
-        {open ? <Breadcrumb className="nav_link_bar_bottom" >
-          <Breadcrumb.Item active ><Link className="link_nav_items" to="/">Home</Link></Breadcrumb.Item>
-          <Breadcrumb.Item active ><Link className="link_nav_items" to="/productpage">Products</Link></Breadcrumb.Item>
-          <Breadcrumb.Item active ><Link className="link_nav_items" to="/about">About Us</Link></Breadcrumb.Item>
-          {user?.rol === "admin" && <Breadcrumb.Item active ><Link className="link_nav_items" to="/admin">Admin</Link></Breadcrumb.Item>}
-        </Breadcrumb> : null}
-      </Navbar>
+
+    <Navbar className="navbar_hm" fixed="top" >
+    <Container>
+    <Navbar.Brand ><Link style={{textDecoration:"none",color:"white"}} to="/">{currentUser&&user?.rol==="admin"?`Admin: @${user.nombre}`:"Y el logo?"}</Link></Navbar.Brand>
+    <Nav className="me-end btn_menu_nav">
+      {currentUser? <AccountView/>:
+        <Button bsPrefix="btn_navbar_actions account_btn_navbar" onClick={(e)=>navigate('/login')}>
+           <FaUserAlt/>
+         </Button>
+      }
+      <Button bsPrefix="btn_navbar_actions menu_btn" onClick={(e)=>setOpen(!open)}  >
+        <IoMenuSharp />
+      </Button>
+    </Nav>
+    </Container>
+    {open?
+      <Nav defaultActiveKey="/home" as="ul" className="nav_link_bar_bottom">
+             <Nav.Item as="li">
+                 <Link className="link_nav_items" to="/">Home</Link>
+             </Nav.Item>
+             /
+             <Nav.Item as="li">
+                  <Link className="link_nav_items" to="/productpage">Products</Link>
+             </Nav.Item>
+             /
+             {user?.rol==="admin"&&<Nav.Item as="li"><Link className="link_nav_items" to="/admin">Admin</Link></Nav.Item>}
+             {user?.rol==="admin"&& "/"}
+              <Nav.Item as="li">
+                  <Link className="link_nav_items" to="/about">About</Link>
+             </Nav.Item>
+             
+
+      </Nav>:null}
+  </Navbar>
     </React.Fragment>)
 
 }

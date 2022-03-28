@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import CreateActor from "./CreateActor/CreateActor.jsx";
 import CreateGenre from "./CreateGenre/CreateGenre.jsx";
 import CreateMovies from "./CreateMovies/CreateMovies.js";
+import EditMovies from "./EditMovies/EditMovies.jsx";
 import CreateProduct from "./CreateProduct/CreateProduct.jsx";
 import DetailsMovies from "./Details/DetailsMovies";
 import ProductDetail from "./Products/ProductDetail";
@@ -11,7 +12,7 @@ import { Profile } from "./profile/Profile.js";
 import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
-import ProductsPage from "./Products/ProductsPage"
+import ProductsPage from "./Products/ProductsPage";
 
 //Changes
 import { AuthProvider } from "../contexts/AuthContext";
@@ -37,15 +38,12 @@ import {
   FiltrarGenero,
   FiltrarCast,
   FiltrarGeneroYCast,
+  editMovie,
 } from "./../store/actions";
 
-
 export const App = () => {
-
-
   return (
     <Router>
-
       <AuthProvider>
         <Routes>
            /*Rutas agregadas*/
@@ -97,6 +95,7 @@ export const App = () => {
               </PrivateRoute>
             }
           />
+
             <Route
              path="/admin/createproducto"
              element={
@@ -105,13 +104,21 @@ export const App = () => {
               </PrivateRoute>
             }
           />
-
+          <Route
+            path="/admin/editpelicula/:id"
+            element={
+              <PrivateRoute component={EditMovies}>
+                <EditMovies />
+              </PrivateRoute>
+            }
+          />
           <Route path="/review/:id" element={
             <PrivateComment component={Review}>
             <Review />
             </ PrivateComment>
           } />
            /*Rutas privadas*/
+
           <Route path="/" element={<Home />} />
           <Route path="/productpage" element={<ProductsPage />} />
           <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
@@ -122,9 +129,5 @@ export const App = () => {
         </Routes>
       </AuthProvider>
     </Router>
-
-
   );
 };
-
-

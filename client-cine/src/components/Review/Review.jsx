@@ -5,6 +5,7 @@ import styles from "./Review.module.css"
 import { DivStar } from "./styled"
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 
 const Review = () => {
@@ -19,8 +20,10 @@ const Review = () => {
     const [errorPuntuacion, setErrorPuntuacion] = useState("")
     const [errorComentario, setErrorComentario] = useState("")
     const [error2Comentario, setError2Comentario] = useState("")
-    const nombre = "Anonimo";
-
+    // const nombre = "Anonimo";
+    const { user, currentUser } = useAuth();
+    let nombre = user && user.nombre ? user.nombre :"Anonimo"
+    console.log(user)
 
     const onChange = (e) => {
         console.log(e.target.value)

@@ -24,9 +24,14 @@ export default function AccountView() {
   }
   return (
     <>
+<<<<<<< HEAD
       <Dropdown className="drop_account_container">
          <Dropdown.Toggle bsPrefix  variant="primary" id="dropdown-basic" >
            <Image  className="image_account" fluid={true} src={user?.imagen||iconAuxiliar}/>
+=======
+      <Dropdown>
+         <Dropdown.Toggle variant="success" id="dropdown-basic">
+>>>>>>> c1ccb47505424b0d9aa2af07953f508103853a94
          </Dropdown.Toggle>
          <Dropdown.Menu>
            <Dropdown.Item onClick={()=>navigate('/update-profile')}>update profile</Dropdown.Item>

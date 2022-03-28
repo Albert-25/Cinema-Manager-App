@@ -2,7 +2,7 @@ import Slider from "infinite-react-carousel"
 import { useSelector } from "react-redux";
 import "./Carousel.css"
 import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 
 const Carousel = (AllMovies) => {
 
@@ -39,7 +39,7 @@ const Carousel = (AllMovies) => {
 
     React.useEffect(() => {
         if (AllPelis.length !== 0 && auxilio.length === 2) {
-            // console.log('all', AllPelis)
+            console.log('all', AllPelis)
             // console.log('arrais: ', arrais)
             let pelis = [...AllPelis]
             let arreglar = pelis.sort((a, b) =>

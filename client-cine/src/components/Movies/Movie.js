@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Card } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import "./Movie.css";
 import { getAllReviewByIdOfMovie } from "../../store/actions";
 import { useSelector, useDispatch } from "react-redux";

@@ -7,6 +7,7 @@ import ReviewToShow from "../ReviewToShow/ReviewToShow.jsx"
 import { BodyBackground } from "./styled.js"
 import "./DetailsMovies.css";
 import ReactPlayer from "react-player"
+import { Form, Button} from "react-bootstrap";
 
 const DetailsMovies = (props) => {
     let { id: code } = useParams();
@@ -147,17 +148,17 @@ const DetailsMovies = (props) => {
                     <div className="buttons">
                         <div className="div_lef">
                             <div>Ordenar por rating:</div>
-                            <select className="filterByRating" onChange={handleFilterRating}>
+                            <Form.Select className="filterByRating" onChange={handleFilterRating}>
                                 <option selected disabled={true}>Select rating</option>
                                 <option value="asc">Ascendente</option>
                                 <option value="des">Descendente</option>
-                            </select>
+                            </Form.Select >
                             <Link className="button_comentar" to={`/review/${id}`}>
-                                <button>Escribir un comentario</button>
+                                <Button>Escribir un comentario</Button>
                             </Link>
                         </div>
                     </div>
-                    <div>
+                    <div className="Details__rightdown__container">
                         <a href="/" className="Details__rightdown">
                             <p className="Details__rightdown__text">👉 Go back 👈</p>
                         </a>

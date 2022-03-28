@@ -1,20 +1,26 @@
 .Create__Movies {
-   width: 100%;
+   width: 90%;
    max-width: 1200px;
-   display: flex;
+   margin-top: 3rem;
+   /* display: flex;
    flex-direction: column;
    justify-content: center;
-   align-items: center;
+   align-items: center; */
 }
 
-.Create__Movies input {
+.Create__Movies label {
+   color: var(--text-light-color);
+   letter-spacing: 1px;
+}
+
+/* .Create__Movies input {
    margin: 1rem;
 }
 
 .Create__Movies select {
    margin: 1rem;
    width: 172px;
-}
+} */
 
 .input__with__error span {
    margin: auto;
@@ -22,17 +28,24 @@
    letter-spacing: 1px;
 }
 
-.SelectedFilters {
-   max-height: 15vh;
+/* .SelectedFilters {
    display: flex;
    margin-bottom: 1rem;
-   overflow: scroll;
+   margin-right: 1rem;
+} */
+
+/* .Selected__Genders {
+   width: 47%;
 }
 
-.close {
+.Selected__Actors {
+   width: 47%;
+} */
+
+/* .close {
    margin: 1rem;
-}
-
+} */
+/* 
 .gendersChoosenContainer,
 .castChoosenContainer {
    padding: 3rem;
@@ -41,4 +54,4 @@
 .gendersChoosenContainer div,
 .castChoosenContainer div {
    display: flex;
-}
+} */

@@ -222,9 +222,21 @@ export const editMovie = (id, data) => {
 export const filterReviewByRating = (payload) => {
   return {
     type: "FILTER_REVIEWBYRATING",
-    payload,
-  };
+
+    payload
+  }
+}
+
+
+export const removeActors=(id)=>{
+  return (dispatch)=>{
+    axios.delete(`http://localhost:3001/actores/${parseInt(id)}`)
+    .then(res=>dispatch({type:"DELETECAST",payload:id}))
+    .catch(err=>console.log(err.response))
+  }
+
 };
+
 // export function deleteReview(id) {
 //   return async function (dispatch) {
 //     const json = await axios.delete(`http://localhost:3001/comentarios/${id}`);

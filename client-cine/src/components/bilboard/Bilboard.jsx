@@ -15,7 +15,7 @@ export const Bilboard = () => {
   const moviesByTitle = filterByTitle(moviesAll, title)
   const moviesByActors = filterByActors(moviesByTitle, actors)
   const moviesByGenders = filterByGenders(moviesByActors, genders)
-  const moviesPerPage = 2;
+  const moviesPerPage = 4;
   const end = moviesPerPage * pageSelected;
   const start = end - moviesPerPage;
   const filteredMovies = moviesByGenders.slice(start, end)

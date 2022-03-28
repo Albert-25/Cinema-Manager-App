@@ -21,6 +21,14 @@
 	align-items:center;
 	gap:0 1em;
 }
+.btnCreateAdminM{
+	font-size: 2em;
+	color: green;
+}
+.btnCreateAdminM:hover{
+	color: #04ff00;
+	text-shadow: 1px 1px 5px #04ff00;
+}
 .item_admin_data_buttons_options{
 	display:flex;
 	gap: 0 1em;
@@ -29,10 +37,30 @@
 }
 .item_admin_btn_create{
 	position:absolute;
-	top:-30px;
+	width: fit-content;
+	border-radius: 4em;
+	border: 0.2px transparent;
+	background-color: transparent;
+	top:-20px;
 	left:40px ;
 }
+.item_admin_btn_create:hover{
+	box-shadow: -1px -1px 5px #18f714,  1px 1px 5px #18f714;
+}
+
 .item_admin_stack_container{
 	height:100%;
 	overflow:auto;
+}
+.btn_options{
+	width: fit-content;
+	padding: 2px 5px;
+	border: 0.5px transparent;
+	background-color: transparent;
+}
+.edit_option:hover{
+	box-shadow: inset 1px 1px 1px blue, inset -1px -1px 1px blue;
+}
+.delete_option:hover{
+	box-shadow: inset 1px 1px 1px red, inset -1px -1px 1px red;
 }

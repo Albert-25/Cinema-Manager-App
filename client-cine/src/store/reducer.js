@@ -48,18 +48,18 @@ const reducer = (state = initialState, action) => {
     // }
 
 
-        case "DETAILEDMOVIE": {
-            return {
-                ...state,
-                PelisDetails: action.payload.detis,
-            };
-        }
-        case "DETAILEDPRODUCT": {
-            return {
-                ...state,
-                ProductDetails: action.payload.produs,
-            };
-        }
+    case "DETAILEDMOVIE": {
+      return {
+        ...state,
+        PelisDetails: action.payload.detis,
+      };
+    }
+    case "DETAILEDPRODUCT": {
+      return {
+        ...state,
+        ProductDetails: action.payload.produs,
+      };
+    }
 
     case "ALLMOVIES": {
       return {
@@ -120,17 +120,18 @@ const reducer = (state = initialState, action) => {
       };
     }
 
+
     case "GENRES": {
       return {
         ...state,
-        GenresAll: state.GenresAll.concat(action.payload.generos),
+        GenresAll: action.payload.generos,
       };
     }
 
     case "CAST": {
       return {
         ...state,
-        CastAll: state.CastAll.concat(action.payload.actores),
+        CastAll: action.payload.actores,
       };
     }
 
@@ -173,6 +174,7 @@ const reducer = (state = initialState, action) => {
         PelisFiltred: filteredArray,
       };
     }
+    
     case "FILTRARGENEROYCASTING": {
       let ArrayReaderGenero = (elm, action) => {
         let completeArray = [];
@@ -276,4 +278,5 @@ const reducer = (state = initialState, action) => {
     // }
   }
 };
-export default reducer;
+
+export default reducer

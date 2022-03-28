@@ -4,25 +4,19 @@ import {
     AllProducts
 } from "../../store/actions";
 import NavBar from "../Navbar/navbar.jsx";
-
 import { useSelector, useDispatch } from "react-redux";
-
 import Products from "./Products";
+import {Container} from 'react-bootstrap';
 
 const ProductsPage = () => {
     const dispatch = useDispatch();
-
     const ProductosTotales = useSelector((state) => state.ProductAll);
-
     const [container, setContainer] = useState([]);
-
-
     useEffect(() => {
         dispatch(AllProducts());
     }, [dispatch]);
 
     React.useEffect(() => {
-
         if (container.length === 0) {
             console.log(ProductosTotales)
             setContainer(ProductosTotales);
@@ -49,21 +43,13 @@ const ProductsPage = () => {
 
 
     return (
-        <div className="Product__Background">
-            <div>
-                {/* <NavBar></NavBar> */}
-            </div>
-            <div><h1>"-"</h1></div>
-            <div>
-                <h1>Vengan y compren!</h1>
-            </div>
-            <div className="Product__Productos__container">
-                <Products className="Product__Productos" productsInfo={container}></Products>
-            </div>
+        <>
+        <NavBar/>
+        <Container className="products_main_container" fluid="ls">
+           <Products className="Product__Productos" productsInfo={container}></Products>
+        </Container>
 
-        </div>
-
-
+        </>
     )
 
 };

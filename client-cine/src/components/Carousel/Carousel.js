@@ -34,7 +34,6 @@ const Carousel = (AllMovies) => {
         genero: ["???"]
     }]);
 
-    const AllPelis = useSelector((state) => state.PelisAll)
     let arregloFinal = []
 
     React.useEffect(() => {
@@ -45,9 +44,12 @@ const Carousel = (AllMovies) => {
             let arreglar = pelis.sort((a, b) =>
                 a.puntuación < b.puntuación ? 1 : b.puntuación < a.puntuación ? -1 : 0
             )
+            console.log(arreglar)
             arregloFinal = arreglar.slice(0, 3)
             console.log("arreglo final del carrusel: ", arregloFinal)
             setAuxilio(arregloFinal)
+            console.log('arr', arregloFinal)
+               console.log('auxIN', auxilio)
         }
     }, [AllPelis]);
 

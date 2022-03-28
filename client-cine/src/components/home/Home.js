@@ -8,6 +8,7 @@ import "./Home.css"
 
 const Home = () => {
   const dispatch = useDispatch()
+     const AllPelis = useSelector((state) => state.PelisAll)
 
   useEffect(() => {
     dispatch(AllMovies());

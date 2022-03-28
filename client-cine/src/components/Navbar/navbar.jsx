@@ -36,7 +36,7 @@ export default function NavBar() {
           <Breadcrumb.Item active ><Link className="link_nav_items" to="/">Home</Link></Breadcrumb.Item>
           <Breadcrumb.Item active ><Link className="link_nav_items" to="/productpage">Products</Link></Breadcrumb.Item>
           <Breadcrumb.Item active ><Link className="link_nav_items" to="/about">About Us</Link></Breadcrumb.Item>
-          {user?.rol === "admin" && <Breadcrumb.Item ><Link className="link_nav_items" to="/admin">Admin</Link></Breadcrumb.Item>}
+          {user?.rol === "admin" && <Breadcrumb.Item active ><Link className="link_nav_items" to="/admin">Admin</Link></Breadcrumb.Item>}
         </Breadcrumb> : null}
       </Navbar>
     </React.Fragment>)

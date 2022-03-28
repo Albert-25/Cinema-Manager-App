@@ -39,6 +39,11 @@ import {
 
 
 export const App = () => {
+   // const dispatch = useDispatch()
+
+   // useEffect(() => {
+   //    dispatch(AllMovies());
+   // }, []);
 
 
    return (
@@ -127,8 +132,8 @@ export const App = () => {
                </Routes>
             </AuthProvider>
          </Router>
-         </div>
-         );
+      </div>
+   );
 };
 
 

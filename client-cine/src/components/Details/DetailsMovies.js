@@ -7,7 +7,7 @@ import ReviewToShow from "../ReviewToShow/ReviewToShow.jsx"
 import { BodyBackground } from "./styled.js"
 import "./DetailsMovies.css";
 import ReactPlayer from "react-player"
-import { Form, Button} from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 const DetailsMovies = (props) => {
     let { id: code } = useParams();
@@ -159,20 +159,22 @@ const DetailsMovies = (props) => {
                         </div>
                     </div>
                     <div className="Details__rightdown__container">
-                        <a href="/" className="Details__rightdown">
+
+                        <Link to={"/"} className="Details__rightdown">
                             <p className="Details__rightdown__text">👉 Go back 👈</p>
-                        </a>
+                        </Link>
+
                     </div>
                     <div className="comentarios">
                         <ReviewToShow id={id} />
                     </div>
-                    {console.log(comentarios)}
+                    {/* {console.log(comentarios)} */}
 
                 </div>
 
 
             </div>
-        </div>
+        </div >
     );
 };
 

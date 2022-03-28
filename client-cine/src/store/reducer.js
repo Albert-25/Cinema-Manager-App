@@ -70,7 +70,7 @@ const reducer = (state = initialState, action) => {
     case "ALLPRODUCTS": {
       return {
         ...state,
-        ProductAll: state.ProductAll.concat(action.payload.produs),
+        ProductAll: action.payload.produs,
       };
     }
 
@@ -174,7 +174,7 @@ const reducer = (state = initialState, action) => {
         PelisFiltred: filteredArray,
       };
     }
-    
+
     case "FILTRARGENEROYCASTING": {
       let ArrayReaderGenero = (elm, action) => {
         let completeArray = [];

@@ -2,7 +2,7 @@ import Slider from "infinite-react-carousel"
 import { useSelector } from "react-redux";
 import "./Carousel.css"
 import { Link } from 'react-router-dom';
-import React, { useState} from "react";
+import React, { useState } from "react";
 
 const Carousel = (AllMovies) => {
 
@@ -35,12 +35,14 @@ const Carousel = (AllMovies) => {
     }]);
 
     const AllPelis = useSelector((state) => state.PelisAll)
-    let arregloFinal = []
+
+    console.log('AUXILIO!: ',auxilio )
 
     React.useEffect(() => {
+        let arregloFinal = []
         if (AllPelis.length !== 0 && auxilio.length === 2) {
             console.log('all', AllPelis)
-            // console.log('arrais: ', arrais)
+
             let pelis = [...AllPelis]
             let arreglar = pelis.sort((a, b) =>
                 a.puntuación < b.puntuación ? 1 : b.puntuación < a.puntuación ? -1 : 0
@@ -57,7 +59,7 @@ const Carousel = (AllMovies) => {
         </h1>
         <Slider className="slider__content" autoplay={true} autoplaySpeed={4000}>
             {
-                auxilio.map(elm => {
+                auxilio && auxilio.map(elm => {
                     return (<div className='slider__content--item' key={elm.id}>
                         <img src={elm.background} alt={elm.titulo}></img>
                         <Link to={`MovieDetails/${elm.id}`}>

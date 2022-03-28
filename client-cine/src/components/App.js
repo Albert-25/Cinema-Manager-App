@@ -11,7 +11,6 @@ import { Profile } from "./profile/Profile.js";
 import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
-import ProductsPage from "./Products/ProductsPage"
 
 //Changes
 import { AuthProvider } from "../contexts/AuthContext";
@@ -24,17 +23,15 @@ import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 
 import ReviewToShow from "./ReviewToShow/ReviewToShow.jsx";
-
 import Admin from "./AdminPanel/Admin.jsx";
 import { useDispatch } from "react-redux";
-
 import {
-  AllMovies,
-  GetAllGenres,
-  GetAllCast,
-  FiltrarGenero,
-  FiltrarCast,
-  FiltrarGeneroYCast,
+   AllMovies,
+   GetAllGenres,
+   GetAllCast,
+   FiltrarGenero,
+   FiltrarCast,
+   FiltrarGeneroYCast,
 } from "./../store/actions";
 
 

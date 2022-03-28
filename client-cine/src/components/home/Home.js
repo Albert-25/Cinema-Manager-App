@@ -8,6 +8,7 @@ import "./Home.css"
 
 const Home = () => {
   const dispatch = useDispatch()
+
      const AllPelis = useSelector((state) => state.PelisAll)
 
   useEffect(() => {
@@ -15,6 +16,7 @@ const Home = () => {
     dispatch(GetAllGenres());
     dispatch(GetAllCast());
   }, []);
+
 
   return (
     <div className="Home__Background">

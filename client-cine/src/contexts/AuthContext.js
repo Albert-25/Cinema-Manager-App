@@ -58,8 +58,9 @@ export function AuthProvider({ children }) {
   function updateEmail(email) {
     return currentUser.updateEmail(email);
   }
-  function updatePassword(password) {
-    return currentUser.updatePassword(password);
+  async function updatePassword(password) {
+    // return currentUser.updatePassword(password);
+    await updatePassword(auth,password) 
   }
   function updateName(name, imagen, user) {
     console.log(user)

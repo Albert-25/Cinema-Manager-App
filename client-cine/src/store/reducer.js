@@ -223,6 +223,11 @@ const reducer = (state = initialState, action) => {
           ...state,
           CastAll:state.CastAll.filter(e=>e.id!== action.payload)
          }
+    case "DELETEPRODUCT":
+          return {
+            ...state,
+            ProductAll:state.ProductAll.filter(e=>e.id!== action.payload)
+          }
     case "FILTER_REVIEWBYRATING":
       let comentariosByRating;
       if (action.payload === "asc") {

@@ -256,6 +256,13 @@ export const removeGenres =(id)=>{
     .catch(res=>alert(res.response.data))
   }
 }
+export const removeProduct=(id)=>{
+  return (dispatch)=>{
+    axios.delete(`http://localhost:3001/productos/${parseInt(id)}`)
+    .then(res=>dispatch({type:"DELETEPRODUCT",payload:parseInt(id)}))
+    .catch(res=>alert(res.response))
+  }
+}
 
 // export function deleteReview(id) {
 //   return async function (dispatch) {

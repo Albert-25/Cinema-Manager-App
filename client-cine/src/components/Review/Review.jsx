@@ -4,11 +4,15 @@ import { postReview } from "../../store/actions"
 import styles from "./Review.module.css"
 import { DivStar } from "./styled"
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 
 const Review = () => {
 
+    let navigate = useNavigate();
     const id = useParams().id;
+    console.log(id)
     const dispatch = useDispatch()
     const [comentario, setComentario] = useState("")
     const [puntuación, setPuntuación] = useState()
@@ -16,10 +20,13 @@ const Review = () => {
     const [errorPuntuacion, setErrorPuntuacion] = useState("")
     const [errorComentario, setErrorComentario] = useState("")
     const [error2Comentario, setError2Comentario] = useState("")
-    const nombre = "Anonimo";
-
+    // const nombre = "Anonimo";
+    const { user, currentUser } = useAuth();
+    let nombre = user && user.nombre ? user.nombre :"Anonimo"
+    console.log(user)
 
     const onChange = (e) => {
+        console.log(e.target.value)
         setComentario(e.target.value)
         setError2Comentario("")
     }
@@ -54,11 +61,13 @@ const Review = () => {
         if (puntuación == null) setErrorPuntuacion("es necesario calificar esta pelicula")
         if (!comentario.trim()) setError2Comentario("es necesario rellenar este campo")
         dispatch(postReview({ nombre, comentario, puntuación, id }))
+        alert("¡Comentario publicado!")
+        navigate(-1)
     }
 
     useEffect(() => {
-        if (comentario.length >= 6) {
-            setErrorComentario("se permiten como maximo 5 carácteres")
+        if (comentario.length >= 601) {
+            setErrorComentario("se permiten como maximo 600 carácteres")
         }
         else {
             setErrorComentario("")
@@ -81,7 +90,7 @@ const Review = () => {
                 <div className={styles.error}>{errorPuntuacion}</div>
                 <div>
                     <h4>¡Cuéntanos que te pareció la pelicula!</h4>
-                    <textarea cols="20" rows="10" onChange={onChange}></textarea>
+                    <textarea cols="20" rows="10" onChange={(e) => onChange(e)}></textarea>
                 </div>
                 <div className={styles.error}>{errorComentario}</div>
                 <div className={styles.error}>{error2Comentario}</div>

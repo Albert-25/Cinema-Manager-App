@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import MapView from "../mapView/MapView.js";
+import NavBar from "../Navbar/navbar.jsx";
 import "./SobreNosotros.css"
 
 const SobreNosotros = () => {
 
     return (
         <div className="SobreNosotros">
+            <NavBar></NavBar>
+            <h1>-</h1>
             <div className="SobreNosotros__title">
                 <h1>Hello! welcome to Cinene</h1>
             </div>
@@ -31,7 +34,7 @@ const SobreNosotros = () => {
                         Programado por:<br></br>
                         Agustin .(*￣０￣)ノ<br></br>
                         Dani  (。_。)<br></br>
-                        Vicen（*゜ー゜*）<br></br>
+                        Vicen(*゜ー゜*）<br></br>
                         Jonathan Σ(っ °Д °;)っ<br></br>
                         Alberto (ﾉ*･ω･)ﾉ<br></br>
                         Elian (´･ω･`)?<br></br>

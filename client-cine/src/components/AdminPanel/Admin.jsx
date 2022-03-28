@@ -1,21 +1,22 @@
-import React from 'react'
-import {Container} from '@mui/material'
-import CssBaseline from "@mui/material/CssBaseline";
-import NavAdmin from './componentsAdmin/navadmin'
+import React, { useEffect } from 'react'
 import Main from './componentsAdmin/main.jsx'
-import {AdminContextProvider} from './admincontext.jsx'
+import { AdminContextProvider } from './admincontext.jsx'
+import { useDispatch, useSelector } from 'react-redux'
+import { AllMovies, GetAllCast, GetAllGenres } from './../../store/actions'
+import NavBar from './../Navbar/navbar.jsx'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Admin.css'
 
 
+export default function Admin() {
 
-export default function Admin (){
-	return (
-		
-       <AdminContextProvider>
-          <CssBaseline />
-          <Container maxWidth="ls" sx={{ height: "100vh",backgroundColor:"lightgray"}}>
-            <NavAdmin/>
-            <Main/>
-          </Container>
-       </AdminContextProvider>
-   )
+  
+  return (
+    <AdminContextProvider>
+      <div id="admin_section_container">
+        <NavBar />
+        <Main />
+      </div>
+    </AdminContextProvider>
+  )
 }

@@ -1,16 +1,14 @@
 import axios from "axios";
 
 export function postMovies(inputs) {
-  return function (dispatch) {
-    fetch("http://localhost:3001/peliculas", {
-      method: "POST", // or 'PUT'
-      body: JSON.stringify(inputs), // data can be `string` or {object}!
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(() => console.log({ msg: "Success" }))
-      .catch((err) => console.log(err.message));
+  return  (dispatch) => {
+     axios.post("http://localhost:3001/peliculas", inputs)
+     .then(res=>{
+      dispatch(AllMovies())
+     },err=>{
+      alert(err.response)
+     })
+
   };
 }
 
@@ -21,6 +19,17 @@ export const AllMovies = () => {
       dispatch({
         type: "ALLMOVIES",
         payload: { pelis: response.data },
+      });
+    }
+  };
+};
+export const AllProducts = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`http://localhost:3001/productos`);
+    if (response?.data) {
+      dispatch({
+        type: "ALLPRODUCTS",
+        payload: { produs: response.data },
       });
     }
   };
@@ -42,6 +51,22 @@ export const DetailedMovie = (id) => {
   };
 };
 
+export const DetailedProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/productos/${id}`);
+      if (response?.data) {
+        dispatch({
+          type: "DETAILEDPRODUCT",
+          payload: { produs: response.data },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export function getAllReviewByIdOfMovie(id) {
   return async function (dispatch) {
     const json = await axios.get(`http://localhost:3001/comentarios/${id}`);
@@ -51,6 +76,14 @@ export function getAllReviewByIdOfMovie(id) {
     });
   };
 }
+
+export const BestMovies = (arg) => {
+  // console.log("howdy im action")
+  return {
+    type: "BESTMOVIES",
+    payload: arg,
+  };
+};
 
 export const postReview = (payload) => {
   return async (dispatch) => {
@@ -108,33 +141,135 @@ export const FiltrarGeneroYCast = (arg) => {
 };
 
 export const uploadGenre = (info) => {
-  return async function postGenre() {
-    let body = {
-      Genre: {
-        genero: info.genero,
-      },
-    };
-    try {
-      await axios.post("http://localhost:3001/generos", body);
-      alert("Genero creado satisfactoriamente");
-    } catch (error) {
-      alert("Error, el genero ya se encuentra en la base de datos");
-    }
+  return function postGenre(dispatch) {
+    let body = {Genre: {genero: info.genero,}}
+    axios.post("http://localhost:3001/generos", body)
+      .then(res=>{
+        alert("Genero creado satisfactoriamente")
+        dispatch(GetAllGenres()) })
+      .catch(err=>{
+        alert("Error, el genero ya se encuentra en la base de datos");
+      })
+    
   };
 };
 
 export const uploadActor = (info) => {
-  return async function postActor() {
+  return async function postActor(dispatch) {
     let body = {
       Actor: {
         nombre: info.nombre,
       },
     };
+      axios.post("http://localhost:3001/actores", body)
+      .then(resp=>{
+        alert("Actor creado satisfactoriamente")
+        dispatch(GetAllCast())
+      },error=>{
+        alert("Error, el actor ya se encuentra en la base de datos");
+      })
+    
+  };
+};
+
+export const uploadProduct = (info) => {
+  if (info.imagenProducto === "") {
+    info.imagenProducto =
+      "https://www.feednavigator.com/var/wrbm_gb_food_pharma/storage/images/9/2/8/5/235829-6-eng-GB/Feed-Test-SIC-Feed-20142.jpg";
+  }
+  return async function postProduct(dispatch) {
+    let body = {
+      Product: {
+        nombreProducto: info.nombreProducto,
+        imagenProducto: info.imagenProducto,
+        descripcion: info.descripcion,
+        precio: info.precio,
+        stock: info.stock,
+        isCombo: info.isCombo,
+      },
+    };
+    axios.post("http://localhost:3001/productos", body)
+    .then(res=>{
+      alert("Producto creado satisfactoriamente");
+      dispatch(AllProducts())
+    },error=>{
+      alert("Datos erroneos o el producto ya existe en la base de datos");
+    })
+  };
+};
+
+export const getMovieInfo = (id) => {
+  return async (dispatch) => {
     try {
-      await axios.post("http://localhost:3001/actores", body);
-      alert("Actor creado satisfactoriamente");
+      const response = await axios.get(`http://localhost:3001/peliculas/${id}`);
+      if (response?.data) {
+        dispatch({
+          type: "EDITMOVIEINFO",
+          payload: { info: response.data },
+        });
+      }
     } catch (error) {
-      alert("Error, el actor ya se encuentra en la base de datos");
+      console.log(error);
     }
   };
 };
+
+export const editMovie = (id, data) => {
+  console.log("actiondata: " + JSON.stringify(data));
+  return async () => {
+    try {
+      axios.put(`http://localhost:3001/peliculas/${id}`, data);
+      console.log(data);
+    } catch (error) {
+      alert(error);
+    }
+  };
+};
+
+export const filterReviewByRating = (payload) => {
+  return {
+    type: "FILTER_REVIEWBYRATING",
+
+    payload
+  }
+}
+
+
+export const removeActors=(id)=>{
+  return (dispatch)=>{
+    axios.delete(`http://localhost:3001/actores/${parseInt(id)}`)
+    .then(res=>dispatch({type:"DELETECAST",payload:parseInt(id)}))
+    .catch(err=>console.log(err.response))
+  }
+};
+export const removeMovie=(id)=>{
+  return (dispatch)=>{
+    axios.delete(`http://localhost:3001/peliculas/${parseInt(id)}`)
+    .then(res=>dispatch({type:"DELETEMOVIE",payload:parseInt(id)}))
+    .catch(re=>alert("error to delete"))
+  }
+}
+export const removeGenres =(id)=>{
+  return (dispatch)=>{
+    axios.delete(`http://localhost:3001/generos/${parseInt(id)}`)
+    .then(res=>dispatch({type:"DELETEGENRE",payload:parseInt(id)}))
+    .catch(res=>alert(res.response.data))
+  }
+}
+export const removeProduct=(id)=>{
+  return (dispatch)=>{
+    axios.delete(`http://localhost:3001/productos/${parseInt(id)}`)
+    .then(res=>dispatch({type:"DELETEPRODUCT",payload:parseInt(id)}))
+    .catch(res=>alert(res.response))
+  }
+}
+
+// export function deleteReview(id) {
+//   return async function (dispatch) {
+//     const json = await axios.delete(`http://localhost:3001/comentarios/${id}`);
+//     return dispatch({
+//       type: "DELETE_REVIEW",
+//       payload: json.data,
+//     });
+//   };
+// }

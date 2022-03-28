@@ -1,107 +1,57 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
-import CallFormCtrl from './../signInForm/formOpenControll.jsx'
-import {Link} from 'react-router-dom';
-import logo from "../../assets/popcorn.png"
-
-let pages=["About"]
-export default function Navbar() {
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
-   const [sizeScreen ,setSizeScreen]= React.useState(window.innerWidth)
-    React.useEffect(()=>{
-        let cancel=false
-        window.addEventListener('resize',(e)=>{
-            if(!cancel){
-                setSizeScreen(window.innerWidth)
-            }
-        })
-        return ()=>{cancel=true}
-    })
+import AccountView from './../accountview.js'
+import { useAuth } from "../../contexts/AuthContext";
+import { FaUserAlt } from 'react-icons/fa';
+import { IoMenuSharp } from 'react-icons/io5';
+import { useNavigate, Link } from 'react-router-dom';
+import { Navbar, Container, Nav, Button, Breadcrumb } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './navbar.css'
 
 
+export default function NavBar() {
+  let [open, setOpen] = React.useState(false)
+  let navigate = useNavigate()
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event &&
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
-    ) {
-      return;
-    }
 
-    setState({ ...state, [anchor]: open });
-  };
+  const { user, currentUser } = useAuth();
 
-  const list = (anchor) => (
-    <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {['About'].map((text) => (
-          <ListItem button key={text}>
-            <Link to={`/${text.toLowerCase()}`}>{text}</Link>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
   return (
-    <Box sx={{ flexGrow: 1 ,bgColor:"rgb(90, 154, 191)"}}>
-      <AppBar position="static" sx={{flexDirection:"row",padding:"0 1em",justifyContent:"space-between",backgroundColor:"rgb(90, 154, 191)",boxShadow:"none",backdropFilter:"blur(10px)"}}>
-        <Toolbar variant="dense">
-          <SwipeableDrawer
-            anchor={"left"}
-            open={state["left"]}
-            onClose={toggleDrawer("left", false)}
-            onOpen={toggleDrawer("left", true)}
-          >
-            {list("left")}
-          </SwipeableDrawer>
-          <Typography variant="h6" color="inherit" component="div">
-            <img src={logo} alt="L2ogo"/>
-          </Typography>
-            {sizeScreen>=1024?pages.map((page) => (
-                <MenuItem key={page}>
-                  <Typography textAlign="center"><Link to={`/${page.toLowerCase()}`}>{page}</Link></Typography>
-                </MenuItem>
-              )):null}
-        </Toolbar>
-        <div>
-        <CallFormCtrl txt={'SingUp'}/>
-        <CallFormCtrl txt={'LogIn'}/>
-         <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-          sx={{marginRight:"1em"}}
-        >
-          <LocalGroceryStoreIcon />
-        </IconButton>
-         {sizeScreen<=1024?<IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2,right:"0" }} onClick={toggleDrawer("left", true)} >
-            <MenuIcon />
-        </IconButton>:null}
-        </div>
-      </AppBar>
-    </Box>
-  );
+    <React.Fragment>
+
+    <Navbar className="navbar_hm" fixed="top" >
+    <Container>
+    <Navbar.Brand ><Link style={{textDecoration:"none",color:"white"}} to="/">{currentUser&&user?.rol==="admin"?`Admin: @${user.nombre}`:"Y el logo?"}</Link></Navbar.Brand>
+    <Nav className="me-end btn_menu_nav">
+      {currentUser? <AccountView/>:
+        <Button bsPrefix="btn_navbar_actions account_btn_navbar" onClick={(e)=>navigate('/login')}>
+           <FaUserAlt/>
+         </Button>
+      }
+      <Button bsPrefix="btn_navbar_actions menu_btn" onClick={(e)=>setOpen(!open)}  >
+        <IoMenuSharp />
+      </Button>
+    </Nav>
+    </Container>
+    {open?
+      <Nav defaultActiveKey="/home" as="ul" className="nav_link_bar_bottom">
+             <Nav.Item as="li">
+                 <Link className="link_nav_items" to="/">Home</Link>
+             </Nav.Item>
+             /
+             <Nav.Item as="li">
+                  <Link className="link_nav_items" to="/productpage">Products</Link>
+             </Nav.Item>
+             /
+             {user?.rol==="admin"&&<Nav.Item as="li"><Link className="link_nav_items" to="/admin">Admin</Link></Nav.Item>}
+             {user?.rol==="admin"&& "/"}
+              <Nav.Item as="li">
+                  <Link className="link_nav_items" to="/about">About</Link>
+             </Nav.Item>
+             
+
+      </Nav>:null}
+  </Navbar>
+    </React.Fragment>)
+
 }

@@ -1,0 +1,11 @@
+html {
+    background-color: #11072F;
+}
+.products_main_container{
+    height: 100vh !important;
+    background-color: #11072F;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw !important;
+}

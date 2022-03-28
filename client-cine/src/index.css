@@ -1,0 +1,34 @@
+/* ----- Customs Properties ----- */
+/* Para usarlas colocar var(--nombre-de-variable) en la propiedad que deseen. ej: border: thin solid var(--black-color); max-width: var(--max-width); en estos casos, var(--black-color) equivale a #000 y var(--max-width) equivale a 1200px */
+#root{
+   background-color: #11072f;
+}
+:root {
+   --first-color: #11072f;
+   --first-alpha-color: rgba(17, 7, 47, 0.75);
+   --second-color: #14192d;
+   --second-alpha-color: rgba(20, 25, 45, 0.75);
+   --third-color: #501464;
+   --third-alpha-color: rgba(80, 20, 100, 0.75);
+   --white-color: #fff;
+   --gray-light-color: #f3f3f3;
+   --gray-color: #ccc;
+   --gray-dark-color: #666;
+   --black-gray-color: #222;
+   --black-color: #000;
+   --link-color: #509ee3;
+   --title-color: #333;
+   --text-dark-color: #222;
+   --text-light-color: #f3f3f3;
+   --white-alpha-color: rgba(255, 255, 255, 0.5);
+   --black-alpha-color: rgba(0, 0, 0, 0.65);
+   --background-light: #f3f3f3;
+   --background-dark: #111111;
+   --font: "Open Sans", sans-serif;
+   --max-width: 1200px;
+   --header-height: 4rem;
+   --breakpoint-nm: 576px;
+   --breakpoint-md: 768px;
+   --breakpoint-lg: 992px;
+   --breakpoint-xl: 1200px;
+}

@@ -1,0 +1,32 @@
+html {
+    background-color: var(--first-color);
+}
+
+.Home__Background {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--first-color);
+}
+
+.Home__MoviesContainer {
+    display: flex;
+    justify-content: center
+}
+
+.Home__Movies {
+    display: flex;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgb(4, 255, 17);
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.25);
+  }

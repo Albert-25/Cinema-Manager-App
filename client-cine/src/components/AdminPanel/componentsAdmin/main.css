@@ -1,0 +1,35 @@
+.main_admin_panel{
+	display:inline-flex;
+	align-items:flex-end;
+	justify-content:center;
+	height: 90vh;
+	width:100%;
+	background-color:#11072F;
+}
+.main_container_panel_admin{
+	height:80%;
+	width:90%;
+	background-color:transparent;
+	display:inline-flex;
+	flex-direction: column;
+	margin: 0 auto;
+	position: relative;
+	
+}
+.main_back_to_home_btn{
+	position:absolute;
+	top:-40px;
+	left:-10px;
+	color:white;
+	background-color: transparent;
+	border:none;
+}
+.main_back_to_home_btn:hover{
+	border-bottom: 0.5px solid white;
+}
+.main_items_container_admin{
+	width:100%;
+	height:stretch;
+	background-color:white;
+	padding:2em 1em 1em 0;
+}

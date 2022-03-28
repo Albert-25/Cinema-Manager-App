@@ -1,0 +1,13 @@
+.drop_account_container{
+	max-width: 60px;
+}
+#dropdown-basic{
+	border-radius: 4em !important;
+	padding: 0;
+	height: 25px;
+}
+.image_account{
+	width: 80%;
+	height: 80%;
+	border-radius: 4em;
+}

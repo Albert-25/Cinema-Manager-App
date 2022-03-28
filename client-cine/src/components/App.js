@@ -45,11 +45,11 @@ export const App = () => {
       dispatch(AllMovies())
       dispatch(GetAllGenres())
       dispatch(GetAllCast())
-   },[])
+   },[dispatch])
 
 
    return (
-      <div style={{ backgroundColor: "var(--first-color)" }} >
+      
          <Router>
             <AuthProvider>
                <Routes>
@@ -112,7 +112,7 @@ export const App = () => {
                   <Route
                      path="/admin/editpelicula/:id"
                      element={
-                        <PrivateRoute component={EditMovies}>
+                        <PrivateRoute component={EditMovies} rol={'admin'}>
                            <EditMovies />
                         </PrivateRoute>
                      }
@@ -134,7 +134,6 @@ export const App = () => {
                </Routes>
             </AuthProvider>
          </Router>
-         </div>
          );
 };
 

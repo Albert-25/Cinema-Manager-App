@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postMovies } from "../../store/actions";
 import "./CreateMovies.css";
-import { GetAllGenres, GetAllCast } from "../../store/actions";
+import { GetAllGenres, GetAllCast ,AllMovies} from "../../store/actions";
 import { validate } from "./validate";
 import Swal from "sweetalert2";
 import Axios from "axios";
@@ -13,15 +13,9 @@ import { MdKeyboardBackspace } from "react-icons/md";
 const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
 const CreateMovies = () => {
-   const dispatch = useDispatch();
-   useEffect(() => {
-      dispatch(GetAllGenres());
-      dispatch(GetAllCast());
-   }, [dispatch]);
-
    const Genres = useSelector((state) => state.GenresAll);
    const Cast = useSelector((state) => state.CastAll);
-
+   let dispatch= useDispatch()
    const [inputs, setInputs] = useState({
       titulo: "",
       sinopsis: "",
@@ -177,6 +171,8 @@ const CreateMovies = () => {
                   actors: [],
                })
                Swal.fire("La pelicula fue agregada!", "", "success");
+               setTimeout(()=>{dispatch(AllMovies())},1000)
+
             } else if (result.isDenied) {
                Swal.fire("La pelicula no fue agregada", "", "info");
             }
@@ -405,7 +401,7 @@ const CreateMovies = () => {
                         <option value="DEFAULT" disabled>
                            Generos
                         </option>
-                        {Genres &&
+                        {Genres.length &&
                            Genres.map((item, index) => {
                               return (
                                  <option
@@ -433,7 +429,7 @@ const CreateMovies = () => {
                         <option value="DEFAULT" disabled>
                            Cast
                         </option>
-                        {Cast &&
+                        {Cast.length &&
                            Cast.map((item) => {
                               return (
                                  <option
@@ -492,7 +488,7 @@ const CreateMovies = () => {
                                     letterSpacing: "1px",
                                  }}
                               >
-                                 {Genres[item - 1].genero}
+                                 {Genres[item - 1]?.genero}
                               </span>
                               <Button onClick={() => handleOnClickGenres(item)}>
                                  X
@@ -518,7 +514,7 @@ const CreateMovies = () => {
                                     letterSpacing: "1px",
                                  }}
                               >
-                                 {Cast[item - 1].nombre}
+                                 {Cast[item - 1]?.nombre}
                               </span>
                               <Button onClick={() => handleOnClickCast(item)}>
                                  X

@@ -1,8 +1,14 @@
 import axios from "axios";
 
 export function postMovies(inputs) {
-  return async (dispatch) => {
-    await axios.post("http://localhost:3001/peliculas", inputs);
+  return  (dispatch) => {
+     axios.post("http://localhost:3001/peliculas", inputs)
+     .then(res=>{
+      dispatch(AllMovies())
+     },err=>{
+      alert(err.response)
+     })
+
   };
 }
 
@@ -135,34 +141,34 @@ export const FiltrarGeneroYCast = (arg) => {
 };
 
 export const uploadGenre = (info) => {
-  return async function postGenre() {
-    let body = {
-      Genre: {
-        genero: info.genero,
-      },
-    };
-    try {
-      await axios.post("http://localhost:3001/generos", body);
-      alert("Genero creado satisfactoriamente");
-    } catch (error) {
-      alert("Error, el genero ya se encuentra en la base de datos");
-    }
+  return function postGenre(dispatch) {
+    let body = {Genre: {genero: info.genero,}}
+    axios.post("http://localhost:3001/generos", body)
+      .then(res=>{
+        alert("Genero creado satisfactoriamente")
+        dispatch(GetAllGenres()) })
+      .catch(err=>{
+        alert("Error, el genero ya se encuentra en la base de datos");
+      })
+    
   };
 };
 
 export const uploadActor = (info) => {
-  return async function postActor() {
+  return async function postActor(dispatch) {
     let body = {
       Actor: {
         nombre: info.nombre,
       },
     };
-    try {
-      await axios.post("http://localhost:3001/actores", body);
-      alert("Actor creado satisfactoriamente");
-    } catch (error) {
-      alert("Error, el actor ya se encuentra en la base de datos");
-    }
+      axios.post("http://localhost:3001/actores", body)
+      .then(resp=>{
+        alert("Actor creado satisfactoriamente")
+        dispatch(GetAllCast())
+      },error=>{
+        alert("Error, el actor ya se encuentra en la base de datos");
+      })
+    
   };
 };
 
@@ -171,7 +177,7 @@ export const uploadProduct = (info) => {
     info.imagenProducto =
       "https://www.feednavigator.com/var/wrbm_gb_food_pharma/storage/images/9/2/8/5/235829-6-eng-GB/Feed-Test-SIC-Feed-20142.jpg";
   }
-  return async function postProduct() {
+  return async function postProduct(dispatch) {
     let body = {
       Product: {
         nombreProducto: info.nombreProducto,
@@ -182,12 +188,13 @@ export const uploadProduct = (info) => {
         isCombo: info.isCombo,
       },
     };
-    try {
-      await axios.post("http://localhost:3001/productos", body);
+    axios.post("http://localhost:3001/productos", body)
+    .then(res=>{
       alert("Producto creado satisfactoriamente");
-    } catch (error) {
+      dispatch(AllProducts())
+    },error=>{
       alert("Datos erroneos o el producto ya existe en la base de datos");
-    }
+    })
   };
 };
 
@@ -231,11 +238,24 @@ export const filterReviewByRating = (payload) => {
 export const removeActors=(id)=>{
   return (dispatch)=>{
     axios.delete(`http://localhost:3001/actores/${parseInt(id)}`)
-    .then(res=>dispatch({type:"DELETECAST",payload:id}))
+    .then(res=>dispatch({type:"DELETECAST",payload:parseInt(id)}))
     .catch(err=>console.log(err.response))
   }
-
 };
+export const removeMovie=(id)=>{
+  return (dispatch)=>{
+    axios.delete(`http://localhost:3001/peliculas/${parseInt(id)}`)
+    .then(res=>dispatch({type:"DELETEMOVIE",payload:parseInt(id)}))
+    .catch(re=>alert("error to delete"))
+  }
+}
+export const removeGenres =(id)=>{
+  return (dispatch)=>{
+    axios.delete(`http://localhost:3001/generos/${parseInt(id)}`)
+    .then(res=>dispatch({type:"DELETEGENRE",payload:parseInt(id)}))
+    .catch(res=>alert(res.response.data))
+  }
+}
 
 // export function deleteReview(id) {
 //   return async function (dispatch) {

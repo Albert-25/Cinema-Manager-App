@@ -4,6 +4,7 @@ import ItemsContainer from './itemcontainer.jsx'
 import {BsArrowLeftShort} from 'react-icons/bs'
 import {Button} from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './main.css'
 export default function  Main(){
     let nagivate= useNavigate()	

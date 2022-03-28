@@ -37,11 +37,18 @@ export default function NavBar(){
       </Button>
     </Nav>
     </Container>
-    {open?<Breadcrumb className="nav_link_bar_bottom" >
-         <Breadcrumb.Item  active ><Link className="link_nav_items" to="/">Home</Link></Breadcrumb.Item>
-         <Breadcrumb.Item><Link className="link_nav_items" to="/productpage">Products</Link></Breadcrumb.Item>
-         {user?.rol==="admin"&&<Breadcrumb.Item ><Link className="link_nav_items" to="/admin">Admin</Link></Breadcrumb.Item>}
-     </Breadcrumb>:null}
+    {open?
+      <Nav defaultActiveKey="/home" as="ul" className="nav_link_bar_bottom">
+             <Nav.Item as="li">
+                 <Link className="link_nav_items" to="/">Home</Link>
+             </Nav.Item>
+             /
+             <Nav.Item as="li">
+                  <Link className="link_nav_items" to="/productpage">Products</Link>
+             </Nav.Item>
+             /
+             {user?.rol==="admin"&&<Nav.Item as="li"><Link className="link_nav_items" to="/admin">Admin</Link></Nav.Item>}
+      </Nav>:null}
   </Navbar>
     </React.Fragment>)
 

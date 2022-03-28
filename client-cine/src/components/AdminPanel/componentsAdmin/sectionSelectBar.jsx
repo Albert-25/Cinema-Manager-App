@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import {Nav} from 'react-bootstrap';
 import { AdminContext } from '../admincontext'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './sectionSelectBar.css'
 
 let status = ['movies', 'actors', 'genres']

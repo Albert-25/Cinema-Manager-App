@@ -35,6 +35,7 @@ import {
    FiltrarCast,
    FiltrarGeneroYCast,
    editMovie,
+   AllProducts
 } from "./../store/actions";
 
 
@@ -45,6 +46,7 @@ export const App = () => {
       dispatch(AllMovies())
       dispatch(GetAllGenres())
       dispatch(GetAllCast())
+      dispatch(AllProducts())
    },[dispatch])
 
 

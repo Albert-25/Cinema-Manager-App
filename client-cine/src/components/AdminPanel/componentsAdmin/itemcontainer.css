@@ -1,9 +1,12 @@
+
+
 .item_admin_stack{
 	background-color: #fff;
 	padding: 0.5em;
 	text-align: center;
 	color: gray;
 	display:flex;
+	height: fit-content;
 	flex-direction:rows;
 	justify-content:space-between;
 	box-shadow: -1px -1px 2px gray,
@@ -14,6 +17,7 @@
 	height:100%;
 	position:relative;
 	padding:1em;
+	text-align: center;
 }
 .item_admin_data_left{
 	display:flex;
@@ -63,15 +67,12 @@
 	height:100%;
 	overflow:auto;
 }
-.btn_options{
-	width: fit-content;
-	padding: 2px 5px;
-	border: 0.5px transparent;
-	background-color: transparent;
-}
-.edit_option:hover{
-	box-shadow: inset 1px 1px 1px blue, inset -1px -1px 1px blue;
-}
-.delete_option:hover{
-	box-shadow: inset 1px 1px 1px red, inset -1px -1px 1px red;
+.admin_box_comment{
+	text-align: left;
+    box-shadow: -1px -1px 2px gray,
+	1px 1px 2px gray;
+	padding: 5px;
+	width: 20%;
+	height: 50px;
+	overflowY: auto;	
 }

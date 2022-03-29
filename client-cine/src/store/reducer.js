@@ -75,8 +75,12 @@ const reducer = (state = initialState, action) => {
         ProductAll:action.payload.produs,
       };
     }
-
-
+    case "CLEANCOMMENTS":{
+      return {
+        ...state,
+        PelisComments:[]
+      }
+    }
     case "EDITMOVIEINFO": {
       console.log(action.payload.info);
       return {

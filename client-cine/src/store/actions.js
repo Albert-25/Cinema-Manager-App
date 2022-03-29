@@ -263,6 +263,11 @@ export const removeProduct=(id)=>{
     .catch(res=>alert(res.response))
   }
 }
+export const cleanMovieComments=()=>{
+  return (dispatch)=>{
+    dispatch({type:"CLEANCOMMENTS"})
+  }
+}
 
 // export function deleteReview(id) {
 //   return async function (dispatch) {

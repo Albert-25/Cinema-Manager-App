@@ -265,19 +265,24 @@ const reducer = (state = initialState, action) => {
         PelisComments: comentariosByRating,
       };
 
+
+    case "DELETE_REVIEW": {
+      return {
+        ...state,
+        PelisComments: state.PelisComments.filter(c => c.id !== action.payload)
+      };
+    }
+    case "UPDATE_REVIEW": {
+      return {
+        ...state
+      }
+    }
+
     default: {
       return state;
     }
 
-    // case "DELETE_REVIEW": {
-    //     return {
-    //         ...state,
-    //         PelisComments: state.PelisComments.filter(p =>{
-    //             console.log(p)
-    //             return  p !== action.payload
-    //         })
-    //     };
-    // }
+
   }
 };
 

@@ -60,6 +60,7 @@ function CreateProduct() {
     e.preventDefault();
     if (errors.error === false) {
       dispatch(uploadProduct(info));
+      document.getElementById("Batatas").reset();
     }
   }
 
@@ -84,7 +85,7 @@ function CreateProduct() {
         <h2>Crear Producto</h2>
       </div>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form id="Batatas" onSubmit={handleSubmit}>
           <div>
             <span>Nombre del producto:</span>
             <input

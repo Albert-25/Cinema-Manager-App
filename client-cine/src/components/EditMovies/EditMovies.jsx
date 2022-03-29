@@ -14,8 +14,13 @@ const EditMovies = () => {
   const dispatch = useDispatch();
   const id = useParams().id;
   useEffect(() => {
+    dispatch(GetAllGenres());
+    dispatch(GetAllCast());
     dispatch(getMovieInfo(id));
   }, [dispatch]);
+
+  
+
   const Genres = useSelector((state) => state.GenresAll);
   const Cast = useSelector((state) => state.CastAll);
   const movieData = useSelector((state) => state.editInfo);

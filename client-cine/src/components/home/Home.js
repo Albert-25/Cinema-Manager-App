@@ -6,6 +6,11 @@ import { Bilboard } from "../bilboard/Bilboard.jsx";
 import "./Home.css"
 
 const Home = () => {
+
+
+
+
+
   return (
     <div className="Home__Background">
       <NavBar />

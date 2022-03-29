@@ -2,7 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
-export const GenderFilter = ({ genders, setGenders }) => {
+export const GenderFilter = ({ genders, setGenders, setPageSelected }) => {
    const gendersOptions = useSelector((state) => state.GenresAll) || [];
 
    const handleChange = (e) => {
@@ -13,10 +13,12 @@ export const GenderFilter = ({ genders, setGenders }) => {
          if (!genders.includes(value))
             setGenders((prev) => [...prev, e.target.value]);
       }
+      setPageSelected(1);
    };
 
    function handleClick(name) {
       setGenders((prev) => [...prev.filter((act) => act !== name)]);
+      setPageSelected(1);
    }
 
    return (
@@ -42,7 +44,7 @@ export const GenderFilter = ({ genders, setGenders }) => {
    );
 };
 
-export const Actorsfilter = ({ actors, setActors }) => {
+export const Actorsfilter = ({ actors, setActors, setPageSelected }) => {
    const actorsOptions = useSelector((state) => state.CastAll) || [];
 
    const handleChange = (e) => {
@@ -53,7 +55,13 @@ export const Actorsfilter = ({ actors, setActors }) => {
          if (!actors.includes(value))
             setActors((prev) => [...prev, e.target.value]);
       }
+      setPageSelected(1);
    };
+
+   function handleClick(name) {
+      setActors((prev) => [...prev.filter((act) => act !== name)]);
+      setPageSelected(1);
+   }
 
    function handleClick(name) {
       setActors((prev) => [...prev.filter((act) => act !== name)]);

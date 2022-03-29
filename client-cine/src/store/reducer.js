@@ -64,14 +64,15 @@ const reducer = (state = initialState, action) => {
     case "ALLMOVIES": {
       return {
         ...state,
-        // PelisAll: state.PelisAll.concat(action.payload.pelis),
-        PelisAll: action.payload.pelis,
+
+        PelisAll:action.payload.pelis,
+
       };
     }
     case "ALLPRODUCTS": {
       return {
         ...state,
-        ProductAll: action.payload.produs,
+        ProductAll:action.payload.produs,
       };
     }
 
@@ -81,14 +82,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         editInfo: action.payload.info,
-      };
-    }
-
-    case "DETAILEDPRODUCT": {
-      state = initialState;
-      return {
-        ...state,
-        ProductDetails: action.payload.produs,
       };
     }
     // ----------------------------------------------------------------------------------------------------
@@ -106,21 +99,6 @@ const reducer = (state = initialState, action) => {
         TopPelis: arregloFinal,
       };
     }
-
-    case "BESTMOVIES": {
-      // console.log("howdy soy reducer")
-      let pelis = [...state.PelisAll];
-      let arreglar = pelis.sort((a, b) =>
-        a.puntuación < b.puntuación ? 1 : b.puntuación < a.puntuación ? -1 : 0
-      );
-      // console.log("arreglar",arreglar)
-      let arregloFinal = arreglar.slice(0, 3);
-      return {
-        ...state,
-        TopPelis: arregloFinal,
-      };
-    }
-
 
     case "GENRES": {
       return {
@@ -232,7 +210,26 @@ const reducer = (state = initialState, action) => {
         ...state,
         PelisAll: action.payload,
       };
-
+    case "DELETEMOVIE":
+        return {
+          ...state,
+          PelisAll:state.PelisAll.filter(e=> e.id!== action.payload)
+        }
+    case "DELETEGENRE":
+         return {
+          ...state,
+          GenresAll:state.GenresAll.filter(e=>e.id!==action.payload)
+         }
+    case "DELETECAST":
+         return {
+          ...state,
+          CastAll:state.CastAll.filter(e=>e.id!== action.payload)
+         }
+    case "DELETEPRODUCT":
+          return {
+            ...state,
+            ProductAll:state.ProductAll.filter(e=>e.id!== action.payload)
+          }
     case "FILTER_REVIEWBYRATING":
       let comentariosByRating;
       if (action.payload === "asc") {

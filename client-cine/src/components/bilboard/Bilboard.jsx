@@ -23,8 +23,8 @@ export const Bilboard = () => {
   return (
     <>
       <Search title={title} setTitle={setTitle} items={moviesAll} />
-      <Actorsfilter actors={actors} setActors={setActors} />
-      <GenderFilter genders={genders} setGenders={setGenders} />
+      <Actorsfilter setPageSelected={setPageSelected} actors={actors} setActors={setActors} />
+      <GenderFilter setPageSelected={setPageSelected} genders={genders} setGenders={setGenders} />
       <Movies items={filteredMovies} />
       <Pagination items={moviesByGenders} setPageSelected={setPageSelected} limit={moviesPerPage} />
       {filteredMovies.length === 0 && <h1>No hay Resultados</h1>}

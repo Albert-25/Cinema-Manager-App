@@ -4,26 +4,44 @@ import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { Image } from "cloudinary-react";
+import firebaseApp from "../firebase";
+import {
+  getAuth,
+  EmailAuthProvider,
+reauthenticateWithCredential,
+reauthenticateWithPopup,
+  updatePassword,
+  GoogleAuthProvider,
+
+} from "firebase/auth";
 const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
 export default function UpdateProfile() {
+  const auth = getAuth(firebaseApp);
+  const finales = auth.currentUser;
+  const credential = EmailAuthProvider.credential(finales.email, '123123')
   const emailRef = useRef();
   const passwordRef = useRef();
   const nameRef = useRef()
   const imagenRef = useRef()
   const passwordConfirmRef = useRef();
-  const { user, currentUser, updatePassword, updateEmail, updateName } = useAuth();
+  const { user, currentUser, upPassword, updateEmail, updateName } = useAuth();
   const [error, setError] = useState("");
+  const [pass, setPass] = useState("");
+  const [passConfirm, setPassConfirm] = useState("");
+
+
   const [picProfile, setPicProfile] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const [selectedImage, setSelectedImage] = useState("");
- 
+
 
   function handleSubmit(e) {
+    console.log(pass)
     e.preventDefault();
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+    if (pass !== passConfirm) {
       return setError("Passwords dont match");
     }
 
@@ -33,8 +51,26 @@ export default function UpdateProfile() {
     if (emailRef.current.value !== currentUser.email) {
       promises.push(updateEmail(emailRef.current.value));
     }
-    if (passwordRef.current.value) {
-      promises.push(updatePassword(passwordRef.current.value));
+    if (pass) {
+      console.log('Iniciamos')
+    const result = reauthenticateWithCredential(finales, credential).then(() => {
+      console.log('lool')
+      console.log('soy yo nwn', pass)
+            promises.push(updatePassword(currentUser, pass).then(() => {
+        console.log('listo uwu')
+      }).catch((e) => {
+        console.log('Cielos :C', e)
+      })
+
+
+        )
+      console.log('terminamos nwn')
+    }).catch((error) => {
+      console.log('errorsD:', error)
+    })
+
+
+
     }
     if(nameRef.current.value !== user.nombre || picProfile !== user.imagen){
 
@@ -44,7 +80,8 @@ export default function UpdateProfile() {
       .then(() => {
         navigate("/");
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log('error', e)
         setError("Failed to update account");
       })
       .finally(() => {
@@ -81,7 +118,6 @@ export default function UpdateProfile() {
               <Form.Control
                 type="email"
                 ref={emailRef}
-                required
                 defaultValue={currentUser.email}
               />
             </Form.Group>
@@ -89,7 +125,9 @@ export default function UpdateProfile() {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
-                ref={passwordRef}
+                onChange={e => {
+                  setPass(e.target.value)
+                }}
                 placeholder="Leave blank to keep the same"
               />
             </Form.Group>
@@ -97,7 +135,9 @@ export default function UpdateProfile() {
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type="password"
-                ref={passwordConfirmRef}
+                onChange={e => {
+                  setPassConfirm(e.target.value)
+                }}
                 placeholder="Leave blank to keep the same"
               />
             </Form.Group>

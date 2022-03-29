@@ -1,18 +1,24 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import NavBar from "../Navbar/navbar.jsx";
 import Carousel from "../Carousel/Carousel.js"
+import CarouselSmall from "../Carousel/CarouselSmall.js";
 import { Bilboard } from "../bilboard/Bilboard.jsx";
-import { AllMovies, GetAllGenres, GetAllCast } from "../../store/actions";
+
 import "./Home.css"
 
+
 const Home = () => {
-  const dispatch = useDispatch()
+
+
+
+
+
   return (
     <div className="Home__Background">
       <NavBar />
       <Carousel />
       <Bilboard />
+      <CarouselSmall />
     </div>
   );
 };

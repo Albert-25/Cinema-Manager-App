@@ -1,6 +1,8 @@
 /* ----- Customs Properties ----- */
 /* Para usarlas colocar var(--nombre-de-variable) en la propiedad que deseen. ej: border: thin solid var(--black-color); max-width: var(--max-width); en estos casos, var(--black-color) equivale a #000 y var(--max-width) equivale a 1200px */
-
+#root{
+   background-color: #11072f;
+}
 :root {
    --first-color: #11072f;
    --first-alpha-color: rgba(17, 7, 47, 0.75);

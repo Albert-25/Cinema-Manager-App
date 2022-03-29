@@ -2,13 +2,12 @@ const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
 const { Pelicula } = require("./pelicula.js");
 
-const Funcion = sequelize.define(
-  "Funcion",
+const Funciones = sequelize.define(
+  "Funciones",
   {
     sala: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true,
     },
     horario: {
       type: DataTypes.STRING,
@@ -30,7 +29,7 @@ const Funcion = sequelize.define(
   { timestamps: false }
 );
 
-Pelicula.belongsToMany(Funcion, { through: "FuncionPelicula" });
-Funcion.belongsToMany(Pelicula, { through: "FuncionPelicula" });
+Pelicula.belongsToMany(Funciones, { through: "FuncionesPelicula" });
+Funciones.belongsToMany(Pelicula, { through: "FuncionesPelicula" });
 
-module.exports = { Funcion };
+module.exports = { Funciones };

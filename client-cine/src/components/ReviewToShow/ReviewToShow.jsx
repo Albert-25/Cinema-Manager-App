@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { getAllReviewByIdOfMovie, deleteReview } from "../../store/actions"
 import styles from "./ReviewToShow.module.css"
 import { DivStar } from "./styled"
+import { Link } from "react-router-dom"
 
 
 const ReviewToShow = ({ id }) => {
@@ -15,9 +16,9 @@ const ReviewToShow = ({ id }) => {
         dispatch(getAllReviewByIdOfMovie(id))
     }, [dispatch])
 
-    // const handleDelete = (idOfComment) => {
-    //     dispatch(deleteReview(idOfComment))
-    // }
+    const handleDelete = (idOfComment) => {
+        dispatch(deleteReview(idOfComment))
+    }
 
     return (
         <div className={styles.container_main}>
@@ -33,7 +34,8 @@ const ReviewToShow = ({ id }) => {
                             <DivStar value="4" puntuacion={c.puntuación} className={styles.star} >★</DivStar>
                             <DivStar value="5" puntuacion={c.puntuación} className={styles.star} >★</DivStar>
                             <div className={styles.comentario}><p>{c.comentario}</p></div>
-                            {/* <button onClick={() => handleDelete(c.id)}>delete</button> */}
+                            <button onClick={() => handleDelete(c.id)}>delete</button>
+                            <Link to={`/reviewtoupdate/${c.id}`}><button>edit</button></Link>
                         </div>
                     )
                 })

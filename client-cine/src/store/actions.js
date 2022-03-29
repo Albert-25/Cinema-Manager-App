@@ -84,7 +84,7 @@ export const postReview = (payload) => {
     const json = await axios.post("http://localhost:3001/comentarios", payload);
     return dispatch({
       type: "POST_REVIEW",
-      payload: json,
+      payload: json.data,
     });
   };
 };
@@ -228,21 +228,31 @@ export const filterReviewByRating = (payload) => {
 }
 
 
-export const removeActors=(id)=>{
-  return (dispatch)=>{
+export const removeActors = (id) => {
+  return (dispatch) => {
     axios.delete(`http://localhost:3001/actores/${parseInt(id)}`)
-    .then(res=>dispatch({type:"DELETECAST",payload:id}))
-    .catch(err=>console.log(err.response))
+      .then(res => dispatch({ type: "DELETECAST", payload: id }))
+      .catch(err => console.log(err.response))
   }
 
 };
 
-// export function deleteReview(id) {
-//   return async function (dispatch) {
-//     const json = await axios.delete(`http://localhost:3001/comentarios/${id}`);
-//     return dispatch({
-//       type: "DELETE_REVIEW",
-//       payload: json.data,
-//     });
-//   };
-// }
+export function deleteReview(id) {
+  return async function (dispatch) {
+    await axios.delete(`http://localhost:3001/comentarios/${id}`);
+    return dispatch({
+      type: "DELETE_REVIEW",
+      payload: id,
+    });
+  };
+}
+
+export const updateReview = payload => {
+  return async dispatch => {
+    const json = await axios.put("http://localhost:3001/comentarios", payload)
+    return dispatch({
+      type: "UPDATE_REVIEW",
+      payload: json.data
+    })
+  }
+}

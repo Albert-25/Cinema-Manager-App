@@ -58,9 +58,9 @@ export function AuthProvider({ children }) {
   function updateEmail(email) {
     return currentUser.updateEmail(email);
   }
-  async function updatePassword(password) {
-    // return currentUser.updatePassword(password);
-    await updatePassword(auth,password) 
+  async function upPassword(password) {
+    console.log('lol')
+    await updatePassword(auth, password)
   }
   function updateName(name, imagen, user) {
     console.log(user)
@@ -109,7 +109,7 @@ export function AuthProvider({ children }) {
     logout,
     resetPassword,
     updateEmail,
-    updatePassword,
+    upPassword,
     user,
     updateName,
     // listAllUsers

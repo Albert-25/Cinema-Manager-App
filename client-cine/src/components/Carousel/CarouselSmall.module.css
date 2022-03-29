@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Hubballi&family=Shizuru&display=swap');
+.smallslider {
+    width: 100%;
+    height: 40vh;
+    overflow: hidden;
+    position: relative;
+    display: block;
+}
+
+.smallcarousel_track{
+
+    height: 100% !important;
+}
+
+
+.smallslider__title {
+    position: absolute;
+    font-family: 'Hubballi', cursive;
+    width: 100%;
+    text-align: center;
+    top: 2rem;
+    z-index: 100;
+    color: white;
+    text-transform: uppercase;
+    padding: 0 4rem;
+    background-color: rgba(34, 34, 34, 0.794);
+}
+
+.smallslider__content, .slider__content__item {
+    width: 100%;
+    height: 40vh;
+    margin: 1vh;
+    position: relative;
+
+}
+.carousel-item{
+    position: relative;
+    float: left;
+    z-index: -100;
+    display: unset !important;
+    width: 100%;
+    margin-right: -100%;
+    backface-visibility: hidden;
+    transition: transform .1s ease-in-out !important;
+}
+
+.smallslider__content__item img{
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+
+}

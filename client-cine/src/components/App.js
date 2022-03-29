@@ -24,7 +24,7 @@ import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import ProductsPage from "./Products/ProductsPage.js";
 
-import ReviewToShow from "./ReviewToShow/ReviewToShow.jsx";
+import ReviewToUpdate from "./ReviewToUpdate/ReviewToUpdate.jsx";
 import Admin from "./AdminPanel/Admin.jsx";
 import { useDispatch } from "react-redux";
 import {
@@ -146,6 +146,7 @@ export const App = () => {
                   <Route path="/" element={<Home />} />
                   <Route path="/productpage" element={<ProductsPage />} />
                   <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
+                  <Route path="/reviewtoupdate/:id" element={<ReviewToUpdate />} />
                   <Route path="/productpage/Products/:id" element={<ProductDetail />} />
                   <Route path="/shoppingcart" element={<ShoppingCart />} />
                   <Route path="/about" element={<SobreNosotros />} />

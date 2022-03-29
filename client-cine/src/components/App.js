@@ -37,6 +37,7 @@ import {
    editMovie,
    AllProducts,
 } from "./../store/actions";
+import { EditItem } from "./editItem/EditItem.jsx";
 
 
 export const App = () => {
@@ -116,6 +117,22 @@ export const App = () => {
                      element={
                         <PrivateRoute component={EditMovies} rol={'admin'}>
                            <EditMovies />
+                        </PrivateRoute>
+                     }
+                  />
+                  <Route
+                     path="/admin/editactor/:id"
+                     element={
+                        <PrivateRoute component={EditItem} rol={'admin'}>
+                           <EditItem />
+                        </PrivateRoute>
+                     }
+                  />
+                  <Route
+                     path="/admin/editgender/:id"
+                     element={
+                        <PrivateRoute component={EditItem} rol={'admin'}>
+                           <EditItem />
                         </PrivateRoute>
                      }
                   />

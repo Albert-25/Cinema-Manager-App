@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postMovies } from "../../store/actions";
 import "./CreateMovies.css";
@@ -18,6 +18,7 @@ const CreateMovies = () => {
       dispatch(GetAllGenres());
       dispatch(GetAllCast());
    }, [dispatch]);
+   const formRef = useRef(null);
 
    const Genres = useSelector((state) => state.GenresAll);
    const Cast = useSelector((state) => state.CastAll);
@@ -30,7 +31,6 @@ const CreateMovies = () => {
       duracion: "",
       clasificacion: "",
       director: "",
-      puntuación: "",
       pais: "",
       distribuidora: "",
       trailer: "",
@@ -161,7 +161,21 @@ const CreateMovies = () => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                dispatch(postMovies(inputs));
-               document.getElementById("ChupaUnLimon").reset();
+               formRef.current.reset();
+               setInputs({
+                  titulo: "",
+                  sinopsis: "",
+                  poster: "",
+                  background: "",
+                  duracion: "",
+                  clasificacion: "",
+                  director: "",
+                  pais: "",
+                  distribuidora: "",
+                  trailer: "",
+                  genders: [],
+                  actors: [],
+               });
 
                Swal.fire("La pelicula fue agregada!", "", "success");
             } else if (result.isDenied) {
@@ -212,7 +226,11 @@ const CreateMovies = () => {
          >
             Crea una pelicula
          </h2>
-         <form id="ChupaUnLimon" onSubmit={(e) => handleSubmit(e)}>
+         <form
+            ref={formRef}
+            id="ChupaUnLimon"
+            onSubmit={(e) => handleSubmit(e)}
+         >
             <Row className="justify-content-between mb-4">
                <Col md="5">
                   <div className="input__with__error">
@@ -260,7 +278,16 @@ const CreateMovies = () => {
                      >
                         Subir Imagen
                      </Button>
-                     {inputs.poster && <span>imagen cargada:</span>}
+                     {inputs.poster && (
+                        <span
+                           style={{
+                              marginLeft: ".75rem",
+                              color: "var(--text-light-color)",
+                           }}
+                        >
+                           imagen cargada:
+                        </span>
+                     )}
                      <Image
                         style={{ width: 200 }}
                         cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
@@ -290,7 +317,16 @@ const CreateMovies = () => {
                      >
                         Subir Imagen
                      </Button>
-                     {inputs.background && <span>imagen cargada:</span>}
+                     {inputs.background && (
+                        <span
+                           style={{
+                              marginLeft: ".75rem",
+                              color: "var(--text-light-color)",
+                           }}
+                        >
+                           imagen cargada:
+                        </span>
+                     )}
                      <Image
                         style={{ width: 400 }}
                         cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
@@ -327,21 +363,7 @@ const CreateMovies = () => {
                </Col>
             </Row>
             <Row className="justify-content-between mb-4">
-               <Col md="5">
-                  <div className="input__with__error">
-                     <Form.Control
-                        type="number"
-                        min="0"
-                        max="10"
-                        name="puntuación"
-                        onChange={(evt) => handleChange(evt)}
-                        placeholder="Puntuación"
-                     />
-                     {errors.puntuación ? (
-                        <span>{errors.puntuación}</span>
-                     ) : null}
-                  </div>
-               </Col>
+               <Col md="5"></Col>
                <Col md="5">
                   <div className="input__with__error">
                      <Form.Control

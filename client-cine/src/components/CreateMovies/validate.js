@@ -44,14 +44,14 @@ export function validate(input, stateErrors, name) {
       }
    }
 
-   if (name === "poster" || name === "submit") {
+   /* if (name === "poster" || name === "submit") {
       if (!input.poster && input.poster !== undefined) {
          errors.poster = "Ingrese un poster para mostrar";
          errors.error = true;
       } else {
          errors.poster = "";
       }
-   }
+   } */
 
    if (name === "clasificacion" || name === "submit") {
       if (!input.clasificacion && input.clasificacion !== undefined) {
@@ -59,15 +59,6 @@ export function validate(input, stateErrors, name) {
          errors.error = true;
       } else {
          errors.clasificacion = "";
-      }
-   }
-
-   if (name === "puntuación" || name === "submit") {
-      if (!input.puntuación && input.puntuación !== undefined) {
-         errors.puntuación = "La puntuacion de la pelicula es requerida";
-         errors.error = true;
-      } else {
-         errors.puntuación = "";
       }
    }
 

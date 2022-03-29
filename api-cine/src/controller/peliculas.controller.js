@@ -5,125 +5,127 @@ const { Comentarios } = require("../db/models/comentarios");
 const { Op } = require("sequelize");
 
 const getMovies = async (req, res, next) => {
-  let movies = [];
-  try {
-    if (Object.keys(req.query).includes("title")) {
-      movies = await Pelicula.findAll({
-        where: {
-          titulo: {
-            [Op.iLike]: "%" + req.query.title + "%",
-          },
-        },
-        include: [Generos, Actores],
-      });
-    }
-    if (Object.keys(req.query).length === 0) {
-      movies = await Pelicula.findAll({ include: [Generos, Actores] });
-    }
-    if (movies.length !== 0) return res.send(movies);
-    next();
-  } catch (err) {
-    next(err);
-  }
+   let movies = [];
+   try {
+      if (Object.keys(req.query).includes("title")) {
+         movies = await Pelicula.findAll({
+            where: {
+               titulo: {
+                  [Op.iLike]: "%" + req.query.title + "%",
+               },
+            },
+            include: [Generos, Actores],
+         });
+      }
+      if (Object.keys(req.query).length === 0) {
+         movies = await Pelicula.findAll({ include: [Generos, Actores] });
+      }
+      if (movies.length !== 0) return res.send(movies);
+      next();
+   } catch (err) {
+      next(err);
+   }
 };
 
 const insertMovie = async (req, res, next) => {
-  for (const key in req.body) {
-    if (
-      !req.body[key] ||
-      ((key === "genders" || key === "actors") && req.body[key].length === 0)
-    ) {
-      return res.status(406).json({ msg: "All atrributes are required" });
-    }
-  }
-  const gendersTds = req.body.genders;
-  const actorsIds = req.body.actors;
-  try {
-    const movie = await Pelicula.create({
-      titulo: req.body.titulo,
-      sinopsis: req.body.sinopsis,
-      poster: req.body.poster,
-      background: req.body.background,
-      duracion: req.body.duracion,
-      clasificacion: req.body.clasificacion,
-      director: req.body.director,
-      puntuación: req.body.puntuación,
-      pais: req.body.pais,
-      distribuidora: req.body.distribuidora,
-      trailer: req.body.trailer,
-    });
-    await movie.addGeneros(gendersTds);
-    await movie.addActores(actorsIds);
-    return res.json(
-      await Pelicula.findByPk(movie.id, { include: [Generos, Actores] })
-    );
-  } catch (err) {
-    next(err);
-  }
+   console.log(req.body);
+   for (const key in req.body) {
+      if (
+         !req.body[key] ||
+         ((key === "genders" || key === "actors") && req.body[key].length === 0)
+      ) {
+         return res.status(406).json({ msg: "All atrributes are required" });
+      }
+   }
+   const gendersTds = req.body.genders;
+   const actorsIds = req.body.actors;
+   try {
+      const movie = await Pelicula.create({
+         titulo: req.body.titulo,
+         sinopsis: req.body.sinopsis,
+         poster: req.body.poster,
+         background: req.body.background,
+         duracion: req.body.duracion,
+         clasificacion: req.body.clasificacion,
+         director: req.body.director,
+         pais: req.body.pais,
+         distribuidora: req.body.distribuidora,
+         trailer: req.body.trailer,
+      });
+      await movie.addGeneros(gendersTds);
+      await movie.addActores(actorsIds);
+      return res.json(
+         await Pelicula.findByPk(movie.id, { include: [Generos, Actores] })
+      );
+   } catch (err) {
+      next(err);
+   }
 };
 
 const getMovie = async (req, res, next) => {
-  const id = req.params.id;
-  try {
-    const movie = await Pelicula.findByPk(id, { include: [Generos, Actores] });
-    if (movie) return res.json(movie);
-    next();
-  } catch (err) {
-    next(err);
-  }
+   const id = req.params.id;
+   try {
+      const movie = await Pelicula.findByPk(id, {
+         include: [Generos, Actores],
+      });
+      if (movie) return res.json(movie);
+      next();
+   } catch (err) {
+      next(err);
+   }
 };
 
 const updateMovie = async (req, res, next) => {
-  const id = req.params.id;
-  try {
-    const [movie] = await Pelicula.update(req.body, { where: { id: id } });
-    const testmovie = await Pelicula.findByPk(id, {
-      include: [Generos, Actores],
-    });
+   const id = req.params.id;
+   try {
+      const [movie] = await Pelicula.update(req.body, { where: { id: id } });
+      const testmovie = await Pelicula.findByPk(id, {
+         include: [Generos, Actores],
+      });
 
-    if (req.body.actors) {
-      await testmovie.removeActores(calculateAsoc(1, await Actores.count()));
-      await testmovie.addActores(req.body.actors);
-    }
-    if (req.body.genders) {
-      await testmovie.removeGeneros(calculateAsoc(1, await Generos.count()));
-      await testmovie.addGeneros(req.body.genders);
-    }
+      if (req.body.actors) {
+         await testmovie.removeActores(calculateAsoc(1, await Actores.count()));
+         await testmovie.addActores(req.body.actors);
+      }
+      if (req.body.genders) {
+         await testmovie.removeGeneros(calculateAsoc(1, await Generos.count()));
+         await testmovie.addGeneros(req.body.genders);
+      }
 
-    if (movie || testmovie)
-      return res.json(
-        await Pelicula.findByPk(id, { include: [Generos, Actores] })
-      );
-    next();
-  } catch (err) {
-    next(err);
-  }
+      if (movie || testmovie)
+         return res.json(
+            await Pelicula.findByPk(id, { include: [Generos, Actores] })
+         );
+      next();
+   } catch (err) {
+      next(err);
+   }
 };
 
 //funcion auxiliar para calcular el numero actual de generos y actores para poder eliminarlos
 const calculateAsoc = (lowEnd, highEnd) => {
-  var arr = [];
-  while (lowEnd <= highEnd) {
-    arr.push(lowEnd++);
-  }
-  return arr;
+   var arr = [];
+   while (lowEnd <= highEnd) {
+      arr.push(lowEnd++);
+   }
+   return arr;
 };
 
 const destroyMovie = async (req, res, next) => {
-  const id = req.params.id;
-  try {
-    const deleted = await Pelicula.destroy({ where: { id: id } });
-    if (deleted) return res.json({ msg: "Deleted" });
-    next();
-  } catch (err) {
-    next(err);
-  }
+   const id = req.params.id;
+   try {
+      const deleted = await Pelicula.destroy({ where: { id: id } });
+      if (deleted) return res.json({ msg: "Deleted" });
+      next();
+   } catch (err) {
+      next(err);
+   }
 };
 
 module.exports = {
-  getMovies,
-  insertMovie,
-  getMovie,
-  updateMovie,
-  destroyMovie,
+   getMovies,
+   insertMovie,
+   getMovie,
+   updateMovie,
+   destroyMovie,
 };

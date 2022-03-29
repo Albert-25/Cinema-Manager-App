@@ -23,7 +23,7 @@ const Review = () => {
     // const nombre = "Anonimo";
     const { user, currentUser } = useAuth();
     let nombre = user && user.nombre ? user.nombre :"Anonimo"
-    console.log(user)
+    console.log("soy el user",user)
 
     const onChange = (e) => {
         console.log(e.target.value)

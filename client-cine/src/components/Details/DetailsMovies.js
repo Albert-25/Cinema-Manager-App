@@ -20,7 +20,6 @@ const DetailsMovies = (props) => {
     const numeroPuntuaciones = puntuacionArray && puntuacionArray.length;
     const promedioPuntuacion = (sumaPuntuaciones / numeroPuntuaciones).toFixed(1)
     const [ordenRating, setOrdenRating] = useState("")
-
     useEffect(() => {
         dispatch(DetailedMovie(id));
         dispatch(getAllReviewByIdOfMovie(id));

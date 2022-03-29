@@ -271,8 +271,8 @@ const reducer = (state = initialState, action) => {
         PelisComments: state.PelisComments.filter(c => c.id !== action.payload)
       };
     }
-    case "UPDATE_REVIEW":{
-      return{
+    case "UPDATE_REVIEW": {
+      return {
         ...state
       }
     }

@@ -6,7 +6,7 @@ const start = async (conn, server) => {
   try {
     await conn.authenticate()
     console.log("Connection has been established successfully.")
-    await conn.sync({ true: false })
+    await conn.sync({ force: true })
     console.log('Successful Sync')
     server.listen(PORT, () => {
       console.log('Listening at %d', PORT)

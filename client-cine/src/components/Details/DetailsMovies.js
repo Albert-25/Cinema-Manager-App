@@ -159,11 +159,9 @@ const DetailsMovies = (props) => {
                         </div>
                     </div>
                     <div className="Details__rightdown__container">
-
-                        <Link to={"/"} className="Details__rightdown">
-                            <p className="Details__rightdown__text">👉 Go back 👈</p>
+                        <Link to="/" className="Details__rightdown">
+                           <p className="Details__rightdown__text">👉 Go back 👈</p>
                         </Link>
-
                     </div>
                     <div className="comentarios">
                         <ReviewToShow id={id} />

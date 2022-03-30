@@ -1,5 +1,6 @@
 const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
+const { Pelicula } = require("./pelicula");
 
 const Productos = sequelize.define(
   "Productos",
@@ -32,5 +33,8 @@ const Productos = sequelize.define(
   },
   { timestamps: false }
 );
+
+Pelicula.belongsToMany(Productos, { through: "ProductosPelicula" });
+Productos.belongsToMany(Pelicula, { through: "ProductosPelicula" });
 
 module.exports = { Productos };

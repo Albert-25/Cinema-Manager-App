@@ -1,6 +1,7 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Dropdown, DropdownButton, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { MdCancel } from "react-icons/md";
 
 export const GenderFilter = ({ genders, setGenders, setPageSelected }) => {
    const gendersOptions = useSelector((state) => state.GenresAll) || [];
@@ -24,7 +25,11 @@ export const GenderFilter = ({ genders, setGenders, setPageSelected }) => {
    return (
       <>
          <Form.Select
-            style={{ display: "inline-block", width: "initial" }}
+            style={{
+               display: "inline-block",
+               width: "initial",
+               marginLeft: "1.5rem",
+            }}
             onChange={handleChange}
             value="default"
          >
@@ -33,13 +38,38 @@ export const GenderFilter = ({ genders, setGenders, setPageSelected }) => {
                return <option key={item.id}>{item.genero}</option>;
             })}
          </Form.Select>
-         {genders.map((name) => {
-            return (
-               <span key={name}>
-                  {name} <button onClick={() => handleClick(name)}>x</button>{" "}
-               </span>
-            );
-         })}
+         <DropdownButton
+            id="dropdown-basic-button"
+            title={`${"Generos seleccionados:"} ${genders.length}`}
+            className="d-inline-block"
+         >
+            {genders.length > 0 ? (
+               genders.map((name) => {
+                  return (
+                     <>
+                        <Dropdown.Item
+                           key={name + parseInt(Math.random() * 100000)}
+                           className="d-flex justify-content-between align-items-center"
+                           onClick={() => handleClick(name)}
+                        >
+                           {name}
+                           <MdCancel
+                              style={{
+                                 color: "#df1313",
+                                 height: "100%",
+                                 width: "auto",
+                              }}
+                           />
+                        </Dropdown.Item>
+                     </>
+                  );
+               })
+            ) : (
+               <Dropdown.Item className="d-flex justify-content-between">
+                  {"Sin filtros por generos"}
+               </Dropdown.Item>
+            )}
+         </DropdownButton>
       </>
    );
 };
@@ -63,14 +93,17 @@ export const Actorsfilter = ({ actors, setActors, setPageSelected }) => {
       setPageSelected(1);
    }
 
-   function handleClick(name) {
+   /* function handleClick(name) {
       setActors((prev) => [...prev.filter((act) => act !== name)]);
-   }
+   } */
 
    return (
       <>
          <Form.Select
-            style={{ display: "inline-block", width: "initial" }}
+            style={{
+               display: "inline-block",
+               width: "initial",
+            }}
             onChange={handleChange}
             value="default"
          >
@@ -83,13 +116,38 @@ export const Actorsfilter = ({ actors, setActors, setPageSelected }) => {
                );
             })}
          </Form.Select>
-         {actors.map((name) => {
-            return (
-               <span key={name}>
-                  {name} <button onClick={() => handleClick(name)}>x</button>{" "}
-               </span>
-            );
-         })}
+         <DropdownButton
+            id="dropdown-basic-button"
+            title={`${"Actores seleccionados:"} ${actors.length}`}
+            className="d-inline-block"
+         >
+            {actors.length > 0 ? (
+               actors.map((name) => {
+                  return (
+                     <>
+                        <Dropdown.Item
+                           key={name + parseInt(Math.random() * 100000)}
+                           className="d-flex justify-content-between align-items-center"
+                           onClick={() => handleClick(name)}
+                        >
+                           {name}
+                           <MdCancel
+                              style={{
+                                 color: "#df1313",
+                                 height: "100%",
+                                 width: "auto",
+                              }}
+                           />
+                        </Dropdown.Item>
+                     </>
+                  );
+               })
+            ) : (
+               <Dropdown.Item className="d-flex justify-content-between">
+                  {"Sin filtros por actores"}
+               </Dropdown.Item>
+            )}
+         </DropdownButton>
       </>
    );
 };

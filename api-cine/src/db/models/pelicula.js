@@ -60,6 +60,10 @@ const Pelicula = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    proximoEstreno: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
   },
   { timestamps: false }
 );

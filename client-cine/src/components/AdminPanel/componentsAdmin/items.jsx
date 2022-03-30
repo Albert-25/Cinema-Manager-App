@@ -32,7 +32,6 @@ const Items=({nombre,titulo,genero,nombreProducto,id,image,handleDelete,stock,au
          {titulo&&<span className="Item_movie_data_admin"><p><b>Titulo: </b>{titulo}</p></span>}
          {author && <span className="Item_movie_data_admin"><p><b>Author: </b>{author}</p></span>}
          {score && <span className="Item_movie_data_admin"><p><b>Score: </b>{score}</p></span>}
-         {titulo&&<Button className={`btn_view_comments_admin ${id}`}  variant="outline-secondary" onClick={handleToComments} >to comment</Button>}
          {nombre&&<span className="Item_movie_data_admin"><p><b>Nombre: </b>{nombre}</p></span>}
          {genero&&<span className="Item_movie_data_admin"><p><b>Genero: </b>{genero}</p></span>}
         {nombreProducto&&<span className="Item_movie_data_admin"><p><b>Nombre: </b>{nombreProducto}</p></span>}
@@ -40,10 +39,16 @@ const Items=({nombre,titulo,genero,nombreProducto,id,image,handleDelete,stock,au
       {opcomment&&<span className="admin_box_comment">{comment}</span>}
       <span className="item_admin_data_buttons_options" >
          {author&& <Button variant="outline-info"  onClick={(e)=>setOpComment(!opcomment)}> comment</Button>}
-        <Link to={`/admin/editpelicula/${id}`}><Button   className={`btn_options ${id}`} variant="outline-primary" ><BsPencilFill /></Button></Link> <Button className={`btn_options ${id}`} id={id} onClick={handleDelete} variant="outline-danger" ><BsTrash/></Button>
+          {titulo&&<Button className={`btn_view_comments_admin ${id}`}  variant="outline-secondary" onClick={handleToComments} >to comment</Button>}
+          {titulo &&<><Link to={`/admin/editpelicula/${id}`}><Button  className={`btn_options ${id}`} variant="outline-primary"  ><BsPencilFill  /></Button></Link> <Button  className={`btn_options ${id}`} variant="outline-danger"  id={id} onClick={handleDelete}><BsTrash /></Button></>}
+          {nombre &&<><Link to={`/admin/editactor/${id}`}><Button   className={`btn_options ${id}`} variant="outline-primary"  ><BsPencilFill  /></Button></Link> <Button  className={`btn_options ${id}`} variant="outline-danger" id={id} onClick={handleDelete}><BsTrash  /></Button></>}
+          {genero &&<><Link to={`/admin/editgender/${id}`}><Button   className={`btn_options ${id}`} variant="outline-primary"  ><BsPencilFill  /></Button></Link> <Button className={`btn_options ${id}`} variant="outline-danger" id={id} onClick={handleDelete}><BsTrash  /></Button></>}
+          {nombreProducto&&<><Link to={`/admin/product/edit/${id}`}><Button   className={`btn_options ${id}`} variant="outline-primary"  ><BsPencilFill  /></Button></Link> <Button className={`btn_options ${id}`} variant="outline-danger" id={id} onClick={handleDelete}><BsTrash  /></Button></>}
+          {comment&&<><Link to={`/admin/product/edit/${id}`}><Button   className={`btn_options ${id}`} variant="outline-primary"  ><BsPencilFill  /></Button></Link> <Button className={`btn_options ${id}`} variant="outline-danger" id={id} onClick={handleDelete}><BsTrash  /></Button></>}
       </span>
        </div>
       
   )
 }
 export default Items
+

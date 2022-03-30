@@ -35,11 +35,7 @@ import {
    FiltrarCast,
    FiltrarGeneroYCast,
    editMovie,
-<<<<<<< HEAD
    AllProducts
-=======
-   AllProducts,
->>>>>>> 9184c2df874d9a12921857047b7e2516e029e638
 } from "./../store/actions";
 import { EditItem } from "./editItem/EditItem.jsx";
 

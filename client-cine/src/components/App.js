@@ -35,7 +35,7 @@ import {
    FiltrarCast,
    FiltrarGeneroYCast,
    editMovie,
-   AllProducts,
+   AllProducts
 } from "./../store/actions";
 import { EditItem } from "./editItem/EditItem.jsx";
 

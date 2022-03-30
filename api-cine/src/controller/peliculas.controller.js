@@ -15,13 +15,13 @@ const getMovies = async (req, res, next) => {
           },
           proximoEstreno: false,
         },
-        include: [Generos, Actores],
+        include: [Generos, Actores, Comentarios],
       });
     }
     if (Object.keys(req.query).length === 0) {
       movies = await Pelicula.findAll({
         where: { proximoEstreno: false },
-        include: [Generos, Actores],
+        include: [Generos, Actores, Comentarios],
       });
     }
     if (movies.length !== 0) return res.send(movies);
@@ -47,10 +47,7 @@ const getEstrenos = async (req, res, next) => {
 
 const insertMovie = async (req, res, next) => {
   for (const key in req.body) {
-    if (
-      !req.body[key] ||
-      ((key === "genders" || key === "actors") && req.body[key].length === 0)
-    ) {
+    if ((key !== "proximoEstreno") && req.body[key].length === 0) {
       return res.status(406).json({ msg: "All atrributes are required" });
     }
   }

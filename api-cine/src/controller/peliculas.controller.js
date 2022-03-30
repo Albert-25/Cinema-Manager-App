@@ -47,10 +47,7 @@ const getEstrenos = async (req, res, next) => {
 
 const insertMovie = async (req, res, next) => {
   for (const key in req.body) {
-    if (
-      !req.body[key] ||
-      ((key === "genders" || key === "actors") && req.body[key].length === 0)
-    ) {
+    if ((key !== "proximoEstreno") && req.body[key].length === 0) {
       return res.status(406).json({ msg: "All atrributes are required" });
     }
   }

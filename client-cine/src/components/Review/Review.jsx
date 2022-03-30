@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { postReview } from "../../store/actions"
+import { AllMovies, postReview } from "../../store/actions"
 import styles from "./Review.module.css"
 import { DivStar } from "./styled"
 import { useParams } from "react-router";
@@ -62,6 +62,7 @@ const Review = () => {
         if (!comentario.trim()) setError2Comentario("es necesario rellenar este campo")
         dispatch(postReview({ nombre, comentario, puntuación, id }))
         alert("¡Comentario publicado!")
+        dispatch(AllMovies())
         navigate(-1)
     }
 

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { postReview } from "../../store/actions"
-import styles from "./Review.module.css"
+import { updateReview } from "../../store/actions"
+import styles from "./ReviewToUpdate.module.css"
 import { DivStar } from "./styled"
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
-
-const Review = () => {
+const ReviewToUpdate = () => {
 
     let navigate = useNavigate();
     const id = useParams().id;
@@ -22,8 +21,8 @@ const Review = () => {
     const [error2Comentario, setError2Comentario] = useState("")
     // const nombre = "Anonimo";
     const { user, currentUser } = useAuth();
-    let nombre = user && user.nombre ? user.nombre :"Anonimo"
-    console.log("soy el user",user)
+    let nombre = user && user.nombre ? user.nombre : "Anonimo"
+    console.log(user)
 
     const onChange = (e) => {
         console.log(e.target.value)
@@ -60,8 +59,8 @@ const Review = () => {
         e.preventDefault()
         if (puntuación == null) setErrorPuntuacion("es necesario calificar esta pelicula")
         if (!comentario.trim()) setError2Comentario("es necesario rellenar este campo")
-        dispatch(postReview({ nombre, comentario, puntuación, id }))
-        alert("¡Comentario publicado!")
+        dispatch(updateReview({ nombre, comentario, puntuación, id }))
+        alert("¡Comentario editado!")
         navigate(-1)
     }
 
@@ -98,6 +97,6 @@ const Review = () => {
             </form>
         </div>
     )
-}
+};
 
-export default Review;
+export default ReviewToUpdate;

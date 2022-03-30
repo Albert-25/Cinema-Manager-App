@@ -1,23 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Hubballi&family=Shizuru&display=swap');
 
 .Movie__All {
-    margin: 5px;
-    width: 16vw;
-    height: 45vh;
-    /* border: 2px solid #111; */
+    margin: 25px;
+    min-height: 250px;
+    width: 200px;
     border-radius: 15px;
     background-repeat: no-repeat;
     background-size: cover;
     transition: 0.5s all;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
   }
+
   .Movie__All:hover {
     transition: 0.5s all;
     z-index: 100;
     margin-left: 30px;
     margin-bottom: 30px;
   }
-
 
   .Movie__title{
     background-color: rgba(0, 0, 0, 0.794);
@@ -30,6 +32,7 @@
     font-family: 'Hubballi', cursive;
     display: flex;
   }
+
   .Movie___All:hover > .Movie__title {
     display: none;
   }
@@ -48,18 +51,9 @@
     background-color: rgba(0, 0, 0, 0.794);
     color: white;
     border-radius: 2rem;
-    top: 28vh;
-    display: flex;
-    position: relative;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
     font-family: 'Hubballi', cursive;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
   }
-
-
-
-.moviesInfo {
-  display: flex;
-  justify-content: center;
-}

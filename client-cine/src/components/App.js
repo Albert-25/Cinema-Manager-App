@@ -48,12 +48,8 @@ export const App = () => {
       dispatch(GetAllGenres())
       dispatch(GetAllCast())
       dispatch(AllProducts())
-
       dispatch(FutureReleases())
-
-
       dispatch(allUsers())
-
    },[dispatch])
 
 

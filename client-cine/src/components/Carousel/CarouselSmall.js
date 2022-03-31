@@ -30,22 +30,21 @@ let axiliar = [{
     distribuidora: "???",
     genero: ["???"]
 }]
-const CarouselSmall = (AllMovies) => {
+const CarouselSmall = () => {
 
-    let AllPelis = useSelector((state) => state.PelisAll)
-    let arregloFinal = AllPelis.sort((a, b) => a.puntuación < b.puntuación ? 1 : b.puntuación < a.puntuación ? -1 : 0)
+    let ProxPelis = useSelector((state) => state.NextReleases)
 
 
 
     return (
         <>
-            {arregloFinal.length > 0 ? <section className={Style.smallslider}>
+            {ProxPelis.length > 0 ? <section className={Style.smallslider}>
                 <h1 className={Style.smallslider__title}>
                     Proximos estrenos!
                 </h1>
-                <Slider className={Style.smallslider__content} slidesPerRow={5} wheel={true} adaptiveHeight={true} >
+                <Slider className={Style.smallslider__content} slidesPerRow={3} wheel={true} adaptiveHeight={true} >
                     {
-                        arregloFinal.map(elm => {
+                        ProxPelis.map(elm => {
                             return (<div className={Style.smallslider__content__item} key={elm.id}>
                                 <Link to={`MovieDetails/${elm.id}`}>
                                 <img src={elm.background} alt={elm.titulo}></img>

@@ -17,6 +17,10 @@ const initialState = {
   PelisComments: [],
   ProductDetails: [],
   ProductComments: [],
+
+  FirebaseUsers: [],
+  DetailedUser: [],
+
   // numberOfTickets: [],
   // costoTotalTickets: []
   editInfo: "",
@@ -75,8 +79,18 @@ const reducer = (state = initialState, action) => {
         ProductAll:action.payload.produs,
       };
     }
-
-
+    case "FUTURERELEASES": {
+      return {
+        ...state,
+        NextReleases:action.payload.rele,
+      };
+    }
+    case "CLEANCOMMENTS":{
+      return {
+        ...state,
+        PelisComments:[]
+      }
+    }
     case "EDITMOVIEINFO": {
       console.log(action.payload.info);
       return {
@@ -269,6 +283,35 @@ const reducer = (state = initialState, action) => {
       };
     }
     case "UPDATE_REVIEW": {
+      return {
+        ...state
+      }
+    }
+    case "ALL_USERS": {
+      return {
+        ...state,
+        FirebaseUsers: action.payload.users
+      }
+    }
+    case "CREATE_USER": {
+      return {
+        ...state
+      }
+    }
+    case "DETAILED_USER": {
+      return {
+        ...state,
+      DetailedUser: action.payload.details,
+      }
+    }
+
+    case "DELETE_USER":
+         return {
+          ...state,
+          FirebaseUsers:state.FirebaseUsers.filter(e=>e.id!== action.payload)
+         }
+
+    case "UPDATE_USER": {
       return {
         ...state
       }

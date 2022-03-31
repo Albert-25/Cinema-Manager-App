@@ -9,8 +9,7 @@ const Funcion = require("./funcion.js");
 const Generos = require("./generos.js");
 const ProximosEstrenos = require("./proximosEstrenos.js");
 
-const LogIn = require("./login.js");
-const SingUp = require("./singup.js");
+
 const FireDataBase = require("./fireDataBase.js");
 
 

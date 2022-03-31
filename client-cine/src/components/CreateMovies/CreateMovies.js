@@ -64,7 +64,7 @@ const CreateMovies = () => {
       setInputs((prevInputs) => {
         return {
           ...prevInputs,
-          [e.target.name]: e.target.value,
+          [e.target.name]: !inputs[e.target.name],
         };
       });
     }
@@ -341,7 +341,9 @@ const CreateMovies = () => {
                 id="flexCheckDefault"
                 type="checkbox"
                 name="proximoEstreno"
-                onChange={(evt) => handleChange(evt)}
+                onChange={(evt) => {
+                  handleChange(evt);
+                }}
                 placeholder="proximoEstreno"
               />
               <label class="form-check-label" for="flexCheckDefault">

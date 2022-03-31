@@ -13,7 +13,7 @@ const getAll = async (req, res, next) => {
 const getFuncion = async (req, res, next) => {
   let id = req.params.id;
   try {
-    const func = await Funciones.findByPk(id);
+    const func = await Funciones.findByPk(id, { include: [Pelicula] });
     if (func) return res.json(func);
     next();
   } catch (error) {
@@ -34,6 +34,23 @@ const crearFuncion = async (req, res, next) => {
       message: "funcion creada satisfactoriamente",
       data: func,
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const crearFunciones = async (req, res, next) => {
+  const { funciones, peliculaId } = req.body;
+  try {
+    let funcs = await Funciones.bulkCreate(funciones, {
+      ignoreDuplicates: true,
+    });
+
+    funcs.forEach((element) => {
+      element.addPelicula(peliculaId);
+    });
+
+    return res.send(funcs);
   } catch (error) {
     next(error);
   }
@@ -73,6 +90,7 @@ module.exports = {
   getAll,
   getFuncion,
   crearFuncion,
+  crearFunciones,
   editarFuncion,
   eliminarFuncion,
 };

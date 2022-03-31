@@ -97,11 +97,11 @@ const updateMovie = async (req, res, next) => {
       include: [Generos, Actores],
     });
 
-    if (req.body.actors?.length > 0) {
+    if (req.body.actors.length > 0) {
       await testmovie.removeActores(calculateAsoc(1, await Actores.count()));
       await testmovie.addActores(req.body.actors);
     }
-    if (req.body.genders?.length > 0) {
+    if (req.body.genders.length > 0) {
       await testmovie.removeGeneros(calculateAsoc(1, await Generos.count()));
       await testmovie.addGeneros(req.body.genders);
     }

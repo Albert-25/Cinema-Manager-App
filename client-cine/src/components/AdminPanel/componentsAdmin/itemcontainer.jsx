@@ -6,7 +6,7 @@ import { AdminContext } from './../admincontext.jsx'
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Stack, Image ,Spinner} from 'react-bootstrap';
-import { removeActors, removeMovie, removeGenres, removeProduct} from '../../../store/actions'
+import { removeActors, removeMovie, removeGenres, removeProduct, deleteUser} from '../../../store/actions'
 import Swal from "sweetalert2";
 import Items from './items.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,9 +21,10 @@ const items = {
 
 export default function ItemsContainer() {
   let { state } = useContext(AdminContext)
-  let { PelisAll, GenresAll, CastAll, ProductAll,PelisComments } = useSelector(state => state)
+  let { PelisAll, GenresAll, CastAll, ProductAll,PelisComments, FirebaseUsers } = useSelector(state => state)
   const navigate = useNavigate()
   let dispatch = useDispatch()
+  console.log('SoyUsuarios', FirebaseUsers)
   const handleDelete = (e) => {
     console.log(e.currentTarget.className.split(" ")[1])
     let ev = new Promise((resolve, rejected) => {
@@ -49,6 +50,8 @@ export default function ItemsContainer() {
           state?.section === "movies" && dispatch(removeMovie(res))
           state?.section === "genres" && dispatch(removeGenres(res))
           state?.section === "products" && dispatch(removeProduct(res))
+          state?.section === "users" && dispatch(deleteUser(res))
+
           Swal.fire(
             'Deleted!',
             'Your file has been deleted.',
@@ -75,6 +78,7 @@ export default function ItemsContainer() {
         {ProductAll&& state.section ==="products"&& ProductAll.map(prod=><Items key={prod.nombre+prod.id} nombreProducto={prod.nombreProducto} image={prod.imagenProducto}  id={prod.id} handleDelete={handleDelete} />)}
         {PelisComments.length>0&& state.section === "comments"&&PelisComments.map(e=><Items key={e.nombre+"sdad2"} author={e.nombre} comment={e.comentario} score={e.puntuacion} id={e.id}/>)}
         {PelisComments.length<1&& state.section === "comments" && <Spinner animation="border" style={{margin:"0 auto"}} variant="secondary" />}
+        {FirebaseUsers&& state.section ==="users"&& FirebaseUsers.map(prod=><Items key={prod.id} nombreUsuario={prod.nombre} image={prod.imagen}  id={prod.id} correo={prod.correo} rol={prod.rol} handleDelete={handleDelete}/>)}
       </Stack>
     </div>
   );

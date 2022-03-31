@@ -55,7 +55,6 @@ const CreateMovies = () => {
   });
 
   const handleChange = (e) => {
-    console.log("proximo estrenos status:", inputs.proximoEstreno)
     if (e.target.name !== "proximoEstreno") {
       setInputs({
         ...inputs,
@@ -65,7 +64,7 @@ const CreateMovies = () => {
       setInputs((prevInputs) => {
         return {
           ...prevInputs,
-          [e.target.name]: e.target.value,
+          [e.target.name]: !inputs[e.target.name],
         };
       });
     }

@@ -1,21 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Movie.css";
-import { getAllReviewByIdOfMovie } from "../../store/actions";
-import { useSelector, useDispatch } from "react-redux";
 
-export default function Movie({ id, titulo, director, poster, clasificacion }) {
 
-    const dispatch = useDispatch();
-    const comentarios = useSelector(state => state.PelisComments);
-    const puntuacionArray = comentarios && comentarios.map(c => c.puntuación)
+export default function Movie({ id, titulo, director, poster, clasificacion, comments }) {
+
+    const puntuacionArray = comments && comments.map(c => c.puntuación)
     const sumaPuntuaciones = puntuacionArray && puntuacionArray.reduce((contador, puntuación) => contador + puntuación, 0);
     const numeroPuntuaciones = puntuacionArray && puntuacionArray.length;
-    const promedioPuntuacion = (sumaPuntuaciones / numeroPuntuaciones).toFixed(1)
-
-    useEffect(() => {
-        dispatch(getAllReviewByIdOfMovie(id));
-    }, [dispatch]);
+    const promedioPuntuacion = (sumaPuntuaciones / numeroPuntuaciones)
 
     return (
         <>

@@ -15,13 +15,13 @@ const getMovies = async (req, res, next) => {
           },
           proximoEstreno: false,
         },
-        include: [Generos, Actores],
+        include: [Generos, Actores, Comentarios],
       });
     }
     if (Object.keys(req.query).length === 0) {
       movies = await Pelicula.findAll({
         where: { proximoEstreno: false },
-        include: [Generos, Actores],
+        include: [Generos, Actores, Comentarios],
       });
     }
     if (movies.length !== 0) return res.send(movies);

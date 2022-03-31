@@ -30,7 +30,7 @@ let axiliar = [{
     distribuidora: "???",
     genero: ["???"]
 }]
-const Carousel = (AllMovies) => {
+const Carousel = () => {
 
     let AllPelis = useSelector((state) => state.PelisAll)
     let arregloFinal = AllPelis.sort((a, b) => a.puntuación < b.puntuación ? 1 : b.puntuación < a.puntuación ? -1 : 0)

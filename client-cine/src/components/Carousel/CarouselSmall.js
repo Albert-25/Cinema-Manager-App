@@ -32,7 +32,7 @@ let axiliar = [{
 }]
 const CarouselSmall = () => {
 
-    let ProxPelis = useSelector((state) => state.PelisAll)
+    let ProxPelis = useSelector((state) => state.NextReleases)
 
 
 
@@ -42,7 +42,7 @@ const CarouselSmall = () => {
                 <h1 className={Style.smallslider__title}>
                     Proximos estrenos!
                 </h1>
-                <Slider className={Style.smallslider__content} slidesPerRow={5} wheel={true} adaptiveHeight={true} >
+                <Slider className={Style.smallslider__content} slidesPerRow={3} wheel={true} adaptiveHeight={true} >
                     {
                         ProxPelis.map(elm => {
                             return (<div className={Style.smallslider__content__item} key={elm.id}>

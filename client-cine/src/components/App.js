@@ -35,7 +35,8 @@ import {
    FiltrarCast,
    FiltrarGeneroYCast,
    editMovie,
-   AllProducts
+   AllProducts,
+   FutureReleases
 } from "./../store/actions";
 import { EditItem } from "./editItem/EditItem.jsx";
 
@@ -48,7 +49,8 @@ export const App = () => {
       dispatch(GetAllGenres())
       dispatch(GetAllCast())
       dispatch(AllProducts())
-      
+      dispatch(FutureReleases())
+
    },[dispatch])
 
 

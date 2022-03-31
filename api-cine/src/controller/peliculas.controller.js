@@ -31,11 +31,11 @@ const getMovies = async (req, res, next) => {
   }
 };
 
-const getEstrenos = async (res, next) => {
+const getEstrenos = async (req, res, next) => {
   let estrenos = [];
   try {
     estrenos = await Pelicula.findAll({
-      where: { proximoEstreno: false },
+      where: { proximoEstreno: true },
       include: [Generos, Actores],
     });
     if (estrenos.length !== 0) return res.send(estrenos);

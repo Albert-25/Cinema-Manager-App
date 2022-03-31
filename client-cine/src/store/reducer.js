@@ -75,6 +75,12 @@ const reducer = (state = initialState, action) => {
         ProductAll:action.payload.produs,
       };
     }
+    case "FUTURERELEASES": {
+      return {
+        ...state,
+        NextReleases:action.payload.rele,
+      };
+    }
     case "CLEANCOMMENTS":{
       return {
         ...state,

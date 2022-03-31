@@ -35,6 +35,18 @@ export const AllProducts = () => {
   };
 };
 
+export const FutureReleases = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`http://localhost:3001/productos`);
+    if (response?.data) {
+      dispatch({
+        type: "FUTURERELEASES",
+        payload: { produs: response.data },
+      });
+    }
+  };
+};
+
 export const DetailedMovie = (id) => {
   return async (dispatch) => {
     try {

@@ -48,6 +48,7 @@ export const App = () => {
       dispatch(GetAllGenres())
       dispatch(GetAllCast())
       dispatch(AllProducts())
+      
    },[dispatch])
 
 

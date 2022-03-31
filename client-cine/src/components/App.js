@@ -33,16 +33,9 @@ import {
    AllMovies,
    GetAllGenres,
    GetAllCast,
-   FiltrarGenero,
-   FiltrarCast,
-   FiltrarGeneroYCast,
-   editMovie,
    AllProducts,
-
-   FutureReleases
-
+   FutureReleases,
    allUsers
-
 } from "./../store/actions";
 import { EditItem } from "./editItem/EditItem.jsx";
 

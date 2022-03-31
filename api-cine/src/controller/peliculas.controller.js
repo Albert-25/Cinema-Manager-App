@@ -13,12 +13,16 @@ const getMovies = async (req, res, next) => {
                titulo: {
                   [Op.iLike]: "%" + req.query.title + "%",
                },
+               proximoEstreno: false,
             },
-            include: [Generos, Actores],
+            include: [Generos, Actores, Comentarios],
          });
       }
       if (Object.keys(req.query).length === 0) {
-         movies = await Pelicula.findAll({ include: [Generos, Actores] });
+         movies = await Pelicula.findAll({
+            where: { proximoEstreno: false },
+            include: [Generos, Actores, Comentarios],
+         });
       }
       if (movies.length !== 0) return res.send(movies);
       next();
@@ -27,14 +31,23 @@ const getMovies = async (req, res, next) => {
    }
 };
 
+const getEstrenos = async (req, res, next) => {
+   let estrenos = [];
+   try {
+      estrenos = Pelicula.findAll({
+         where: { proximoEstreno: true },
+         include: [Generos, Actores],
+      });
+      if (estrenos.length !== 0) return res.send(estrenos);
+      next();
+   } catch (error) {
+      next(error);
+   }
+};
 
 const insertMovie = async (req, res, next) => {
-   console.log(req.body);
    for (const key in req.body) {
-      if (
-         !req.body[key] ||
-         ((key === "genders" || key === "actors") && req.body[key].length === 0)
-      ) {
+      if (key !== "proximoEstreno" && req.body[key].length === 0) {
          return res.status(406).json({ msg: "All atrributes are required" });
       }
    }
@@ -48,11 +61,12 @@ const insertMovie = async (req, res, next) => {
          background: req.body.background,
          duracion: req.body.duracion,
          clasificacion: req.body.clasificacion,
-         puntuacion: req.body.puntuación,
          director: req.body.director,
+         puntuación: req.body.puntuación,
          pais: req.body.pais,
          distribuidora: req.body.distribuidora,
          trailer: req.body.trailer,
+         proximoEstreno: req.body.proximoEstreno,
       });
       await movie.addGeneros(gendersTds);
       await movie.addActores(actorsIds);
@@ -85,11 +99,11 @@ const updateMovie = async (req, res, next) => {
          include: [Generos, Actores],
       });
 
-      if (req.body.actors) {
+      if (req.body.actors?.length > 0) {
          await testmovie.removeActores(calculateAsoc(1, await Actores.count()));
          await testmovie.addActores(req.body.actors);
       }
-      if (req.body.genders) {
+      if (req.body.genders?.length > 0) {
          await testmovie.removeGeneros(calculateAsoc(1, await Generos.count()));
          await testmovie.addGeneros(req.body.genders);
       }
@@ -130,4 +144,5 @@ module.exports = {
    getMovie,
    updateMovie,
    destroyMovie,
+   getEstrenos,
 };

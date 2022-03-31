@@ -14,54 +14,25 @@ const Pelicula = sequelize.define(
          type: DataTypes.TEXT,
          allowNull: false,
       },
-      poster: {
-         type: DataTypes.STRING(500),
-         allowNull: false,
-      },
-      background: {
-         type: DataTypes.STRING(500),
-         allowNull: false,
-      },
-      duracion: {
-         type: DataTypes.INTEGER,
-         allowNull: false,
-         validate: {
-            isInt: {
-               msg: "Please enter INTEGER number in duration",
-            },
-         },
-      },
-      clasificacion: {
-         type: DataTypes.STRING,
-         allowNull: false,
-      },
-      director: {
-         type: DataTypes.STRING,
-         allowNull: false,
-      },
-      puntuación: {
-         type: DataTypes.FLOAT,
-         allowNull: true,
-         validate: {
-            isFloat: {
-               msg: "Please enter FLOAT number in puntuación",
-            },
-         },
-      },
-      pais: {
-         type: DataTypes.STRING,
-         allowNull: false,
-      },
-      distribuidora: {
-         type: DataTypes.STRING,
-         allowNull: false,
-      },
-      trailer: {
-         type: DataTypes.STRING,
-         allowNull: false,
-      },
-   },
-   { timestamps: false }
+    },
+    pais: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    distribuidora: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    trailer: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    proximoEstreno: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
+  },
+  { timestamps: false }
 );
 
 Generos.belongsToMany(Pelicula, { through: "PeliculaGenero" });

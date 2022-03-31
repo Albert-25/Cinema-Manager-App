@@ -43,11 +43,11 @@ export const Bilboard = () => {
             </Col>
          </Row>
          <Movies items={filteredMovies} />
-         <Pagination
+         {/* <Pagination
             items={moviesByGenders}
             setPageSelected={setPageSelected}
             limit={moviesPerPage}
-         />
+         /> */}
          {filteredMovies.length === 0 && <h1>No hay Resultados</h1>}
       </>
    );

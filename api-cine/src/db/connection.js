@@ -1,6 +1,7 @@
 const { Sequelize } = require("sequelize");
-const { DATABASE_URI } = require("../../config.js");
+const { DATABASE } = require("../../config.js");
 
+<<<<<<< HEAD
 // Connection to Heroku database
 /* const sequelize = new Sequelize(DATABASE_URI, {
    logging: false,
@@ -32,5 +33,12 @@ sequelize
    .catch((err) => {
       console.error("Unable to connect to the database:", err);
    });
+=======
+const sequelize = new Sequelize(DATABASE.uri, {
+   logging: false,
+   native: false,
+   dialectOptions: DATABASE.opt
+})
+>>>>>>> origin/Developer
 
 module.exports = { sequelize };

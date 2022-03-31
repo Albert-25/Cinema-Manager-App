@@ -16,7 +16,6 @@ const CreateMovies = () => {
    const Genres = useSelector((state) => state.GenresAll);
    const Cast = useSelector((state) => state.CastAll);
    let dispatch = useDispatch();
-   const formRef = useRef(null);
    const [inputs, setInputs] = useState({
       titulo: "",
       sinopsis: "",
@@ -25,10 +24,11 @@ const CreateMovies = () => {
       duracion: "",
       clasificacion: "",
       director: "",
-      puntuación: 0,
       pais: "",
+      puntuación: 0,
       distribuidora: "",
       trailer: "",
+      proximoEstreno: false,
       genders: [],
       actors: [],
    });
@@ -45,9 +45,9 @@ const CreateMovies = () => {
       duracion: "",
       clasificacion: "",
       director: "",
-      puntuación: "",
       pais: "",
       distribuidora: "",
+      puntuación: "",
       trailer: "",
       genders: "",
       actors: "",
@@ -55,10 +55,19 @@ const CreateMovies = () => {
    });
 
    const handleChange = (e) => {
-      setInputs({
-         ...inputs,
-         [e.target.name]: e.target.value.trim(),
-      });
+      if (e.target.name !== "proximoEstreno") {
+         setInputs({
+            ...inputs,
+            [e.target.name]: e.target.value.trim(),
+         });
+      } else {
+         setInputs((prevInputs) => {
+            return {
+               ...prevInputs,
+               [e.target.name]: e.target.value,
+            };
+         });
+      }
 
       setErrors(
          validate(
@@ -156,22 +165,7 @@ const CreateMovies = () => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                dispatch(postMovies(inputs));
-               formRef.current.reset();
-               setInputs({
-                  titulo: "",
-                  sinopsis: "",
-                  poster: "",
-                  background: "",
-                  duracion: "",
-                  clasificacion: "",
-                  puntuación: 0,
-                  director: "",
-                  pais: "",
-                  distribuidora: "",
-                  trailer: "",
-                  genders: [],
-                  actors: [],
-               });
+               document.getElementById("ChupaUnLimon").reset();
 
                Swal.fire("La pelicula fue agregada!", "", "success");
                setTimeout(() => {
@@ -225,11 +219,7 @@ const CreateMovies = () => {
          >
             Crea una pelicula
          </h2>
-         <form
-            ref={formRef}
-            id="ChupaUnLimon"
-            onSubmit={(e) => handleSubmit(e)}
-         >
+         <form id="ChupaUnLimon" onSubmit={(e) => handleSubmit(e)}>
             <Row className="justify-content-between mb-4">
                <Col md="5">
                   <div className="input__with__error">
@@ -277,16 +267,7 @@ const CreateMovies = () => {
                      >
                         Subir Imagen
                      </Button>
-                     {inputs.poster && (
-                        <span
-                           style={{
-                              marginLeft: ".75rem",
-                              color: "var(--text-light-color)",
-                           }}
-                        >
-                           imagen cargada:
-                        </span>
-                     )}
+                     {inputs.poster && <span>imagen cargada:</span>}
                      <Image
                         style={{ width: 200 }}
                         cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
@@ -316,16 +297,7 @@ const CreateMovies = () => {
                      >
                         Subir Imagen
                      </Button>
-                     {inputs.background && (
-                        <span
-                           style={{
-                              marginLeft: ".75rem",
-                              color: "var(--text-light-color)",
-                           }}
-                        >
-                           imagen cargada:
-                        </span>
-                     )}
+                     {inputs.background && <span>imagen cargada:</span>}
                      <Image
                         style={{ width: 400 }}
                         cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
@@ -362,7 +334,21 @@ const CreateMovies = () => {
                </Col>
             </Row>
             <Row className="justify-content-between mb-4">
-               <Col md="5"></Col>
+               <Col md="5">
+                  <div className="form-check">
+                     <input
+                        class="form-check-input"
+                        id="flexCheckDefault"
+                        type="checkbox"
+                        name="proximoEstreno"
+                        onChange={(evt) => handleChange(evt)}
+                        placeholder="proximoEstreno"
+                     />
+                     <label class="form-check-label" for="flexCheckDefault">
+                        es proximo estreno?
+                     </label>
+                  </div>
+               </Col>
                <Col md="5">
                   <div className="input__with__error">
                      <Form.Control

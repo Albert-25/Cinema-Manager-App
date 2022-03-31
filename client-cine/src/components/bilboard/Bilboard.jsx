@@ -5,7 +5,7 @@ import { Actorsfilter, GenderFilter } from "../filters/Filters";
 import Movies from "../Movies/Movies";
 import Pagination from "../Movies/Pagination";
 import { filterByActors, filterByGenders, filterByTitle } from "./utils";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 
 export const Bilboard = () => {
    const [title, setTitle] = useState("");
@@ -22,24 +22,34 @@ export const Bilboard = () => {
    const filteredMovies = moviesByGenders.slice(start, end);
 
    return (
-      <>
+      <Container>
          <h2
             style={{ color: "var(--text-light-color)" }}
-            className="mt-5 mb-4 text-center"
+            className="mt-5 mb-5 text-center"
          >
             Disfruta las mejores peliculas estrenos en
             <span className="text-primary"> Pantalla Grande</span>
          </h2>
          <Row className="mt-5 mb-5 mx-auto">
-            <Col md="8" className="d-flex align-items-center">
+            <Col
+               xl="8"
+               md="12"
+               className="d-flex align-items-center justify-content-xl-between"
+            >
                <Actorsfilter actors={actors} setActors={setActors} />
                <GenderFilter genders={genders} setGenders={setGenders} />
             </Col>
             <Col
-               md="4"
-               className="d-flex align-items-center justify-content-end"
+               xl="4"
+               md="12"
+               className="d-flex align-items-center justify-content-xl-end justify-content-xs-center"
             >
-               <Search title={title} setTitle={setTitle} items={moviesAll} />
+               <Search
+                  className="mx-auto"
+                  title={title}
+                  setTitle={setTitle}
+                  items={moviesAll}
+               />
             </Col>
          </Row>
          <Movies items={filteredMovies} />
@@ -49,6 +59,6 @@ export const Bilboard = () => {
       limit={moviesPerPage}
    /> */}
          {filteredMovies.length === 0 && <h1>No hay Resultados</h1>}
-      </>
+      </Container>
    );
 };

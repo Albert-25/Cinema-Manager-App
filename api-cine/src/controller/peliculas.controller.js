@@ -34,7 +34,7 @@ const getMovies = async (req, res, next) => {
 const getEstrenos = async (req, res, next) => {
   let estrenos = [];
   try {
-    estrenos = Pelicula.findAll({
+    estrenos = await Pelicula.findAll({
       where: { proximoEstreno: true },
       include: [Generos, Actores],
     });

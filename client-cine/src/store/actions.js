@@ -23,6 +23,7 @@ export const AllMovies = () => {
     }
   };
 };
+
 export const AllProducts = () => {
   return async (dispatch) => {
     const response = await axios.get(`http://localhost:3001/productos`);
@@ -30,6 +31,18 @@ export const AllProducts = () => {
       dispatch({
         type: "ALLPRODUCTS",
         payload: { produs: response.data },
+      });
+    }
+  };
+};
+
+export const FutureReleases = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`http://localhost:3001/proximosEstrenos`);
+    if (response?.data) {
+      dispatch({
+        type: "FUTURERELEASES",
+        payload: { rele: response.data },
       });
     }
   };

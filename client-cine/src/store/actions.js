@@ -23,6 +23,7 @@ export const AllMovies = () => {
     }
   };
 };
+
 export const AllProducts = () => {
   return async (dispatch) => {
     const response = await axios.get(`http://localhost:3001/productos`);
@@ -30,6 +31,18 @@ export const AllProducts = () => {
       dispatch({
         type: "ALLPRODUCTS",
         payload: { produs: response.data },
+      });
+    }
+  };
+};
+
+export const FutureReleases = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`http://localhost:3001/proximosEstrenos`);
+    if (response?.data) {
+      dispatch({
+        type: "FUTURERELEASES",
+        payload: { rele: response.data },
       });
     }
   };
@@ -284,6 +297,62 @@ export const updateReview = payload => {
     const json = await axios.put("http://localhost:3001/comentarios", payload)
     return dispatch({
       type: "UPDATE_REVIEW",
+      payload: json.data
+    })
+  }
+}
+
+export const allUsers = payload => {
+  return async dispatch => {
+    console.log('entramos')
+    const response = await axios.get("http://localhost:3001/firebase")
+    if (response?.data) {
+      dispatch({
+        type: "ALL_USERS",
+        payload: { users: response.data },
+      });
+    }
+  }
+}
+
+export const createUser = payload => {
+  return async dispatch => {
+    const json = await axios.post("http://localhost:3001/firebase")
+    return dispatch({
+      type: "CREATE_USER"
+
+    })
+  }
+}
+
+export const detailedUser = (id) => {
+  return async dispatch => {
+    console.log('entramos')
+    const response = await axios.get(`http://localhost:3001/firebase/${id}`)
+    if (response?.data) {
+      dispatch({
+        type: "DETAILED_USER",
+        payload: { details: response.data },
+      });
+    }
+  }
+}
+
+
+export const deleteUser = (id) => {
+  console.log('deletee')
+  return (dispatch) => {
+    axios.get(`http://localhost:3001/firebase/delete/${id}`)
+      .then(res => dispatch({ type: "DELETE_USER", payload: id }))
+      .catch(err => console.log(err.response))
+  }
+};
+
+export const updateUser = (id, data) => {
+  return async dispatch => {
+    const json = await axios.post(`http://localhost:3001/firebase/update/${id}`, data)
+    return dispatch({
+      type: "UPDATE_USER",
       payload: json.data
     })
   }

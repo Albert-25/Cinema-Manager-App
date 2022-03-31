@@ -12,6 +12,8 @@ import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
 import EditMovies from "./EditMovies/EditMovies.jsx"
+import EditUsers from "./EditUsers/EditUsers.js"
+
 import PrivateComment from "./PrivateComment.js"
 
 //Changes
@@ -35,7 +37,12 @@ import {
    FiltrarCast,
    FiltrarGeneroYCast,
    editMovie,
-   AllProducts
+   AllProducts,
+
+   FutureReleases
+
+   allUsers
+
 } from "./../store/actions";
 import { EditItem } from "./editItem/EditItem.jsx";
 
@@ -48,6 +55,12 @@ export const App = () => {
       dispatch(GetAllGenres())
       dispatch(GetAllCast())
       dispatch(AllProducts())
+
+      dispatch(FutureReleases())
+
+
+      dispatch(allUsers())
+
    },[dispatch])
 
 
@@ -112,11 +125,12 @@ export const App = () => {
                         </PrivateRoute>
                      }
                   />
+                  
                   <Route
-                     path="/admin/editpelicula/:id"
+                     path="/admin/edituser/:id"
                      element={
-                        <PrivateRoute component={EditMovies} rol={'admin'}>
-                           <EditMovies />
+                        <PrivateRoute component={EditUsers} rol={'admin'}>
+                           <EditUsers />
                         </PrivateRoute>
                      }
                   />

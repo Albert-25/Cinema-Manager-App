@@ -19,18 +19,28 @@
 }
 
 .list {
-   width: 100%;
-   /* max-width: 450px; */
+   width: 80%;
+   max-width: 450px;
    position: absolute;
+   top: 100%;
+   left: 10%;
    padding: 0;
-   background-color: var(--white-color);
+   background-color: inherit;
    list-style: none;
 }
 
 .item_list {
    display: block;
-   padding: 0.25rem 1rem;
+   width: 100%;
+   padding: 1.25rem 1rem;
    cursor: pointer;
    text-decoration: none;
    color: var(--text-dark-color);
+   background-color: var(--white-color);
+   transition: background-color 0.3s ease-in-out;
+}
+
+.item_list:hover {
+   transition: background-color 0.3s ease-in-out;
+   background-color: var(--gray-color);
 }

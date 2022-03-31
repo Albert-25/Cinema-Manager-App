@@ -23,6 +23,13 @@ export const Bilboard = () => {
 
    return (
       <>
+         <h2
+            style={{ color: "var(--text-light-color)" }}
+            className="mt-5 mb-4 text-center"
+         >
+            Disfruta las mejores peliculas estrenos en
+            <span className="text-primary"> Pantalla Grande</span>
+         </h2>
          <Row className="mt-5 mb-5 mx-auto">
             <Col md="8" className="d-flex align-items-center">
                <Actorsfilter actors={actors} setActors={setActors} />

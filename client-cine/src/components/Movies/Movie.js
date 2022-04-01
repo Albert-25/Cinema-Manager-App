@@ -19,10 +19,11 @@ export default function Movie({
          (contador, puntuación) => contador + puntuación,
          0
       );
-      //puntuacionArray && puntuacionArray.length
-   const numeroPuntuaciones = 3;
-   const promedioPuntuacion = sumaPuntuaciones / numeroPuntuaciones;
 
+   const numeroPuntuaciones = puntuacionArray.length === 0 ? 1 : puntuacionArray.length
+
+   const promedioPuntuacion = sumaPuntuaciones / numeroPuntuaciones;
+   console.log(promedioPuntuacion)
    return (
       <>
          <Card

@@ -1,12 +1,12 @@
 
-
+import { useState } from 'react';
 import React, { useContext } from 'react';
 import { BsPlusCircle, BsPencilFill, BsTrash } from 'react-icons/bs'
 import { AdminContext } from './../admincontext.jsx'
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Stack, Image ,Spinner} from 'react-bootstrap';
-import { removeActors, removeMovie, removeGenres, removeProduct, deleteUser} from '../../../store/actions'
+import { removeActors, removeMovie, removeGenres, removeProduct, deleteUser, deleteReview} from '../../../store/actions'
 import Swal from "sweetalert2";
 import Items from './items.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -50,14 +50,15 @@ export default function ItemsContainer() {
           state?.section === "movies" && dispatch(removeMovie(res))
           state?.section === "genres" && dispatch(removeGenres(res))
           state?.section === "products" && dispatch(removeProduct(res))
+          state?.section === "comments" && dispatch(deleteReview(res))
           state?.section === "users" && dispatch(deleteUser(res))
-
           Swal.fire(
             'Deleted!',
             'Your file has been deleted.',
             'success'
           )
         }
+        setTimeout(() => window.location.reload(), 1000)
       })
 
     }, error => console.log(error))

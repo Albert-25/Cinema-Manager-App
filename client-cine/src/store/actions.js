@@ -11,6 +11,16 @@ export function postMovies(inputs) {
 
   };
 }
+export const postBuy = (payload) => {
+  console.log("payload", payload)
+  return async (dispatch) => {
+    const json = await axios.post("http://localhost:3001/testStripe/create-checkout-session", payload);
+    return dispatch({
+      type: "POSTBUY",
+      payload: json.data,
+    });
+  };
+};
 
 export const AllMovies = () => {
   return async (dispatch) => {
@@ -357,3 +367,5 @@ export const updateUser = (id, data) => {
     })
   }
 }
+
+

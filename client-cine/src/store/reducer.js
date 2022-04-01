@@ -17,6 +17,11 @@ const initialState = {
   PelisComments: [],
   ProductDetails: [],
   ProductComments: [],
+
+  FirebaseUsers: [],
+  DetailedUser: [],
+  cartUrl:[],
+  itemsCart: JSON.parse(localStorage.getItem("items")) || [],
   // numberOfTickets: [],
   // costoTotalTickets: []
   editInfo: "",
@@ -73,6 +78,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         ProductAll:action.payload.produs,
+      };
+    }
+    case "FUTURERELEASES": {
+      return {
+        ...state,
+        NextReleases:action.payload.rele,
       };
     }
     case "CLEANCOMMENTS":{
@@ -207,6 +218,13 @@ const reducer = (state = initialState, action) => {
         ...state,
       };
     }
+    case "POSTBUY": {
+      console.log(action.payload)
+      return{
+        ...state,
+        cartUrl: action.payload
+      }
+    }
 
     case "PELI_NAME":
       state = initialState;
@@ -275,6 +293,42 @@ const reducer = (state = initialState, action) => {
     case "UPDATE_REVIEW": {
       return {
         ...state
+      }
+    }
+    case "ALL_USERS": {
+      return {
+        ...state,
+        FirebaseUsers: action.payload.users
+      }
+    }
+    case "CREATE_USER": {
+      return {
+        ...state
+      }
+    }
+    case "DETAILED_USER": {
+      return {
+        ...state,
+      DetailedUser: action.payload.details,
+      }
+    }
+
+    case "DELETE_USER":
+         return {
+          ...state,
+          FirebaseUsers:state.FirebaseUsers.filter(e=>e.id!== action.payload)
+         }
+
+    case "UPDATE_USER": {
+      return {
+        ...state
+      }
+    }
+
+    case "UPDATE_CART": {
+      return {
+        ...state,
+        itemsCart: [...state.itemsCart, action.payload]
       }
     }
 

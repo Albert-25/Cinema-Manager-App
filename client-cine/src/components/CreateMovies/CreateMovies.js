@@ -64,7 +64,7 @@ const CreateMovies = () => {
       setInputs((prevInputs) => {
         return {
           ...prevInputs,
-          [e.target.name]: e.target.value,
+          [e.target.name]: !inputs[e.target.name],
         };
       });
     }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import CreateActor from "./CreateActor/CreateActor.jsx";
 import CreateGenre from "./CreateGenre/CreateGenre.jsx";
@@ -7,14 +7,12 @@ import CreateProduct from "./CreateProduct/CreateProduct.jsx";
 import DetailsMovies from "./Details/DetailsMovies";
 import ProductDetail from "./Products/ProductDetail";
 import Home from "./home/Home.js";
-import { Profile } from "./profile/Profile.js";
 import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
-import EditMovies from "./EditMovies/EditMovies.jsx"
-import PrivateComment from "./PrivateComment.js"
-
-//Changes
+import EditMovies from "./EditMovies/EditMovies.jsx";
+import EditUsers from "./EditUsers/EditUsers.js";
+import PrivateComment from "./PrivateComment.js";
 import { AuthProvider } from "../contexts/AuthContext";
 import Signup from "./Signup";
 import Login from "./Login";
@@ -31,28 +29,32 @@ import {
    AllMovies,
    GetAllGenres,
    GetAllCast,
-   FiltrarGenero,
-   FiltrarCast,
-   FiltrarGeneroYCast,
-   editMovie,
-   AllProducts
+   AllProducts,
+   FutureReleases,
+   allUsers,
 } from "./../store/actions";
 import { EditItem } from "./editItem/EditItem.jsx";
+import { Success } from "./CheckOuts/Success.js";
+import { Cancel } from "./CheckOuts/Cancel.js";
+import { Cart } from "./cart/Cart"
 
+const stringItems = localStorage.getItem("items")
+// const stringItems = true
 
 export const App = () => {
-   
+
    let dispatch= useDispatch()
    useEffect(()=>{
       dispatch(AllMovies())
       dispatch(GetAllGenres())
       dispatch(GetAllCast())
       dispatch(AllProducts())
-   },[dispatch])
-
+      dispatch(FutureReleases())
+      dispatch(allUsers());
+   }, [dispatch]);
 
    return (
-      
+      <>
          <Router>
             <AuthProvider>
                <Routes>
@@ -112,11 +114,12 @@ export const App = () => {
                         </PrivateRoute>
                      }
                   />
+                  
                   <Route
-                     path="/admin/editpelicula/:id"
+                     path="/admin/edituser/:id"
                      element={
-                        <PrivateRoute component={EditMovies} rol={'admin'}>
-                           <EditMovies />
+                        <PrivateRoute component={EditUsers} rol={'admin'}>
+                           <EditUsers />
                         </PrivateRoute>
                      }
                   />
@@ -152,19 +155,20 @@ export const App = () => {
            /*Rutas privadas*/
 
                   <Route path="/" element={<Home />} />
+                  <Route path="/cancel" element={<Cancel />} />
+                  <Route path="/Success" element={<Success />} />
                   <Route path="/productpage" element={<ProductsPage />} />
                   <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
                   <Route path="/reviewtoupdate/:id" element={<ReviewToUpdate />} />
                   <Route path="/productpage/Products/:id" element={<ProductDetail />} />
                   <Route path="/shoppingcart" element={<ShoppingCart />} />
                   <Route path="/about" element={<SobreNosotros />} />
-                  <Route path="/portal" element={<Profile />} />
+                  {/* <Route path="/cart" element={<Cart />} /> */}
                </Routes>
             </AuthProvider>
          </Router>
-
+         <Cart/>
+      </>
          );
    
 };
-
-

@@ -60,6 +60,7 @@ function CreateProduct() {
     e.preventDefault();
     if (errors.error === false) {
       dispatch(uploadProduct(info));
+      
       document.getElementById("Batatas").reset();
     }
   }

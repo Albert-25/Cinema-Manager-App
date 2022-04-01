@@ -10,7 +10,8 @@ import './itemcontainer.css';
 
 
 
-const Items = ({ nombre, titulo, genero, nombreProducto, id, image, handleDelete, stock, author, score, comment }) => {
+
+const Items = ({ nombre, titulo, genero, nombreProducto, id, image, handleDelete, stock, author, score, comment, correo, rol, nombreUsuario }) => {
   let { dispatch } = useContext(AdminContext)
   let dispatchRedux = useDispatch()
   let [opcomment, setOpComment] = useState(false)
@@ -28,11 +29,15 @@ const Items = ({ nombre, titulo, genero, nombreProducto, id, image, handleDelete
           src={image}
           thumbnail
           alt="Live from space album cover"
-        />}
-        {titulo && <span className="Item_movie_data_admin"><p><b>Titulo: </b>{titulo}</p></span>}
+
+         />}
+         {titulo && <span className="Item_movie_data_admin"><p><b>Titulo: </b>{titulo}</p></span>}
         {author && <span className="Item_movie_data_admin"><p><b>Author: </b>{author}</p></span>}
         {score && <span className="Item_movie_data_admin"><p><b>Score: </b>{score}</p></span>}
         {nombre && <span className="Item_movie_data_admin"><p><b>Nombre: </b>{nombre}</p></span>}
+        {correo && <span className="Item_movie_data_admin"><p><b>Correo: </b>{correo}</p></span>}
+        {rol && <span className="Item_movie_data_admin"><p><b>rol: </b>{rol}</p></span>}
+        {nombreUsuario && <span className="Item_movie_data_admin"><p><b>Nombre: </b>{nombreUsuario}</p></span>}
         {genero && <span className="Item_movie_data_admin"><p><b>Genero: </b>{genero}</p></span>}
         {nombreProducto && <span className="Item_movie_data_admin"><p><b>Nombre: </b>{nombreProducto}</p></span>}
       </span>
@@ -45,6 +50,7 @@ const Items = ({ nombre, titulo, genero, nombreProducto, id, image, handleDelete
         {genero && <><Link to={`/admin/editgender/${id}`}><Button className={`btn_options ${id}`} variant="outline-primary"  ><BsPencilFill /></Button></Link> <Button className={`btn_options ${id}`} variant="outline-danger" id={id} onClick={handleDelete}><BsTrash /></Button></>}
         {nombreProducto && <><Link to={`/admin/product/edit/${id}`}><Button className={`btn_options ${id}`} variant="outline-primary"  ><BsPencilFill /></Button></Link> <Button className={`btn_options ${id}`} variant="outline-danger" id={id} onClick={handleDelete}><BsTrash /></Button></>}
         {comment && <><Link to={`/admin/comment/edit/${id}`}><Button className={`btn_options ${id}`} variant="outline-primary"  ><BsPencilFill /></Button></Link> <Button className={`btn_options ${id}`} variant="outline-danger" id={id} onClick={handleDelete}><BsTrash /></Button></>}
+        {correo && <><Link to={`/admin/edituser/${id}`}><Button className={`btn_options ${id}`} variant="outline-primary"  ><BsPencilFill /></Button></Link> <Button className={`btn_options ${id}`} variant="outline-danger" id={id} onClick={handleDelete}><BsTrash /></Button></>}
       </span>
     </div>
 

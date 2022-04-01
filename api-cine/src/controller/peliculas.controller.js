@@ -2,6 +2,7 @@ const { Pelicula } = require("../db/models/pelicula");
 const { Generos } = require("../db/models/generos");
 const { Actores } = require("../db/models/actores");
 const { Comentarios } = require("../db/models/comentarios");
+const { Funciones } = require("../db/models/funcion");
 const { Op } = require("sequelize");
 
 const getMovies = async (req, res, next) => {
@@ -34,7 +35,7 @@ const getMovies = async (req, res, next) => {
 const getEstrenos = async (req, res, next) => {
   let estrenos = [];
   try {
-    estrenos = Pelicula.findAll({
+    estrenos = await Pelicula.findAll({
       where: { proximoEstreno: true },
       include: [Generos, Actores],
     });
@@ -81,7 +82,7 @@ const insertMovie = async (req, res, next) => {
 const getMovie = async (req, res, next) => {
   const id = req.params.id;
   try {
-    const movie = await Pelicula.findByPk(id, { include: [Generos, Actores] });
+    const movie = await Pelicula.findByPk(id, { include: [Generos, Actores, Funciones] });
     if (movie) return res.json(movie);
     next();
   } catch (err) {
@@ -97,11 +98,11 @@ const updateMovie = async (req, res, next) => {
       include: [Generos, Actores],
     });
 
-    if (req.body.actors?.length > 0) {
+    if (req.body.actors.length > 0) {
       await testmovie.removeActores(calculateAsoc(1, await Actores.count()));
       await testmovie.addActores(req.body.actors);
     }
-    if (req.body.genders?.length > 0) {
+    if (req.body.genders.length > 0) {
       await testmovie.removeGeneros(calculateAsoc(1, await Generos.count()));
       await testmovie.addGeneros(req.body.genders);
     }

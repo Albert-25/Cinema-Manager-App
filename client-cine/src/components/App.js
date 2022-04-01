@@ -136,6 +136,14 @@ export const App = () => {
                         </PrivateRoute>
                      }
                   />
+                  <Route
+                     path="/admin/comment/edit/:id"
+                     element={
+                        <PrivateRoute component={ReviewToUpdate} rol={'admin'}>
+                           <ReviewToUpdate />
+                        </PrivateRoute>
+                     }
+                  />
                   <Route path="/review/:id" element={
                      <PrivateComment component={Review}>
                         <Review />

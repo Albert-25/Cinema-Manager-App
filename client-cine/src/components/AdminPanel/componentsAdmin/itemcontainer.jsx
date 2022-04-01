@@ -1,12 +1,12 @@
 
-
+import { useState } from 'react';
 import React, { useContext } from 'react';
 import { BsPlusCircle, BsPencilFill, BsTrash } from 'react-icons/bs'
 import { AdminContext } from './../admincontext.jsx'
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Stack, Image ,Spinner} from 'react-bootstrap';
-import { removeActors, removeMovie, removeGenres, removeProduct} from '../../../store/actions'
+import { Button, Stack, Image, Spinner } from 'react-bootstrap';
+import { removeActors, removeMovie, removeGenres, removeProduct, deleteReview } from '../../../store/actions'
 import Swal from "sweetalert2";
 import Items from './items.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,7 +21,7 @@ const items = {
 
 export default function ItemsContainer() {
   let { state } = useContext(AdminContext)
-  let { PelisAll, GenresAll, CastAll, ProductAll,PelisComments } = useSelector(state => state)
+  let { PelisAll, GenresAll, CastAll, ProductAll, PelisComments } = useSelector(state => state)
   const navigate = useNavigate()
   let dispatch = useDispatch()
   const handleDelete = (e) => {
@@ -49,12 +49,14 @@ export default function ItemsContainer() {
           state?.section === "movies" && dispatch(removeMovie(res))
           state?.section === "genres" && dispatch(removeGenres(res))
           state?.section === "products" && dispatch(removeProduct(res))
+          state?.section === "comments" && dispatch(deleteReview(res))
           Swal.fire(
             'Deleted!',
             'Your file has been deleted.',
             'success'
           )
         }
+        setTimeout(() => window.location.reload(), 1000)
       })
 
     }, error => console.log(error))
@@ -69,12 +71,12 @@ export default function ItemsContainer() {
     <div className="item_admin_container_all">
       <Button bsPrefix className="item_admin_btn_create" onClick={handleCreate}> <BsPlusCircle className="btnCreateAdminM" /></Button>
       <Stack className="item_admin_stack_container" gap={2}>
-        {PelisAll && state.section==="movies" && PelisAll.map(movie=><Items key={movie.titulo} titulo={movie.titulo} image={movie.poster} id={movie.id} handleDelete={handleDelete} />)}
-        {GenresAll && state.section==="genres" && GenresAll.map(movie=><Items key={movie.genero+movie.id} genero={movie.genero}  id={movie.id} handleDelete={handleDelete}  />)}
-        {CastAll &&  state.section==="actors" && CastAll.map(movie=><Items key={movie.nombre+movie.id} nombre={movie.nombre}  id={movie.id} handleDelete={handleDelete}  />)}
-        {ProductAll&& state.section ==="products"&& ProductAll.map(prod=><Items key={prod.nombre+prod.id} nombreProducto={prod.nombreProducto} image={prod.imagenProducto}  id={prod.id} handleDelete={handleDelete} />)}
-        {PelisComments.length>0&& state.section === "comments"&&PelisComments.map(e=><Items key={e.nombre+"sdad2"} author={e.nombre} comment={e.comentario} score={e.puntuacion} id={e.id}/>)}
-        {PelisComments.length<1&& state.section === "comments" && <Spinner animation="border" style={{margin:"0 auto"}} variant="secondary" />}
+        {PelisAll && state.section === "movies" && PelisAll.map(movie => <Items key={movie.titulo} titulo={movie.titulo} image={movie.poster} id={movie.id} handleDelete={handleDelete} />)}
+        {GenresAll && state.section === "genres" && GenresAll.map(movie => <Items key={movie.genero + movie.id} genero={movie.genero} id={movie.id} handleDelete={handleDelete} />)}
+        {CastAll && state.section === "actors" && CastAll.map(movie => <Items key={movie.nombre + movie.id} nombre={movie.nombre} id={movie.id} handleDelete={handleDelete} />)}
+        {ProductAll && state.section === "products" && ProductAll.map(prod => <Items key={prod.nombre + prod.id} nombreProducto={prod.nombreProducto} image={prod.imagenProducto} id={prod.id} handleDelete={handleDelete} />)}
+        {PelisComments.length > 0 && state.section === "comments" && PelisComments.map(e => <Items key={e.nombre + "sdad2"} author={e.nombre} comment={e.comentario} handleDelete={handleDelete} score={e.puntuacion} id={e.id} />)}
+        {PelisComments.length < 1 && state.section === "comments" && <Spinner animation="border" style={{ margin: "0 auto" }} variant="secondary" />}
       </Stack>
     </div>
   );

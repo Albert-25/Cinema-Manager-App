@@ -48,8 +48,10 @@ export default function NavBar() {
               <Nav.Item as="li">
                   <Link className="link_nav_items" to="/about">About</Link>
              </Nav.Item>
-             
-
+             /
+             <Nav.Item as="li">
+                  <Link className="link_nav_items" to="/cart">Cart</Link>
+             </Nav.Item>
       </Nav>:null}
   </Navbar>
     </React.Fragment>)

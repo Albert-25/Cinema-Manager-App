@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import CreateActor from "./CreateActor/CreateActor.jsx";
 import CreateGenre from "./CreateGenre/CreateGenre.jsx";
@@ -7,12 +7,12 @@ import CreateProduct from "./CreateProduct/CreateProduct.jsx";
 import DetailsMovies from "./Details/DetailsMovies";
 import ProductDetail from "./Products/ProductDetail";
 import Home from "./home/Home.js";
-import { Profile } from "./profile/Profile.js";
 import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
 import EditMovies from "./EditMovies/EditMovies.jsx"
 import EditUsers from "./EditUsers/EditUsers.js"
+
 
 import PrivateComment from "./PrivateComment.js"
 
@@ -40,10 +40,12 @@ import {
 import { EditItem } from "./editItem/EditItem.jsx";
 import { Success } from "./CheckOuts/Success.js";
 import { Cancel } from "./CheckOuts/Cancel.js";
+import { Cart } from "./cart/Cart"
 
+const stringItems = localStorage.getItem("items")
 
 export const App = () => {
-   
+
    let dispatch= useDispatch()
    useEffect(()=>{
       dispatch(AllMovies())
@@ -56,7 +58,7 @@ export const App = () => {
 
 
    return (
-      
+      <>
          <Router>
             <AuthProvider>
                <Routes>
@@ -157,11 +159,11 @@ export const App = () => {
                   <Route path="/productpage/Products/:id" element={<ProductDetail />} />
                   <Route path="/shoppingcart" element={<ShoppingCart />} />
                   <Route path="/about" element={<SobreNosotros />} />
-                  <Route path="/portal" element={<Profile />} />
                </Routes>
             </AuthProvider>
          </Router>
-
+         {stringItems && <Cart/>}
+      </>
          );
    
 };

@@ -159,7 +159,7 @@ export const App = () => {
                </Routes>
             </AuthProvider>
          </Router>
-         {stringItems && <Cart/>}
+         <Cart/>
       </>
          );
    

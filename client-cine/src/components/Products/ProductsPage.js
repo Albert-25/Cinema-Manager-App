@@ -16,6 +16,7 @@ const ProductsPage = () => {
     const dispatch = useDispatch();
     const ProductosTotales = useSelector((state) => state.ProductAll);
     const UrlBuy = useSelector((state) => state.cartUrl);
+    console.log(UrlBuy)
     const [container, setContainer] = useState([]);
     useEffect(() => {
         dispatch(AllProducts());
@@ -49,7 +50,7 @@ const ProductsPage = () => {
                 <Products className="Product__Productos" productsInfo={container}></Products>
             </Container>
 
-            <button onClick={handleOnClick} style={{ position: "absolute" }}>Submitr</button>
+            <button onClick={handleOnClick} >Submitr</button>
             <div>
                 <div>{itemsCarrito && itemsCarrito.map((item) => {
                     return (<p>{item.name}</p>)

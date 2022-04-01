@@ -34,7 +34,7 @@ export const Bilboard = () => {
             <Col
                xl="8"
                md="12"
-               className="d-flex align-items-center justify-content-xl-between"
+               className="d-flex align-items-center justify-content-xl-between mb-4"
             >
                <Actorsfilter actors={actors} setActors={setActors} />
                <GenderFilter genders={genders} setGenders={setGenders} />
@@ -42,7 +42,7 @@ export const Bilboard = () => {
             <Col
                xl="4"
                md="12"
-               className="d-flex align-items-center justify-content-xl-end justify-content-xs-center"
+               className="d-flex align-items-center justify-content-xl-end justify-content-xs-center mb-4"
             >
                <Search
                   className="mx-auto"

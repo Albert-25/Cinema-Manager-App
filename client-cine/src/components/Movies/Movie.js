@@ -24,7 +24,9 @@ export default function Movie({
 
    return (
       <>
-         <Card style={{ width: "20rem" }}>
+         <Card
+            style={{ width: "20rem", marginLeft: "auto", marginRight: "auto" }}
+         >
             <Card.Img
                variant="top"
                src={poster}
@@ -54,7 +56,12 @@ export default function Movie({
                      ))}
                </Card.Text>
                <Link to={`MovieDetails/${id}`}>
-                  <Button variant="primary">Details</Button>
+                  <Button className="me-3" variant="primary">
+                     Details
+                  </Button>
+               </Link>
+               <Link to={`MovieDetails/${id}`}>
+                  <Button variant="primary">Ticket</Button>
                </Link>
             </Card.Body>
          </Card>

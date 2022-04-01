@@ -1,3 +1,5 @@
+import { getItemsCart } from "../utils/itemsCart";
+
 const initialState = {
   PelisAll: [],
   ProductAll: [],
@@ -21,7 +23,7 @@ const initialState = {
   FirebaseUsers: [],
   DetailedUser: [],
   cartUrl:[],
-  itemsCart: JSON.parse(localStorage.getItem("items")) || [],
+  itemsCart: getItemsCart(),
   // numberOfTickets: [],
   // costoTotalTickets: []
   editInfo: "",
@@ -328,7 +330,7 @@ const reducer = (state = initialState, action) => {
     case "UPDATE_CART": {
       return {
         ...state,
-        itemsCart: [...state.itemsCart, action.payload]
+        itemsCart: action.payload
       }
     }
 

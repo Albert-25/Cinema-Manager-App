@@ -368,4 +368,4 @@ export const updateUser = (id, data) => {
   }
 }
 
-
+export const updateCart = (payload) => ({type: "UPDATE_CART", payload})

@@ -42,7 +42,7 @@ export default function Movie({
                   {director} -{" "}
                   <MdPerson style={{ height: "1.5rem", width: "auto" }} />
                </Card.Text>
-               <Card.Text>
+               {/* <Card.Text>
                   <Button style={{ cursor: "auto" }}>
                      {promedioPuntuacion}
                   </Button>{" "}
@@ -54,7 +54,7 @@ export default function Movie({
                            style={{ height: "1.75rem", width: "auto" }}
                         />
                      ))}
-               </Card.Text>
+               </Card.Text> */}
                <Link to={`MovieDetails/${id}`}>
                   <Button className="me-3" variant="primary">
                      Details

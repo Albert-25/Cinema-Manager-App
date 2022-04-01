@@ -4,6 +4,7 @@ import {Card} from 'react-bootstrap'
 import "./Product.css";
 
 export default function Product({ id, nombreProducto, imagenProducto, precio, stock }) {
+    
     return (
         <>
             <Link to={`Products/${id}`}>
@@ -18,6 +19,7 @@ export default function Product({ id, nombreProducto, imagenProducto, precio, st
                       </Card.ImgOverlay>
                  </Card>
             </Link>
+            <button>Agregar al carrito</button>
         </>
     )
 }

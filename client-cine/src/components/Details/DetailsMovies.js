@@ -45,7 +45,10 @@ const DetailsMovies = (props) => {
     if (detailed.proximoEstreno === false) {
         return (
             <div>
-                {detailed.Funciones.length !== 0 ? <DisplayFuntions funtions={detailed.Funciones} /> : null}
+                {detailed.Funciones.length !== 0 
+                    ? <DisplayFuntions funtions={detailed.Funciones} nameMovie={detailed.titulo}/> 
+                    : null
+                }
                 <ReactPlayer
                     url={detailed.trailer}
                     width="100%"

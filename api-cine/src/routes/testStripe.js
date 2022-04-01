@@ -8,22 +8,24 @@ const YOUR_DOMAIN = 'http://localhost:3000';
 
 
 const startSession = async (req, res) => {
-    let Finale = []
-    req.body.map((e) => Finale.push({
-        price: e.price,
-        quantity: e.quantity
-    }))
-    console.log("Finale", Finale)
-    const session = await stripe.checkout.sessions.create({
+    req.body
+    // let Finale = []
+    // req.body.map((e) => Finale.push({
+    //     price: e.price,
+    //     quantity: e.quantity
+    // }))
+    // console.log("Finale", Finale)
+    // const session = await stripe.checkout.sessions.create({
 
-        line_items: Finale
-        ,
-        mode: 'payment',
-        success_url: `${YOUR_DOMAIN}/success`,
-        cancel_url: `${YOUR_DOMAIN}/cancel`,
-    });
-    res.send(session.url)
-    console.log(session.url);
+    //     line_items: Finale
+    //     ,
+    //     mode: 'payment',
+    //     success_url: `${YOUR_DOMAIN}/success`,
+    //     cancel_url: `${YOUR_DOMAIN}/cancel`,
+    // });
+    // res.send(session.url)
+    // console.log(session.url);
+    res.json('stripe')
 }
 
 

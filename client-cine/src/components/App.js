@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import CreateActor from "./CreateActor/CreateActor.jsx";
 import CreateGenre from "./CreateGenre/CreateGenre.jsx";
@@ -15,6 +15,9 @@ import EditMovies from "./EditMovies/EditMovies.jsx"
 import EditUsers from "./EditUsers/EditUsers.js"
 
 import PrivateComment from "./PrivateComment.js"
+
+//Commerce
+import { commerce } from "../lib/commerce";
 
 //Changes
 import { AuthProvider } from "../contexts/AuthContext";
@@ -41,8 +44,19 @@ import { EditItem } from "./editItem/EditItem.jsx";
 
 
 export const App = () => {
+   const [products, setProducts] = useState([]);
+
+   console.log('dejé de ser empty', products)
    
    let dispatch= useDispatch()
+   const fetchProducts = () => {
+      console.log('buenas')
+  commerce.products.list().then((products) => {
+    setProducts(products.data);
+  }).catch((error) => {
+    console.log('There was an error fetching the products', error)
+  });
+}
    useEffect(()=>{
       dispatch(AllMovies())
       dispatch(GetAllGenres())
@@ -50,18 +64,20 @@ export const App = () => {
       dispatch(AllProducts())
 
       dispatch(FutureReleases())
-
-
+      fetchProducts();
       dispatch(allUsers())
 
    },[dispatch])
 
 
    return (
-      
+     
          <Router>
+
             <AuthProvider>
+
                <Routes>
+
            /*Rutas agregadas*/
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/login" element={<Login />} />

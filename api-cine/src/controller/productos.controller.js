@@ -1,4 +1,5 @@
 const { Productos } = require("../db/models/productos");
+const stripe = require('stripe')(process.env.REACT_APP_SRIPE_PRIVATE_KEY);
 
 const getAll = async (req, res, next) => {
   try {
@@ -26,6 +27,7 @@ const getOne = async (req, res, next) => {
 
 const createProduct = async (req, res, next) => {
   const { Product } = req.body;
+
   try {
     if (Product.nombreProducto === "") {
       return res
@@ -41,7 +43,28 @@ const createProduct = async (req, res, next) => {
         .status(406)
         .json({ message: "El producto ingresado ya existe" });
     }
+
+
+    const stripeProduct = await stripe.products.create({
+      name: Product.nombreProducto,
+      images: [Product.imagenProducto],
+      description: Product.descripcion,
+    });
+
+    const stripePrice = await stripe.prices.create({
+      product: stripeProduct.id,
+      unit_amount: Product.precio,
+      currency: 'usd',
+      // recurring: {interval: 'month'},
+    });
+    console.log("HOLA", stripePrice.id)
+
+    Product.id = stripeProduct.id
+    Product.priceID = stripePrice.id
+    console.log(Product)
+
     let nuevo = await Productos.create(Product);
+
     if (nuevo) {
       res.json({ message: "producto creado correctamente", data: nuevo });
     }

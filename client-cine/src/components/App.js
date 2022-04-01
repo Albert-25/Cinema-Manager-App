@@ -38,6 +38,8 @@ import {
    allUsers
 } from "./../store/actions";
 import { EditItem } from "./editItem/EditItem.jsx";
+import { Success } from "./CheckOuts/Success.js";
+import { Cancel } from "./CheckOuts/Cancel.js";
 
 
 export const App = () => {
@@ -147,6 +149,8 @@ export const App = () => {
            /*Rutas privadas*/
 
                   <Route path="/" element={<Home />} />
+                  <Route path="/cancel" element={<Cancel />} />
+                  <Route path="/Success" element={<Success />} />
                   <Route path="/productpage" element={<ProductsPage />} />
                   <Route path="/MovieDetails/:id" element={<DetailsMovies />} />
                   <Route path="/reviewtoupdate/:id" element={<ReviewToUpdate />} />

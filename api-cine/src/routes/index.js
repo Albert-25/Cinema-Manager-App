@@ -8,6 +8,7 @@ const Compras = require("./compras.js");
 const Funcion = require("./funcion.js");
 const Generos = require("./generos.js");
 const ProximosEstrenos = require("./proximosEstrenos.js");
+const testStripe = require("./testStripe.js")
 
 
 const FireDataBase = require("./fireDataBase.js");
@@ -25,6 +26,7 @@ routes.use("/compras", Compras);
 routes.use("/funcion", Funcion);
 routes.use("/generos", Generos);
 routes.use("/proximosEstrenos", ProximosEstrenos);
+routes.use("/testStripe", testStripe);
 routes.use("/firebase", FireDataBase);
 
 

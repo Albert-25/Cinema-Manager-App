@@ -1,42 +1,43 @@
 import React, { useState, useEffect } from "react";
 import "./ProductsPage.css"
+import { useAuth } from "../../contexts/AuthContext";
 import {
-    AllProducts
+    AllProducts,
+    postBuy
 } from "../../store/actions";
 import NavBar from "../Navbar/navbar.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import Products from "./Products";
-import {Container} from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import { Util } from "leaflet";
 
 const ProductsPage = () => {
+    const { user, currentUser, itemsCarrito, setItemsCarrito } = useAuth();
     const dispatch = useDispatch();
     const ProductosTotales = useSelector((state) => state.ProductAll);
+    const UrlBuy = useSelector((state) => state.cartUrl);
+    console.log(UrlBuy)
     const [container, setContainer] = useState([]);
     useEffect(() => {
         dispatch(AllProducts());
     }, [dispatch]);
+    console.log("items carrito", itemsCarrito)
 
     React.useEffect(() => {
         if (container.length === 0) {
             console.log(ProductosTotales)
             setContainer(ProductosTotales);
         }
-        // if (ProductosFiltradas.length !== 0) {
-        //   //Si no hay Productos encontradas popea una alerta y vacía el estado
-        //   if (
-        //     ProductosFiltradas[0].titulo &&
-        //     ProductosFiltradas[0].titulo === "Movie Not found"
-        //   ) {
-        //     Swal.fire("No se encontro peliculas con estos filtros.", "", "error");
-        //     // alert("No movie found with that sorting");
-        //     ProductosFiltradas.pop();
-        //   } else {
-        //     setContainer(ProductosFiltradas);
-        //   }
-        // }
     }, [ProductosTotales]);
 
+    function handleOnClick() {
+        alert("done")
+        dispatch(postBuy(itemsCarrito));
+    }
 
+    if(UrlBuy !== undefined && UrlBuy.length > 30){
+        window.open(UrlBuy)
+    }
 
 
 
@@ -44,10 +45,18 @@ const ProductsPage = () => {
 
     return (
         <>
-        <NavBar/>
-        <Container className="products_main_container" fluid="ls">
-           <Products className="Product__Productos" productsInfo={container}></Products>
-        </Container>
+            <NavBar />
+            <Container className="products_main_container" fluid="ls">
+                <Products className="Product__Productos" productsInfo={container}></Products>
+            </Container>
+
+            <button onClick={handleOnClick} >Submitr</button>
+            <div>
+                <div>{itemsCarrito && itemsCarrito.map((item) => {
+                    return (<p>{item.name}</p>)
+                })}</div>
+
+            </div>
 
         </>
     )

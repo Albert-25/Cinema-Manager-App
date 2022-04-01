@@ -1,21 +1,21 @@
 const ERRORS = {
   Error: (res, err) => {
-    res.status(404).json({ [err.name]: err.message})
+    res.status(404).json({ [err.name]: err})
   },
   SequelizeUniqueConstraintError: (res, err) => {
-    res.status(406).json({ [err.name]: err.errors[0].message })
+    res.status(406).json({ [err.name]: err })
   },
   JsonWebTokenError: (res, err) => {
     res.status(406).json(err)
   },
   SequelizeDatabaseError: (res, err) => {
-    res.status(406).json({[err.name]: err.errors[0].message})
+    res.status(406).json({[err.name]: err})
   },
   SequelizeValidationError: (res, err) => {
-    res.status(406).json({ValidationError: err.message.slice(18)})
+    res.status(406).json({ValidationError: err})
   },
   SequelizeForeignKeyConstraintError: (res, err) => {
-    res.status(406).json({[err.name]: err.message})
+    res.status(406).json({[err.name]: err})
   }
 }
 

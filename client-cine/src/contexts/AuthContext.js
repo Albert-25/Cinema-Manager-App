@@ -32,6 +32,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [user, setUser] = useState(null);
+  const [itemsCarrito, setItemsCarrito] = useState([]);
   const [loading, setLoading] = useState(true);
 
   async function signup(email, password, rol, nombre, imagen) {
@@ -66,7 +67,7 @@ export function AuthProvider({ children }) {
     console.log(user)
     const docuRef = doc(firestore, `usuarios/${user.uid}`);
 
-    setDoc(docuRef, {nombre: name || user.nombre, imagen :  imagen || user.imagen, rol: user.rol });
+    setDoc(docuRef, { nombre: name || user.nombre, imagen: imagen || user.imagen, rol: user.rol });
   }
   //No hay necesidad de setear al usuario porque Firebase te lo notifica con el siguiente método:
   async function getRol(uid) {
@@ -113,6 +114,7 @@ export function AuthProvider({ children }) {
     user,
     updateName,
     // listAllUsers
+    itemsCarrito, setItemsCarrito
   };
   return (
     <AuthContext.Provider value={value}>

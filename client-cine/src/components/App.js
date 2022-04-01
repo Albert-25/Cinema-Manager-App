@@ -103,18 +103,18 @@ export const App = () => {
               }
             />
             <Route
-              path="/admin/createfunciones"
-              element={
-                <PrivateRoute component={CreateFunciones} rol={"admin"}>
-                  <CreateFunciones />
-                </PrivateRoute>
-              }
-            />
-            <Route
               path="/admin/createproducto"
               element={
                 <PrivateRoute component={CreateProduct} rol={"admin"}>
                   <CreateProduct />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/createfunciones"
+              element={
+                <PrivateRoute component={CreateFunciones} rol={"admin"}>
+                  <CreateFunciones />
                 </PrivateRoute>
               }
             />
@@ -139,6 +139,14 @@ export const App = () => {
               element={
                 <PrivateRoute component={EditItem} rol={"admin"}>
                   <EditItem />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/comment/edit/:id"
+              element={
+                <PrivateRoute component={ReviewToUpdate} rol={"admin"}>
+                  <ReviewToUpdate />
                 </PrivateRoute>
               }
             />

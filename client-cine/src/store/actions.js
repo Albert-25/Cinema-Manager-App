@@ -327,7 +327,7 @@ export const allUsers = payload => {
 
 export const createUser = payload => {
   return async dispatch => {
-    const json = await axios.post("http://localhost:3001/firebase")
+    await axios.post("http://localhost:3001/firebase")
     return dispatch({
       type: "CREATE_USER"
 

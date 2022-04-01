@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import CreateActor from "./CreateActor/CreateActor.jsx";
 import CreateGenre from "./CreateGenre/CreateGenre.jsx";
@@ -12,8 +12,6 @@ import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
 
 //Changes
-
-import EditMovies from "./EditMovies/EditMovies.jsx";
 import EditUsers from "./EditUsers/EditUsers.js";
 import PrivateComment from "./PrivateComment.js";
 
@@ -46,30 +44,14 @@ const stringItems = localStorage.getItem("items");
 // const stringItems = true
 
 export const App = () => {
-   const [products, setProducts] = useState([]);
-
-   console.log("dejé de ser empty", products);
-
    let dispatch = useDispatch();
-   const fetchProducts = () => {
-      console.log("buenas");
-      commerce.products
-         .list()
-         .then((products) => {
-            setProducts(products.data);
-         })
-         .catch((error) => {
-            console.log("There was an error fetching the products", error);
-         });
-   };
+
    useEffect(() => {
       dispatch(AllMovies());
       dispatch(GetAllGenres());
       dispatch(GetAllCast());
       dispatch(AllProducts());
       dispatch(FutureReleases());
-
-      fetchProducts();
 
       dispatch(allUsers());
    }, [dispatch]);
@@ -79,7 +61,7 @@ export const App = () => {
          <Router>
             <AuthProvider>
                <Routes>
-                  /*Rutas agregadas*/
+                  {/*Rutas agregadas*/}
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -91,7 +73,8 @@ export const App = () => {
                         </PrivateUpdate>
                      }
                   />
-                  /*Rutas agregadas*/ /*Rutas privadas*/
+                  {/*Rutas agregadas*/
+                  /*Rutas privadas*/}
                   <Route
                      path="/admin"
                      element={
@@ -165,7 +148,7 @@ export const App = () => {
                         </PrivateComment>
                      }
                   />
-                  /*Rutas privadas*/
+                  {/*Rutas privadas*/}
                   <Route path="/" element={<Home />} />
                   <Route path="/cancel" element={<Cancel />} />
                   <Route path="/Success" element={<Success />} />

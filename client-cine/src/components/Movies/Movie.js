@@ -19,7 +19,8 @@ export default function Movie({
          (contador, puntuación) => contador + puntuación,
          0
       );
-   const numeroPuntuaciones = puntuacionArray && puntuacionArray.length;
+      //puntuacionArray && puntuacionArray.length
+   const numeroPuntuaciones = 3;
    const promedioPuntuacion = sumaPuntuaciones / numeroPuntuaciones;
 
    return (

@@ -96,10 +96,10 @@
 .container_footer .h3 h5 {
   font-weight: 900;
 }
-
+/*justify-content: end;*/
 .Details__rightdown__container {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .Details__rightdown {

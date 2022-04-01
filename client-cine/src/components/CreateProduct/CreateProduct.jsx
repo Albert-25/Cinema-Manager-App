@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
 import Axios from "axios";
 import { uploadProduct } from "../../store/actions";

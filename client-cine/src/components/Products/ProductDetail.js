@@ -3,15 +3,18 @@ import { Link } from "react-router-dom";
 import { DetailedProduct } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { useAuth } from "../../contexts/AuthContext";
 import "./ProductDetail.css";
+import Product from "./Product";
 
 const ProductDetail = (props) => {
+    const { user, currentUser, itemsCarrito, setItemsCarrito } = useAuth();
     let { id: code } = useParams();
     let [id] = useState(code);
     const dispatch = useDispatch();
     const detailed = useSelector((state) => state.ProductDetails);
 
-    console.log(detailed)
+    // console.log(detailed)
 
     useEffect(() => {
         dispatch(DetailedProduct(id));
@@ -25,8 +28,20 @@ const ProductDetail = (props) => {
         Produuct = detailed[0];
     }
 
+    function handleOnClick() {
+
+
+        if(itemsCarrito)
+        setItemsCarrito(itemsCarrito.concat({
+            price: detailed.priceID,
+            quantity: 1,
+            name: detailed.nombreProducto
+        }))
+        console.log("carrrito:", itemsCarrito)
+    }
+
     return (
-        <body className="Background__Product">
+        <div className="Background__Product">
             <div className="Product__titl">
                 {detailed.nombreProducto || Produuct.nombreProducto}
             </div>
@@ -55,6 +70,7 @@ const ProductDetail = (props) => {
                         {detailed.stock || Produuct.stock}
                         {" "} unidades
                     </div>
+                    <button onClick={handleOnClick}>👉 Añadir 1 👈</button>
 
                 </div>
             </div>
@@ -63,7 +79,7 @@ const ProductDetail = (props) => {
                     <button className="Product__rightdown__text">👉 Go back 👈</button>
                 </Link>
             </div>
-        </body>
+        </div>
     );
 };
 

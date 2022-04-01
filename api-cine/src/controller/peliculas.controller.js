@@ -2,6 +2,7 @@ const { Pelicula } = require("../db/models/pelicula");
 const { Generos } = require("../db/models/generos");
 const { Actores } = require("../db/models/actores");
 const { Comentarios } = require("../db/models/comentarios");
+const { Funciones } = require("../db/models/funcion");
 const { Op } = require("sequelize");
 
 const getMovies = async (req, res, next) => {
@@ -81,7 +82,7 @@ const insertMovie = async (req, res, next) => {
 const getMovie = async (req, res, next) => {
   const id = req.params.id;
   try {
-    const movie = await Pelicula.findByPk(id, { include: [Generos, Actores] });
+    const movie = await Pelicula.findByPk(id, { include: [Generos, Actores, Funciones] });
     if (movie) return res.json(movie);
     next();
   } catch (err) {

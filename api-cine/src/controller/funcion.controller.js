@@ -4,7 +4,12 @@ const { Pelicula } = require("../db/models/pelicula");
 const getAll = async (req, res, next) => {
   try {
     let funciones = await Funciones.findAll({ include: [Pelicula] });
-    res.json(funciones);
+    if(funciones){
+      res.json(funciones);
+    }
+    else{
+      req.json({message: "no se encontró ninguna funcion en la base de datos"})
+    }
   } catch (error) {
     next(error);
   }
@@ -25,9 +30,6 @@ const crearFuncion = async (req, res, next) => {
   const { funcion, peliculaId } = req.body;
 
   try {
-    if (await Funciones.findOne({ where: { horario: funcion.horario } })) {
-      return res.json({ message: "Ya existe una funcion con ese horario" });
-    }
     let func = await Funciones.create(funcion);
     await func.addPelicula(peliculaId);
     return res.json({

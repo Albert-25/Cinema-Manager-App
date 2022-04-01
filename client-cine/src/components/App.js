@@ -43,6 +43,7 @@ import { Cancel } from "./CheckOuts/Cancel.js";
 import { Cart } from "./cart/Cart"
 
 const stringItems = localStorage.getItem("items")
+// const stringItems = true
 
 export const App = () => {
 
@@ -159,6 +160,7 @@ export const App = () => {
                   <Route path="/productpage/Products/:id" element={<ProductDetail />} />
                   <Route path="/shoppingcart" element={<ShoppingCart />} />
                   <Route path="/about" element={<SobreNosotros />} />
+                  {/* <Route path="/cart" element={<Cart />} /> */}
                </Routes>
             </AuthProvider>
          </Router>

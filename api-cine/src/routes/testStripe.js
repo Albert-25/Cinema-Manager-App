@@ -8,18 +8,22 @@ const YOUR_DOMAIN = 'http://localhost:3000';
 
 
 const startSession = async (req, res) => {
-    const {Carrito} = req.body
-    console.log("entrando", Carrito)
+    let Finale = []
+    req.body.map((e) => Finale.push({
+        price: e.price,
+        quantity: e.quantity
+    }))
+    console.log("Finale", Finale)
     const session = await stripe.checkout.sessions.create({
-        
-        line_items: Carrito
+
+        line_items: Finale
         ,
         mode: 'payment',
         success_url: `${YOUR_DOMAIN}/success`,
         cancel_url: `${YOUR_DOMAIN}/cancel`,
     });
-    res.redirect(303, session.url);
-    console.log(session.url)
+    res.send(session.url)
+    console.log(session.url);
 }
 
 

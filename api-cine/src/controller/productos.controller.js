@@ -27,6 +27,7 @@ const getOne = async (req, res, next) => {
 
 const createProduct = async (req, res, next) => {
   const { Product } = req.body;
+  console.log("het, llegamos!")
 
   try {
     if (Product.nombreProducto === "") {

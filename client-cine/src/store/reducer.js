@@ -20,6 +20,7 @@ const initialState = {
 
   FirebaseUsers: [],
   DetailedUser: [],
+  cartUrl:[],
   itemsCart: JSON.parse(localStorage.getItem("items")) || [],
   // numberOfTickets: [],
   // costoTotalTickets: []
@@ -216,6 +217,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
       };
+    }
+    case "POSTBUY": {
+      console.log(action.payload)
+      return{
+        ...state,
+        cartUrl: action.payload
+      }
     }
 
     case "PELI_NAME":

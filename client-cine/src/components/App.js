@@ -10,13 +10,9 @@ import Home from "./home/Home.js";
 import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
-import EditMovies from "./EditMovies/EditMovies.jsx"
-import EditUsers from "./EditUsers/EditUsers.js"
-
-
-import PrivateComment from "./PrivateComment.js"
-
-//Changes
+import EditMovies from "./EditMovies/EditMovies.jsx";
+import EditUsers from "./EditUsers/EditUsers.js";
+import PrivateComment from "./PrivateComment.js";
 import { AuthProvider } from "../contexts/AuthContext";
 import Signup from "./Signup";
 import Login from "./Login";
@@ -35,7 +31,7 @@ import {
    GetAllCast,
    AllProducts,
    FutureReleases,
-   allUsers
+   allUsers,
 } from "./../store/actions";
 import { EditItem } from "./editItem/EditItem.jsx";
 import { Success } from "./CheckOuts/Success.js";
@@ -54,9 +50,8 @@ export const App = () => {
       dispatch(GetAllCast())
       dispatch(AllProducts())
       dispatch(FutureReleases())
-      dispatch(allUsers())
-   },[dispatch])
-
+      dispatch(allUsers());
+   }, [dispatch]);
 
    return (
       <>
@@ -169,5 +164,3 @@ export const App = () => {
          );
    
 };
-
-

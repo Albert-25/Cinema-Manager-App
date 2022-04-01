@@ -20,7 +20,7 @@ const initialState = {
 
   FirebaseUsers: [],
   DetailedUser: [],
-
+  itemsCart: JSON.parse(localStorage.getItem("items")) || [],
   // numberOfTickets: [],
   // costoTotalTickets: []
   editInfo: "",
@@ -314,6 +314,13 @@ const reducer = (state = initialState, action) => {
     case "UPDATE_USER": {
       return {
         ...state
+      }
+    }
+
+    case "UPDATE_CART": {
+      return {
+        ...state,
+        itemsCart: [...state.itemsCart, action.payload]
       }
     }
 

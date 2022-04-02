@@ -1,24 +1,46 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+   position: relative;
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-end;
+   width: 80%;
+}
+
+.container [type="text"] {
+   width: 80%;
+   max-width: 450px;
 }
 
 .button {
-  cursor: pointer;
-  margin-left: 10px;
+   width: auto;
+   height: 100%;
+   cursor: pointer;
+   margin-left: 1rem;
 }
 
 .list {
-  position: absolute;
-  padding: 0;
-  background-color: rgb(90, 154, 191);
-  list-style: none;
-  width: 100%;
+   width: 80%;
+   max-width: 450px;
+   position: absolute;
+   top: 100%;
+   left: 10%;
+   padding: 0;
+   background-color: inherit;
+   list-style: none;
 }
 
 .item_list {
-  cursor: pointer;
-  text-decoration: none;
-  color: black;
+   display: block;
+   width: 100%;
+   padding: 1.25rem 1rem;
+   cursor: pointer;
+   text-decoration: none;
+   color: var(--text-dark-color);
+   background-color: var(--white-color);
+   transition: background-color 0.3s ease-in-out;
+}
+
+.item_list:hover {
+   transition: background-color 0.3s ease-in-out;
+   background-color: var(--gray-color);
 }

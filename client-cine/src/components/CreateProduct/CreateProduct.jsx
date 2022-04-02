@@ -74,6 +74,7 @@ function CreateProduct() {
 
    function handleSubmit(e) {
       e.preventDefault();
+      console.log(info);
       if (errors.error === false) {
          Swal.fire({
             title: "¿Quieres guardar el producto?",
@@ -86,8 +87,6 @@ function CreateProduct() {
             if (result.isConfirmed) {
                dispatch(uploadProduct(info));
                formRef.current.reset();
-
-               Swal.fire("El producto fue agregado!", "", "success");
             } else if (result.isDenied) {
                Swal.fire("El producto no fue agregada", "", "info");
             }

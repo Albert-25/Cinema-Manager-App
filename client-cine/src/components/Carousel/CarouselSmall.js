@@ -1,7 +1,7 @@
 import Slider from "infinite-react-carousel"
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
-import React, { useState } from "react";
+import React from "react";
 import Style from "./CarouselSmall.module.css"
 let axiliar = [{
     id: 1,

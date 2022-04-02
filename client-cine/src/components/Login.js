@@ -2,19 +2,17 @@ import React, { useRef, useState } from "react";
 import { Card, Form, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const rolRef = useRef();
 
   const { login,user } = useAuth();
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,7 +21,7 @@ export default function Login() {
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
       let next= new Promise((resolve,rejected)=>{
-        if(user && user?.rol==="user"|| !user.rol){
+        if((user && user?.rol==="user") || !user.rol){
           resolve("/")
         }else if(user?.rol==="admin"){
           resolve("/admin")

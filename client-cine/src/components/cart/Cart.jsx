@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Offcanvas, Button, Navbar } from "react-bootstrap";
 // import { useAuth } from "../../contexts/AuthContext";
 

@@ -1,23 +1,21 @@
-import React, { useRef, useState } from "react";
-import { Card, Form, Button, Alert, Modal } from "react-bootstrap";
+import React, {  useState } from "react";
+import {  Modal } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import firebaseApp from "../firebase";
 import Swal from "sweetalert2";
 import {
   getAuth,
   EmailAuthProvider,
 reauthenticateWithCredential,
-reauthenticateWithPopup,
   updatePassword,
-  GoogleAuthProvider,
 
 } from "firebase/auth";
 
 
 
 export default function Example({show, setShow, pass}){
-  const { user, currentUser, upPassword, updateEmail, updateName } = useAuth();
+  const { currentUser} = useAuth();
    const auth = getAuth(firebaseApp);
   const finales = auth.currentUser;
     const navigate = useNavigate();
@@ -25,7 +23,7 @@ export default function Example({show, setShow, pass}){
       const [passAuth, setPassAuth] = useState('');
 
      const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
 
  
   function handleChange(e){
@@ -35,8 +33,8 @@ function handleOnSubmit(e){
   e.preventDefault()
 
   credential = EmailAuthProvider.credential(finales.email, passAuth)
-
-    const result = reauthenticateWithCredential(finales, credential).then(() => {
+//const result = 
+    reauthenticateWithCredential(finales, credential).then(() => {
             updatePassword(currentUser, pass).then(() => {
                Swal.fire({
             title: "¿Quieres guardar los cambios?",

@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { Image, Dropdown } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import './accountview.css'
-import { useDispatch } from "react-redux";
 let iconAuxiliar = "https://png.pngtree.com/element_our/20190522/ourlarge/pngtree-little-yellow-chicken-cartoon-avatar-logo-icon-image_1075898.jpg"
 export default function AccountView() {
-  const [error, setError] = useState("");
   let { user, logout } = useAuth();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   async function handleLogout() {
-    setError("");
     try {
       await logout();
       if (!user?.rol) {
@@ -21,7 +17,7 @@ export default function AccountView() {
         navigate('/')
       }
     } catch {
-      setError("Failed to Log out");
+      alert("Failed to Log out");
     }
   }
   return (

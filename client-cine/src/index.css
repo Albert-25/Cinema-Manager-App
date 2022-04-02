@@ -36,3 +36,9 @@
 body {
    background-color: var(--first-color);
 }
+
+.input__with__error span {
+   margin: auto;
+   color: #df1313;
+   letter-spacing: 1px;
+}

@@ -5,8 +5,9 @@ import { Image } from "cloudinary-react";
 import Axios from "axios";
 import { uploadProduct } from "../../store/actions";
 import { validate } from "./validate";
-import { Button, Container } from "react-bootstrap";
+import { Form, Col, Row, Container, Button } from "react-bootstrap";
 import { MdKeyboardBackspace } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
@@ -59,11 +60,44 @@ function CreateProduct() {
       );
    }
 
+   const handleClick = (e) => {
+      setErrors(
+         validate(
+            {
+               ...info,
+            },
+            errors,
+            "submit"
+         )
+      );
+   };
+
    function handleSubmit(e) {
       e.preventDefault();
       if (errors.error === false) {
-         dispatch(uploadProduct(info));
-         formRef.current.reset();
+         Swal.fire({
+            title: "¿Quieres guardar el producto?",
+            icon: "info",
+            showDenyButton: true,
+            confirmButtonText: "Guardar",
+            denyButtonText: `No guardar`,
+         }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+               dispatch(uploadProduct(info));
+               formRef.current.reset();
+
+               Swal.fire("El producto fue agregado!", "", "success");
+            } else if (result.isDenied) {
+               Swal.fire("El producto no fue agregada", "", "info");
+            }
+         });
+      } else {
+         Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Ingrese correctamente los datos por favor.",
+         });
       }
    }
 
@@ -84,10 +118,10 @@ function CreateProduct() {
 
    return (
       <Container
-         className="Create__Movies"
+         className="mt-5"
          style={{ backgroundColor: "var(--first-color)", position: "relative" }}
       >
-         <Link to="/admin" className="position-absolute top-0 start-0">
+         <Link to="/admin" className="position-absolute top-0 start-10">
             <Button>
                <MdKeyboardBackspace className="me-3" />
                <span>Regresar al Admin</span>
@@ -100,99 +134,160 @@ function CreateProduct() {
             Crear Producto
          </h2>
 
-         <div>
-            <form ref={formRef} onSubmit={handleSubmit}>
-               <div>
-                  <span>Nombre del producto:</span>
-                  <input
-                     type="text"
-                     name="nombreProducto"
-                     placeholder="Ingrese el nombre aquí..."
-                     id="1"
-                     onChange={handleChange}
-                  />
-                  {errors.nombreProducto ? (
-                     <span>{errors.nombreProducto}</span>
-                  ) : null}
-                  {/* {info.nombreProducto.length < 1 && <span>no puede ser vacio</span>} */}
-               </div>
-               <div className="image_upload_product">
-                  <span>Imagen del producto:</span>
-                  <br />
-                  <input
-                     type="file"
-                     name="imagenProducto"
-                     onChange={(event) => {
-                        setImageSelected(event.target.files[0]);
-                     }}
-                  />
-                  <button
-                     type="button"
-                     name="imagenProducto"
-                     onClick={(event) => uploadImage(event)}
-                  >
-                     Subir Imagen
-                  </button>
-                  <br />
-                  {info.imagenProducto && <span>imagen cargada:</span>}
-                  <br />
-                  <Image
-                     style={{ width: 200 }}
-                     cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
-                     publicId={info.imagenProducto}
-                  />
-               </div>
-               <div>
-                  <span>Descripcion del producto:</span>
-                  <textarea
-                     name="descripcion"
-                     id="3"
-                     placeholder="Ingrese una descripción para el producto..."
-                     onChange={handleChange}
-                  />
-                  {errors.descripcion ? (
-                     <span>{errors.descripcion}</span>
-                  ) : null}
-               </div>
-               <div>
-                  <span>Precio:</span>
-                  <input
-                     type="number"
-                     name="precio"
-                     id="4"
-                     min="0.00"
-                     step="any"
-                     onChange={handleChange}
-                  />
-                  {errors.precio ? <span>{errors.precio}</span> : null}
-               </div>
-               <div>
-                  <span>Stock:</span>
-                  <input
-                     type="number"
-                     name="stock"
-                     id="5"
-                     min="0"
-                     onChange={handleChange}
-                  />
-                  {errors.stock ? <span>{errors.stock}</span> : null}
-               </div>
-               <div>
-                  <span>Es combo:</span>
-                  <input
-                     type="checkbox"
-                     name="isCombo"
-                     id="6"
-                     onChange={handleChange}
-                  />
-               </div>
-               <div>
-                  <button name="submit" type="submit" disabled={errors.error}>
-                     Crear Producto
-                  </button>
-               </div>
-            </form>
-         </div>
+         <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="mx-auto"
+            style={{ width: "80%" }}
+         >
+            <Row className="mb-4">
+               <Col>
+                  <div className="input__with__error">
+                     <Form.Label
+                        htmlFor="1"
+                        style={{ color: "var(--text-light-color)" }}
+                     >
+                        Nombre del producto:
+                     </Form.Label>
+                     <Form.Control
+                        type="text"
+                        name="nombreProducto"
+                        placeholder="Ingrese el nombre aquí..."
+                        id="1"
+                        onChange={handleChange}
+                     />
+                     {errors.nombreProducto ? (
+                        <span>{errors.nombreProducto}</span>
+                     ) : null}
+                     {/* {info.nombreProducto.length < 1 && <span>no puede ser vacio</span>} */}
+                  </div>
+               </Col>
+            </Row>
+            <Row className="mb-4">
+               <Col>
+                  <div className="image_upload_product">
+                     <Form.Label style={{ color: "var(--text-light-color)" }}>
+                        Imagen del producto:
+                     </Form.Label>
+                     <Form.Control
+                        type="file"
+                        name="imagenProducto"
+                        onChange={(event) => {
+                           setImageSelected(event.target.files[0]);
+                        }}
+                     />
+                     <Button
+                        type="button"
+                        name="imagenProducto"
+                        onClick={(event) => uploadImage(event)}
+                     >
+                        Subir Imagen
+                     </Button>
+                     {info.imagenProducto && <span>imagen cargada:</span>}
+                     <Image
+                        style={{ width: 200 }}
+                        cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
+                        publicId={info.imagenProducto}
+                     />
+                  </div>
+               </Col>
+            </Row>
+            <Row className="mb-4">
+               <Col>
+                  <div className="input__with__error">
+                     <Form.Label
+                        htmlFor="4"
+                        style={{ color: "var(--text-light-color)" }}
+                     >
+                        Precio:
+                     </Form.Label>
+                     <Form.Control
+                        type="number"
+                        name="precio"
+                        id="4"
+                        min="0.00"
+                        step="any"
+                        onChange={handleChange}
+                     />
+                     {errors.precio ? <span>{errors.precio}</span> : null}
+                  </div>
+               </Col>
+            </Row>
+            <Row className="mb-4">
+               <Col>
+                  <div className="input__with__error">
+                     <Form.Label
+                        htmlFor="5"
+                        style={{ color: "var(--text-light-color)" }}
+                     >
+                        Stock:
+                     </Form.Label>
+                     <Form.Control
+                        type="number"
+                        name="stock"
+                        id="5"
+                        min="0"
+                        onChange={handleChange}
+                     />
+                     {errors.stock ? <span>{errors.stock}</span> : null}
+                  </div>
+               </Col>
+            </Row>
+            <Row className="mb-4">
+               <Col>
+                  <div className="input__with__error">
+                     <Form.Label
+                        htmlFor="3"
+                        style={{ color: "var(--text-light-color)" }}
+                     >
+                        Descripcion del producto:
+                     </Form.Label>
+                     <Form.Control
+                        as="textarea"
+                        name="descripcion"
+                        id="3"
+                        placeholder="Ingrese una descripción para el producto..."
+                        onChange={handleChange}
+                        style={{ resize: "none" }}
+                     />
+                     {errors.descripcion ? (
+                        <span>{errors.descripcion}</span>
+                     ) : null}
+                  </div>
+               </Col>
+            </Row>
+            <Row className="mb-4">
+               <Col>
+                  <div className="input__with__error">
+                     <Form.Label
+                        htmlFor="6"
+                        style={{
+                           color: "var(--text-light-color)",
+                           display: "inline-block",
+                           marginRight: "1rem",
+                        }}
+                     >
+                        Es combo?{"   "}
+                     </Form.Label>
+                     <Form.Check
+                        type="checkbox"
+                        name="isCombo"
+                        id="6"
+                        onChange={handleChange}
+                        style={{
+                           display: "inline-block",
+                        }}
+                     />
+                     <Form.Control
+                        type="submit"
+                        value="Crear pelicula"
+                        onClick={(e) => handleClick(e)}
+                        style={{ width: "40%", margin: "auto" }}
+                     />
+                  </div>
+               </Col>
+            </Row>
+         </form>
       </Container>
    );
 }

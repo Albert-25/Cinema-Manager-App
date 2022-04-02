@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { uploadActor } from "../../store/actions";
 import { Link } from "react-router-dom";
 import { Form, Col, Row, Container, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 function CreateActor() {
    const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function CreateActor() {
       document.getElementById("1").value = "";
       dispatch(uploadActor(actor));
       document.getElementById("HAHA").reset();
+      Swal.fire("El actor fue agregado!", "", "success");
    }
 
    return (

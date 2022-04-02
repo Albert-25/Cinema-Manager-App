@@ -15,7 +15,11 @@ const ReviewToShow = ({ id }) => {
 
     useEffect(() => {
         dispatch(getAllReviewByIdOfMovie(id))
-    }, [dispatch, id])
+    }, [dispatch])
+
+    /*useEffect(() => {
+        dispatch(getAllReviewByIdOfMovie(id))
+    }, [dispatch, id])*/
 
     const handleDelete = (idOfComment) => {
         dispatch(deleteReview(idOfComment))

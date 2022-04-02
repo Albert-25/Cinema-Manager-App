@@ -12,6 +12,7 @@ import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
 
 //Changes
+import EditMovies from './EditMovies/EditMovies.jsx'
 import EditUsers from "./EditUsers/EditUsers.js";
 import CreateFunciones from "./CreateFuncion/CreateFuncion.jsx";
 
@@ -62,7 +63,7 @@ export const App = () => {
       <Router>
         <AuthProvider>
           <Routes>
-            /*Rutas agregadas*/
+ 
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -74,7 +75,7 @@ export const App = () => {
                 </PrivateUpdate>
               }
             />
-            /*Rutas agregadas*/ /*Rutas privadas*/
+
             <Route
               path="/admin"
               element={
@@ -121,6 +122,15 @@ export const App = () => {
                 </PrivateRoute>
               }
             />
+            
+            <Route
+              path="/admin/editpelicula/:id"
+              element={
+                <PrivateRoute component={EditMovies} rol={"admin"}>
+                  <EditMovies />
+                </PrivateRoute>
+              }
+            />
             <Route
               path="/admin/edituser/:id"
               element={
@@ -161,7 +171,7 @@ export const App = () => {
                 </PrivateComment>
               }
             />
-            /*Rutas privadas*/
+    
             <Route path="/" element={<Home />} />
             <Route path="/cancel" element={<Cancel />} />
             <Route path="/Success" element={<Success />} />
@@ -174,7 +184,7 @@ export const App = () => {
             />
             <Route path="/shoppingcart" element={<ShoppingCart />} />
             <Route path="/about" element={<SobreNosotros />} />
-            {/* <Route path="/cart" element={<Cart />} /> */}
+  
           </Routes>
         </AuthProvider>
       </Router>

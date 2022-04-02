@@ -22,7 +22,6 @@ export default function ItemsContainer() {
   let { PelisAll, GenresAll, CastAll, ProductAll,PelisComments, FirebaseUsers } = useSelector(state => state)
   const navigate = useNavigate()
   let dispatch = useDispatch()
-  console.log('SoyUsuarios', FirebaseUsers)
   const handleDelete = (e) => {
     console.log(e.currentTarget.className.split(" ")[1])
     let ev = new Promise((resolve, rejected) => {

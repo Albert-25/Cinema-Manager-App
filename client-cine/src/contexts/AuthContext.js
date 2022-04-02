@@ -87,7 +87,7 @@ export function AuthProvider({ children }) {
     });
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserWithFirebaseAndRol(user);
@@ -98,9 +98,9 @@ export function AuthProvider({ children }) {
       }, 2000);
     });
     return unsuscribe;
-  });
+  });*/
 
- /*  useEffect(() => {
+   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserWithFirebaseAndRol(user);
@@ -111,7 +111,7 @@ export function AuthProvider({ children }) {
       }, 2000);
     });
     return unsuscribe;
-  }, []);*/
+  }, []);
 
   const value = {
     currentUser,

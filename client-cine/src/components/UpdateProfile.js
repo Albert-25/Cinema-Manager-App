@@ -4,11 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { Link} from "react-router-dom";
 import Axios from "axios";
 import { Image } from "cloudinary-react";
-import firebaseApp from "../firebase";
-import Example from './PasswordVerification'
-import {
-  getAuth,
-} from "firebase/auth";
+import Example from './PasswordVerification';
 const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
 export default function UpdateProfile() {

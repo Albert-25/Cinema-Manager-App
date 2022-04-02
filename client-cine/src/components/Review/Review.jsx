@@ -69,23 +69,23 @@ const Review = () => {
         navigate(-1)
     }
 
-     /*useEffect(() => {
+     useEffect(() => {
         if (comentario.length >= 601) {
             setErrorComentario("se permiten como maximo 600 carácteres")
         }
         else {
             setErrorComentario("")
         }
-    })*/
+    })
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (comentario.length >= 601) {
             setErrorComentario("se permiten como maximo 600 carácteres")
         }
         else {
             setErrorComentario("")
         }
-    },[comentario.length])
+    },[comentario.length])*/
 
     return (
         <div className={styles.container}>

@@ -11,7 +11,7 @@ const ReviewToUpdate = () => {
 
     let navigate = useNavigate();
     const id = useParams().id;
-    console.log(id)
+
     const dispatch = useDispatch()
     const [comentario, setComentario] = useState("")
     const [puntuación, setPuntuación] = useState()
@@ -22,7 +22,7 @@ const ReviewToUpdate = () => {
     // const nombre = "Anonimo";
     const { user } = useAuth();
     let nombre = user && user.nombre ? user.nombre : "Anonimo"
-    console.log(user)
+
 
     const onChange = (e) => {
         console.log(e.target.value)
@@ -66,15 +66,6 @@ const ReviewToUpdate = () => {
         navigate(-1)
     }
 
-    /*useEffect(() => {
-        if (comentario.length >= 601) {
-            setErrorComentario("se permiten como maximo 600 carácteres")
-        }
-        else {
-            setErrorComentario("")
-        }
-    })*/
-
     useEffect(() => {
         if (comentario.length >= 601) {
             setErrorComentario("se permiten como maximo 600 carácteres")
@@ -82,7 +73,16 @@ const ReviewToUpdate = () => {
         else {
             setErrorComentario("")
         }
-    },[comentario.length])
+    })
+
+    /*useEffect(() => {
+        if (comentario.length >= 601) {
+            setErrorComentario("se permiten como maximo 600 carácteres")
+        }
+        else {
+            setErrorComentario("")
+        }
+    },[comentario.length])*/
 
     return (
         <div className={styles.container}>

@@ -22,19 +22,19 @@ const ProductsPage = () => {
     }, [dispatch]);
     console.log("items carrito", itemsCarrito)
 
-    React.useEffect(() => {
+    /*React.useEffect(() => {
         if (container.length === 0) {
             console.log(ProductosTotales)
             setContainer(ProductosTotales);
         }
-    }, [ProductosTotales, container]);
+    }, [ProductosTotales, container]);*/
 
-       /* React.useEffect(() => {
+       React.useEffect(() => {
         if (container.length === 0) {
             console.log(ProductosTotales)
             setContainer(ProductosTotales);
         }
-    }, [ProductosTotales]);*/
+    }, [ProductosTotales]);
 
     function handleOnClick() {
         alert("done")

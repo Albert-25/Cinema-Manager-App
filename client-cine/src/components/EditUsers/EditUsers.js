@@ -13,13 +13,13 @@ const EditUsers = () => {
   const dispatch = useDispatch();
   const id = useParams().id;
 
- /*   useEffect(() => {
+   useEffect(() => {
     dispatch(detailedUser(id));
-  }, [dispatch]);*/
+  }, [dispatch]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     dispatch(detailedUser(id));
-  }, [dispatch, id]);
+  }, [dispatch, id]);*/
 
   
 

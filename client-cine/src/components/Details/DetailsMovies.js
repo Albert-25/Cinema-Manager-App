@@ -21,16 +21,16 @@ const DetailsMovies = (props) => {
     const numeroPuntuaciones = puntuacionArray && puntuacionArray.length;
     const promedioPuntuacion = (sumaPuntuaciones / numeroPuntuaciones).toFixed(1)
 
-  /*useEffect(() => {
+  useEffect(() => {
         dispatch(DetailedMovie(id));
         dispatch(getAllReviewByIdOfMovie(id));
-    }, [dispatch]);*/
+    }, [dispatch]);
 
 
-    useEffect(() => {
+    /*useEffect(() => {
         dispatch(DetailedMovie(id));
         dispatch(getAllReviewByIdOfMovie(id));
-    }, [dispatch, id]);
+    }, [dispatch, id]);*/
 
     const handleFilterRating = e => {
         dispatch(filterReviewByRating(e.target.value))

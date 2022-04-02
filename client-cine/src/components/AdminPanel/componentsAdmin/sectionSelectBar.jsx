@@ -21,7 +21,6 @@ export default function SelectSectionBar() {
     dispatch({ type: 'sectionSelect', payload:value})  
   };
 
-  console.log(section)
   return (
     <div className="section_admin_select_container">
        <Nav justify variant="tabs" activeKey={`${section}`}  onSelect={handleChange}>

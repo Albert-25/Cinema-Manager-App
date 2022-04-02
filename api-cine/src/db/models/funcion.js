@@ -9,11 +9,20 @@ const Funciones = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    fecha: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
     horario: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+
     asientos: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    maxAsientos: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

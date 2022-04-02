@@ -341,7 +341,9 @@ const CreateMovies = () => {
                 id="flexCheckDefault"
                 type="checkbox"
                 name="proximoEstreno"
-                onChange={(evt) => handleChange(evt)}
+                onChange={(evt) => {
+                  handleChange(evt);
+                }}
                 placeholder="proximoEstreno"
               />
               <label class="form-check-label" for="flexCheckDefault">

@@ -1,14 +1,15 @@
 import axios from "axios";
 
 export function postMovies(inputs) {
-  return  (dispatch) => {
-     axios.post("http://localhost:3001/peliculas", inputs)
-     .then(res=>{
-      dispatch(AllMovies())
-     },err=>{
-      alert(err.response)
-     })
-
+  return (dispatch) => {
+    axios.post("http://localhost:3001/peliculas", inputs).then(
+      (res) => {
+        dispatch(AllMovies());
+      },
+      (err) => {
+        alert(err.response);
+      }
+    );
   };
 }
 export const postBuy = (payload) => {
@@ -20,6 +21,24 @@ export const postBuy = (payload) => {
       payload: json.data,
     });
   };
+};
+
+export const postFunciones = (funciones, peliculaId) => {
+  if (funciones.length > 1) {
+    let body = {
+      funciones: funciones,
+      peliculaId: peliculaId,
+    };
+    console.log(body);
+    axios.post("http://localhost:3001/funcion/bulk", body);
+  } else {
+    let body = {
+      funcion: funciones[0],
+      peliculaId: peliculaId,
+    };
+    console.log(body);
+    axios.post("http://localhost:3001/funcion", body);
+  }
 };
 
 export const AllMovies = () => {
@@ -165,15 +184,16 @@ export const FiltrarGeneroYCast = (arg) => {
 
 export const uploadGenre = (info) => {
   return function postGenre(dispatch) {
-    let body = {Genre: {genero: info.genero,}}
-    axios.post("http://localhost:3001/generos", body)
-      .then(res=>{
-        alert("Genero creado satisfactoriamente")
-        dispatch(GetAllGenres()) })
-      .catch(err=>{
-        alert("Error, el genero ya se encuentra en la base de datos");
+    let body = { Genre: { genero: info.genero } };
+    axios
+      .post("http://localhost:3001/generos", body)
+      .then((res) => {
+        alert("Genero creado satisfactoriamente");
+        dispatch(GetAllGenres());
       })
-    
+      .catch((err) => {
+        alert("Error, el genero ya se encuentra en la base de datos");
+      });
   };
 };
 
@@ -184,14 +204,15 @@ export const uploadActor = (info) => {
         nombre: info.nombre,
       },
     };
-      axios.post("http://localhost:3001/actores", body)
-      .then(resp=>{
-        alert("Actor creado satisfactoriamente")
-        dispatch(GetAllCast())
-      },error=>{
+    axios.post("http://localhost:3001/actores", body).then(
+      (resp) => {
+        alert("Actor creado satisfactoriamente");
+        dispatch(GetAllCast());
+      },
+      (error) => {
         alert("Error, el actor ya se encuentra en la base de datos");
-      })
-    
+      }
+    );
   };
 };
 
@@ -211,13 +232,15 @@ export const uploadProduct = (info) => {
         isCombo: info.isCombo,
       },
     };
-    axios.post("http://localhost:3001/productos", body)
-    .then(res=>{
-      alert("Producto creado satisfactoriamente");
-      dispatch(AllProducts())
-    },error=>{
-      alert("Datos erroneos o el producto ya existe en la base de datos");
-    })
+    axios.post("http://localhost:3001/productos", body).then(
+      (res) => {
+        alert("Producto creado satisfactoriamente");
+        dispatch(AllProducts());
+      },
+      (error) => {
+        alert("Datos erroneos o el producto ya existe en la base de datos");
+      }
+    );
   };
 };
 
@@ -253,44 +276,47 @@ export const filterReviewByRating = (payload) => {
   return {
     type: "FILTER_REVIEWBYRATING",
 
-    payload
-  }
-}
-
+    payload,
+  };
+};
 
 export const removeActors = (id) => {
   return (dispatch) => {
-    axios.delete(`http://localhost:3001/actores/${parseInt(id)}`)
-      .then(res => dispatch({ type: "DELETECAST", payload: id }))
-      .catch(err => console.log(err.response))
-  }
+    axios
+      .delete(`http://localhost:3001/actores/${parseInt(id)}`)
+      .then((res) => dispatch({ type: "DELETECAST", payload: id }))
+      .catch((err) => console.log(err.response));
+  };
 };
-export const removeMovie=(id)=>{
-  return (dispatch)=>{
-    axios.delete(`http://localhost:3001/peliculas/${parseInt(id)}`)
-    .then(res=>dispatch({type:"DELETEMOVIE",payload:parseInt(id)}))
-    .catch(re=>alert("error to delete"))
-  }
-}
-export const removeGenres =(id)=>{
-  return (dispatch)=>{
-    axios.delete(`http://localhost:3001/generos/${parseInt(id)}`)
-    .then(res=>dispatch({type:"DELETEGENRE",payload:parseInt(id)}))
-    .catch(res=>alert(res.response.data))
-  }
-}
-export const removeProduct=(id)=>{
-  return (dispatch)=>{
-    axios.delete(`http://localhost:3001/productos/${parseInt(id)}`)
-    .then(res=>dispatch({type:"DELETEPRODUCT",payload:parseInt(id)}))
-    .catch(res=>alert(res.response))
-  }
-}
-export const cleanMovieComments=()=>{
-  return (dispatch)=>{
-    dispatch({type:"CLEANCOMMENTS"})
-  }
-}
+export const removeMovie = (id) => {
+  return (dispatch) => {
+    axios
+      .delete(`http://localhost:3001/peliculas/${parseInt(id)}`)
+      .then((res) => dispatch({ type: "DELETEMOVIE", payload: parseInt(id) }))
+      .catch((re) => alert("error to delete"));
+  };
+};
+export const removeGenres = (id) => {
+  return (dispatch) => {
+    axios
+      .delete(`http://localhost:3001/generos/${parseInt(id)}`)
+      .then((res) => dispatch({ type: "DELETEGENRE", payload: parseInt(id) }))
+      .catch((res) => alert(res.response.data));
+  };
+};
+export const removeProduct = (id) => {
+  return (dispatch) => {
+    axios
+      .delete(`http://localhost:3001/productos/${parseInt(id)}`)
+      .then((res) => dispatch({ type: "DELETEPRODUCT", payload: parseInt(id) }))
+      .catch((res) => alert(res.response));
+  };
+};
+export const cleanMovieComments = () => {
+  return (dispatch) => {
+    dispatch({ type: "CLEANCOMMENTS" });
+  };
+};
 
 export function deleteReview(id) {
   return async function (dispatch) {
@@ -302,65 +328,67 @@ export function deleteReview(id) {
   };
 }
 
-export const updateReview = payload => {
-  return async dispatch => {
-    const json = await axios.put("http://localhost:3001/comentarios", payload)
+export const updateReview = (payload) => {
+  return async (dispatch) => {
+    const json = await axios.put("http://localhost:3001/comentarios", payload);
     return dispatch({
       type: "UPDATE_REVIEW",
-      payload: json.data
-    })
-  }
-}
+      payload: json.data,
+    });
+  };
+};
 
-export const allUsers = payload => {
-  return async dispatch => {
-    console.log('entramos')
-    const response = await axios.get("http://localhost:3001/firebase")
+export const allUsers = (payload) => {
+  return async (dispatch) => {
+    console.log("entramos");
+    const response = await axios.get("http://localhost:3001/firebase");
     if (response?.data) {
       dispatch({
         type: "ALL_USERS",
         payload: { users: response.data },
       });
     }
-  }
-}
+  };
+};
 
-export const createUser = payload => {
-  return async dispatch => {
-    const json = await axios.post("http://localhost:3001/firebase")
+export const createUser = (payload) => {
+  return async (dispatch) => {
+    const json = await axios.post("http://localhost:3001/firebase");
     return dispatch({
-      type: "CREATE_USER"
-
-    })
-  }
-}
+      type: "CREATE_USER",
+    });
+  };
+};
 
 export const detailedUser = (id) => {
-  return async dispatch => {
-    console.log('entramos')
-    const response = await axios.get(`http://localhost:3001/firebase/${id}`)
+  return async (dispatch) => {
+    console.log("entramos");
+    const response = await axios.get(`http://localhost:3001/firebase/${id}`);
     if (response?.data) {
       dispatch({
         type: "DETAILED_USER",
         payload: { details: response.data },
       });
     }
-  }
-}
-
+  };
+};
 
 export const deleteUser = (id) => {
-  console.log('deletee')
+  console.log("deletee");
   return (dispatch) => {
-    axios.get(`http://localhost:3001/firebase/delete/${id}`)
-      .then(res => dispatch({ type: "DELETE_USER", payload: id }))
-      .catch(err => console.log(err.response))
-  }
+    axios
+      .get(`http://localhost:3001/firebase/delete/${id}`)
+      .then((res) => dispatch({ type: "DELETE_USER", payload: id }))
+      .catch((err) => console.log(err.response));
+  };
 };
 
 export const updateUser = (id, data) => {
-  return async dispatch => {
-    const json = await axios.post(`http://localhost:3001/firebase/update/${id}`, data)
+  return async (dispatch) => {
+    const json = await axios.post(
+      `http://localhost:3001/firebase/update/${id}`,
+      data
+    );
     return dispatch({
       type: "UPDATE_USER",
       payload: json.data

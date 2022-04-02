@@ -22,7 +22,7 @@ export function EditItem() {
         setItem(objTxt.tag === 'actor' ? itemDB.nombre : itemDB.genero)
       })
       .catch(err => console.log(err.response))
-  }, []);
+  }, [params]);
 
   function handleSubmit(e) {
     e.preventDefault()

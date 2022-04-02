@@ -12,15 +12,20 @@ const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 const EditUsers = () => {
   const dispatch = useDispatch();
   const id = useParams().id;
+
+ /*   useEffect(() => {
+    dispatch(detailedUser(id));
+  }, [dispatch]);*/
+
   useEffect(() => {
     dispatch(detailedUser(id));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   
 
 
   const userDetails = useSelector((state) => state.DetailedUser);
-  console.log(userDetails)
+
 
   const [imagesSelected, setImagesSelected] = useState({
     imagen: ""
@@ -32,7 +37,7 @@ const EditUsers = () => {
     nombre: ""
   });
 
-  const [errors, setErrors] = useState({
+  const [errors] = useState({
     nombre: "",
     imagen: "",
     correo: "",
@@ -45,7 +50,6 @@ const EditUsers = () => {
       ...inputs,
       [e.target.name]: e.target.value.trim(),
     });
-    console.log(inputs)
   };
 
 
@@ -69,13 +73,10 @@ const EditUsers = () => {
         imagen: userDetails.imagen,
       });
     }
-    console.log(inputs);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("heyyyyyyyyyyyyyyy", errors);
-    console.log('mandamooos');
     checkInputs()
     if (errors.error === false) {
       Swal.fire({
@@ -172,7 +173,7 @@ const EditUsers = () => {
         <p>Actual imágen de perfil:</p>
         <img src={detailedUser.imagen}
             style={{ width: 200 }}
-            
+            alt=''
           />
        
         

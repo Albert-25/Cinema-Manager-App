@@ -1,11 +1,9 @@
-
-import { useState } from 'react';
 import React, { useContext } from 'react';
-import { BsPlusCircle, BsPencilFill, BsTrash } from 'react-icons/bs'
+import { BsPlusCircle } from 'react-icons/bs'
 import { AdminContext } from './../admincontext.jsx'
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Stack, Image ,Spinner} from 'react-bootstrap';
+import { Button, Stack, Spinner} from 'react-bootstrap';
 import { removeActors, removeMovie, removeGenres, removeProduct, deleteUser, deleteReview} from '../../../store/actions'
 import Swal from "sweetalert2";
 import Items from './items.jsx'

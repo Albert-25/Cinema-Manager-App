@@ -1,38 +1,27 @@
 import React, { useRef, useState } from "react";
-import { Card, Form, Button, Alert, Modal } from "react-bootstrap";
+import { Card, Form, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import Axios from "axios";
 import { Image } from "cloudinary-react";
 import firebaseApp from "../firebase";
 import Example from './PasswordVerification'
 import {
   getAuth,
-  EmailAuthProvider,
-  reauthenticateWithCredential,
-  reauthenticateWithPopup,
-  updatePassword,
-  GoogleAuthProvider,
 } from "firebase/auth";
 const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
 export default function UpdateProfile() {
-  const auth = getAuth(firebaseApp);
-  const finales = auth.currentUser;
-  let credential = '';
   const emailRef = useRef();
-  const passwordRef = useRef();
   const nameRef = useRef();
-  const imagenRef = useRef();
-  const passwordConfirmRef = useRef();
-  const { user, currentUser, upPassword, updateEmail, updateName } = useAuth();
+  const { user, currentUser, updateEmail, updateName } = useAuth();
   const [error, setError] = useState("");
   const [pass, setPass] = useState("");
   const [passConfirm, setPassConfirm] = useState("");
 
   const [picProfile, setPicProfile] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
 
   const [selectedImage, setSelectedImage] = useState("");
@@ -42,8 +31,8 @@ export default function UpdateProfile() {
 
 
 //Estados para abrir y cerrar el popup
-   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+   //const handleClose = () => setShow(false);
+  //const handleShow = () => setShow(true);
 
 //Mostrando el popup desplegable
 

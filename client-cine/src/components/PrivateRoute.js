@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 
@@ -8,8 +8,8 @@ export default function PrivateRoute({
   component: Component,
   ...rest
 }) {
-  const { user, currentUser } = useAuth();
-  console.log(user.rol);
+  const { user } = useAuth();
+
   return <>{user && user.rol === `${Rol}` ? <Component /> : <Navigate to="/" />}</>;
 
 

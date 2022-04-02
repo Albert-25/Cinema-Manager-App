@@ -21,7 +21,7 @@ const Review = () => {
     const [errorComentario, setErrorComentario] = useState("")
     const [error2Comentario, setError2Comentario] = useState("")
     // const nombre = "Anonimo";
-    const { user, currentUser } = useAuth();
+    const { user } = useAuth();
     let nombre = user && user.nombre ? user.nombre :"Anonimo"
     console.log("soy el user",user)
 
@@ -52,7 +52,10 @@ const Review = () => {
             case 5: {
                 setCalificacion("Excelente")
                 break
-            }
+            }default: {
+
+    }
+
         }
         setErrorPuntuacion("")
     }
@@ -66,6 +69,15 @@ const Review = () => {
         navigate(-1)
     }
 
+     /*useEffect(() => {
+        if (comentario.length >= 601) {
+            setErrorComentario("se permiten como maximo 600 carácteres")
+        }
+        else {
+            setErrorComentario("")
+        }
+    })*/
+
     useEffect(() => {
         if (comentario.length >= 601) {
             setErrorComentario("se permiten como maximo 600 carácteres")
@@ -73,7 +85,7 @@ const Review = () => {
         else {
             setErrorComentario("")
         }
-    })
+    },[comentario.length])
 
     return (
         <div className={styles.container}>

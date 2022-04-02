@@ -22,6 +22,19 @@ export const postBuy = (payload) => {
   };
 };
 
+export const getRetrive = (id) => {
+  console.log("esoty enstadno al recuer", id)
+  return async (dispatch) => {
+    const response = await axios.get(`http://localhost:3001/testStripe/retrive/${id}`);
+    if (response?.data) {
+      dispatch({
+        type: "GETRETRIVE",
+        payload: { retr: response.data },
+      });
+    }
+  };
+};
+
 export const AllMovies = () => {
   return async (dispatch) => {
     const response = await axios.get(`http://localhost:3001/peliculas`);

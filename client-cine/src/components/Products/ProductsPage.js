@@ -33,9 +33,10 @@ const ProductsPage = () => {
         alert("done")
         dispatch(postBuy(itemsCarrito));
     }
-
-    if(UrlBuy !== undefined && UrlBuy.length > 30){
-        window.open(UrlBuy)
+  
+    if(UrlBuy && UrlBuy[0] !== undefined && UrlBuy[0].length > 30){
+        window.open(UrlBuy[0])
+        
     }
 
 

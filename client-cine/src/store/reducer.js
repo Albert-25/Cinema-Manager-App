@@ -21,6 +21,8 @@ const initialState = {
   FirebaseUsers: [],
   DetailedUser: [],
   cartUrl:[],
+  cartID:[],
+  Retrive:[],
   itemsCart: JSON.parse(localStorage.getItem("items")) || [],
   // numberOfTickets: [],
   // costoTotalTickets: []
@@ -57,6 +59,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         PelisDetails: action.payload.detis,
+      };
+    }
+    case "GETRETRIVE": {
+      return {
+        ...state,
+        Retrive: action.payload.retr,
       };
     }
     case "DETAILEDPRODUCT": {

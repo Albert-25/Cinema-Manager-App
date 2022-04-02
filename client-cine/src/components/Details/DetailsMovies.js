@@ -20,15 +20,20 @@ const DetailsMovies = (props) => {
     const sumaPuntuaciones = puntuacionArray && puntuacionArray.reduce((contador, puntuacion) => contador + puntuacion, 0);
     const numeroPuntuaciones = puntuacionArray && puntuacionArray.length;
     const promedioPuntuacion = (sumaPuntuaciones / numeroPuntuaciones).toFixed(1)
-    const [ordenRating, setOrdenRating] = useState("")
-    useEffect(() => {
+
+  useEffect(() => {
         dispatch(DetailedMovie(id));
         dispatch(getAllReviewByIdOfMovie(id));
     }, [dispatch]);
 
+
+    /*useEffect(() => {
+        dispatch(DetailedMovie(id));
+        dispatch(getAllReviewByIdOfMovie(id));
+    }, [dispatch, id]);*/
+
     const handleFilterRating = e => {
         dispatch(filterReviewByRating(e.target.value))
-        setOrdenRating(`ordenado ${e.target.value}`)
     }
 
     // console.log("la ide detalles : ", id)
@@ -97,7 +102,7 @@ const DetailsMovies = (props) => {
                                 <div className="Details__trailer">
                                     {Array.isArray(GenArray) ? (
                                         GenArray.map((a, i) => {
-                                            if (i == GenArray.length - 1) {
+                                            if (i === GenArray.length - 1) {
 
                                                 return (
                                                     <span key={a}>
@@ -122,7 +127,7 @@ const DetailsMovies = (props) => {
                                 <div className="Details__trailer">
                                     {Array.isArray(ActArray) ? (
                                         ActArray.map((a, i) => {
-                                            if (i == GenArray.length - 1) {
+                                            if (i === GenArray.length - 1) {
                                                 return (
                                                     <span key={a}>
                                                         {a}
@@ -230,7 +235,7 @@ const DetailsMovies = (props) => {
                                 <div className="Details__trailer">
                                     {Array.isArray(GenArray) ? (
                                         GenArray.map((a, i) => {
-                                            if (i == GenArray.length - 1) {
+                                            if (i === GenArray.length - 1) {
 
                                                 return (
                                                     <span key={a}>
@@ -255,7 +260,7 @@ const DetailsMovies = (props) => {
                                 <div className="Details__trailer">
                                     {Array.isArray(ActArray) ? (
                                         ActArray.map((a, i) => {
-                                            if (i == GenArray.length - 1) {
+                                            if (i === GenArray.length - 1) {
                                                 return (
                                                     <span key={a}>
                                                         {a}

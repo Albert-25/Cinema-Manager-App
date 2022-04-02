@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postMovies } from "../../store/actions";
 import "./CreateMovies.css";
-import { GetAllGenres, GetAllCast, AllMovies } from "../../store/actions";
+import { AllMovies } from "../../store/actions";
 import { validate } from "./validate";
 import Swal from "sweetalert2";
 import Axios from "axios";

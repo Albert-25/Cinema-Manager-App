@@ -5,39 +5,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
 import "./ProductDetail.css";
-import Product from "./Product";
 
 const ProductDetail = (props) => {
-    const { user, currentUser, itemsCarrito, setItemsCarrito } = useAuth();
+    const { itemsCarrito, setItemsCarrito } = useAuth();
     let { id: code } = useParams();
     let [id] = useState(code);
     const dispatch = useDispatch();
     const detailed = useSelector((state) => state.ProductDetails);
 
-    // console.log(detailed)
 
     useEffect(() => {
         dispatch(DetailedProduct(id));
     }, [id, dispatch]);
 
 
-
-    // console.log("la ide detalles : ", id)
     let Produuct = [];
     if (detailed[0]) {
         Produuct = detailed[0];
     }
 
     function handleOnClick() {
-
-
-        if(itemsCarrito)
-        setItemsCarrito(itemsCarrito.concat({
-            price: detailed.priceID,
-            quantity: 1,
-            name: detailed.nombreProducto
-        }))
-        console.log("carrrito:", itemsCarrito)
+        if (itemsCarrito)
+            setItemsCarrito(
+                itemsCarrito.concat({
+                    price: detailed.priceID,
+                    quantity: 1,
+                    name: detailed.nombreProducto,
+                })
+            );
+        console.log("carrrito:", itemsCarrito);
     }
 
     return (
@@ -62,21 +58,20 @@ const ProductDetail = (props) => {
                     </div>
                     <div className="Product__duracion">
                         <h5>Precio: </h5>
-                        {detailed.precio || Produuct.precio}
-                        {" "}dolares
+                        {detailed.precio || Produuct.precio} dolares
                     </div>
                     <div className="Product__clasificacion">
                         <h5>Stock: </h5>
-                        {detailed.stock || Produuct.stock}
-                        {" "} unidades
+                        {detailed.stock || Produuct.stock} unidades
                     </div>
                     <button onClick={handleOnClick}>👉 Añadir 1 👈</button>
-
                 </div>
             </div>
             <div className="container__button">
                 <Link to="/productpage" className="Product__rightdown">
-                    <button className="Product__rightdown__text">👉 Go back 👈</button>
+                    <button className="Product__rightdown__text">
+                        👉 Go back 👈
+                    </button>
                 </Link>
             </div>
         </div>

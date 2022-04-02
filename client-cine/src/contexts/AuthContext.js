@@ -5,9 +5,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
-  sendPasswordResetEmail,
-  updateEmail,
+  //sendPasswordResetEmail,
   updatePassword,
   onAuthStateChanged,
 } from "firebase/auth";
@@ -15,7 +13,6 @@ import {
 import {
   getFirestore,
   doc,
-  collection,
   setDoc,
   getDoc,
 } from "firebase/firestore";
@@ -90,7 +87,20 @@ export function AuthProvider({ children }) {
     });
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
+    const unsuscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserWithFirebaseAndRol(user);
+      }
+      setTimeout(function () {
+        setCurrentUser(user);
+        setLoading(false);
+      }, 2000);
+    });
+    return unsuscribe;
+  });*/
+
+   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserWithFirebaseAndRol(user);

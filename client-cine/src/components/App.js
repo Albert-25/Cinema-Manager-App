@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import CreateActor from "./CreateActor/CreateActor.jsx";
 import CreateGenre from "./CreateGenre/CreateGenre.jsx";
@@ -10,11 +10,14 @@ import Home from "./home/Home.js";
 import SobreNosotros from "./SobreNosotros/SobreNosotros.js";
 import Review from "./Review/Review.jsx";
 import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
-import EditMovies from "./EditMovies/EditMovies.jsx";
+
+//Changes
+import EditMovies from './EditMovies/EditMovies.jsx'
 import EditUsers from "./EditUsers/EditUsers.js";
 import CreateFunciones from "./CreateFuncion/CreateFuncion.jsx";
 
 import PrivateComment from "./PrivateComment.js";
+
 import { AuthProvider } from "../contexts/AuthContext";
 import Signup from "./Signup";
 import Login from "./Login";
@@ -44,6 +47,7 @@ const stringItems = localStorage.getItem("items");
 // const stringItems = true
 
 export const App = () => {
+
   let dispatch = useDispatch();
   useEffect(() => {
     dispatch(AllMovies());
@@ -59,7 +63,7 @@ export const App = () => {
       <Router>
         <AuthProvider>
           <Routes>
-            /*Rutas agregadas*/
+ 
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -71,7 +75,7 @@ export const App = () => {
                 </PrivateUpdate>
               }
             />
-            /*Rutas agregadas*/ /*Rutas privadas*/
+
             <Route
               path="/admin"
               element={
@@ -118,6 +122,15 @@ export const App = () => {
                 </PrivateRoute>
               }
             />
+            
+            <Route
+              path="/admin/editpelicula/:id"
+              element={
+                <PrivateRoute component={EditMovies} rol={"admin"}>
+                  <EditMovies />
+                </PrivateRoute>
+              }
+            />
             <Route
               path="/admin/edituser/:id"
               element={
@@ -158,7 +171,7 @@ export const App = () => {
                 </PrivateComment>
               }
             />
-            /*Rutas privadas*/
+    
             <Route path="/" element={<Home />} />
             <Route path="/cancel" element={<Cancel />} />
             <Route path="/Success" element={<Success />} />
@@ -171,11 +184,12 @@ export const App = () => {
             />
             <Route path="/shoppingcart" element={<ShoppingCart />} />
             <Route path="/about" element={<SobreNosotros />} />
-            {/* <Route path="/cart" element={<Cart />} /> */}
+  
           </Routes>
         </AuthProvider>
       </Router>
       <Cart />
     </>
   );
+
 };

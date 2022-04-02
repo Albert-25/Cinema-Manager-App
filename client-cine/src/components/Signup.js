@@ -12,7 +12,6 @@ export default function Signup() {
   const passwordConfirmRef = useRef();
 
   const nombreRef = useRef();
-  const imagenRef = useRef();
   const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { postFunciones } from "../../store/actions";
 //import { validate } from "./validate";
 import Swal from "sweetalert2";
@@ -48,7 +48,7 @@ const CreateFunciones = () => {
     setInputs(data);
   };
 
-  const [errors, setErrors] = useState({
+  const [errors] = useState({
     sala: "",
     fecha: "",
     horario: "",

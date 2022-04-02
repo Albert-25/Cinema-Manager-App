@@ -9,10 +9,9 @@ import NavBar from "../Navbar/navbar.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import Products from "./Products";
 import { Container } from 'react-bootstrap';
-import { Util } from "leaflet";
 
 const ProductsPage = () => {
-    const { user, currentUser, itemsCarrito, setItemsCarrito } = useAuth();
+    const { itemsCarrito} = useAuth();
     const dispatch = useDispatch();
     const ProductosTotales = useSelector((state) => state.ProductAll);
     const UrlBuy = useSelector((state) => state.cartUrl);
@@ -23,7 +22,14 @@ const ProductsPage = () => {
     }, [dispatch]);
     console.log("items carrito", itemsCarrito)
 
-    React.useEffect(() => {
+    /*React.useEffect(() => {
+        if (container.length === 0) {
+            console.log(ProductosTotales)
+            setContainer(ProductosTotales);
+        }
+    }, [ProductosTotales, container]);*/
+
+       React.useEffect(() => {
         if (container.length === 0) {
             console.log(ProductosTotales)
             setContainer(ProductosTotales);

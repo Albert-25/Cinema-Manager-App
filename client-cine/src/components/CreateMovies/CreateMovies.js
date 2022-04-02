@@ -157,8 +157,8 @@ const CreateMovies = () => {
       if (errors.error === false) {
          Swal.fire({
             title: "¿Quieres guardar la pelicula?",
+            icon: "info",
             showDenyButton: true,
-            showCancelButton: true,
             confirmButtonText: "Guardar",
             denyButtonText: `No guardar`,
          }).then((result) => {
@@ -336,7 +336,7 @@ const CreateMovies = () => {
             <Row className="justify-content-between mb-4">
                <Col md="5">
                   <div className="form-check">
-                     <input
+                     <Form.Check
                         class="form-check-input"
                         id="flexCheckDefault"
                         type="checkbox"

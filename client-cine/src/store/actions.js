@@ -288,10 +288,11 @@ export const editMovie = (id, data) => {
 export const filterReviewByRating = (payload) => {
   return {
     type: "FILTER_REVIEWBYRATING",
+    payload
+  }
+}
 
-    payload,
-  };
-};
+
 
 export const removeActors = (id) => {
   return (dispatch) => {
@@ -431,4 +432,4 @@ export const updateUser = (id, data) => {
   }
 }
 
-
+export const updateCart = (payload) => ({type: "UPDATE_CART", payload})

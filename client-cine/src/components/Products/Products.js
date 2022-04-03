@@ -14,6 +14,7 @@ export default function Products({productsInfo}) {
                         imagenProducto={e.imagenProducto}
                         precio={e.precio}
                         stock={e.stock}
+                        priceID={e.priceID}
                     />
                 ))}
         </div>

@@ -1,18 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Offcanvas, Button, Navbar } from "react-bootstrap";
-// import { useAuth } from "../../contexts/AuthContext";
 
 export const Cart = () => {
-  // const {user, currentUser } = useAuth();
   const [show, setShow] = useState(false);
+  const itemsCart = useSelector((state) => state.itemsCart);
+  const total = itemsCart.reduce((pValue, cValue) =>pValue + cValue.quantity*cValue.price, 0)
+  console.log(total)
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  // console.log("item carrito", itemsCarrito)
+  const handleClick = () => {
+    console.log('terminar')
+  }
 
   return (
-    <Navbar style={{display: 'table'}} className="justify-content-end" fixed="bottom">
-      <Button  variant="primary" onClick={handleShow}>
-        Launch
+    <Navbar className="justify-content-end" fixed="bottom">
+      <Button variant="primary" onClick={handleShow}>
+        Carrito {itemsCart.length}
       </Button>
 
       <Offcanvas show={show} onHide={handleClose} placement="end" name="end">
@@ -20,13 +25,16 @@ export const Cart = () => {
           <Offcanvas.Title>carrito</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          {/* <div>{itemsCarrito&&itemsCarrito.map((item) => {
-            return(<p>{item.name}</p>)
-          })}</div> */}
-          <div>{/* <button onClick={handleOnClick}>Reset</button> */}</div>
-
-          <p>Aqui iria mi orgullo, si tubiese alguno</p>
+          {
+            itemsCart.map((item) => {
+              return (
+                <p key={item.id}>{item.quantity} - {item.name} ${item.price} subTotal:{item.quantity * item.price}</p>
+              )
+            })
+          }
+          <p> Total: {total}</p>
         </Offcanvas.Body>
+        <Button variant="primary" onClick={handleClick}>Pagar</Button>
       </Offcanvas>
     </Navbar>
   );

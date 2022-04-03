@@ -43,14 +43,16 @@ const DetailsMovies = (props) => {
     }
 
 
-
     let GenArray = detailed.Generos && detailed.Generos.length ? detailed.Generos.map((e) => e.genero) : ["no genres"]
     let ActArray = detailed.Actores && detailed.Actores.length ? detailed.Actores.map((e) => e.nombre) : ["no actors"]
 
     if (detailed.proximoEstreno === false) {
         return (
             <div>
-                {detailed.Funciones.length !== 0 ? <DisplayFuntions funtions={detailed.Funciones} /> : null}
+                {detailed.Funciones.length !== 0 
+                    ? <DisplayFuntions funtions={detailed.Funciones} nameMovie={detailed.titulo}/> 
+                    : null
+                }
                 <ReactPlayer
                     url={detailed.trailer}
                     width="100%"

@@ -49,9 +49,7 @@ export const Success = () => {
 
   return (
     <div>
-      <h1>
-        Todo nice, viva amlo
-      </h1>
+      <h1>Todo nice, viva amlo</h1>
     </div>
-  )
-}
+  );
+};

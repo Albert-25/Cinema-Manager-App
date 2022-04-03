@@ -52,7 +52,7 @@ export default function UpdateProfile() {
 
 
     }
-    if (nameRef.current.value !== user.nombre || picProfile !== user.imagen) {
+    if (user && nameRef.current.value !== user.nombre || user && picProfile !== user.imagen) {
       promises.push(updateName(nameRef.current.value, picProfile, user));
     }
     Promise.all(promises)

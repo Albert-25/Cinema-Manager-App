@@ -78,7 +78,7 @@ function CreateProduct() {
       if (errors.error === false) {
          Swal.fire({
             title: "¿Quieres guardar el producto?",
-            icon: "info",
+            icon: "question",
             showDenyButton: true,
             confirmButtonText: "Guardar",
             denyButtonText: `No guardar`,
@@ -118,7 +118,12 @@ function CreateProduct() {
    return (
       <Container
          className="mt-5"
-         style={{ backgroundColor: "var(--first-color)", position: "relative" }}
+         style={{
+            backgroundColor: "var(--first-color)",
+            position: "relative",
+            marginTop: "3rem",
+            marginBottom: "5rem",
+         }}
       >
          <Link to="/admin" className="position-absolute top-0 start-10">
             <Button>

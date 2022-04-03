@@ -11,8 +11,6 @@ export const Success = () => {
   const { itemsCarrito} = useAuth();
   var informacion = localStorage.getItem('compra')
 
-
-  // console.log('Estado cargado', informacion)
   // const ProductosTotales = useSelector((state) => state.ProductAll);
   console.log("prodctos comprados:", itemsCarrito)
 

@@ -3,6 +3,9 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import CreateActor from "./CreateActor/CreateActor.jsx";
 import CreateGenre from "./CreateGenre/CreateGenre.jsx";
 import CreateMovies from "./CreateMovies/CreateMovies.js";
+import CreateUser from "./CreateUser/CreateUser.js";
+
+
 import CreateProduct from "./CreateProduct/CreateProduct.jsx";
 import DetailsMovies from "./Details/DetailsMovies";
 import ProductDetail from "./Products/ProductDetail";
@@ -111,6 +114,14 @@ export const App = () => {
               element={
                 <PrivateRoute component={CreateProduct} rol={"admin"}>
                   <CreateProduct />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/createuser"
+              element={
+                <PrivateRoute component={CreateUser} rol={"admin"}>
+                  <CreateUser />
                 </PrivateRoute>
               }
             />

@@ -14,7 +14,7 @@ export default function NavBar() {
   let navigate = useNavigate()
 
 
-  const { user, currentUser } = useAuth();
+  const { user, currentUser} = useAuth();
 
   return (
     <React.Fragment>

@@ -1,18 +1,24 @@
+
+
 import React, { useRef, useState } from "react";
 import { Card, Form, Button, Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
+import { createUser } from "../../store/actions";
+
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { Image } from "cloudinary-react";
+import { useDispatch } from "react-redux";
+
 const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
-export default function Signup() {
+export default function CreateUser() {
+   const dispatch = useDispatch();
+
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
 
   const nombreRef = useRef();
-  const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [roles, setRoles] = useState("user");
@@ -29,14 +35,14 @@ export default function Signup() {
       setError("");
       setLoading(true);
       console.log("recibidiro", roles);
-      await signup(
-        emailRef.current.value,
-        passwordRef.current.value,
-        roles,
-        nombreRef.current.value,
-        picProfile
-      );
-      navigate("/");
+      await dispatch(createUser(
+       { correo: emailRef.current.value,
+               password: passwordRef.current.value,
+               rol: roles,
+               nombre: nombreRef.current.value,
+               imagen: picProfile}
+      ));
+      navigate("/admin");
     } catch {
       setError("Failed to create an account");
     }
@@ -64,7 +70,7 @@ export default function Signup() {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Sign Up</h2>
+          <h2 className="text-center mb-4">Create user</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
@@ -109,16 +115,31 @@ export default function Signup() {
             publicId={picProfile}
           />
             </Form.Group>
+            <div className="form-group">
+            <select
+                defaultValue={"DEFAULT"}
+                name="Rol"
+                onChange={(evt) => setRoles(evt.target.value)}
+                required
+              >
+                <option className="elemSelect" value="DEFAULT" disabled>
+                  Seleccionar roles
+                </option>
+                <option className="elemSelect" value="admin" type="text">
+                  Admin
+                </option>
+                <option className="elemSelect" value="user">
+                  User
+                </option>
+              </select>
+            </div>
             <Button className="w-100" disabled={loading} type="submit">
-              Sign up
+              Create User
             </Button>
           </Form>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        Already have an account?
-        <Link to="/login">Log in</Link>
-      </div>
+
     </>
   );
 }

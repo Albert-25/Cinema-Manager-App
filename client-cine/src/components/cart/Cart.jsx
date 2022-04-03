@@ -10,8 +10,8 @@ export const Cart = () => {
   // console.log("item carrito", itemsCarrito)
 
   return (
-    <Navbar className="justify-content-end" fixed="bottom">
-      <Button variant="primary" onClick={handleShow}>
+    <Navbar style={{display: 'table'}} className="justify-content-end" fixed="bottom">
+      <Button  variant="primary" onClick={handleShow}>
         Launch
       </Button>
 

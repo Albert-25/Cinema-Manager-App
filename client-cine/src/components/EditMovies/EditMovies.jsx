@@ -47,7 +47,7 @@ const EditMovies = () => {
       duracion: "",
       clasificacion: "",
       director: "",
-      puntuación: "",
+      //puntuación: "",
       pais: "",
       distribuidora: "",
       trailer: "",
@@ -237,19 +237,18 @@ const EditMovies = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      console.log("heyyyyyyyyyyyyyyy", errors);
+      console.log("hey", errors);
       if (errors.error === false) {
          Swal.fire({
             title: "¿Quieres guardar los cambios?",
+            icon: "question",
             showDenyButton: true,
-            showCancelButton: true,
             confirmButtonText: "Guardar",
             denyButtonText: `No guardar`,
          }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                dispatch(editMovie(id, inputs));
-               Swal.fire("La pelicula fue editada!", "", "success");
             } else if (result.isDenied) {
                Swal.fire("La pelicula no fue editada", "", "info");
             }
@@ -281,226 +280,275 @@ const EditMovies = () => {
    return (
       <Container
          className="Create__Movies"
-         style={{ backgroundColor: "var(--first-color)", position: "relative" }}
+         style={{
+            backgroundColor: "var(--first-color)",
+            position: "relative",
+            color: "var(--text-light-color)",
+            marginTop: "3rem",
+            marginBottom: "5rem",
+         }}
       >
-         <Link to="/admin" className="position-absolute top-0 start-0">
+         <Link to="/admin" className="position-absolute top-0 start-10">
             <Button>
                <MdKeyboardBackspace className="me-3" />
                <span>Regresar al Admin</span>
             </Button>
          </Link>
+         <h2
+            className="text-center mb-4"
+            style={{ color: "var(--text-light-color)" }}
+         >
+            Editar la pelicula
+         </h2>
          <form onSubmit={(e) => handleSubmit(e)}>
-            <span>Título:</span>
-            <div className="input__with__error">
-               <Form.Control
-                  type="text"
-                  name="titulo"
-                  placeholder={movieData.titulo}
-                  onChange={(evt) => handleChange(evt)}
-               />
-               {errors.titulo ? <span>{errors.titulo}</span> : null}
-            </div>
-            <span>Sinópsis:</span>
-            <div className="input__with__error">
-               <Form.Control
-                  type="text"
-                  name="sinopsis"
-                  onChange={(evt) => handleChange(evt)}
-                  placeholder={movieData.sinopsis}
-               />
-               {errors.sinopsis ? <span>{errors.sinopsis}</span> : null}
-            </div>
-            <div className="image_upload_poster">
-               <span>Poster:</span>
-               <br />
-               <Form.Control
-                  type="file"
-                  name="poster"
-                  onChange={(event) => {
-                     setImagesSelected({
-                        ...imagesSelected,
-                        [event.target.name]: event.target.files[0],
-                     });
-                  }}
-               />
-               <Button
-                  type="button"
-                  name="poster"
-                  onClick={(event) => uploadImage(event)}
-               >
-                  Subir Imagen
-               </Button>
-               <br />
-               {inputs.poster && <span>imagen cargada:</span>}
-               <br />
-               <Image
-                  style={{ width: 200 }}
-                  cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
-                  publicId={inputs.poster}
-               />
-            </div>
-            <div className="image_upload_background">
-               <span>background:</span>
-               <br />
-               <Form.Control
-                  type="file"
-                  name="background"
-                  onChange={(event) => {
-                     setImagesSelected({
-                        ...imagesSelected,
-                        [event.target.name]: event.target.files[0],
-                     });
-                  }}
-               />
-               <Button
-                  type="button"
-                  name="background"
-                  onClick={(event) => uploadImage(event)}
-               >
-                  Subir Imagen
-               </Button>
-               <br />
-               {inputs.background && <span>imagen cargada:</span>}
-               <br />
-               <Image
-                  style={{ width: 400 }}
-                  cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
-                  publicId={inputs.background}
-               />
-            </div>
-            <span>Duración:</span>
-            <div className="input__with__error">
-               <Form.Control
-                  type="number"
-                  min="0"
-                  name="duracion"
-                  onChange={(evt) => handleChange(evt)}
-                  placeholder={movieData.duracion}
-               />
-               {errors.duracion ? <span>{errors.duracion}</span> : null}
-            </div>
-            <span>Clasificación:</span>
-            <div className="input__with__error">
-               <Form.Control
-                  type="text"
-                  name="clasificacion"
-                  placeholder={movieData.clasificacion}
-                  onChange={(evt) => handleChange(evt)}
-               />
-               {errors.clasificacion ? (
-                  <span>{errors.clasificacion}</span>
-               ) : null}
-            </div>
-            <span>Director:</span>
-            <div className="input__with__error">
-               <Form.Control
-                  type="text"
-                  name="director"
-                  onChange={(evt) => handleChange(evt)}
-                  placeholder={movieData.director}
-               />
-               {errors.director ? <span>{errors.director}</span> : null}
-            </div>
-            <span>Puntuación:</span>
-            <div className="input__with__error">
-               <Form.Control
-                  type="number"
-                  min="0"
-                  max="10"
-                  name="puntuación"
-                  onChange={(evt) => handleChange(evt)}
-                  placeholder={movieData.puntuación}
-               />
-               {errors.puntuación ? <span>{errors.puntuación}</span> : null}
-            </div>
-            <span>País:</span>
-            <div className="input__with__error">
-               <Form.Control
-                  type="text"
-                  name="pais"
-                  onChange={(evt) => handleChange(evt)}
-                  placeholder={movieData.pais}
-               />
-               {errors.pais ? <span>{errors.pais}</span> : null}
-            </div>
-            <span>Distribuidora:</span>
-            <div className="input__with__error">
-               <Form.Control
-                  type="text"
-                  name="distribuidora"
-                  placeholder={movieData.distribuidora}
-                  onChange={(evt) => handleChange(evt)}
-               />
-               {errors.distribuidora ? (
-                  <span>{errors.distribuidora}</span>
-               ) : null}
-            </div>
-            <span>Trailer:</span>
-            <div className="input__with__error">
-               <Form.Control
-                  type="text"
-                  name="trailer"
-                  onChange={(evt) => handleChange(evt)}
-                  placeholder={movieData.trailer}
-               />
-               {errors.trailer ? <span>{errors.trailer}</span> : null}
-            </div>
-            <div className="input__with__error">
-               <Form.Select
-                  id="defaultGenres"
-                  name="genders"
-                  defaultValue={"DEFAULT"}
-                  onChange={(evt) => changeArrayGenders(evt)}
-               >
-                  <option value="DEFAULT" disabled>
-                     Generos
-                  </option>
-                  {Genres &&
-                     Genres.map((item, index) => {
-                        return (
-                           <option
-                              id={item.id}
-                              className="elemSelect"
-                              key={`${item.genero}${index}`}
-                              value={item.id}
-                           >
-                              {item.genero}
-                           </option>
-                        );
-                     })}
-               </Form.Select>
-               {errors.genders ? <span>{errors.genders}</span> : null}
-            </div>
-            <div className="input__with__error">
-               <Form.Select
-                  id="defaultCast"
-                  name="actors"
-                  defaultValue={"DEFAULT"}
-                  onChange={(evt) => changeArrayCast(evt)}
-               >
-                  <option value="DEFAULT" disabled>
-                     Cast
-                  </option>
-                  {Cast &&
-                     Cast.map((item) => {
-                        return (
-                           <option
-                              name={item.id}
-                              className="elemSelect"
-                              key={item.nombre}
-                              value={item.id}
-                           >
-                              {item.nombre}
-                           </option>
-                        );
-                     })}
-               </Form.Select>
+            <Row className="justify-content-between mb-4">
+               <Col lg={5}>
+                  <div className="input__with__error">
+                     <Form.Label htmlFor="titulo">Título:</Form.Label>
+                     <Form.Control
+                        type="text"
+                        name="titulo"
+                        id="titulo"
+                        placeholder={movieData.titulo}
+                        onChange={(evt) => handleChange(evt)}
+                     />
+                     {errors.titulo ? <span>{errors.titulo}</span> : null}
+                  </div>
+               </Col>
+               <Col lg={5}>
+                  <div className="input__with__error">
+                     <Form.Label htmlFor="director">Director:</Form.Label>
+                     <Form.Control
+                        type="text"
+                        name="director"
+                        id="director"
+                        onChange={(evt) => handleChange(evt)}
+                        placeholder={movieData.director}
+                     />
+                     {errors.director ? <span>{errors.director}</span> : null}
+                  </div>
+               </Col>
+            </Row>
+            <Row className="justify-content-between mb-4">
+               <Col lg={5}>
+                  <div className="image_upload_poster">
+                     <Form.Label>Poster:</Form.Label>
+                     <Form.Control
+                        type="file"
+                        name="poster"
+                        id="poster"
+                        onChange={(event) => {
+                           setImagesSelected({
+                              ...imagesSelected,
+                              [event.target.name]: event.target.files[0],
+                           });
+                        }}
+                     />
+                     <Button
+                        type="button"
+                        name="poster"
+                        onClick={(event) => uploadImage(event)}
+                     >
+                        Subir Imagen
+                     </Button>
+                     {inputs.poster && <span>imagen cargada:</span>}
+                     <Image
+                        style={{ width: 200 }}
+                        cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
+                        publicId={inputs.poster}
+                     />
+                  </div>
+               </Col>
+               <Col lg={5}>
+                  <div className="image_upload_background">
+                     <Form.Label htmlFor="background">Background:</Form.Label>
+                     <Form.Control
+                        type="file"
+                        name="background"
+                        id="background"
+                        onChange={(event) => {
+                           setImagesSelected({
+                              ...imagesSelected,
+                              [event.target.name]: event.target.files[0],
+                           });
+                        }}
+                     />
+                     <Button
+                        type="button"
+                        name="background"
+                        onClick={(event) => uploadImage(event)}
+                     >
+                        Subir Imagen
+                     </Button>
+                     {inputs.background && <span>imagen cargada:</span>}
+                     <Image
+                        style={{ width: 400 }}
+                        cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
+                        publicId={inputs.background}
+                     />
+                  </div>
+               </Col>
+            </Row>
+            <Row className="justify-content-between mb-4">
+               <Col lg={5}>
+                  <div className="input__with__error">
+                     <Form.Label htmlFor="duracion">Duración:</Form.Label>
+                     <Form.Control
+                        type="number"
+                        min="0"
+                        name="duracion"
+                        id="duracion"
+                        onChange={(evt) => handleChange(evt)}
+                        placeholder={movieData.duracion}
+                     />
+                     {errors.duracion ? <span>{errors.duracion}</span> : null}
+                  </div>
+               </Col>
+               <Col lg={5}>
+                  <div className="input__with__error">
+                     <Form.Label htmlFor="clasificacion">
+                        Clasificación:
+                     </Form.Label>
+                     <Form.Control
+                        type="text"
+                        name="clasificacion"
+                        id="clasificacion"
+                        placeholder={movieData.clasificacion}
+                        onChange={(evt) => handleChange(evt)}
+                     />
+                     {errors.clasificacion ? (
+                        <span>{errors.clasificacion}</span>
+                     ) : null}
+                  </div>
+               </Col>
+            </Row>
+            <Row className="justify-content-between mb-4">
+               <Col lg={5}>
+                  <div className="input__with__error">
+                     <Form.Label htmlFor="trailer">Trailer:</Form.Label>
+                     <Form.Control
+                        type="text"
+                        name="trailer"
+                        id="trailer"
+                        onChange={(evt) => handleChange(evt)}
+                        placeholder={movieData.trailer}
+                     />
+                     {errors.trailer ? <span>{errors.trailer}</span> : null}
+                  </div>
+               </Col>
+               <Col lg={5}></Col>
+            </Row>
+            <Row className="justify-content-between mb-4">
+               <Col lg={5}>
+                  <div className="input__with__error">
+                     <Form.Label htmlFor="pais">País:</Form.Label>
+                     <Form.Control
+                        type="text"
+                        name="pais"
+                        id="pais"
+                        onChange={(evt) => handleChange(evt)}
+                        placeholder={movieData.pais}
+                     />
+                     {errors.pais ? <span>{errors.pais}</span> : null}
+                  </div>
+               </Col>
+               <Col lg={5}>
+                  <div className="input__with__error">
+                     <Form.Label htmlFor="distribuidora">
+                        Distribuidora:
+                     </Form.Label>
+                     <Form.Control
+                        type="text"
+                        name="distribuidora"
+                        id="distribuidora"
+                        placeholder={movieData.distribuidora}
+                        onChange={(evt) => handleChange(evt)}
+                     />
+                     {errors.distribuidora ? (
+                        <span>{errors.distribuidora}</span>
+                     ) : null}
+                  </div>
+               </Col>
+            </Row>
 
-               {errors.actors ? <span>{errors.actors}</span> : null}
-            </div>
+            <Row className="justify-content-between mb-4">
+               <Col lg={5}>
+                  <div className="input__with__error">
+                     <Form.Select
+                        id="defaultGenres"
+                        name="genders"
+                        defaultValue={"DEFAULT"}
+                        onChange={(evt) => changeArrayGenders(evt)}
+                     >
+                        <option value="DEFAULT" disabled>
+                           Generos
+                        </option>
+                        {Genres &&
+                           Genres.map((item, index) => {
+                              return (
+                                 <option
+                                    id={item.id}
+                                    className="elemSelect"
+                                    key={`${item.genero}${index}`}
+                                    value={item.id}
+                                 >
+                                    {item.genero}
+                                 </option>
+                              );
+                           })}
+                     </Form.Select>
+                     {errors.genders ? <span>{errors.genders}</span> : null}
+                  </div>
+               </Col>
+               <Col lg={5}>
+                  <div className="input__with__error">
+                     <Form.Select
+                        id="defaultCast"
+                        name="actors"
+                        defaultValue={"DEFAULT"}
+                        onChange={(evt) => changeArrayCast(evt)}
+                     >
+                        <option value="DEFAULT" disabled>
+                           Cast
+                        </option>
+                        {Cast &&
+                           Cast.map((item) => {
+                              return (
+                                 <option
+                                    name={item.id}
+                                    className="elemSelect"
+                                    key={item.nombre}
+                                    value={item.id}
+                                 >
+                                    {item.nombre}
+                                 </option>
+                              );
+                           })}
+                     </Form.Select>
+
+                     {errors.actors ? <span>{errors.actors}</span> : null}
+                  </div>
+               </Col>
+            </Row>
+            <Row className="justify-content-between mb-4">
+               <Col lg={12}>
+                  <div className="input__with__error">
+                     <Form.Label htmlFor="sinopsis">Sinópsis:</Form.Label>
+                     <Form.Control
+                        type="text"
+                        name="sinopsis"
+                        id="sinopsis"
+                        onChange={(evt) => handleChange(evt)}
+                        placeholder={movieData.sinopsis}
+                     />
+                     {errors.sinopsis ? <span>{errors.sinopsis}</span> : null}
+                  </div>
+               </Col>
+            </Row>
             <Form.Control
                type="submit"
                value="Editar pelicula"
+               style={{ width: "50%", margin: "auto" }}
                onClick={(e) => {
                   checkInputs();
                   handleClick(e);

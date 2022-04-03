@@ -252,7 +252,6 @@ export const editMovie = (id, data) => {
 export const filterReviewByRating = (payload) => {
   return {
     type: "FILTER_REVIEWBYRATING",
-
     payload
   }
 }

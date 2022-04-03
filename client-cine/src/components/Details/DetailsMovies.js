@@ -38,7 +38,6 @@ const DetailsMovies = (props) => {
     }
 
 
-
     let GenArray = detailed.Generos && detailed.Generos.length ? detailed.Generos.map((e) => e.genero) : ["no genres"]
     let ActArray = detailed.Actores && detailed.Actores.length ? detailed.Actores.map((e) => e.nombre) : ["no actors"]
 

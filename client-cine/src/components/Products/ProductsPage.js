@@ -12,8 +12,9 @@ import { Container } from 'react-bootstrap';
 import { Util } from "leaflet";
 import { Form, Button } from "react-bootstrap";
 
+
 const ProductsPage = () => {
-    const { user, currentUser, itemsCarrito, setItemsCarrito } = useAuth();
+    const { itemsCarrito} = useAuth();
     const dispatch = useDispatch();
     const ProductosTotales = useSelector((state) => state.ProductAll);
     const UrlBuy = useSelector((state) => state.cartUrl);
@@ -26,7 +27,14 @@ const ProductsPage = () => {
     const [orderPrice, setOrderPrice] = useState("")
     const [filterCombo, setFilterCombo] = useState("")
 
-    React.useEffect(() => {
+    /*React.useEffect(() => {
+        if (container.length === 0) {
+            console.log(ProductosTotales)
+            setContainer(ProductosTotales);
+        }
+    }, [ProductosTotales, container]);*/
+
+       React.useEffect(() => {
         if (container.length === 0) {
             console.log(ProductosTotales)
             setContainer(ProductosTotales);

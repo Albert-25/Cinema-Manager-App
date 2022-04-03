@@ -27,25 +27,32 @@ export const DisplayFuntions = ({ funtions, nameMovie }) => {
     navigate('/productpage')
   }
 
+
   return (
     <Navbar bg="transparent" expand={false} sticky="top">
       <Container fluid>
         <br />
         <>
-          <Button variant="primary" onClick={() => setShow(true)}>Reservar ticket</Button>
+          <Button variant="primary" onClick={() => setShow(true)}>
+            Reservar ticket
+          </Button>
           <Modal show={show} fullscreen="xl-down">
             <Modal.Body>
               <Form>
                 <Form.Group className="mb-3">
-                  <Form.Select onChange={(e) => setFunctionCine(e.target.value)} value={functionCine}>
-                    <option key="default" value="default">Seleccione una función</option>
-                    {
-                      funtions.map(e => {
-                        return (
-                          <option key={e.id} value={e.horario}>{e.horario}</option>
-                        )
-                      })
-                    }
+
+                  <Form.Label>Seleccione una función</Form.Label>
+                  <Form.Select
+                    onChange={(e) => setFunctionCine(e.target.value)}
+                    value={functionCine}
+                  >
+                    {funtions.map((e) => {
+                      return (
+                        <option key={e.id} value={e.horario}>
+                          {e.horario}
+                        </option>
+                      );
+                    })}
                   </Form.Select>
                 </Form.Group>
                 {/* TODO: agregar input para setear la cantidad */}
@@ -62,6 +69,6 @@ export const DisplayFuntions = ({ funtions, nameMovie }) => {
           </Modal>
         </>
       </Container>
-    </Navbar >
-  )
-} 
+    </Navbar>
+  );
+};

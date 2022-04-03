@@ -4,7 +4,12 @@ const { Pelicula } = require("../db/models/pelicula");
 const getAll = async (req, res, next) => {
   try {
     let funciones = await Funciones.findAll({ include: [Pelicula] });
-    res.json(funciones);
+    if(funciones){
+      res.json(funciones);
+    }
+    else{
+      req.json({message: "no se encontró ninguna funcion en la base de datos"})
+    }
   } catch (error) {
     next(error);
   }
@@ -13,7 +18,7 @@ const getAll = async (req, res, next) => {
 const getFuncion = async (req, res, next) => {
   let id = req.params.id;
   try {
-    const func = await Funciones.findByPk(id);
+    const func = await Funciones.findByPk(id, { include: [Pelicula] });
     if (func) return res.json(func);
     next();
   } catch (error) {
@@ -25,15 +30,29 @@ const crearFuncion = async (req, res, next) => {
   const { funcion, peliculaId } = req.body;
 
   try {
-    if (await Funciones.findOne({ where: { horario: funcion.horario } })) {
-      return res.json({ message: "Ya existe una funcion con ese horario" });
-    }
     let func = await Funciones.create(funcion);
     await func.addPelicula(peliculaId);
     return res.json({
       message: "funcion creada satisfactoriamente",
       data: func,
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const crearFunciones = async (req, res, next) => {
+  const { funciones, peliculaId } = req.body;
+  try {
+    let funcs = await Funciones.bulkCreate(funciones, {
+      ignoreDuplicates: true,
+    });
+
+    funcs.forEach((element) => {
+      element.addPelicula(peliculaId);
+    });
+
+    return res.send(funcs);
   } catch (error) {
     next(error);
   }
@@ -73,6 +92,7 @@ module.exports = {
   getAll,
   getFuncion,
   crearFuncion,
+  crearFunciones,
   editarFuncion,
   eliminarFuncion,
 };

@@ -1,5 +1,5 @@
 import React from "react"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getAllReviewByIdOfMovie, deleteReview } from "../../store/actions"
 import styles from "./ReviewToShow.module.css"
@@ -16,6 +16,10 @@ const ReviewToShow = ({ id }) => {
     useEffect(() => {
         dispatch(getAllReviewByIdOfMovie(id))
     }, [dispatch])
+
+    /*useEffect(() => {
+        dispatch(getAllReviewByIdOfMovie(id))
+    }, [dispatch, id])*/
 
     const handleDelete = (idOfComment) => {
         dispatch(deleteReview(idOfComment))
@@ -42,7 +46,7 @@ const ReviewToShow = ({ id }) => {
                             <DivStar value="4" puntuacion={c.puntuación} className={styles.star} >★</DivStar>
                             <DivStar value="5" puntuacion={c.puntuación} className={styles.star} >★</DivStar>
                             <div className={styles.comentario}><p>{c.comentario}</p></div>
-                            {currentUser ? c.nombre == user.nombre ? <Botones id={c.id} /> : null : null}
+                            {currentUser ? c.nombre === user.nombre ? <Botones id={c.id} /> : null : null}
                         </div>
                     )
                 })

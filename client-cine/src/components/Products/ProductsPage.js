@@ -31,12 +31,6 @@ const ProductsPage = () => {
     const [orderPrice, setOrderPrice] = useState("")
     const [filterCombo, setFilterCombo] = useState("")
 
-    /*React.useEffect(() => {
-        if (container.length === 0) {
-            console.log(ProductosTotales)
-            setContainer(ProductosTotales);
-        }
-    }, [ProductosTotales, container]);*/
 
     React.useEffect(() => {
         if (container.length === 0) {
@@ -61,15 +55,15 @@ const ProductsPage = () => {
         variable = variable - 1;
     }
 
-    const handleFilterPrice = e => {
-        dispatch({ type: "FILTER_BYPRICE", payload: e.target.value })
-        setOrderPrice(`order: ${e.target.value}`)
-    }
+const handleFilterPrice = e => {
+    dispatch({ type: "FILTER_BYPRICE", payload: e.target.value })
+    setOrderPrice(`order: ${e.target.value}`)
+}
 
-    const handleFilterByCombo = e => {
-        dispatch({ type: "FILTER_BYCOMBO", payload: e.target.value })
-        setFilterCombo(`combo: ${e.target.value}`)
-    }
+const handleFilterByCombo = e =>{
+    dispatch({ type: "FILTER_BYCOMBO", payload: e.target.value })
+    setFilterCombo(`combo: ${e.target.value}`)
+}
     return (
         <>
             <NavBar />

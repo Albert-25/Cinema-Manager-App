@@ -11,7 +11,7 @@ import Products from "./Products";
 import { Container } from 'react-bootstrap';
 
 const ProductsPage = () => {
-    const { itemsCarrito} = useAuth();
+    const { itemsCarrito } = useAuth();
     const dispatch = useDispatch();
     const ProductosTotales = useSelector((state) => state.ProductAll);
     const UrlBuy = useSelector((state) => state.cartUrl);
@@ -21,6 +21,13 @@ const ProductsPage = () => {
         dispatch(AllProducts());
     }, [dispatch]);
     console.log("items carrito", itemsCarrito)
+    let Comprados = []
+    itemsCarrito.map((e) => {
+        Comprados.push({ name: e.name, quantity: e.quantity })
+    })
+    console.log("comprdos: ", Comprados)
+    localStorage.setItem("BuyInfo", JSON.stringify(Comprados))
+
 
     /*React.useEffect(() => {
         if (container.length === 0) {
@@ -29,7 +36,7 @@ const ProductsPage = () => {
         }
     }, [ProductosTotales, container]);*/
 
-       React.useEffect(() => {
+    React.useEffect(() => {
         if (container.length === 0) {
             console.log(ProductosTotales)
             setContainer(ProductosTotales);
@@ -40,10 +47,14 @@ const ProductsPage = () => {
         alert("done")
         dispatch(postBuy(itemsCarrito));
     }
-  
-    if(UrlBuy && UrlBuy[0] !== undefined && UrlBuy[0].length > 30){
-        window.open(UrlBuy[0])
-        
+
+    let variable = 1;
+    if (UrlBuy && UrlBuy[0] !== undefined && UrlBuy[0].length > 30 && variable === 1) {
+        //window.open(UrlBuy[0])
+        window.location.href = UrlBuy[0]
+        console.log('Datos de entrada:', UrlBuy)
+        localStorage.setItem('compra', UrlBuy[1])
+        variable = variable - 1;
     }
 
 

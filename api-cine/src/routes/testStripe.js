@@ -26,17 +26,17 @@ const startSession = async (req, res) => {
     varrita.push(session.url)
     varrita.push(session.id)
     res.send(varrita)
-    // res.send(session.id)
-    // console.log(session.url);
-    console.log("Sesion", session);
-    // console.log("neco", stripe)
+
+    // console.log("Sesion", session);
+
 }
 
 const RetriveSesion = async (req, res) => {
-    console.log("bicen", req.params.id)
+    console.log("bicennnnnnnnnnn", req.params.id)
     const session = await stripe.checkout.sessions.retrieve(
         req.params.id
     );
+    console.log("sesioooooon",session)
     res.send(session)
 }
 

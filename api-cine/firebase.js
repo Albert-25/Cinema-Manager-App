@@ -21,6 +21,22 @@ admin.initializeApp({
 	})
 })
 
+const firebaseConfig = {
+  apiKey: "AIzaSyDL7zwkmyckovN5kttelxA1s8j-L3C1AVM",
+  authDomain: "react-authentication-8fef9.firebaseapp.com",
+  projectId: "react-authentication-8fef9",
+  storageBucket: "react-authentication-8fef9.appspot.com",
+  messagingSenderId: "168111067330",
+  appId: "1:168111067330:web:79ee1c3477e06209736b5b"
+};
+
+const app = admin.initializeApp(firebaseConfig, 'autentica');
+
+const secundaria =  admin.initializeApp(firebaseConfig, 'secundaria');
+
+
+console.log('Holaaaa', app.name)
+
 const db = getFirestore();
 
-module.exports = { db }
+module.exports = { db, app, secundaria }

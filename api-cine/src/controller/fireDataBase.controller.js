@@ -1,4 +1,6 @@
-const {db} = require('../../firebase.js');
+const {db, app, secundaria} = require('../../firebase.js');
+const admin = require('firebase-admin');
+
 //  ...e.data()
 const allUsers = async (req, res, next) => {
   try {
@@ -19,15 +21,24 @@ res.json(contacts)
 };
 
 const createUsers = async (req, res, next) => {
-  const {correo, imagen, nombre, rol} = req.body
-  await db.collection('usuarios').add({
+  const {correo, password, imagen, nombre, rol} = req.body
+  console.log('we are here')
+    let data = await admin.auth().createUser({
+email: correo,
+password: password,
+})
+
+  let final = await db.collection('usuarios').doc(`${data.uid}`).set({
     correo,
       imagen,
       nombre,
       rol,
   })
+
   res.send('New contact created');
 }
+
+
 
 const editUsers = async (req, res, next) => {
     const id = req.params.id;
@@ -41,6 +52,8 @@ const editUsers = async (req, res, next) => {
       rol: doc.data().rol,
 
  })
+ console.log('doc', doc)
+ res.send(doc)
 }
 
 const deleteUser = async (req, res, next) => {

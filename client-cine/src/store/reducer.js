@@ -19,6 +19,7 @@ const initialState = {
   ProductComments: [],
 
   FirebaseUsers: [],
+  newPic: [],
   DetailedUser: [],
   cartUrl:[],
   cartID:[],
@@ -227,15 +228,15 @@ const reducer = (state = initialState, action) => {
       };
     }
     case "POSTBUY": {
-      console.log(action.payload)
+      console.log('Retorno recibido', action.payload)
       return{
         ...state,
-        cartUrl: action.payload
+        cartUrl: [...action.payload]
       }
     }
 
     case "PELI_NAME":
-      state = initialState;
+      //state = initialState;
       return {
         ...state,
         PelisAll: action.payload,
@@ -309,7 +310,7 @@ const reducer = (state = initialState, action) => {
         FirebaseUsers: action.payload.users
       }
     }
-    case "CREATE_USER": {
+   case "CREATE_USER": {
       return {
         ...state
       }
@@ -328,8 +329,10 @@ const reducer = (state = initialState, action) => {
          }
 
     case "UPDATE_USER": {
+      console.log('holaaa', action.payload)
       return {
-        ...state
+        ...state,
+        newPic: action.payload
       }
     }
 

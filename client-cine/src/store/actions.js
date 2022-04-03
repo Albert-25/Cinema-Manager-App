@@ -364,14 +364,33 @@ export const allUsers = (payload) => {
   };
 };
 
+/*export const createUser = (data) => {
+  console.log('executing')
+  return  (dispatch) => {
+  console.log('executing2')
+
+     axios.post(
+      `http://localhost:3001/firebase/create`,
+      data
+    );
+    return dispatch({
+
+    })
+  }
+}*/
+
+
+
+
 
 export const createUser = (payload) => {
+  console.log('hola', payload)
   return async (dispatch) => {
-    await axios.post("http://localhost:3001/firebase");
+    console.log("entramos");
 
-    return dispatch({
-      type: "CREATE_USER",
-    });
+    const json = await axios.post("http://localhost:3001/firebase/create", payload);
+
+    return dispatch(allUsers());
   };
 };
 
@@ -399,6 +418,7 @@ export const deleteUser = (id) => {
 };
 
 export const updateUser = (id, data) => {
+  console.log('here')
   return async (dispatch) => {
     const json = await axios.post(
       `http://localhost:3001/firebase/update/${id}`,

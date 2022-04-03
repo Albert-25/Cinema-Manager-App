@@ -16,6 +16,8 @@ const FireDataBase = require("./fireDataBase.js");
 
 
 
+
+
 routes.use("/peliculas",Peliculas);
 routes.use("/productos", Productos);
 routes.use("/actores", Actores);
@@ -26,6 +28,8 @@ routes.use("/generos", Generos);
 routes.use("/proximosEstrenos", ProximosEstrenos);
 routes.use("/testStripe", testStripe);
 routes.use("/firebase", FireDataBase);
+
+
 
 routes.use((_req, res) => res.status(404).json("Not found"));
 routes.use(handleErrors);

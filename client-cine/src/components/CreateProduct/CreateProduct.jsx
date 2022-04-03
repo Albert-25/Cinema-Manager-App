@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
 import Axios from "axios";
 import { uploadProduct } from "../../store/actions";
 import { validate } from "./validate";
+import { Link } from "react-router-dom";
 import { Form, Col, Row, Container, Button } from "react-bootstrap";
 import { MdKeyboardBackspace } from "react-icons/md";
 import Swal from "sweetalert2";

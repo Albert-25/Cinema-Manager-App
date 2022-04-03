@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import {Nav} from 'react-bootstrap';
 import {useDispatch,useSelector} from 'react-redux';
 import { AdminContext } from '../admincontext'
@@ -21,7 +21,6 @@ export default function SelectSectionBar() {
     dispatch({ type: 'sectionSelect', payload:value})  
   };
 
-  console.log(section)
   return (
     <div className="section_admin_select_container">
        <Nav justify variant="tabs" activeKey={`${section}`}  onSelect={handleChange}>

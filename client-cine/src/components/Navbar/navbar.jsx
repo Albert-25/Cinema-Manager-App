@@ -4,7 +4,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { FaUserAlt } from "react-icons/fa";
 import { IoMenuSharp } from "react-icons/io5";
 import { useNavigate, Link } from "react-router-dom";
-import { Navbar, Container, Nav, Button, Breadcrumb } from "react-bootstrap";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./navbar.css";
 

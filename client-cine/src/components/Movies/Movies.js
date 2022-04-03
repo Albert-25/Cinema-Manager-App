@@ -1,7 +1,7 @@
 import React from "react";
 import Movie from "./Movie";
 import { Row, Col } from "react-bootstrap";
-import s from "./movies.module.css";
+
 
 export default function Movies({ items }) {
    return (

@@ -27,6 +27,24 @@ export const postBuy = (payload) => {
    };
 };
 
+export const postFunciones = (funciones, peliculaId) => {
+   if (funciones.length > 1) {
+      let body = {
+         funciones: funciones,
+         peliculaId: peliculaId,
+      };
+      console.log(body);
+      axios.post("http://localhost:3001/funcion/bulk", body);
+   } else {
+      let body = {
+         funcion: funciones[0],
+         peliculaId: peliculaId,
+      };
+      console.log(body);
+      axios.post("http://localhost:3001/funcion", body);
+   }
+};
+
 export const AllMovies = () => {
    return async (dispatch) => {
       const response = await axios.get(`http://localhost:3001/peliculas`);
@@ -367,7 +385,8 @@ export const allUsers = (payload) => {
 
 export const createUser = (payload) => {
    return async (dispatch) => {
-      const json = await axios.post("http://localhost:3001/firebase");
+      await axios.post("http://localhost:3001/firebase");
+
       return dispatch({
          type: "CREATE_USER",
       });

@@ -4,7 +4,7 @@ const router = Router();
 let info = {
     price: 5000,
     nombre: "Elisa Gonzales",
-    email: "justapinkdev@gmail.com"
+    email: "victorrodriguez2222@gmail.com"
 }
 let producto = [{
     name: "cacerola de acero",
@@ -40,11 +40,11 @@ const sendEmail = async (req, res) => {
         Usted compro:<br/></p>
         Productos: <br/>
         <p>
-        ${producto.map((a) =>( 
-            <li key={a}>
-                <span>{a}</span>
-            </li>
-        ))}
+        ${producto.map((a) =>(
+            a.name
+            )
+                    
+                )}
         </p>
         
         Precio total:${info.price} pesos brasileños <br/>

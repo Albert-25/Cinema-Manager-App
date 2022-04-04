@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Offcanvas, Button, Navbar } from "react-bootstrap";
-import { updateCart } from "../../store/actions"
+import { updateCart, postBuy } from "../../store/actions"
 
 export const Cart = () => {
   const dispatch = useDispatch();
+  const UrlBuy = useSelector((state) => state.cartUrl);
   const [show, setShow] = useState(false);
   const itemsCart = useSelector((state) => state.itemsCart);
   const total = itemsCart.reduce((pValue, cValue) => pValue + cValue.quantity * cValue.price, 0)
@@ -13,7 +14,19 @@ export const Cart = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleClick = () => {
-    console.log('terminar')
+    alert("done");
+    console.log("items card:", itemsCart)
+    // console.log("items carrito:", itemsCarrito)
+    dispatch(postBuy(itemsCart));
+    localStorage.setItem("compra", JSON.stringify(UrlBuy[0]));
+  }
+
+  let variable = 1;
+  if (UrlBuy && UrlBuy[0] !== undefined && UrlBuy[0].length > 30 && variable === 1) {
+      window.location.href = UrlBuy[0]
+      console.log('Datos de entrada:', UrlBuy)
+      localStorage.setItem('compra', UrlBuy[1])
+      variable = variable - 1;
   }
 
   const handleDelete = (id, name) => {

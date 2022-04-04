@@ -10,7 +10,7 @@ const YOUR_DOMAIN = 'http://localhost:3000';
 const startSession = async (req, res) => {
     let Finale = []
     req.body.map((e) => Finale.push({
-        price: e.price,
+        price: e.priceID,
         quantity: e.quantity
     }))
     // console.log("Finale", Finale)

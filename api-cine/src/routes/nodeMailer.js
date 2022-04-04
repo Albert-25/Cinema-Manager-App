@@ -5,7 +5,7 @@ const QRCode = require("qrcode")
 
 
 const liString = (name, quantity) => {
-    return `<li><span>${name} ${quantity}</span></li>`
+    return `<li><span>${name} x  ${quantity}</span></li>`
 }
 // QRCode.toDataURL(codigoUID).then(data => { codigoQR = data })
 const sendEmail = async (req, res) => {
@@ -37,7 +37,8 @@ const sendEmail = async (req, res) => {
         Usted compro:<br/></p>
         Productos: <br/>
         ${productsString}
-        Precio total:${req.body.price} pesos brasileños <br/>
+        Precio total:${req.body.price} millones de pesos brasileños <br/>
+        <p>Aqui tienes un codigo QR, muestralo en boleteria para recibir tu compra~</p><br/>
         <img src=${imagen} alt="qr"/>`,
     }
 

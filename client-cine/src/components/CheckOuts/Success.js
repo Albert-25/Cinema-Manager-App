@@ -25,7 +25,7 @@ export const Success = () => {
     informacion = localStorage.removeItem('compra')
 
   }
-  var storedNames = JSON.parse(localStorage.getItem("BuyInfo"));
+  var storedNames = JSON.parse(localStorage.getItem("items"));
   console.log("hello cosa extraña", RetriveItems)
   console.log("Hola cosas compradas:", storedNames)
 
@@ -55,7 +55,7 @@ export const Success = () => {
           (res) => {
             console.log("send-email post")
             window.location.href = "http://localhost:3000/"
-            localStorage.removeItem("BuyInfo")
+            localStorage.removeItem("items")
           },
           (err) => {
             alert(err);

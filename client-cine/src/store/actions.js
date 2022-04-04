@@ -12,6 +12,9 @@ export function postMovies(inputs) {
     );
   };
 }
+
+
+
 export const postBuy = (payload) => {
   console.log("payload", payload)
   return async (dispatch) => {
@@ -35,6 +38,8 @@ export const getRetrive = (id) => {
     }
   };
 };
+
+
 
 export const postFunciones = (funciones, peliculaId) => {
   if (funciones.length > 1) {

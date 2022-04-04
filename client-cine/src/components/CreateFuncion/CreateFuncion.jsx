@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { postFunciones } from "../../store/actions";
-//import { validate } from "./validate";
+import { validate } from "./validate";
 import Swal from "sweetalert2";
 import { Form, Col, Row, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -25,6 +25,19 @@ const CreateFunciones = () => {
       maxAsientos: info.asientos,
       precio: "",
       detalle: "",
+      pelicula: info.pelicula,
+    },
+  ]);
+  const [errors, setErrors] = useState([
+    {
+      sala: "",
+      fecha: "",
+      horario: "",
+      asientos: "",
+      precio: "",
+      detalle: "",
+      pelicula: "",
+      error: true,
     },
   ]);
 
@@ -39,62 +52,57 @@ const CreateFunciones = () => {
       detalle: "",
     };
 
+    let newErrors = {
+      sala: "",
+      fecha: "",
+      horario: "",
+      asientos: "",
+      precio: "",
+      detalle: "",
+      pelicula: "",
+      error: true,
+    };
+
     setInputs([...inputs, newfield]);
+    setErrors(errors.concat(newErrors));
   };
 
   const removeFields = (index) => {
     let data = [...inputs];
     data.splice(index, 1);
     setInputs(data);
-  };
 
-  const [errors] = useState({
-    sala: "",
-    fecha: "",
-    horario: "",
-    asientos: "",
-    precio: "",
-    detalle: "",
-    pelicula: "",
-    error: false,
-  });
+    let errData = [...errors];
+    errData.splice(index, 1);
+    setErrors(errData);
+  };
 
   const handleChange = (index, e) => {
     let data = [...inputs];
     data[index][e.target.name] = e.target.value;
+    setInputs(data);
     checkInputs();
-    console.log(data);
 
-    // setErrors(
-    //   validate(
-    //     {
-    //       [e.target.name]: e.target.value,
-    //     },
-    //     errors,
-    //     e.target.name
-    //   )
-    // );
+    errors[index] = validate(
+      {
+        [e.target.name]: e.target.value,
+      },
+      errors[index],
+      e.target.name
+    );
   };
 
-  const handleInfo = (e) => {
+  const handleInfo = (e, index) => {
     setInfo({
       ...info,
       [e.target.name]: e.target.value,
     });
-    console.log(info);
     checkInputs();
-  };
-
-  const handleClick = (e) => {
-    // setErrors(
-    //   validate(
-    //     {
-    //       ...inputs,
-    //     },
-    //     errors,
-    //     "submit"
-    //   )
-    // );
+    errors[index] = validate(
+      { [e.target.name]: e.target.value },
+      errors[index],
+      e.target.name
+    );
   };
 
   const checkInputs = () => {
@@ -107,7 +115,13 @@ const CreateFunciones = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (errors.error === false) {
+    let finalCheck = false;
+    errors.forEach((e) => {
+      if (e.error === true) {
+        finalCheck = true;
+      }
+    });
+    if (finalCheck === false) {
       Swal.fire({
         title: "¿Quieres guardar las funciones?",
         showDenyButton: true,
@@ -118,23 +132,22 @@ const CreateFunciones = () => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           postFunciones(inputs, info.pelicula);
-          
-          //vvv cambiar clase x algo gracioso vvv
-          document.getElementById("Panaino!").reset();
 
-          Swal.fire("La pelicula fue agregada!", "", "success");
+          document.getElementById("Panaino!").reset();
+          window.location.reload();
+          Swal.fire("Las funciones fueron agregadas!", "", "success");
           // setTimeout(() => {
           //   dispatch(AllMovies());
           // }, 1000);
         } else if (result.isDenied) {
-          Swal.fire("La pelicula no fue agregada", "", "info");
+          Swal.fire("Las funciones no fueron agregadas", "", "info");
         }
       });
     } else {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Ingrese correctamente los datos por favor.",
+        text: "Porfavor, ingrese correctamente los datos y vuelva a intentar",
       });
     }
   };
@@ -173,10 +186,10 @@ const CreateFunciones = () => {
                         type="number"
                         name="sala"
                         min="00"
-                        onChange={(e) => handleInfo(e)}
+                        onChange={(e) => handleInfo(e, index)}
                         placeholder="Sala"
                       />
-                      {/* {errors.titulo ? <span>{errors.titulo}</span> : null} */}
+                      {/* {errors.sala ? <span>{errors.sala}</span> : null} */}
                     </div>
                   </Col>
                 )}
@@ -189,7 +202,9 @@ const CreateFunciones = () => {
                       onChange={(e) => handleChange(index, e)}
                       placeholder="Fecha"
                     />
-                    {/* {errors.director ? <span>{errors.director}</span> : null} */}
+                    {/* {errors.fecha ? (
+                      <span style={{ color: "red" }}>{errors.fecha}</span>
+                    ) : null} */}
                   </div>
                 </Col>
               </Row>
@@ -204,9 +219,7 @@ const CreateFunciones = () => {
                       name="horario"
                       onChange={(e) => handleChange(index, e)}
                     />
-                    {/* {errors.clasificacion ? (
-              <span>{errors.clasificacion}</span>
-            ) : null} */}
+                    {/* {errors.horario ? <span>{errors.horario}</span> : null} */}
                   </div>
                 </Col>
                 {index === 0 && (
@@ -217,10 +230,12 @@ const CreateFunciones = () => {
                           type="number"
                           min="0"
                           name="asientos"
-                          onChange={(e) => handleInfo(e)}
+                          onChange={(e) => handleInfo(e, index)}
                           placeholder="Nro. de asientos"
                         />
-                        {/* {errors.duracion ? <span>{errors.duracion}</span> : null} */}
+                        {/* {errors.asientos ? (
+                          <span>{errors.asientos}</span>
+                        ) : null} */}
                       </div>
                     )}
                   </Col>
@@ -237,7 +252,6 @@ const CreateFunciones = () => {
                       onChange={(e) => handleChange(index, e)}
                       placeholder="Precio entrada"
                     />
-                    {/* {errors.pais ? <span>{errors.pais}</span> : null} */}
                   </div>
                 </Col>
               </Row>
@@ -250,9 +264,7 @@ const CreateFunciones = () => {
                       placeholder="Detalles de la función"
                       onChange={(e) => handleChange(index, e)}
                     />
-                    {/* {errors.distribuidora ? (
-              <span>{errors.distribuidora}</span>
-            ) : null} */}
+                    {/* {errors.detalle ? <span>{errors.detalle}</span> : null} */}
                   </div>
                 </Col>
                 <Col md="5">
@@ -262,7 +274,7 @@ const CreateFunciones = () => {
                         name="pelicula"
                         defaultValue={"DEFAULT"}
                         onChange={(e) => {
-                          handleInfo(e);
+                          handleInfo(e, index);
                         }}
                       >
                         <option value="DEFAULT" disabled>
@@ -281,7 +293,7 @@ const CreateFunciones = () => {
                             );
                           })}
                       </Form.Select>
-                      {/* {errors.trailer ? <span>{errors.trailer}</span> : null} */}
+                      {/* {errors.pelicula ? <span>{errors.pelicula}</span> : null} */}
                     </div>
                   )}
                 </Col>
@@ -316,7 +328,6 @@ const CreateFunciones = () => {
                 <Form.Control
                   type="submit"
                   value="Crear función(es)"
-                  onClick={(e) => handleClick(e)}
                   style={{ width: "50%", margin: "auto" }}
                 />
               )}

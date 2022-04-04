@@ -21,9 +21,9 @@ export default function Login() {
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
       let next= new Promise((resolve,rejected)=>{
-        if((user && user?.rol==="user") || !user.rol){
+        if((user && user?.rol==="user") || user && !user.rol){
           resolve("/")
-        }else if(user?.rol==="admin"){
+        }else if(user && user?.rol==="admin"){
           resolve("/admin")
         }
       })

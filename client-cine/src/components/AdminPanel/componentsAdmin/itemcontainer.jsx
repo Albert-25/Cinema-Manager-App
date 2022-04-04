@@ -13,7 +13,8 @@ const items = {
   movies: 'createmovies',
   genres: 'creategenero',
   actors: 'createactor',
-  products: 'createproducto'
+  products: 'createproducto',
+  users: 'createuser',
 }
 
 

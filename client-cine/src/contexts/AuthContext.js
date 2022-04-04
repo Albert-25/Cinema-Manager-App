@@ -5,7 +5,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  //sendPasswordResetEmail,
+  sendPasswordResetEmail,
   updatePassword,
   onAuthStateChanged,
 } from "firebase/auth";
@@ -30,6 +30,8 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [user, setUser] = useState(null);
   const [itemsCarrito, setItemsCarrito] = useState([]);
+  const [id, setId] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
   async function signup(email, password, rol, nombre, imagen) {
@@ -50,8 +52,9 @@ export function AuthProvider({ children }) {
   function logout() {
     return auth.signOut();
   }
-  function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email);
+  async function resetPassword(email) {
+    console.log('welcome')
+    await sendPasswordResetEmail(auth, email);
   }
   function updateEmail(email) {
     return currentUser.updateEmail(email);
@@ -61,17 +64,16 @@ export function AuthProvider({ children }) {
     await updatePassword(auth, password)
   }
   function updateName(name, imagen, user) {
-    console.log(user)
     const docuRef = doc(firestore, `usuarios/${user.uid}`);
+    
+        setDoc(docuRef, { nombre: name || user.nombre, imagen: imagen || user.imagen, rol: user.rol });}
 
-    setDoc(docuRef, { nombre: name || user.nombre, imagen: imagen || user.imagen, rol: user.rol });
-  }
   //No hay necesidad de setear al usuario porque Firebase te lo notifica con el siguiente método:
   async function getRol(uid) {
     const docuRef = doc(firestore, `usuarios/${uid}`);
     const docuCifrada = await getDoc(docuRef);
-    const infoTotal = [docuCifrada.data().rol, docuCifrada.data().nombre, docuCifrada.data().imagen]
-    return infoTotal;
+    if(docuCifrada && docuCifrada.data()){const infoTotal = [docuCifrada.data().rol, docuCifrada.data().nombre, docuCifrada.data().imagen]
+        return infoTotal;}
   }
 
   async function setUserWithFirebaseAndRol(usuarioFirebase) {
@@ -124,7 +126,10 @@ export function AuthProvider({ children }) {
     user,
     updateName,
     // listAllUsers
-    itemsCarrito, setItemsCarrito
+    itemsCarrito, 
+    setItemsCarrito,
+    id,
+    setId
   };
   return (
     <AuthContext.Provider value={value}>

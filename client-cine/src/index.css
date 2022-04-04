@@ -1,5 +1,6 @@
 /* ----- Customs Properties ----- */
 /* Para usarlas colocar var(--nombre-de-variable) en la propiedad que deseen. ej: border: thin solid var(--black-color); max-width: var(--max-width); en estos casos, var(--black-color) equivale a #000 y var(--max-width) equivale a 1200px */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 #root {
    background-color: #11072f;
 }

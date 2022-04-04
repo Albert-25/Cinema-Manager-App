@@ -5,10 +5,19 @@ export function postMovies(inputs) {
    return (dispatch) => {
       axios.post("http://localhost:3001/peliculas", inputs).then(
          (res) => {
+            Swal.fire({
+               icon: "succes",
+               title: "Excelente!",
+               text: "La pelicula fue agregada correctamente",
+            });
             dispatch(AllMovies());
          },
          (err) => {
-            alert(err.response);
+            Swal.fire({
+               icon: "error",
+               title: "Error!",
+               text: `${err.response}`,
+            });
          }
       );
    };
@@ -35,6 +44,11 @@ export const postFunciones = (funciones, peliculaId) => {
       };
       console.log(body);
       axios.post("http://localhost:3001/funcion/bulk", body);
+      Swal.fire({
+         icon: "succes",
+         title: "Excelente!",
+         text: "La funcion se agrego satisfactoriamente",
+      });
    } else {
       let body = {
          funcion: funciones[0],
@@ -201,11 +215,19 @@ export const uploadGenre = (info) => {
       axios
          .post("http://localhost:3001/generos", body)
          .then((res) => {
-            alert("Genero creado satisfactoriamente");
+            Swal.fire({
+               icon: "succes",
+               title: "Excelente!",
+               text: "Genero creado satisfactoriamente",
+            });
             dispatch(GetAllGenres());
          })
          .catch((err) => {
-            alert("Error, el genero ya se encuentra en la base de datos");
+            Swal.fire({
+               icon: "error",
+               title: "Error!",
+               text: "El Actor ya se encuentra en la base de datos",
+            });
          });
    };
 };
@@ -219,11 +241,19 @@ export const uploadActor = (info) => {
       };
       axios.post("http://localhost:3001/actores", body).then(
          (resp) => {
-            alert("Actor creado satisfactoriamente");
+            Swal.fire({
+               icon: "succes",
+               title: "Excelente!",
+               text: "Actor creado satisfactoriamente",
+            });
             dispatch(GetAllCast());
          },
          (error) => {
-            alert("Error, el actor ya se encuentra en la base de datos");
+            Swal.fire({
+               icon: "error",
+               title: "Error!",
+               text: "El actor ya se encuentra en la base de datos",
+            });
          }
       );
    };

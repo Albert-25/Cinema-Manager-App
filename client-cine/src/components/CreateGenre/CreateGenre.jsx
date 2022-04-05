@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { uploadGenre } from "../../store/actions";
 import { Link } from "react-router-dom";
 import { Form, Col, Row, Container, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 function CreateGenre() {
    const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function CreateGenre() {
       document.getElementById("1").value = "";
       dispatch(uploadGenre(info));
       document.getElementById("HUHU").reset();
+      Swal.fire("El genero fue agregado!", "", "success");
    }
 
    return (

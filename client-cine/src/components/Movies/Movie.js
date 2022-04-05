@@ -20,10 +20,11 @@ export default function Movie({
          0
       );
 
-   const numeroPuntuaciones = puntuacionArray.length === 0 ? 1 : puntuacionArray.length
+   const numeroPuntuaciones =
+      puntuacionArray.length === 0 ? 1 : puntuacionArray.length;
 
    const promedioPuntuacion = sumaPuntuaciones / numeroPuntuaciones;
-   console.log(promedioPuntuacion)
+   console.log(promedioPuntuacion);
    return (
       <>
          <Card
@@ -32,10 +33,10 @@ export default function Movie({
             <Card.Img
                variant="top"
                src={poster}
-               style={{ maxHeight: "390px" }}
+               style={{ maxHeight: "330px", minHeight: "330px" }}
             />
             <Card.Body>
-               <Card.Title>{titulo}</Card.Title>
+               <Card.Title className="fw-bolder">{titulo}</Card.Title>
                <Card.Text>
                   {clasificacion} -{" "}
                   <MdRule style={{ height: "1.5rem", width: "auto" }} />

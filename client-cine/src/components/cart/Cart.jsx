@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Offcanvas, Button, Navbar } from "react-bootstrap";
-
-
-
 import { getItemsCart } from "../../utils/itemsCart"
 import { updateCart } from "../../store/actions"
 

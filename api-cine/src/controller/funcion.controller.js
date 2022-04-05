@@ -1,14 +1,15 @@
 const { Funciones } = require("../db/models/funcion");
 const { Pelicula } = require("../db/models/pelicula");
+const stripe = require('stripe')(process.env.REACT_APP_SRIPE_PRIVATE_KEY);
 
 const getAll = async (req, res, next) => {
   try {
     let funciones = await Funciones.findAll({ include: [Pelicula] });
-    if(funciones){
+    if (funciones) {
       res.json(funciones);
     }
-    else{
-      req.json({message: "no se encontró ninguna funcion en la base de datos"})
+    else {
+      req.json({ message: "no se encontró ninguna funcion en la base de datos" })
     }
   } catch (error) {
     next(error);
@@ -19,6 +20,7 @@ const getFuncion = async (req, res, next) => {
   let id = req.params.id;
   try {
     const func = await Funciones.findByPk(id, { include: [Pelicula] });
+    console.log("funcion totalera",func)
     if (func) return res.json(func);
     next();
   } catch (error) {
@@ -28,8 +30,29 @@ const getFuncion = async (req, res, next) => {
 
 const crearFuncion = async (req, res, next) => {
   const { funcion, peliculaId } = req.body;
+  let peli = await Pelicula.findByPk(peliculaId)
+  console.log("pelii", peli.titulo)
 
   try {
+    const stripeProduct = await stripe.products.create({
+      name: peli.titulo,
+      images: ["https://www.pngmart.com/files/6/Ticket-PNG-Free-Download.png"],
+      description: funcion.detalle,
+    });
+
+    const stripePrice = await stripe.prices.create({
+      product: stripeProduct.id,
+      unit_amount: funcion.precio,
+      currency: 'usd',
+      // recurring: {interval: 'month'},
+    });
+    console.log("OLA soy stripePrice", stripePrice.id)
+
+    funcion.id = stripeProduct.id
+    funcion.priceID = stripePrice.id
+    // console.log(funcion)
+
+
     let func = await Funciones.create(funcion);
     await func.addPelicula(peliculaId);
     return res.json({
@@ -37,18 +60,40 @@ const crearFuncion = async (req, res, next) => {
       data: func,
     });
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 };
-
+// ---------------------------------------------------------------------------------------
 const crearFunciones = async (req, res, next) => {
   const { funciones, peliculaId } = req.body;
+  let peli = await Pelicula.findByPk(peliculaId)
   try {
+
+    for (let i = 0; i < funciones.length; i++){
+      const stripeProduct = await stripe.products.create({
+        name: peli.titulo,
+        images: ["https://www.pngmart.com/files/6/Ticket-PNG-Free-Download.png"],
+        description: funciones[i].detalle,
+      });
+
+      const stripePrice = await stripe.prices.create({
+        product: stripeProduct.id,
+        unit_amount: funciones[i].precio,
+        currency: 'usd',
+        // recurring: {interval: 'month'},
+      });
+      console.log("HOLA soy stripePrice", stripePrice.id)
+
+      funciones[i].id = stripeProduct.id
+      funciones[i].priceID = stripePrice.id
+    }
+
     let funcs = await Funciones.bulkCreate(funciones, {
       ignoreDuplicates: true,
     });
+    console.log(funcs)
 
-    funcs.forEach((element) => {
+    funcs.map((element) => {
       element.addPelicula(peliculaId);
     });
 

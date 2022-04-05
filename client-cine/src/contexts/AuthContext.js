@@ -53,20 +53,18 @@ export function AuthProvider({ children }) {
     return auth.signOut();
   }
   async function resetPassword(email) {
-    console.log('welcome')
     await sendPasswordResetEmail(auth, email);
   }
   function updateEmail(email) {
     return currentUser.updateEmail(email);
   }
   async function upPassword(password) {
-    console.log('lol')
     await updatePassword(auth, password)
   }
   function updateName(name, imagen, user) {
     const docuRef = doc(firestore, `usuarios/${user.uid}`);
     
-        setDoc(docuRef, { nombre: name || user.nombre, imagen: imagen || user.imagen, rol: user.rol });}
+        setDoc(docuRef, { nombre: name || user.nombre, imagen: imagen || user.imagen, rol: user.rol, correo: user.email });}
 
   //No hay necesidad de setear al usuario porque Firebase te lo notifica con el siguiente método:
   async function getRol(uid) {

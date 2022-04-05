@@ -38,21 +38,21 @@ export const postBuy = (payload) => {
 };
 
 export const getRetrive = (id) => {
-   console.log("esoty enstadno al recuer", id);
-   return async (dispatch) => {
-      const response = await axios.get(
-         `http://localhost:3001/testStripe/retrive/${id}`
-      );
-      if (response?.data) {
-         dispatch({
-            type: "GETRETRIVE",
-            payload: { retr: response.data },
-         });
-      }
-   };
+
+  return async (dispatch) => {
+    const response = await axios.get(`http://localhost:3001/testStripe/retrive/${id}`);
+    if (response?.data) {
+      dispatch({
+        type: "GETRETRIVE",
+        payload: { retr: response.data },
+      });
+    }
+  };
+
 };
 
 export const postFunciones = (funciones, peliculaId) => {
+ 
    if (funciones.length > 1) {
       let body = {
          funciones: funciones,
@@ -73,6 +73,7 @@ export const postFunciones = (funciones, peliculaId) => {
       console.log(body);
       axios.post("http://localhost:3001/funcion", body);
    }
+
 };
 
 export const AllMovies = () => {
@@ -330,6 +331,7 @@ export const getMovieInfo = (id) => {
 };
 
 export const editMovie = (id, data) => {
+
    console.log("actiondata: " + JSON.stringify(data));
    return async () => {
       try {
@@ -345,6 +347,7 @@ export const editMovie = (id, data) => {
          //alert(error);
       }
    };
+
 };
 
 export const filterReviewByRating = (payload) => {
@@ -450,9 +453,7 @@ export const allUsers = (payload) => {
 }*/
 
 export const createUser = (payload) => {
-   console.log("hola", payload);
-   return async (dispatch) => {
-      console.log("entramos");
+  return async (dispatch) => {
 
       const json = await axios.post(
          "http://localhost:3001/firebase/create",
@@ -477,27 +478,27 @@ export const detailedUser = (id) => {
 };
 
 export const deleteUser = (id) => {
-   console.log("deletee");
-   return (dispatch) => {
-      axios
-         .get(`http://localhost:3001/firebase/delete/${id}`)
-         .then((res) => dispatch({ type: "DELETE_USER", payload: id }))
-         .catch((err) => console.log(err.response));
-   };
+
+  return (dispatch) => {
+    axios
+      .get(`http://localhost:3001/firebase/delete/${id}`)
+      .then((res) => dispatch({ type: "DELETE_USER", payload: id }))
+      .catch((err) => console.log(err.response));
+  };
 };
 
 export const updateUser = (id, data) => {
-   console.log("here");
-   return async (dispatch) => {
-      const json = await axios.post(
-         `http://localhost:3001/firebase/update/${id}`,
-         data
-      );
-      return dispatch({
-         type: "UPDATE_USER",
-         payload: json.data,
-      });
-   };
-};
+  return async (dispatch) => {
+    const json = await axios.post(
+      `http://localhost:3001/firebase/update/${id}`,
+      data
+    );
+    return dispatch({
+      type: "UPDATE_USER",
+      payload: json.data
+    })
+  }
+}
+
 
 export const updateCart = (payload) => ({ type: "UPDATE_CART", payload });

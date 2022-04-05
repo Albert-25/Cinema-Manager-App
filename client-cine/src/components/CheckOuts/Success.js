@@ -3,7 +3,7 @@ import { getRetrive, postBuy, AllProducts } from "../../store/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "../../contexts/AuthContext";
 import axios from "axios"
-import QRCode from "qrcode"
+// import QRCode from "qrcode"
 
 
 export const Success = () => {
@@ -25,7 +25,7 @@ export const Success = () => {
     informacion = localStorage.removeItem('compra')
 
   }
-  var storedNames = JSON.parse(localStorage.getItem("BuyInfo"));
+  var storedNames = JSON.parse(localStorage.getItem("items"));
   console.log("hello cosa extraña", RetriveItems)
   console.log("Hola cosas compradas:", storedNames)
 
@@ -40,41 +40,33 @@ export const Success = () => {
       },
     }
     let codigoUID = "equisde"
-
-
-
-    async function Cosadecosas() {
-      let res = await axios.post("http://localhost:3001/compras", macaquito)
-      let data = JSON.parse(res.data)
-      return data
-
-    }
-    codigoUID = Cosadecosas()
-
-
-
-
-    console.log("codigooooooooooooooo, ", codigoUID)
-    // QRCode.toDataURL(codigoUID)
-    let codigoQR = QRCode.toDataURL(codigoUID).then(data => { codigoQR = data })
-
-    let macaco = {
-      email: RetriveItems.customer_details.email,
-      name: RetriveItems.customer_details.name,
-      price: RetriveItems.amount_total,
-      products: storedNames,
-      QR: codigoQR
-    }
-    console.log("FINALMENTE, UN MACCACO", macaco)
-
-    axios.post("http://localhost:3001/nodeMailer/send-email", macaco).then(
-      (res) => {
-        console.log("send-email post")
-      },
-      (err) => {
-        alert(err);
+    // -------------------------------------------------
+    axios.post("http://localhost:3001/compras", macaquito).then(
+      (response) => {
+        codigoUID = response.data
+        let macaco = {
+          email: RetriveItems.customer_details.email,
+          name: RetriveItems.customer_details.name,
+          price: RetriveItems.amount_total,
+          products: storedNames,
+          QR: codigoUID
+        }
+        axios.post("http://localhost:3001/nodeMailer/send-email", macaco).then(
+          (res) => {
+            console.log("send-email post")
+            window.location.href = "http://localhost:3000/"
+            localStorage.removeItem("items")
+          },
+          (err) => {
+            alert(err);
+          }
+        );
+        console.log("FINALMENTE, UN MACCACO", macaco)
       }
-    );
+    )
+    // -------------------------------------------------
+
+
   }
 
 

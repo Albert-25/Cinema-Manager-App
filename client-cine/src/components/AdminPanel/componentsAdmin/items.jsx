@@ -50,7 +50,7 @@ const Items = ({ nombre, titulo, genero, nombreProducto, id, image, handleDelete
         {genero && <><Link to={`/admin/editgender/${id}`}><Button className={`btn_options ${id}`} variant="outline-primary"  ><BsPencilFill /></Button></Link> <Button className={`btn_options ${id}`} variant="outline-danger" id={id} onClick={handleDelete}><BsTrash /></Button></>}
         {nombreProducto && <><Link to={`/admin/product/edit/${id}`}><Button className={`btn_options ${id}`} variant="outline-primary"  ><BsPencilFill /></Button></Link> <Button className={`btn_options ${id}`} variant="outline-danger" id={id} onClick={handleDelete}><BsTrash /></Button></>}
         {comment && <><Link to={`/admin/comment/edit/${id}`}><Button className={`btn_options ${id}`} variant="outline-primary"  ><BsPencilFill /></Button></Link> <Button className={`btn_options ${id}`} variant="outline-danger" id={id} onClick={handleDelete}><BsTrash /></Button></>}
-        {correo && <><Link to={`/admin/edituser/${id}`}><Button className={`btn_options ${id}`} variant="outline-primary"  ><BsPencilFill /></Button></Link> <Button className={`btn_options ${id}`} variant="outline-danger" id={id} onClick={handleDelete}><BsTrash /></Button></>}
+        {nombreUsuario && <><Link to={`/admin/edituser/${id}`}><Button className={`btn_options ${id}`} variant="outline-primary"  ><BsPencilFill /></Button></Link> <Button className={`btn_options ${id}`} variant="outline-danger" id={id} onClick={handleDelete}><BsTrash /></Button></>}
       </span>
     </div>
 

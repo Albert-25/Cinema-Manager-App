@@ -31,10 +31,10 @@ export const DisplayFuntions = ({ funtions, nameMovie, posterMovie }) => {
 
   const handleSave = () => {
     const itemCart = {
-      id: 'cambiar por priceID',
+      id: functionSelected.id,
       name: `${nameMovie} -- Horario: ${ticket.horario}`,
       price: functionSelected.precio,
-      priceID: 'cambiar por priceID',
+      priceID: functionSelected.priceID,
       quantity: ticket.quantity,
       imagen: posterMovie,
       stock: functionSelected.asientos,

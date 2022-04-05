@@ -19,7 +19,7 @@ export default function Product({ id, nombreProducto, imagenProducto, precio, pr
         setCantidad(cantidad + 1)
     }
     const addToCart = () => {
-        let items = getItemsCart()
+        let items = getItemsCart("items")
         const productToAdd = {
             id: id,
             name: nombreProducto,
@@ -43,7 +43,14 @@ export default function Product({ id, nombreProducto, imagenProducto, precio, pr
             }
             : productToAdd;
         let arrayToSend = restOfItems.concat(newProductToAdd)
-        
+
+        const itemPP = {
+            priceID: newProductToAdd.priceID,
+            quantity: newProductToAdd.quantity,
+            name: newProductToAdd.name
+        }
+        let itemsPP = getItemsCart("stripe")
+        localStorage.setItem("stripe", JSON.stringify([...itemsPP, itemPP]))
         localStorage.setItem("items", JSON.stringify(arrayToSend))
         dispatch(updateCart(arrayToSend))
     }
@@ -73,7 +80,7 @@ export default function Product({ id, nombreProducto, imagenProducto, precio, pr
                     <button disabled={cantidad <= 0 ? true : false} onClick={() => onClickLess()}>-</button>
                     <span>{" "}{cantidad}{" "}</span>
                     <button onClick={() => onClickMore()}>+</button>
-                    <Button onClick={() => addToCart()} variant="primary">add to cart</Button>
+                    <Button disabled={cantidad <= 0 ? true : false} onClick={() => addToCart()} variant="primary">add to cart</Button>
 
                 </Card.Body>
                 {/* <Card.ImgOverlay>

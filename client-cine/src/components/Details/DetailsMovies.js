@@ -60,12 +60,12 @@ const DetailsMovies = (props) => {
       detailed.Actores && detailed.Actores.length
          ? detailed.Actores.map((e) => e.nombre)
          : ["no actors"];
-
+         
    if (detailed.proximoEstreno === false) {
       return (
          <div>
             {detailed.Funciones.length !== 0 ? (
-               <DisplayFuntions funtions={detailed.Funciones} />
+               <DisplayFuntions funtions={detailed.Funciones} nameMovie={detailed.titulo}/>
             ) : null}
             <ReactPlayer url={detailed.trailer} width="100%" height="400px" />
             <div className="Background__Details">

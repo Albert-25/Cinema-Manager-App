@@ -16,11 +16,15 @@ const Compra = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    notas: {
-      type: DataTypes.TEXT,
+    products: {
+      type: DataTypes.JSON,
+      allowNull:false,
+    },
+    Nombre: {
+      type: DataTypes.STRING,
     },
     total: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },

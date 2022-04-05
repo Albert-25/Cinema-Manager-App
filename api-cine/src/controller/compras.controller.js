@@ -23,17 +23,12 @@ const getCompra = async (req, res, next) => {
 };
 
 const crearCompra = async (req, res, next) => {
-  const { compra, productosIds, funcionesIds } = req.body;
+  const { compra } = req.body;
   try {
     let comp = await Compra.create(compra);
 
-    await comp.addProductos(productosIds);
-    await comp.addFunciones(funcionesIds);
-
-    return res.json({
-      message: "orden de compra creada satisfactoriamente",
-      data: comp,
-    });
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", comp.id)
+    return res.send(comp.id);
   } catch (error) {
     next(error);
   }

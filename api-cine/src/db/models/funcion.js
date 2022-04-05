@@ -5,6 +5,10 @@ const { Pelicula } = require("./pelicula.js");
 const Funciones = sequelize.define(
   "Funciones",
   {
+    id:{
+      type: DataTypes.STRING,
+      primaryKey: true,
+    },
     sala: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -13,11 +17,13 @@ const Funciones = sequelize.define(
       type: DataTypes.DATE,
       allowNull: false,
     },
+    priceID: {
+      type: DataTypes.STRING,
+    },
     horario: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-
     asientos: {
       type: DataTypes.INTEGER,
       allowNull: false,

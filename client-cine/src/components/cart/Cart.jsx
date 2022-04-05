@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Offcanvas, Button, Navbar } from "react-bootstrap";
 import { updateCart, postBuy } from "../../store/actions"
-import { getItemsCart } from "../../utils/itemsCart"
+// import { getItemsCart } from "../../utils/itemsCart"
 
 export const Cart = () => {
   const dispatch = useDispatch();

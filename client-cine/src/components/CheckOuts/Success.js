@@ -60,7 +60,13 @@ export const Success = () => {
           }, 5000);
         },
         (err) => {
-          alert(err);
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: err,
+            showConfirmButton: false,
+            timer: 1000
+          })
         }
       );
     });

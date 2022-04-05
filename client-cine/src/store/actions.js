@@ -337,7 +337,6 @@ export const editMovie = (id, data) => {
             title: "Oops...",
             text: `${error}`,
          });
-         //alert(error);
       }
    };
 
@@ -365,7 +364,13 @@ export const removeMovie = (id) => {
          .then((res) =>
             dispatch({ type: "DELETEMOVIE", payload: parseInt(id) })
          )
-         .catch((re) => alert("error to delete"));
+         .catch((re) => Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Error al eliminar pelicula!',
+        showConfirmButton: false,
+        timer: 1000
+      }));
    };
 };
 export const removeGenres = (id) => {

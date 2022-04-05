@@ -24,7 +24,6 @@ export function postMovies(inputs) {
 }
 
 export const postBuy = (payload) => {
-   console.log("payload", payload);
    return async (dispatch) => {
       const json = await axios.post(
          "http://localhost:3001/testStripe/create-checkout-session",
@@ -58,7 +57,6 @@ export const postFunciones = (funciones, peliculaId) => {
          funciones: funciones,
          peliculaId: peliculaId,
       };
-      console.log(body);
       axios.post("http://localhost:3001/funcion/bulk", body);
       Swal.fire({
          icon: "succes",
@@ -70,7 +68,6 @@ export const postFunciones = (funciones, peliculaId) => {
          funcion: funciones[0],
          peliculaId: peliculaId,
       };
-      console.log(body);
       axios.post("http://localhost:3001/funcion", body);
    }
 
@@ -161,7 +158,6 @@ export function getAllReviewByIdOfMovie(id) {
 }
 
 export const BestMovies = (arg) => {
-   // console.log("howdy im action")
    return {
       type: "BESTMOVIES",
       payload: arg,
@@ -331,8 +327,6 @@ export const getMovieInfo = (id) => {
 };
 
 export const editMovie = (id, data) => {
-
-   console.log("actiondata: " + JSON.stringify(data));
    return async () => {
       try {
          axios.put(`http://localhost:3001/peliculas/${id}`, data);
@@ -426,7 +420,6 @@ export const updateReview = (payload) => {
 
 export const allUsers = (payload) => {
    return async (dispatch) => {
-      console.log("entramos");
       const response = await axios.get("http://localhost:3001/firebase");
       if (response?.data) {
          dispatch({
@@ -466,7 +459,6 @@ export const createUser = (payload) => {
 
 export const detailedUser = (id) => {
    return async (dispatch) => {
-      console.log("entramos");
       const response = await axios.get(`http://localhost:3001/firebase/${id}`);
       if (response?.data) {
          dispatch({

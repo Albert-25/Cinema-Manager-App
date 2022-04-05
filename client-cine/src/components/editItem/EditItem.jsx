@@ -14,7 +14,6 @@ export function EditItem() {
     ? { endpoint: 'actores', tag: 'actor' }
     : { endpoint: 'generos', tag: 'genero' }
   const navigate = useNavigate()
-  console.log(params.id)
   useEffect(() => {
     axios.get(`${REACT_APP_BASE_URL}/${objTxt.endpoint}`)
       .then(res => {

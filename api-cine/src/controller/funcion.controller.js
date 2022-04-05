@@ -20,7 +20,6 @@ const getFuncion = async (req, res, next) => {
   let id = req.params.id;
   try {
     const func = await Funciones.findByPk(id, { include: [Pelicula] });
-    console.log("funcion totalera",func)
     if (func) return res.json(func);
     next();
   } catch (error) {
@@ -31,7 +30,6 @@ const getFuncion = async (req, res, next) => {
 const crearFuncion = async (req, res, next) => {
   const { funcion, peliculaId } = req.body;
   let peli = await Pelicula.findByPk(peliculaId)
-  console.log("pelii", peli.titulo)
 
   try {
     const stripeProduct = await stripe.products.create({
@@ -46,11 +44,10 @@ const crearFuncion = async (req, res, next) => {
       currency: 'usd',
       // recurring: {interval: 'month'},
     });
-    console.log("OLA soy stripePrice", stripePrice.id)
+
 
     funcion.id = stripeProduct.id
     funcion.priceID = stripePrice.id
-    // console.log(funcion)
 
 
     let func = await Funciones.create(funcion);
@@ -82,7 +79,6 @@ const crearFunciones = async (req, res, next) => {
         currency: 'usd',
         // recurring: {interval: 'month'},
       });
-      console.log("HOLA soy stripePrice", stripePrice.id)
 
       funciones[i].id = stripeProduct.id
       funciones[i].priceID = stripePrice.id
@@ -91,7 +87,6 @@ const crearFunciones = async (req, res, next) => {
     let funcs = await Funciones.bulkCreate(funciones, {
       ignoreDuplicates: true,
     });
-    console.log(funcs)
 
     funcs.map((element) => {
       element.addPelicula(peliculaId);

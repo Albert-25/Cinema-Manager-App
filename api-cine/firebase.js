@@ -35,7 +35,6 @@ const app = admin.initializeApp(firebaseConfig, 'autentica');
 const secundaria =  admin.initializeApp(firebaseConfig, 'secundaria');
 
 
-console.log('Holaaaa', app.name)
 
 const db = getFirestore();
 

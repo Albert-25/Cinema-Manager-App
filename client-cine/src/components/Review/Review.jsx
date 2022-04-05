@@ -12,7 +12,6 @@ const Review = () => {
 
     let navigate = useNavigate();
     const id = useParams().id;
-    console.log(id)
     const dispatch = useDispatch()
     const [comentario, setComentario] = useState("")
     const [puntuación, setPuntuación] = useState()
@@ -23,10 +22,8 @@ const Review = () => {
     // const nombre = "Anonimo";
     const { user } = useAuth();
     let nombre = user && user.nombre ? user.nombre :"Anonimo"
-    console.log("soy el user",user)
 
     const onChange = (e) => {
-        console.log(e.target.value)
         setComentario(e.target.value)
         setError2Comentario("")
     }

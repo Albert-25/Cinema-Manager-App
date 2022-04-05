@@ -55,33 +55,27 @@ export default function NavBar() {
                >
                   <Nav.Item as="li">
                      <Link className="link_nav_items" to="/">
-                        Home
+                        Inicio
                      </Link>
                   </Nav.Item>
                   /
                   <Nav.Item as="li">
                      <Link className="link_nav_items" to="/productpage">
-                        Products
+                        Productos
                      </Link>
                   </Nav.Item>
                   /
                   {user?.rol === "admin" && (
                      <Nav.Item as="li">
                         <Link className="link_nav_items" to="/admin">
-                           Admin
+                           Administrar
                         </Link>
                      </Nav.Item>
                   )}
                   {user?.rol === "admin" && "/"}
                   <Nav.Item as="li">
                      <Link className="link_nav_items" to="/about">
-                        About
-                     </Link>
-                  </Nav.Item>
-                  /
-                  <Nav.Item as="li">
-                     <Link className="link_nav_items" to="/cart">
-                        Cart
+                        Sobre nosotros
                      </Link>
                   </Nav.Item>
                </Nav>

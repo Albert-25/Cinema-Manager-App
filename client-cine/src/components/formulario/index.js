@@ -1,5 +1,5 @@
  import React, { Component } from 'react'
-
+ import Swal from "sweetalert2";
 
 class Formulario extends Component {
     constructor(props) {
@@ -39,8 +39,13 @@ class Formulario extends Component {
     }
 
     handleSubmit = (event) => {
-        alert(`${this.state.firstName} ${this.state.lastName}  Registered Successfully !!!!`)
-        console.log(this.state);
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: `${this.state.firstName} ${this.state.lastName} se registró correctamente!!`,
+            showConfirmButton: false,
+            timer: 1500
+          })
         this.setState({
             firstName: "",
             lastName: "",

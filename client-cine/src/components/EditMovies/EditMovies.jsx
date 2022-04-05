@@ -26,14 +26,12 @@ const EditMovies = () => {
    const Cast = useSelector((state) => state.CastAll);
    const movieData = useSelector((state) => state.editInfo);
 
-   //console.log("md: " + JSON.stringify(movieData));
 
    const [inputs, setInputs] = useState({
       genders: [],
       actors: [],
    });
 
-   //console.log("inputs: " + inputs.titulo);
 
    const [imagesSelected, setImagesSelected] = useState({
       poster: "",
@@ -61,33 +59,13 @@ const EditMovies = () => {
          ...inputs,
          [e.target.name]: e.target.value.trim(),
       });
-      console.log(inputs);
-      // setErrors(
-      //   validate(
-      //     {
-      //       [e.target.name]: e.target.value,
-      //     },
-      //     errors,
-      //     e.target.name
-      //   )
-      // );
    };
 
    const changeArrayGenders = (evt) => {
-      console.log(evt.target.value);
       setInputs({
          ...inputs,
          [evt.target.name]: inputs.genders.concat(evt.target.value),
       });
-      // setErrors(
-      //   validate(
-      //     {
-      //       ...inputs,
-      //     },
-      //     errors,
-      //     "genders"
-      //   )
-      // );
       document
          .getElementById(evt.target.value)
          .setAttribute("disabled", "disabled");
@@ -98,15 +76,6 @@ const EditMovies = () => {
          ...inputs,
          [evt.target.name]: inputs.actors.concat(evt.target.value),
       });
-      // setErrors(
-      //   validate(
-      //     {
-      //       ...inputs,
-      //     },
-      //     errors,
-      //     "actors"
-      //   )
-      // );
       document
          .getElementsByName(evt.target.value)[0]
          .setAttribute("disabled", "disabled");
@@ -135,15 +104,6 @@ const EditMovies = () => {
    };
 
    const handleClick = (e) => {
-      // setErrors(
-      //   validate(
-      //     {
-      //       ...inputs,
-      //     },
-      //     errors,
-      //     "submit"
-      //   )
-      // );
    };
 
    const checkInputs = () => {
@@ -181,7 +141,6 @@ const EditMovies = () => {
          inputs.clasificacion === "" &&
          movieData.clasificacion !== undefined
       ) {
-         console.log(movieData.clasificacion);
          setInputs({
             ...inputs,
             clasificacion: movieData.clasificacion,
@@ -232,12 +191,10 @@ const EditMovies = () => {
             actors: movieData.Actors,
          });
       }
-      console.log(inputs);
    };
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      console.log("hey", errors);
       if (errors.error === false) {
          Swal.fire({
             title: "¿Quieres guardar los cambios?",
@@ -593,24 +550,6 @@ const EditMovies = () => {
                   })}
             </div>
          </div>
-
-         {/* {poster.length !== 0
-            ? poster.map((el, index) => {
-                 return (
-                    <div
-                       key={`${Date.now()}${el.titulo}${index}`}
-                       className="Check__Movies"
-                    >
-                       <span>{el.titulo} </span>
-                       <span>{el.sinopsis} </span>
-                       <span>{el.director} </span>
-                       <span>{el.pais} </span>
-                       <span>{el.duracion} </span>
-                       <span>{el.trailer} </span>
-                    </div>
-                 );
-              })
-            : null} */}
       </Container>
    );
 };

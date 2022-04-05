@@ -33,7 +33,6 @@ const ProductDetail = (props) => {
                     name: detailed.nombreProducto,
                 })
             );
-        console.log("carrrito:", itemsCarrito);
     }
 
     return (
@@ -70,7 +69,7 @@ const ProductDetail = (props) => {
             <div className="container__button">
                 <Link to="/productpage" className="Product__rightdown">
                     <button className="Product__rightdown__text">
-                        👉 Go back 👈
+                        👉 Volver 👈
                     </button>
                 </Link>
             </div>

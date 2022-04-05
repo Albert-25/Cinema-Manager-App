@@ -25,7 +25,6 @@ const ReviewToUpdate = () => {
 
 
     const onChange = (e) => {
-        console.log(e.target.value)
         setComentario(e.target.value)
         setError2Comentario("")
     }

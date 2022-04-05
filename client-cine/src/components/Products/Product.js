@@ -80,7 +80,7 @@ export default function Product({
                <Card.Text>Stock: {stock}!</Card.Text>
                <Link to={`Products/${id}`}>
                   <Button className="me-3" variant="primary">
-                     Details
+                     Detalles
                   </Button>
                </Link>
                <Button
@@ -99,7 +99,7 @@ export default function Product({
                   onClick={() => addToCart()}
                   variant="primary"
                >
-                  add to cart
+                  Añadir al carrito
                </Button>
             </Card.Body>
             {/* <Card.ImgOverlay>

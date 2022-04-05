@@ -11,10 +11,10 @@ import Items from './items.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './itemcontainer.css';
 const items = {
-  movies: 'createmovies',
-  genres: 'creategenero',
-  actors: 'createactor',
-  products: 'createproducto',
+  peliculas: 'createmovies',
+  generos: 'creategenero',
+  actores: 'createactor',
+  productos: 'createproducto',
   users: 'createuser',
 }
 
@@ -46,27 +46,27 @@ export default function ItemsContainer() {
 
       }
       Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Estas seguro?',
+        text: "¡Este cambio no se puede revertir!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Si, ¡Bórralo!'
       }).then((result) => {
         if (result.isConfirmed) {
-          state?.section === "actors" && dispatch(removeActors(res))
-          state?.section === "movies" && dispatch(removeMovie(res))
-          state?.section === "genres" && dispatch(removeGenres(res))
-          state?.section === "products" && dispatch(removeProduct(res))
+          state?.section === "actores" && dispatch(removeActors(res))
+          state?.section === "peliculas" && dispatch(removeMovie(res))
+          state?.section === "generos" && dispatch(removeGenres(res))
+          state?.section === "productos" && dispatch(removeProduct(res))
           state?.section === "comments" && dispatch(deleteReview(res))
-          state?.section === "users" && dispatch(deleteUser(res))
+          state?.section === "usuarios" && dispatch(deleteUser(res))
           Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
+            'Borrado!',
+            'El elemento ha sido eliminado.',
             'success'
           )
-        }if(state?.section !== "users"){
+        }if(state?.section !== "usuarios"){
         setTimeout(() => window.location.reload(), 1000)
       }
       })
@@ -83,13 +83,13 @@ export default function ItemsContainer() {
     <div className="item_admin_container_all">
       <Button bsPrefix className="item_admin_btn_create" onClick={handleCreate}> <BsPlusCircle className="btnCreateAdminM" /></Button>
       <Stack className="item_admin_stack_container" gap={2}>
-        {PelisAll && state.section==="movies" && PelisAll.map(movie=><Items key={movie.titulo} titulo={movie.titulo} image={movie.poster} id={movie.id} handleDelete={handleDelete} />)}
-        {GenresAll && state.section==="genres" && GenresAll.map(movie=><Items key={movie.genero+movie.id} genero={movie.genero}  id={movie.id} handleDelete={handleDelete}  />)}
-        {CastAll &&  state.section==="actors" && CastAll.map(movie=><Items key={movie.nombre+movie.id} nombre={movie.nombre}  id={movie.id} handleDelete={handleDelete}  />)}
-        {ProductAll&& state.section ==="products"&& ProductAll.map(prod=><Items key={prod.nombre+prod.id} nombreProducto={prod.nombreProducto} image={prod.imagenProducto}  id={prod.id} handleDelete={handleDelete} />)}
+        {PelisAll && state.section==="peliculas" && PelisAll.map(movie=><Items key={movie.titulo} titulo={movie.titulo} image={movie.poster} id={movie.id} handleDelete={handleDelete} />)}
+        {GenresAll && state.section==="generos" && GenresAll.map(movie=><Items key={movie.genero+movie.id} genero={movie.genero}  id={movie.id} handleDelete={handleDelete}  />)}
+        {CastAll &&  state.section==="actores" && CastAll.map(movie=><Items key={movie.nombre+movie.id} nombre={movie.nombre}  id={movie.id} handleDelete={handleDelete}  />)}
+        {ProductAll&& state.section ==="productos"&& ProductAll.map(prod=><Items key={prod.nombre+prod.id} nombreProducto={prod.nombreProducto} image={prod.imagenProducto}  id={prod.id} handleDelete={handleDelete} />)}
         {PelisComments.length>0&& state.section === "comments"&&PelisComments.map(e=><Items key={e.nombre+"sdad2"} author={e.nombre} comment={e.comentario} score={e.puntuacion} id={e.id} handleDelete={handleDelete} />)}
         {PelisComments.length<1&& state.section === "comments" && <Spinner animation="border" style={{margin:"0 auto"}} variant="secondary" />}
-        {FirebaseUsers&& state.section ==="users"&& FirebaseUsers.map(prod=><Items key={prod.id} nombreUsuario={prod.nombre} image={prod.imagen}  id={prod.id} correo={prod.correo} rol={prod.rol} handleDelete={handleDelete}/>)}
+        {FirebaseUsers&& state.section ==="usuarios"&& FirebaseUsers.map(prod=><Items key={prod.id} nombreUsuario={prod.nombre} image={prod.imagen}  id={prod.id} correo={prod.correo} rol={prod.rol} handleDelete={handleDelete}/>)}
       </Stack>
     </div>
   );

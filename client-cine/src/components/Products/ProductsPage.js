@@ -15,7 +15,7 @@ const ProductsPage = () => {
     const dispatch = useDispatch();
     const ProductosTotales = useSelector((state) => state.ProductAll);
     const UrlBuy = useSelector((state) => state.cartUrl);
-    console.log("Estado cargado", UrlBuy);
+    // console.log("Estado cargado", UrlBuy);
     const [container, setContainer] = useState([]);
     useEffect(() => {
         dispatch(AllProducts());
@@ -26,7 +26,7 @@ const ProductsPage = () => {
         Comprados.push({ name: e.name, quantity: e.quantity })
     })
     console.log("comprdos: ", Comprados)
-    localStorage.setItem("BuyInfo", JSON.stringify(Comprados))
+    // localStorage.setItem("BuyInfo", JSON.stringify(Comprados))
 
     const [orderPrice, setOrderPrice] = useState("")
     const [filterCombo, setFilterCombo] = useState("")

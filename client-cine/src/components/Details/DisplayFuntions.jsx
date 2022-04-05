@@ -28,7 +28,7 @@ export const DisplayFuntions = ({ funtions, nameMovie, posterMovie }) => {
   if(ticket.horario) {
     functionSelected = funtions.find(f => f.horario === ticket.horario)
   }
-
+  // console.log("coas:", funtions, nameMovie, posterMovie)
   const handleSave = () => {
     const itemCart = {
       id: functionSelected.id,

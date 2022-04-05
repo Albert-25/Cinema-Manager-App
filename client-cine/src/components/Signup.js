@@ -3,6 +3,7 @@ import { Card, Form, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
+import Swal from "sweetalert2";
 import { Image } from "cloudinary-react";
 const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
@@ -23,12 +24,17 @@ export default function Signup() {
     e.preventDefault();
     
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      Swal.fire(
+            'Contraseñas distintas',
+            'Ambas contraseñas deben ser iguales',
+            'error'
+          )
       return setError("Passwords dont match");
+      
     }
     try {
       setError("");
       setLoading(true);
-      console.log("recibidiro", roles);
       await signup(
         emailRef.current.value,
         passwordRef.current.value,
@@ -37,8 +43,15 @@ export default function Signup() {
         picProfile
       );
       navigate("/");
-    } catch {
-      setError("Failed to create an account");
+    } catch(e) {
+      setError("Error al crear una cuenta");
+      if(e.code === "auth/email-already-in-use"){
+        Swal.fire(
+            'Correo ya registrado',
+            'Este correo ya está asociado a una cuenta activa',
+            'error'
+          )
+      }
     }
 
     setLoading(false);
@@ -65,7 +78,6 @@ export default function Signup() {
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Sign Up</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>

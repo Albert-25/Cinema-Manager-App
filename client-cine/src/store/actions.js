@@ -27,7 +27,6 @@ export const postBuy = (payload) => {
 };
 
 export const getRetrive = (id) => {
-  console.log("esoty enstadno al recuer", id)
   return async (dispatch) => {
     const response = await axios.get(`http://localhost:3001/testStripe/retrive/${id}`);
     if (response?.data) {
@@ -47,14 +46,14 @@ export const postFunciones = (funciones, peliculaId) => {
       funciones: funciones,
       peliculaId: peliculaId,
     };
-    console.log(body);
+
     axios.post("http://localhost:3001/funcion/bulk", body);
   } else {
     let body = {
       funcion: funciones[0],
       peliculaId: peliculaId,
     };
-    console.log(body);
+
     axios.post("http://localhost:3001/funcion", body);
   }
 };
@@ -279,11 +278,9 @@ export const getMovieInfo = (id) => {
 };
 
 export const editMovie = (id, data) => {
-  console.log("actiondata: " + JSON.stringify(data));
   return async () => {
     try {
       axios.put(`http://localhost:3001/peliculas/${id}`, data);
-      console.log(data);
     } catch (error) {
       alert(error);
     }
@@ -390,9 +387,7 @@ export const allUsers = (payload) => {
 
 
 export const createUser = (payload) => {
-  console.log('hola', payload)
   return async (dispatch) => {
-    console.log("entramos");
 
     const json = await axios.post("http://localhost:3001/firebase/create", payload);
 
@@ -414,7 +409,6 @@ export const detailedUser = (id) => {
 };
 
 export const deleteUser = (id) => {
-  console.log("deletee");
   return (dispatch) => {
     axios
       .get(`http://localhost:3001/firebase/delete/${id}`)
@@ -424,7 +418,6 @@ export const deleteUser = (id) => {
 };
 
 export const updateUser = (id, data) => {
-  console.log('here')
   return async (dispatch) => {
     const json = await axios.post(
       `http://localhost:3001/firebase/update/${id}`,

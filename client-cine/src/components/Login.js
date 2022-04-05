@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Card, Form, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function Login() {
   const emailRef = useRef();
@@ -30,7 +31,26 @@ export default function Login() {
       next.then((res)=>navigate(res))
       
     } catch (e) {
-      console.log("Failed to sign in", e);
+      if(e.code === "auth/too-many-requests"){
+        Swal.fire(
+            'Demasiados intentos',
+            'Espera unos minutos o reinicia la contraseña para volver a intentar',
+            'error'
+          )
+      }else if(e.code === "auth/wrong-password"){
+        Swal.fire(
+            'Contraseña equivocada',
+            '¿Has olvidado tu contraseña?',
+            'question'
+          )
+      }if(e.code === "auth/user-not-found"){
+        Swal.fire(
+            'Correo electrónico no encontrado',
+            'Si aún no tienes una cuenta prueba a registrarte',
+            'question'
+          )
+      }
+      console.log("Failed to sign in", JSON.stringify(e.code));
     }
 
     setLoading(false);

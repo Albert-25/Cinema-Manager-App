@@ -15,9 +15,7 @@ export const Cart = () => {
   const handleClick = () => {
 
   
-        alert("done");
-        dispatch(postBuy(itemsCarrito));
-        localStorage.setItem("compra", JSON.stringify(UrlBuy[0]));
+        
 
 
     console.log('terminar')

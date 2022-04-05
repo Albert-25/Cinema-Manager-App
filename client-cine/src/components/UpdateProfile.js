@@ -12,29 +12,26 @@ export default function UpdateProfile() {
   const nameRef = useRef();
   const { user, currentUser, updateEmail, updateName } = useAuth();
   const [error, setError] = useState("");
+  const [email, setEmail] = useState(user.email);
+  const [name, setName] = useState(user.name);
+
+
   const [pass, setPass] = useState("");
   const [passConfirm, setPassConfirm] = useState("");
 
   const [picProfile, setPicProfile] = useState("");
   const [loading, setLoading] = useState(false);
-  //const navigate = useNavigate();
+
 
 
   const [selectedImage, setSelectedImage] = useState("");
 
-//Estados para guardar la nueva contraseña y para abrir y cerrar el desplegable
   const [show, setShow] = useState(false);
-
-
-//Estados para abrir y cerrar el popup
-   //const handleClose = () => setShow(false);
-  //const handleShow = () => setShow(true);
-
-//Mostrando el popup desplegable
 
 
 
   function handleSubmit(e) {
+
     console.log(pass);
     e.preventDefault();
     if (pass !== passConfirm) {
@@ -44,16 +41,14 @@ export default function UpdateProfile() {
     const promises = [];
     setLoading(true);
     setError("");
-    if (emailRef.current.value !== currentUser.email) {
-      promises.push(updateEmail(emailRef.current.value));
-    }
     if (pass) {
       setShow(true)
 
 
     }
-    if (user && nameRef.current.value !== user.nombre || user && picProfile !== user.imagen) {
-      promises.push(updateName(nameRef.current.value, picProfile, user));
+    if (user && nameRef && nameRef.current && nameRef.current.value !== user.nombre || user && picProfile !== user.imagen) {
+      console.log(name, picProfile, user)
+      promises.push(updateName(name, picProfile, user));
     }
     Promise.all(promises)
       .then(() => {
@@ -78,10 +73,6 @@ export default function UpdateProfile() {
       formData
     ).then((response) => {
       setPicProfile(response.data.url);
-      /*setInputs({
-        ...inputs,
-        [event.target.name]: response.data.url,
-      });*/
     });
   };
 
@@ -97,7 +88,7 @@ export default function UpdateProfile() {
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
-                ref={emailRef}
+                 
                 disabled
                 defaultValue={currentUser.email}
               />
@@ -126,7 +117,9 @@ export default function UpdateProfile() {
               <Form.Label>Cambio de nombre</Form.Label>
               <Form.Control
                 type="text"
-                ref={nameRef}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
                 placeholder="Leave blank to keep the same"
               />
             </Form.Group>

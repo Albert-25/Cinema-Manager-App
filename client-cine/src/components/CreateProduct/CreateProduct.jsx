@@ -42,10 +42,14 @@ function CreateProduct() {
    // }, [info, error]);
 
    function handleChange(e) {
+      if (e.target.name === "isCombo")
+         setInfo({ ...info, isCombo: !info.isCombo });
+
       setInfo((prevInfo) => {
          return {
             ...prevInfo,
             [e.target.name]: e.target.value,
+            isCombo: info.isCombo,
          };
       });
 

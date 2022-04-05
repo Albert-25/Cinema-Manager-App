@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Hubballi&family=Shizuru&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Hubballi&family=Shizuru&display=swap');*/
 .smallslider {
     width: 100%;
     height: 40vh;
@@ -12,10 +12,10 @@
     height: 100% !important;
 }
 
-
+/*    font-family: 'Hubballi', cursive;*/
 .smallslider__title {
     position: absolute;
-    font-family: 'Hubballi', cursive;
+
     width: 100%;
     text-align: center;
     top: 2rem;

@@ -453,7 +453,6 @@ export const allUsers = (payload) => {
 }*/
 
 export const createUser = (payload) => {
-<<<<<<< HEAD
   return async (dispatch) => {
 
       const json = await axios.post(

@@ -102,7 +102,7 @@ export function validate(input, stateErrors, name) {
          errors.trailer = "El trailer del titulo es requerido";
          errors.error = true;
       } else if (
-         /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.test(
+         !/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.test(
             input.trailer
          )
       ) {

@@ -52,8 +52,8 @@ export const Cart = () => {
             {
               itemsCart.map((item) => {
                 return (
-                  <div className={s.itemlist}>
-                    <span key={item.id}>{item.quantity} - {item.name} $ {item.quantity * item.price}</span>
+                  <div className={s.itemlist} key={item.id}>
+                    <span>{item.quantity} - {item.name} $ {item.quantity * item.price}</span>
                     <Button variant="outline-danger" size="sm">
                       <BsTrash onClick={() => handleDelete(item.id, item.name)} />
                     </Button>

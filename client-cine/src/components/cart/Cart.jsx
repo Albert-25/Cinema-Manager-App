@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Offcanvas, Button, Navbar } from "react-bootstrap";
-import { updateCart } from "../../store/actions"
+import { updateCart, postBuy } from "../../store/actions"
 
 export const Cart = () => {
   const dispatch = useDispatch();
@@ -13,6 +13,13 @@ export const Cart = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleClick = () => {
+
+  
+        alert("done");
+        dispatch(postBuy(itemsCarrito));
+        localStorage.setItem("compra", JSON.stringify(UrlBuy[0]));
+
+
     console.log('terminar')
   }
 

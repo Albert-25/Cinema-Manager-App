@@ -36,6 +36,7 @@ const sendEmail = async (req, res) => {
         la informacion de lo que compro y un codigo QR para llevarlo y mostrarlo en el cine~<br/>
         Usted compro:<br/></p>
         Productos: <br/>
+
         ${productsString}
         Precio total:${req.body.price} millones de pesos brasileños <br/>
         <p>Aqui tienes un codigo QR, muestralo en boleteria para recibir tu compra~</p><br/>

@@ -64,7 +64,6 @@ const deleteUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
     const id = req.params.id;
-  const {correo, imagen, nombre, rol} = req.body
 
   await db.collection('usuarios').doc(`${id}`).update(req.body)
 

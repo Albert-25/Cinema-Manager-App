@@ -21,6 +21,7 @@
 	padding: 7px 10px;
 	font-size: 1.2em;
 	border-radius: 50%;
+   box-shadow: 2px 2px 1px transparent;
 	transition: all .4s ease;
 }
 

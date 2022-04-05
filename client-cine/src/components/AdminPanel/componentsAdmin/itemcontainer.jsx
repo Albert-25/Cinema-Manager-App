@@ -4,6 +4,7 @@ import { AdminContext } from './../admincontext.jsx'
 import { useNavigate} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Stack, Spinner} from 'react-bootstrap';
+import { useAuth } from "../../../contexts/AuthContext";
 import { removeActors, removeMovie, removeGenres, removeProduct, deleteUser, deleteReview} from '../../../store/actions'
 import Swal from "sweetalert2";
 import Items from './items.jsx'
@@ -19,12 +20,14 @@ const items = {
 
 
 export default function ItemsContainer() {
+    const { user, currentUser } = useAuth();
+
   let { state } = useContext(AdminContext)
   let { PelisAll, GenresAll, CastAll, ProductAll,PelisComments, FirebaseUsers } = useSelector(state => state)
   const navigate = useNavigate()
   let dispatch = useDispatch()
   const handleDelete = (e) => {
-    console.log(e.currentTarget.className.split(" ")[1])
+
     let ev = new Promise((resolve, rejected) => {
       if (e.currentTarget.className.split(" ")[1]) {
         resolve(e.currentTarget.className.split(" ")[1])
@@ -33,6 +36,15 @@ export default function ItemsContainer() {
       }
     })
     ev.then(res => {
+      if(res === user.uid){
+        Swal.fire(
+            'No puedes borrar tu propia cuenta',
+            'Si necesitas borrar esta cuenta, pide ayuda a otro administrador',
+            'error'
+          )
+       return 'Error'
+
+      }
       Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -43,7 +55,6 @@ export default function ItemsContainer() {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          console.log(res, state.section)
           state?.section === "actors" && dispatch(removeActors(res))
           state?.section === "movies" && dispatch(removeMovie(res))
           state?.section === "genres" && dispatch(removeGenres(res))
@@ -55,15 +66,16 @@ export default function ItemsContainer() {
             'Your file has been deleted.',
             'success'
           )
-        }
+        }if(state?.section !== "users"){
         setTimeout(() => window.location.reload(), 1000)
+      }
       })
 
-    }, error => console.log(error))
+    }, error => console.log(typeof(error)))
   }
 
   const handleCreate = () => {
-    console.log(items[state.section])
+
     navigate(`/admin/${items[state.section]}`)
   }
 

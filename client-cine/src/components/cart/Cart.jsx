@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Offcanvas, Button, Navbar } from "react-bootstrap";
+import { Offcanvas, Button, Navbar, Stack } from "react-bootstrap";
+import { BsTrash } from 'react-icons/bs'
 import { updateCart, postBuy } from "../../store/actions"
-// import { getItemsCart } from "../../utils/itemsCart"
-
+import s from "./cart.module.css"
 
 export const Cart = () => {
   const dispatch = useDispatch();
   const UrlBuy = useSelector((state) => state.cartUrl);
   const [show, setShow] = useState(false);
   const itemsCart = useSelector((state) => state.itemsCart);
-  const total = itemsCart.reduce((pValue, cValue) =>pValue + cValue.quantity*cValue.price, 0)
+  const total = itemsCart.reduce((pValue, cValue) => pValue + cValue.quantity * cValue.price, 0)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
+
   const handleClick = () => {
     alert("done");
     console.log("items card:", itemsCart)
@@ -25,10 +25,10 @@ export const Cart = () => {
 
   let variable = 1;
   if (UrlBuy && UrlBuy[0] !== undefined && UrlBuy[0].length > 30 && variable === 1) {
-      window.location.href = UrlBuy[0]
-      console.log('Datos de entrada:', UrlBuy)
-      localStorage.setItem('compra', UrlBuy[1])
-      variable = variable - 1;
+    window.location.href = UrlBuy[0]
+    console.log('Datos de entrada:', UrlBuy)
+    localStorage.setItem('compra', UrlBuy[1])
+    variable = variable - 1;
   }
 
   const handleDelete = (id, name) => {
@@ -38,26 +38,32 @@ export const Cart = () => {
   }
 
   return (
-    <Navbar style={{right:"0", left:"auto"}} fixed="bottom">
+    <Navbar style={{ right: "0", left: "auto" }} fixed="bottom">
       <Button variant="primary" onClick={handleShow}>
         Carrito {itemsCart.length}
       </Button>
 
       <Offcanvas show={show} onHide={handleClose} placement="end" name="end">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>carrito</Offcanvas.Title>
+          <Offcanvas.Title>Carrito</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          {
-            itemsCart.map((item) => {
-              return (<div>
-                <p key={item.id}>{item.quantity} - {item.name} ${item.price} subTotal:{item.quantity * item.price}</p>
-                <button onClick={() => handleDelete(item.id, item.name)}>delete</button>
-              </div>)
-            })
-          }
-          <p> Total: {total}</p>
+          <Stack gap={4}>
+            {
+              itemsCart.map((item) => {
+                return (
+                  <div className={s.itemlist}>
+                    <span key={item.id}>{item.quantity} - {item.name} $ {item.quantity * item.price}</span>
+                    <Button variant="outline-danger" size="sm">
+                      <BsTrash onClick={() => handleDelete(item.id, item.name)} />
+                    </Button>
+                  </div>
+                )
+              })
+            }
+          </Stack>
         </Offcanvas.Body>
+        <p className={s.total}> Total: <span className={s.total_number}>${total}</span></p>
         <Button variant="primary" onClick={handleClick}>Pagar</Button>
       </Offcanvas>
     </Navbar>

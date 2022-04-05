@@ -1,0 +1,15 @@
+.itemlist {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total{
+  text-align: end;
+  margin-right: 10px;
+}
+
+.total_number {
+  font-weight: bolder;
+  font-size: larger;
+}

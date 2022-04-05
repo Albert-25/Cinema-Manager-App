@@ -31,9 +31,11 @@ const sendEmail = async (req, res) => {
         la informacion de lo que compro y un codigo QR para llevarlo y mostrarlo en el cine~<br/>
         Usted compro:<br/></p>
         Productos: <br/>
+
         ${productsString}
         Precio total:${req.body.price} pesos brasileños <br/>
         <img src=${req.body.QR} alt="qr"/>`,
+
     }
 
     transporter.sendMail(mailOptions, (error, info) => {

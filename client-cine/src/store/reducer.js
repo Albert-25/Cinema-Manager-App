@@ -380,7 +380,7 @@ const reducer = (state = initialState, action) => {
 
     case "FILTER_BYCOMBO": {
       const totalProductAll = state.TotalProductAll;
-      const comboFiltered = action.payload === "true" ? totalProductAll.filter(p => p.isCombo == true) : totalProductAll.filter(p => p.isCombo == false)
+      const comboFiltered = action.payload === "true" ? totalProductAll.filter(p => p.isCombo === true) : totalProductAll.filter(p => p.isCombo === false)
       return {
         ...state,
         ProductAll: action.payload === "all" ? totalProductAll : comboFiltered

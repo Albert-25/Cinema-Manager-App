@@ -1,5 +1,3 @@
-
-
 import React, { useRef, useState } from "react";
 import { Card, Form, Button, Alert } from "react-bootstrap";
 import { createUser } from "../../store/actions";
@@ -34,7 +32,6 @@ export default function CreateUser() {
     try {
       setError("");
       setLoading(true);
-      console.log("recibidiro", roles);
       await dispatch(createUser(
        { correo: emailRef.current.value,
                password: passwordRef.current.value,

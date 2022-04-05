@@ -4,6 +4,7 @@ import { Offcanvas, Button, Navbar } from "react-bootstrap";
 import { getItemsCart } from "../../utils/itemsCart"
 import { updateCart } from "../../store/actions"
 
+
 export const Cart = () => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
@@ -14,8 +15,7 @@ export const Cart = () => {
   const handleShow = () => setShow(true);
   
   const handleClick = () => {
-    // pagar
-    console.log('para stripe',getItemsCart("stripe"))
+
   }
 
   const handleDelete = (id, name) => {

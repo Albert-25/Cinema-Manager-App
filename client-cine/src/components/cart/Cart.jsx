@@ -37,7 +37,7 @@ export const Cart = () => {
   }
 
   return (
-    <Navbar className="justify-content-end" fixed="bottom">
+    <Navbar style={{right:"0", left:"auto"}} fixed="bottom">
       <Button variant="primary" onClick={handleShow}>
         Carrito {itemsCart.length}
       </Button>

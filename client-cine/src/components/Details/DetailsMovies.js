@@ -37,21 +37,14 @@ const DetailsMovies = (props) => {
       dispatch(getAllReviewByIdOfMovie(id));
    }, [dispatch]);
 
-   /*useEffect(() => {
-        dispatch(DetailedMovie(id));
-        dispatch(getAllReviewByIdOfMovie(id));
-    }, [dispatch, id]);*/
-
    const handleFilterRating = (e) => {
       dispatch(filterReviewByRating(e.target.value));
    };
 
-   // console.log("la ide detalles : ", id)
    let Mooovie = [];
    if (detailed[0]) {
       Mooovie = detailed[0];
    }
-   console.log("DETAAAAILED", detailed)
    let GenArray =
       detailed.Generos && detailed.Generos.length
          ? detailed.Generos.map((e) => e.genero)

@@ -331,7 +331,6 @@ export const editMovie = (id, data) => {
       try {
          axios.put(`http://localhost:3001/peliculas/${id}`, data);
          Swal.fire("La pelicula fue editada!", "", "success");
-         console.log(data);
       } catch (error) {
          Swal.fire({
             icon: "error",

@@ -32,7 +32,6 @@ export const Cart = () => {
     variable === 1
   ) {
     window.location.href = UrlBuy[0];
-    console.log("Datos de entrada:", UrlBuy);
     localStorage.setItem("compra", UrlBuy[1]);
     variable = variable - 1;
   }

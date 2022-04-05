@@ -51,7 +51,7 @@ const DetailsMovies = (props) => {
    if (detailed[0]) {
       Mooovie = detailed[0];
    }
-
+   console.log("DETAAAAILED", detailed)
    let GenArray =
       detailed.Generos && detailed.Generos.length
          ? detailed.Generos.map((e) => e.genero)
@@ -65,7 +65,8 @@ const DetailsMovies = (props) => {
       return (
          <div>
             {detailed.Funciones.length !== 0 ? (
-               <DisplayFuntions funtions={detailed.Funciones} nameMovie={detailed.titulo}/>
+               <DisplayFuntions funtions={detailed.Funciones} nameMovie={detailed.titulo} />
+
             ) : null}
             <ReactPlayer url={detailed.trailer} width="100%" height="400px" />
             <div className="Background__Details">

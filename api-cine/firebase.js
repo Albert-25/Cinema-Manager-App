@@ -34,8 +34,6 @@ const app = admin.initializeApp(firebaseConfig, 'autentica');
 
 const secundaria =  admin.initializeApp(firebaseConfig, 'secundaria');
 
-
-
 const db = getFirestore();
 
 module.exports = { db, app, secundaria }

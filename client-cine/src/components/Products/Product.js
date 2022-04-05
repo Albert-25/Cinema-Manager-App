@@ -8,61 +8,61 @@ import { getItemsCart } from "../../utils/itemsCart";
 import { updateCart } from "../../store/actions";
 
 export default function Product({
-   id,
-   nombreProducto,
-   imagenProducto,
-   precio,
-   priceID,
-   stock,
+    id,
+    nombreProducto,
+    imagenProducto,
+    precio,
+    priceID,
+    stock,
 }) {
-   const [cantidad, setCantidad] = useState(0);
-   const dispatch = useDispatch();
-   const onClickLess = () => {
-      setCantidad(cantidad - 1);
-   };
-   const onClickMore = () => {
-      setCantidad(cantidad + 1);
-   };
-   const addToCart = () => {
-      let items = getItemsCart("items");
-      const productToAdd = {
-         id: id,
-         name: nombreProducto,
-         price: precio,
-         priceID: priceID,
-         quantity: cantidad,
-         imagenProducto: imagenProducto,
-         stock: stock,
-      };
-      let restOfItems = items.filter(
-         (p) => p.id !== id && p.name !== nombreProducto
-      );
-      let itemToChange = items.find(
-         (p) => p.id == id && p.name == nombreProducto
-      );
-      let newProductToAdd = itemToChange
-         ? {
-              id: id,
-              name: nombreProducto,
-              price: precio,
-              priceID: priceID,
-              quantity: cantidad + itemToChange.quantity,
-              imagenProducto: imagenProducto,
-              stock: stock,
-           }
-         : productToAdd;
-      let arrayToSend = restOfItems.concat(newProductToAdd);
+    const [cantidad, setCantidad] = useState(0);
+    const dispatch = useDispatch();
+    const onClickLess = () => {
+        setCantidad(cantidad - 1);
+    };
+    const onClickMore = () => {
+        setCantidad(cantidad + 1);
+    };
+    const addToCart = () => {
+        let items = getItemsCart("items");
+        const productToAdd = {
+            id: id,
+            name: nombreProducto,
+            price: precio,
+            priceID: priceID,
+            quantity: cantidad,
+            imagenProducto: imagenProducto,
+            stock: stock,
+        };
+        let restOfItems = items.filter(
+            (p) => p.id !== id && p.name !== nombreProducto
+        );
+        let itemToChange = items.find(
+            (p) => p.id == id && p.name == nombreProducto
+        );
+        let newProductToAdd = itemToChange
+            ? {
+                id: id,
+                name: nombreProducto,
+                price: precio,
+                priceID: priceID,
+                quantity: cantidad + itemToChange.quantity,
+                imagenProducto: imagenProducto,
+                stock: stock,
+            }
+            : productToAdd;
+        let arrayToSend = restOfItems.concat(newProductToAdd);
 
-      const itemPP = {
-         priceID: newProductToAdd.priceID,
-         quantity: newProductToAdd.quantity,
-         name: newProductToAdd.name,
-      };
-      let itemsPP = getItemsCart("stripe");
-      localStorage.setItem("stripe", JSON.stringify([...itemsPP, itemPP]));
-      localStorage.setItem("items", JSON.stringify(arrayToSend));
-      dispatch(updateCart(arrayToSend));
-   };
+        const itemPP = {
+            priceID: newProductToAdd.priceID,
+            quantity: newProductToAdd.quantity,
+            name: newProductToAdd.name,
+        };
+        let itemsPP = getItemsCart("stripe");
+        localStorage.setItem("stripe", JSON.stringify([...itemsPP, itemPP]));
+        localStorage.setItem("items", JSON.stringify(arrayToSend));
+        dispatch(updateCart(arrayToSend));
+    };
 
    return (
       <>
@@ -109,7 +109,7 @@ export default function Product({
                     </Card.Text>
                     <Card.Text>Stock: {stock}!</Card.Text>
                 </Card.ImgOverlay> */}
-         </Card>
-      </>
-   );
+            </Card>
+        </>
+    );
 }

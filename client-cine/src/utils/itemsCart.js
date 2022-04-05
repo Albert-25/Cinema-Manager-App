@@ -1,5 +1,5 @@
-export const getItemsCart = () => {
-  let items = localStorage.getItem("items")
+export const getItemsCart = (key) => {
+  let items = localStorage.getItem(key)
     if (!items) {
       items = []
     } else {

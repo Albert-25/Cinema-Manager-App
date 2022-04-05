@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Offcanvas, Button, Navbar } from "react-bootstrap";
-import { updateCart, postBuy } from "../../store/actions"
+
+
+
+import { getItemsCart } from "../../utils/itemsCart"
+import { updateCart } from "../../store/actions"
+
 
 export const Cart = () => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const itemsCart = useSelector((state) => state.itemsCart);
-  const total = itemsCart.reduce((pValue, cValue) => pValue + cValue.quantity * cValue.price, 0)
-  console.log(total)
+  const total = itemsCart.reduce((pValue, cValue) =>pValue + cValue.quantity*cValue.price, 0)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
   const handleClick = () => {
 
-  
-        
-
-
-    console.log('terminar')
   }
 
   const handleDelete = (id, name) => {

@@ -4,6 +4,9 @@ import { Offcanvas, Button, Navbar, Stack } from "react-bootstrap";
 import { BsTrash } from 'react-icons/bs'
 import { updateCart, postBuy } from "../../store/actions"
 import s from "./cart.module.css"
+import logo from "../../assets/cart.png"
+
+
 
 export const Cart = () => {
   const dispatch = useDispatch();
@@ -38,10 +41,18 @@ export const Cart = () => {
   }
 
   return (
+
+//     <>
+//       <div className={s.show} onClick={handleShow}>
+//         <img src={logo} alt="logo-carrito" className={s.img}/>
+//         <span className={s.span}>{itemsCart.length}</span>
+//       </div>
+
     <Navbar style={{ right: "0", left: "auto" }} fixed="bottom">
       <Button variant="primary" onClick={handleShow}>
         Carrito {itemsCart.length}
       </Button>
+
 
       <Offcanvas show={show} onHide={handleClose} placement="end" name="end">
         <Offcanvas.Header closeButton>
@@ -66,6 +77,6 @@ export const Cart = () => {
         <p className={s.total}> Total: <span className={s.total_number}>${total}</span></p>
         <Button variant="primary" onClick={handleClick}>Pagar</Button>
       </Offcanvas>
-    </Navbar>
+    </>
   );
 };

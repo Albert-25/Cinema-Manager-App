@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Offcanvas, Button, Navbar } from "react-bootstrap";
 import { updateCart, postBuy } from "../../store/actions"
-// import { getItemsCart } from "../../utils/itemsCart"
+import s from "./cart.module.css"
+import logo from "../../assets/cart.png"
 
 
 export const Cart = () => {
@@ -38,10 +39,11 @@ export const Cart = () => {
   }
 
   return (
-    <Navbar style={{right:"0", left:"auto"}} fixed="bottom">
-      <Button variant="primary" onClick={handleShow}>
-        Carrito {itemsCart.length}
-      </Button>
+    <>
+      <div className={s.show} onClick={handleShow}>
+        <img src={logo} alt="logo-carrito" className={s.img}/>
+        <span className={s.span}>{itemsCart.length}</span>
+      </div>
 
       <Offcanvas show={show} onHide={handleClose} placement="end" name="end">
         <Offcanvas.Header closeButton>
@@ -60,6 +62,6 @@ export const Cart = () => {
         </Offcanvas.Body>
         <Button variant="primary" onClick={handleClick}>Pagar</Button>
       </Offcanvas>
-    </Navbar>
+    </>
   );
 };

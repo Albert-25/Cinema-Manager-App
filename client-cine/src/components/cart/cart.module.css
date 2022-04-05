@@ -1,0 +1,26 @@
+.show {
+  border-radius: 50%;
+  position: fixed;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 10px;
+  right: 10px;
+  z-index: 100;
+  background-color: #0d6efd;
+}
+
+.img{
+  width: 45px;
+  height: 45px;
+  transform: translateY(3px);
+}
+
+.span{
+  position: absolute;
+  transform: translate(3px,-4px);
+  font-weight: bolder;
+  color: var(--white-color)
+}

@@ -21,7 +21,7 @@ const items = {
 
 
 export default function ItemsContainer() {
-    const { user, currentUser } = useAuth();
+    const { user} = useAuth();
 
   let { state } = useContext(AdminContext)
   let { PelisAll, GenresAll, CastAll, ProductAll,PelisComments, FirebaseUsers, FunctionsAll } = useSelector(state => state)
@@ -94,7 +94,7 @@ export default function ItemsContainer() {
         {GenresAll && state.section==="generos" && GenresAll.map(movie=><Items key={movie.genero+movie.id} genero={movie.genero}  id={movie.id} handleDelete={handleDelete}  />)}
         {CastAll &&  state.section==="actores" && CastAll.map(movie=><Items key={movie.nombre+movie.id} nombre={movie.nombre}  id={movie.id} handleDelete={handleDelete}  />)}
         {ProductAll&& state.section ==="productos"&& ProductAll.map(prod=><Items key={prod.nombre+prod.id} nombreProducto={prod.nombreProducto} image={prod.imagenProducto}  id={prod.id} handleDelete={handleDelete} />)}
-        {PelisComments.length>0&& state.section === "comments"&&PelisComments.map(e=><Items key={e.nombre+"sdad2"} author={e.nombre} comment={e.comentario} score={e.puntuacion} id={e.id} handleDelete={handleDelete} />)}
+        {PelisComments.length>0&& state.section === "comments"&&PelisComments.map(e=><Items key={e.id+"sdad2"} author={e.nombre} comment={e.comentario} score={e.puntuacion} id={e.id} handleDelete={handleDelete} />)}
         {PelisComments.length<1&& state.section === "comments" && <Spinner animation="border" style={{margin:"0 auto"}} variant="secondary" />}
 
         {FunctionsAll&& state.section ==="funciones"&& FunctionsAll.map(prod=><Items key={prod.id} id={prod.id} sala={prod.sala} horario={prod.horario} pelicula={prod.Peliculas[0].titulo} fecha={prod.fecha} asientos={prod.asientos} maxAsientos={prod.maxAsientos} />)}

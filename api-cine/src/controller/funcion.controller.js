@@ -12,7 +12,7 @@ const getAll = async (req, res, next) => {
       req.json({ message: "no se encontró ninguna funcion en la base de datos" })
     }
   } catch (error) {
-    next(error);
+    console.log('error', error);
   }
 };
 
@@ -99,9 +99,10 @@ const crearFunciones = async (req, res, next) => {
 };
 
 const editarFuncion = async (req, res, next) => {
+  console.log('buenas', req.body)
   const id = req.params.id;
   try {
-    const [func] = await Funciones.update(req.body.funcion, {
+    const [func] = await Funciones.update(req.body, {
       where: { id: id },
     });
     if (func) {
@@ -111,7 +112,7 @@ const editarFuncion = async (req, res, next) => {
       });
     }
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 };
 

@@ -50,6 +50,20 @@ export const getRetrive = (id) => {
 
 };
 
+export const GetAllFunctions = () => {
+  return async (dispatch) => {
+    const response = await axios.get(`http://localhost:3001/funcion`);
+    if (response?.data) {
+      console.log(response.data)
+      dispatch({
+        type: "GETFUNCTIONS",
+        payload: { funcs: response.data },
+      });
+    }
+  };
+
+};
+
 export const postFunciones = (funciones, peliculaId) => {
  
    if (funciones.length > 1) {
@@ -326,6 +340,24 @@ export const getMovieInfo = (id) => {
    };
 };
 
+export const getFunctionInfo = (id) => {
+   return async (dispatch) => {
+      try {
+         const response = await axios.get(
+            `http://localhost:3001/funcion/${id}`
+         );
+         if (response?.data) {
+            dispatch({
+               type: "EDITFUNCTIONINFO",
+               payload: { info: response.data },
+            });
+         }
+      } catch (error) {
+         console.log(error);
+      }
+   };
+};
+
 export const editMovie = (id, data) => {
    return async () => {
       try {
@@ -337,6 +369,26 @@ export const editMovie = (id, data) => {
             title: "Oops...",
             text: `${error}`,
          });
+      }
+   };
+
+};
+
+
+export const editFunction = (id, data) => {
+
+   console.log("actiondata: " + JSON.stringify(data));
+   return async () => {
+      try {
+         axios.put(`http://localhost:3001/funcion/${id}`, data);
+         Swal.fire("La función ha sido editada!", "", "success");
+      } catch (error) {
+         Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `${error}`,
+         });
+         //alert(error);
       }
    };
 

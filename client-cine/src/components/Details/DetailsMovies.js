@@ -14,6 +14,7 @@ import ReactPlayer from "react-player";
 import { Form, Button } from "react-bootstrap";
 import { DisplayFuntions } from "./DisplayFuntions";
 
+
 const DetailsMovies = (props) => {
    let { id: code } = useParams();
    let [id] = useState(code);

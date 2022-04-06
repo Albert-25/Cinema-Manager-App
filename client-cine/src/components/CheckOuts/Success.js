@@ -42,7 +42,7 @@ export const Success = () => {
         name: RetriveItems.customer_details.name,
         price: RetriveItems.amount_total,
         products: storedNames,
-        QR: codigoUID,
+        QR: `http://localhost:3000/admin/checksale/${codigoUID}`,
       };
       axios.post("http://localhost:3001/nodeMailer/send-email", macaco).then(
         (res) => {
@@ -67,8 +67,8 @@ export const Success = () => {
                 Peliculitas.push(macaco.products[i])
               }
             }
-            console.log("Productitos:", Productitos)
-            console.log("Peliculitas:", Peliculitas)
+            // console.log("Productitos:", Productitos)
+            // console.log("Peliculitas:", Peliculitas)
             if (Productitos.length > 0) {
               for (let y = 0; y < Productitos.length; y++) {
                 console.log("for", Productitos[y])

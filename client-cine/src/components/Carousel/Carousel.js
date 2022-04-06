@@ -36,7 +36,6 @@ const Carousel = () => {
     let AllPelis = useSelector((state) => state.PelisAll)
     let arregloFinal = AllPelis.sort((a, b) => a.puntuación < b.puntuación ? 1 : b.puntuación < a.puntuación ? -1 : 0)
     let BestTres = arregloFinal.slice(0,3)
-    console.log(BestTres)
 
 
 

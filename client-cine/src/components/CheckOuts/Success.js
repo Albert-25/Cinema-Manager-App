@@ -1,90 +1,93 @@
 import React, { useEffect, useState } from "react";
 import { getRetrive, postBuy, AllProducts } from "../../store/actions";
 import { useSelector, useDispatch } from "react-redux";
-import { useAuth } from "../../contexts/AuthContext";
-import axios from "axios"
-// import QRCode from "qrcode"
-
+// import { useAuth } from "../../contexts/AuthContext";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export const Success = () => {
   const dispatch = useDispatch();
-  const UrlBuy = useSelector((state) => state.cartUrl);
-  const RetriveItems = useSelector((state) => state.Retrive)
-  const { itemsCarrito } = useAuth();
-  var informacion = localStorage.getItem('compra')
+  // const UrlBuy = useSelector((state) => state.cartUrl);
+  const RetriveItems = useSelector((state) => state.Retrive);
+  // const { itemsCarrito } = useAuth();
+  var informacion = localStorage.getItem("compra");
 
-  // const ProductosTotales = useSelector((state) => state.ProductAll);
-  // console.log("prodctos comprados:", itemsCarrito)
-
-  var contador = 1
+  var contador = 1;
   if (informacion && informacion !== undefined && contador === 1) {
-    // console.log("info", informacion)
-    dispatch(getRetrive(informacion))
-    contador = contador - 1
-    // console.log(contador)
-    informacion = localStorage.removeItem('compra')
-
+    dispatch(getRetrive(informacion));
+    contador = contador - 1;
+    informacion = localStorage.removeItem("compra");
   }
   var storedNames = JSON.parse(localStorage.getItem("items"));
-  // console.log("hello cosa extraña", RetriveItems)
-  // console.log("Hola cosas compradas:", storedNames)
 
-
-  if (RetriveItems && RetriveItems.customer_details && RetriveItems.payment_status === "paid") {
+  if (
+    RetriveItems &&
+    RetriveItems.customer_details &&
+    RetriveItems.payment_status === "paid"
+  ) {
     let macaquito = {
       compra: {
         correo: RetriveItems.customer_details.email,
         Nombre: RetriveItems.customer_details.name,
         total: RetriveItems.amount_total,
-        products: storedNames
+        products: storedNames,
       },
-    }
-    let codigoUID = "equisde"
+    };
+    let codigoUID = "equisde";
     // -------------------------------------------------
-    axios.post("http://localhost:3001/compras", macaquito).then(
-      (response) => {
-        codigoUID = response.data
-        let macaco = {
-          email: RetriveItems.customer_details.email,
-          name: RetriveItems.customer_details.name,
-          price: RetriveItems.amount_total,
-          products: storedNames,
-          QR: codigoUID
+    axios.post("http://localhost:3001/compras", macaquito).then((response) => {
+      codigoUID = response.data;
+      let macaco = {
+        email: RetriveItems.customer_details.email,
+        name: RetriveItems.customer_details.name,
+        price: RetriveItems.amount_total,
+        products: storedNames,
+        QR: codigoUID,
+      };
+      axios.post("http://localhost:3001/nodeMailer/send-email", macaco).then(
+        (res) => {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title:
+              "Correo enviado al e-mail del comprador \n ¡gracias por su compra! \n Será redirigido a la pagina de Inicio \n\n no te olvides de revisar la carpeta de spam si no ves el correo",
+            showConfirmButton: false,
+            timer: 2500,
+          });
+          setTimeout(function () {
+            window.location.href = "http://localhost:3000/";
+            localStorage.removeItem("items");
+          }, 5000);
+        },
+        (err) => {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: err,
+            showConfirmButton: false,
+            timer: 1000
+          })
         }
-        axios.post("http://localhost:3001/nodeMailer/send-email", macaco).then(
-          (res) => {
-            // console.log("send-email post")
-            window.location.href = "http://localhost:3000/"
-            // Aca lo de quitar stock al comprar
 
+      );
+    });
 
-
-
-
-            localStorage.removeItem("items")
-          },
-          (err) => {
-            alert(err);
-          }
-        );
-        console.log("FINALMENTE, UN MACCACO", macaco)
-      }
-    )
     // -------------------------------------------------
-
-
   }
-
-
 
   const GettingRetrive = useSelector((state) => state.Retrive);
 
-
-  // console.log("GettingUrl", UrlBuy)
-
   return (
     <div>
-      <h1>Todo nice, viva amlo</h1>
+      <img
+        src={"https://acegif.com/wp-content/uploads/loading-23.gif"}
+        style={{
+          width: "50%",
+          marginLeft: "auto",
+          marginRight: "auto",
+          display: "block",
+        }}
+      />
     </div>
   );
 };

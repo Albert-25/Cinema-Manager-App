@@ -32,7 +32,6 @@ export default function UpdateProfile() {
 
   function handleSubmit(e) {
 
-    console.log(pass);
     e.preventDefault();
     if (pass !== passConfirm) {
       return setError("Passwords dont match");
@@ -47,7 +46,6 @@ export default function UpdateProfile() {
 
     }
     if (user && nameRef && nameRef.current && nameRef.current.value !== user.nombre || user && picProfile !== user.imagen) {
-      console.log(name, picProfile, user)
       promises.push(updateName(name, picProfile, user));
     }
     Promise.all(promises)
@@ -55,7 +53,6 @@ export default function UpdateProfile() {
         console.log('done');
       })
       .catch((e) => {
-        console.log("error", e);
         setError("Failed to update account");
       })
       .finally(() => {

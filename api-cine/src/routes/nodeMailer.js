@@ -31,24 +31,24 @@ const sendEmail = async (req, res) => {
         to: req.body.email,
         attachDataUrls: true,
         form: "Thanks~.",
-        html: `<p><b>Saludos</b> Querid@ ${req.body.name} <img src="https://c.tenor.com/jBUbiy6D_ssAAAAC/draw-spinner.gif"/></p>
-        <p>su compra en nuestro sitio se ha completado recientemente, aqui le enviaremos<br/>
-        la informacion de lo que compro y un codigo QR para llevarlo y mostrarlo en el cine~<br/>
-        Usted compro:<br/></p>
-        Productos: <br/>
+        html: `<p><b>Saludos</b> Querid@ ${req.body.name}</p>
+        <p>su compra en nuestro sitio se ha efectuado satisfactoriamente, abajo le mostraremos<br/>
+        la informacion de su compra y un codigo QR para llevarlo y mostrarlo a nuestro empleado en Caja<br/>
+        <br/>
+        Usted compró:<br/></p>
 
         ${productsString}
-        Precio total:${req.body.price} millones de pesos brasileños <br/>
-        <p>Aqui tienes un codigo QR, muestralo en boleteria para recibir tu compra~</p><br/>
+        <br/>
+        <br/>
+        Precio total: $ ${req.body.price} USD <br/>
+        <p>Aqui tiene el codigo QR, muestrelo en boleteria para recibir su compra</p><br/>
         <img src=${imagen} alt="qr"/>`,
     }
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.log("No email send unu");
             res.status(500).send(error.message);
         } else {
-            console.log("email enviado uwu, nyaa", mailOptions);
             res.status(200).json(req.body)
         }
     })

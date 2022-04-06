@@ -5,6 +5,7 @@ import { BsTrash } from "react-icons/bs";
 import { updateCart, postBuy } from "../../store/actions";
 import s from "./cart.module.css";
 import logo from "../../assets/cart.png";
+import ticket from "../../assets/ticket.png"
 
 export const Cart = () => {
   const dispatch = useDispatch();
@@ -20,8 +21,6 @@ export const Cart = () => {
   const handleShow = () => setShow(true);
 
   const handleClick = () => {
-    alert("done");
-    console.log("items card:", itemsCart);
     dispatch(postBuy(itemsCart));
     localStorage.setItem("compra", JSON.stringify(UrlBuy[0]));
   };
@@ -34,7 +33,6 @@ export const Cart = () => {
     variable === 1
   ) {
     window.location.href = UrlBuy[0];
-    console.log("Datos de entrada:", UrlBuy);
     localStorage.setItem("compra", UrlBuy[1]);
     variable = variable - 1;
   }
@@ -61,12 +59,17 @@ export const Cart = () => {
             {itemsCart.map((item) => {
               return (
                 <div className={s.itemlist} key={item.id}>
-                  <span>
-                    {item.quantity} - {item.name} $ {item.quantity * item.price}
+                  <span className={s.imgticket}>
+                    <img src={item.imagenProducto ? item.imagenProducto : ticket} width="75px" height="50px" />
                   </span>
-                  <Button variant="outline-danger" size="sm">
-                    <BsTrash onClick={() => handleDelete(item.id, item.name)} />
-                  </Button>
+                  <span className={s.texto}>
+                    {item.quantity}{" und."} - {item.name} $ {item.quantity * item.price}
+                  </span>
+                  <span className={s.buttonTrash}>
+                    <Button onClick={() => handleDelete(item.id, item.name)} variant="outline-danger" size="sm">
+                      <BsTrash />
+                    </Button>
+                  </span>
                 </div>
               );
             })}

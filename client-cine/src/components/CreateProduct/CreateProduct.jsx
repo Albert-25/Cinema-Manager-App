@@ -78,7 +78,6 @@ function CreateProduct() {
 
    function handleSubmit(e) {
       e.preventDefault();
-      console.log(info);
       if (errors.error === false) {
          Swal.fire({
             title: "¿Quieres guardar el producto?",

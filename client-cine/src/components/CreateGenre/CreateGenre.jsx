@@ -32,7 +32,6 @@ function CreateGenre() {
       document.getElementById("1").value = "";
       dispatch(uploadGenre(info));
       document.getElementById("HUHU").reset();
-      Swal.fire("El genero fue agregado!", "", "success");
    }
 
    return (

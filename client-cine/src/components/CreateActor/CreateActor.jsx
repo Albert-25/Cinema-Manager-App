@@ -32,7 +32,6 @@ function CreateActor() {
       document.getElementById("1").value = "";
       dispatch(uploadActor(actor));
       document.getElementById("HAHA").reset();
-      Swal.fire("El actor fue agregado!", "", "success");
    }
 
    return (

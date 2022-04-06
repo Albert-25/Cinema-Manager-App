@@ -33,7 +33,7 @@ export const GenderFilter = ({ genders, setGenders, setPageSelected }) => {
             onChange={handleChange}
             value="default"
          >
-            <option>Filter by gender</option>
+            <option>Filtrar por género</option>
             {gendersOptions.map((item) => {
                return <option key={item.id}>{item.genero}</option>;
             })}
@@ -66,7 +66,7 @@ export const GenderFilter = ({ genders, setGenders, setPageSelected }) => {
                })
             ) : (
                <Dropdown.Item className="d-flex justify-content-between">
-                  {"Sin filtros por generos"}
+                  {"Sin filtros por géneros"}
                </Dropdown.Item>
             )}
          </DropdownButton>
@@ -103,7 +103,7 @@ export const Actorsfilter = ({ actors, setActors, setPageSelected }) => {
             onChange={handleChange}
             value="default"
          >
-            <option>Filter by actors</option>
+            <option>Filtrar por actores</option>
             {actorsOptions.map((item) => {
                return (
                   <option key={item.id} value={item.nombre}>

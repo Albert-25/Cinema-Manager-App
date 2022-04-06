@@ -11,7 +11,7 @@ const SobreNosotros = () => {
             <NavBar></NavBar>
             <h1>-</h1>
             <div className="SobreNosotros__title">
-                <h1>Hello! welcome to Cinene</h1>
+                <h1>Bienvenidos al cine!</h1>
             </div>
             <div className="SobreNosotros__info">
                 <p>
@@ -43,7 +43,7 @@ const SobreNosotros = () => {
                 </div>
             </div>
             <div>
-                <Link to="/" className="SobreNosotros__back">❌Go Back❌</Link>
+                <Link to="/" className="SobreNosotros__back">❌Volver❌</Link>
             </div>
         </div>
     )

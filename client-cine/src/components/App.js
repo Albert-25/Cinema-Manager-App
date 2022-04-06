@@ -17,6 +17,8 @@ import ShoppingCart from "./ShoppingCart/ShoppingCart.jsx";
 //Changes
 import EditMovies from './EditMovies/EditMovies.jsx'
 import EditUsers from "./EditUsers/EditUsers.js";
+import EditFunctions from "./EditFunctions/EditFunctions.js";
+
 import CreateFunciones from "./CreateFuncion/CreateFuncion.jsx";
 
 import PrivateComment from "./PrivateComment.js";
@@ -39,6 +41,7 @@ import {
   GetAllCast,
   AllProducts,
   FutureReleases,
+  GetAllFunctions,
   allUsers,
 } from "./../store/actions";
 import { EditItem } from "./editItem/EditItem.jsx";
@@ -59,6 +62,8 @@ export const App = () => {
     dispatch(AllProducts());
     dispatch(FutureReleases());
     dispatch(allUsers());
+    dispatch(GetAllFunctions());
+
   }, [dispatch]);
 
   return (
@@ -126,7 +131,7 @@ export const App = () => {
               }
             />
             <Route
-              path="/admin/createfunciones"
+              path="/admin/createfunction"
               element={
                 <PrivateRoute component={CreateFunciones} rol={"admin"}>
                   <CreateFunciones />
@@ -134,6 +139,15 @@ export const App = () => {
               }
             />
             
+
+            <Route
+              path="/admin/editfunction/:id"
+              element={
+                <PrivateRoute component={EditFunctions} rol={"admin"}>
+                  <EditFunctions />
+                </PrivateRoute>
+              }
+            />
             <Route
               path="/admin/editpelicula/:id"
               element={

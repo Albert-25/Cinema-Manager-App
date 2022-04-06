@@ -12,7 +12,6 @@ const getAll = async (req, res, next) => {
 const createActor = async (req, res, next) => {
   const { Actor } = req.body;
   try {
-    console.log(Actor.nombre);
     if (Actor.nombre === "") {
       return res.status(406).json({ message: "El nombre no puede ser vacío" });
     }

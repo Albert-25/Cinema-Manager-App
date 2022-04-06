@@ -26,8 +26,6 @@ const crearCompra = async (req, res, next) => {
   const { compra } = req.body;
   try {
     let comp = await Compra.create(compra);
-
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", comp.id)
     return res.send(comp.id);
   } catch (error) {
     next(error);

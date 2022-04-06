@@ -25,7 +25,7 @@ export default function NavBar() {
                   >
                      {currentUser && user?.rol === "admin"
                         ? `Admin: @${user.nombre}`
-                        : "Y el logo?"}
+                        : <img src='https://cdn-icons-png.flaticon.com/512/2809/2809590.png' alt='' style={{width: '2vw'}} /> }
                   </Link>
                </Navbar.Brand>
                <Nav className="me-end btn_menu_nav">
@@ -55,35 +55,29 @@ export default function NavBar() {
                >
                   <Nav.Item as="li">
                      <Link className="link_nav_items" to="/">
-                        Home
+                        Inicio
                      </Link>
                   </Nav.Item>
                   /
                   <Nav.Item as="li">
                      <Link className="link_nav_items" to="/productpage">
-                        Products
+                        Productos
                      </Link>
                   </Nav.Item>
                   /
                   {user?.rol === "admin" && (
                      <Nav.Item as="li">
                         <Link className="link_nav_items" to="/admin">
-                           Admin
+                           Administrar
                         </Link>
                      </Nav.Item>
                   )}
                   {user?.rol === "admin" && "/"}
                   <Nav.Item as="li">
                      <Link className="link_nav_items" to="/about">
-                        About
+                        Sobre nosotros
                      </Link>
                   </Nav.Item>
-                  {/* /
-                  <Nav.Item as="li">
-                     <Link className="link_nav_items" to="/cart">
-                        Cart
-                     </Link>
-                  </Nav.Item> */}
                </Nav>
             ) : null}
          </Navbar>

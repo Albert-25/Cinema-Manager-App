@@ -25,6 +25,23 @@
   transform: translate(3px,-4px);
   font-weight: bolder;
   color: var(--white-color)
+}
+
+.texto{
+  text-align: justify;
+}
+.itemlist{
+  display: grid;
+  grid-template-columns: 75px 230px 30px;
+  column-gap: 10px;
+  border: #CCD1D1  solid 1px;
+  border-radius: 5px;
+  padding: 5px;
+}
+.buttonTrash, .imgticket, .texto{
+  display: flex;
+  align-self: center;
+}
 
 /* .itemlist {
   display: flex;
@@ -41,4 +58,3 @@
   font-weight: bolder;
   font-size: larger; */
 
-}

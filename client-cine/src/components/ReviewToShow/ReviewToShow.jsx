@@ -27,8 +27,8 @@ const ReviewToShow = ({ id }) => {
     const Botones = ({ id }) => {
         return (
             <div>
-                <button onClick={() => handleDelete(id)}>delete</button>
-                <Link to={`/reviewtoupdate/${id}`}><button>edit</button></Link>
+                <button onClick={() => handleDelete(id)}>Borrar</button>
+                <Link to={`/reviewtoupdate/${id}`}><button>Editar</button></Link>
             </div>
         )
     }

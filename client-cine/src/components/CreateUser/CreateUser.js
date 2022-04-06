@@ -67,27 +67,27 @@ export default function CreateUser() {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Create user</h2>
+          <h2 className="text-center mb-4">Crear Usuario</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Dirección de e-mail:</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
             <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Contraseña:</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
             <Form.Group id="password-confirm">
-              <Form.Label>Confirm Password</Form.Label>
+              <Form.Label>Confirmar contraseña:</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
             <Form.Group id="text">
-              <Form.Label>Nombre</Form.Label>
+              <Form.Label>Nombre:</Form.Label>
               <Form.Control type="text" ref={nombreRef} required />
             </Form.Group>
           <Form.Group id="picture">
-              <Form.Label>Cambiar foto de perfil</Form.Label>
+              <Form.Label>Cambiar foto de perfil:</Form.Label>
               <Form.Control
                 type="file"
                 name='profilePic'
@@ -120,18 +120,18 @@ export default function CreateUser() {
                 required
               >
                 <option className="elemSelect" value="DEFAULT" disabled>
-                  Seleccionar roles
+                  Seleccionar rol:
                 </option>
                 <option className="elemSelect" value="admin" type="text">
-                  Admin
+                  Administrador
                 </option>
                 <option className="elemSelect" value="user">
-                  User
+                  Usuario
                 </option>
               </select>
             </div>
             <Button className="w-100" disabled={loading} type="submit">
-              Create User
+              Crear Usuario
             </Button>
           </Form>
         </Card.Body>

@@ -8,6 +8,7 @@ const {
   createProduct,
   editProduct,
   deleteProduct,
+  stockController,
 } = require("../controller/productos.controller");
 
 router.get("/", getAll);
@@ -15,5 +16,6 @@ router.post("/", createProduct);
 router.put("/:id", editProduct);
 router.delete("/:id", deleteProduct);
 router.get("/:id", getOne);
+router.get("/stock", stockController)
 
 module.exports = router;

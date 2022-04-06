@@ -14,11 +14,11 @@ export const Success = () => {
   var informacion = localStorage.getItem('compra')
 
   // const ProductosTotales = useSelector((state) => state.ProductAll);
-  console.log("prodctos comprados:", itemsCarrito)
+  // console.log("prodctos comprados:", itemsCarrito)
 
   var contador = 1
   if (informacion && informacion !== undefined && contador === 1) {
-    console.log("info", informacion)
+    // console.log("info", informacion)
     dispatch(getRetrive(informacion))
     contador = contador - 1
     // console.log(contador)
@@ -26,8 +26,8 @@ export const Success = () => {
 
   }
   var storedNames = JSON.parse(localStorage.getItem("items"));
-  console.log("hello cosa extraña", RetriveItems)
-  console.log("Hola cosas compradas:", storedNames)
+  // console.log("hello cosa extraña", RetriveItems)
+  // console.log("Hola cosas compradas:", storedNames)
 
 
   if (RetriveItems && RetriveItems.customer_details && RetriveItems.payment_status === "paid") {
@@ -53,8 +53,14 @@ export const Success = () => {
         }
         axios.post("http://localhost:3001/nodeMailer/send-email", macaco).then(
           (res) => {
-            console.log("send-email post")
+            // console.log("send-email post")
             window.location.href = "http://localhost:3000/"
+            // Aca lo de quitar stock al comprar
+
+
+
+
+
             localStorage.removeItem("items")
           },
           (err) => {

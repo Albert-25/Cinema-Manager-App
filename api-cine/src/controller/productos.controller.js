@@ -107,6 +107,25 @@ const editProduct = async (req, res, next) => {
   }
 };
 
+const stockController = async (req, res, next) => {
+  // const id = req.params.id;
+  const { Product } = req.body;
+  try {
+
+    const [producto] = await Productos.update(Product, { where: { name: Product.name } });
+    if (producto) {
+      return res.json({
+        message: "producto editado correctamente",
+        data: await Productos.findByPk(id),
+      });
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 const deleteProduct = async (req, res, next) => {
   const id = req.params.id;
   try {
@@ -128,4 +147,5 @@ module.exports = {
   createProduct,
   editProduct,
   deleteProduct,
+  stockController,
 };

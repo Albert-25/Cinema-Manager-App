@@ -42,7 +42,7 @@ export const Success = () => {
         name: RetriveItems.customer_details.name,
         price: RetriveItems.amount_total,
         products: storedNames,
-        QR: codigoUID,
+        QR: `http://localhost:3000/admin/checksale/${codigoUID}`,
       };
       axios.post("http://localhost:3001/nodeMailer/send-email", macaco).then(
         (res) => {

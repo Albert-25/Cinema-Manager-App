@@ -8,7 +8,7 @@ import './sectionSelectBar.css'
 
 
 
-let status = ['peliculas', 'actores', 'generos','productos',"comments", 'usuarios', 'funciones']
+let status = ['peliculas', 'actores', 'generos','productos',"comments", 'usuarios', 'funciones', 'historial']
 
 
 export default function SelectSectionBar() {

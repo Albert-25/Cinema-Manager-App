@@ -12,7 +12,7 @@ const getAll = async (req, res, next) => {
       req.json({ message: "no se encontró ninguna funcion en la base de datos" })
     }
   } catch (error) {
-    next(error);
+    console.log('error', error);
   }
 };
 
@@ -20,7 +20,6 @@ const getFuncion = async (req, res, next) => {
   let id = req.params.id;
   try {
     const func = await Funciones.findByPk(id, { include: [Pelicula] });
-    console.log("funcion totalera",func)
     if (func) return res.json(func);
     next();
   } catch (error) {
@@ -31,7 +30,6 @@ const getFuncion = async (req, res, next) => {
 const crearFuncion = async (req, res, next) => {
   const { funcion, peliculaId } = req.body;
   let peli = await Pelicula.findByPk(peliculaId)
-  console.log("pelii", peli.titulo)
 
   try {
     const stripeProduct = await stripe.products.create({
@@ -46,11 +44,10 @@ const crearFuncion = async (req, res, next) => {
       currency: 'usd',
       // recurring: {interval: 'month'},
     });
-    console.log("OLA soy stripePrice", stripePrice.id)
+
 
     funcion.id = stripeProduct.id
     funcion.priceID = stripePrice.id
-    // console.log(funcion)
 
 
     let func = await Funciones.create(funcion);
@@ -82,7 +79,6 @@ const crearFunciones = async (req, res, next) => {
         currency: 'usd',
         // recurring: {interval: 'month'},
       });
-      console.log("HOLA soy stripePrice", stripePrice.id)
 
       funciones[i].id = stripeProduct.id
       funciones[i].priceID = stripePrice.id
@@ -91,7 +87,6 @@ const crearFunciones = async (req, res, next) => {
     let funcs = await Funciones.bulkCreate(funciones, {
       ignoreDuplicates: true,
     });
-    console.log(funcs)
 
     funcs.map((element) => {
       element.addPelicula(peliculaId);
@@ -103,10 +98,31 @@ const crearFunciones = async (req, res, next) => {
   }
 };
 
+const stockController = async (req, res, next) => {
+  console.log("NECESITAMOS entrar aca, flaco")
+  console.log("Funciones: ", req.body)
+  try {
+    const salaInfo = await Funciones.findOne({
+      where: { priceID: req.body.priceID }
+    })
+    const [sala] = await Funciones.update({
+      asientos: salaInfo.asientos - req.body.quantity,
+    },
+      {where: { priceID: req.body.priceID } });
+    if (sala) {
+      console.log("Stock editado")
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
 const editarFuncion = async (req, res, next) => {
+  console.log('buenas', req.body)
   const id = req.params.id;
   try {
-    const [func] = await Funciones.update(req.body.funcion, {
+    const [func] = await Funciones.update(req.body, {
       where: { id: id },
     });
     if (func) {
@@ -116,7 +132,7 @@ const editarFuncion = async (req, res, next) => {
       });
     }
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 };
 
@@ -140,4 +156,5 @@ module.exports = {
   crearFunciones,
   editarFuncion,
   eliminarFuncion,
+  stockController
 };

@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import React from "react";
 import Style from "./CarouselSmall.module.css"
 let axiliar = [{
-    id: 1,
+    id: 99998,
     titulo: "Movie Not found",
     sipnosis: "???",
-    poster: "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/4QNRHYDIZFEJTINRQFU5BSVHSA.jpg",
+    poster: "https://i.pinimg.com/originals/e1/fa/f6/e1faf61b8dad48e2f06ae555609bfa9d.jpg",
     duracion: "???",
     pais: "???",
+    background: "https://i.pinimg.com/originals/e1/fa/f6/e1faf61b8dad48e2f06ae555609bfa9d.jpg",
     clasificacion: "???",
     director: "???",
     puntuación: "???",
@@ -17,12 +18,12 @@ let axiliar = [{
     genero: ["???"]
 },
 {
-    id: 2,
+    id: 99999,
     titulo: "Movie Not found2",
     sipnosis: "???",
-    poster: "https://www.cinemascomics.com/wp-content/uploads/2019/02/habra-zootropolis-2-zootopia-2.jpg?mrf-size=m",
+    poster: "https://i.pinimg.com/originals/e1/fa/f6/e1faf61b8dad48e2f06ae555609bfa9d.jpg",
     duracion: "???",
-    background: "https://www.cinemascomics.com/wp-content/uploads/2019/02/habra-zootropolis-2-zootopia-2.jpg?mrf-size=m",
+    background: "https://i.pinimg.com/originals/e1/fa/f6/e1faf61b8dad48e2f06ae555609bfa9d.jpg",
     pais: "???",
     clasificacion: "???",
     director: "???",
@@ -47,7 +48,7 @@ const CarouselSmall = () => {
                         ProxPelis.map(elm => {
                             return (<div className={Style.smallslider__content__item} key={elm.id}>
                                 <Link to={`MovieDetails/${elm.id}`}>
-                                <img src={elm.background} alt={elm.titulo}></img>
+                                    <img src={elm.background} alt={elm.titulo}></img>
                                 </Link>
 
                             </div>)
@@ -56,7 +57,7 @@ const CarouselSmall = () => {
                 </Slider>
             </section> : <section className={Style.smallslider}>
                 <h1 className={Style.smallslider__title}>
-                    Estrenos imperdibles!
+                    Proximos estrenos!
                 </h1>
                 <Slider className={Style.smallslider__content} slidesPerRow={5} wheel={true} adaptiveHeight={true}>
                     {

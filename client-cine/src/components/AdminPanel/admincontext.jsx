@@ -1,7 +1,7 @@
 import React ,{createContext,useReducer}from 'react';
 
 let stateSection={
-	section:'movies'
+	section:'peliculas'
 }
 let root=(state,action)=>{
 	switch(action.type){

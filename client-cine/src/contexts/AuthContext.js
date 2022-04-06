@@ -42,7 +42,6 @@ export function AuthProvider({ children }) {
     ).then((usuarioFirebase) => {
       return usuarioFirebase;
     });
-    console.log(infoUsuario.user.uid);
     const docuRef = doc(firestore, `usuarios/${infoUsuario.user.uid}`);
     setDoc(docuRef, { correo: email, rol: rol, nombre: nombre, imagen: imagen });
   }

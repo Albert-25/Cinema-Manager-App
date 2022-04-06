@@ -22,7 +22,6 @@ res.json(contacts)
 
 const createUsers = async (req, res, next) => {
   const {correo, password, imagen, nombre, rol} = req.body
-  console.log('we are here')
     let data = await admin.auth().createUser({
 email: correo,
 password: password,
@@ -42,7 +41,6 @@ password: password,
 
 const editUsers = async (req, res, next) => {
     const id = req.params.id;
-    console.log(id)
  const doc = await db.collection('usuarios').doc(`${id}`).get()
  res.json({
   id: doc.id,
@@ -52,7 +50,6 @@ const editUsers = async (req, res, next) => {
       rol: doc.data().rol,
 
  })
- console.log('doc', doc)
  res.send(doc)
 }
 

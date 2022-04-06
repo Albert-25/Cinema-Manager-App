@@ -7,6 +7,7 @@ const initialState = {
 
   GenresAll: [],
   CastAll: [],
+  FunctionsAll: [],
 
   PelisFiltred: [],
   ProductFiltred: [],
@@ -31,6 +32,7 @@ const initialState = {
   // numberOfTickets: [],
   // costoTotalTickets: []
   editInfo: "",
+  editFunctionInfo: [], 
 };
 
 /*Película no encontrada*/
@@ -106,25 +108,45 @@ const reducer = (state = initialState, action) => {
       }
     }
     case "EDITMOVIEINFO": {
-      console.log(action.payload.info);
       return {
         ...state,
         editInfo: action.payload.info,
       };
     }
+
+    case "EDITPRODUCTINFO": {
+      return {
+        ...state,
+        editInfo: action.payload.info,
+      };
+    }
+
+
+
+    
+    case "EDITFUNCTIONINFO": {
+      return {
+        ...state,
+        editFunctionInfo: action.payload.info,
+      };
+    }
+
     // ----------------------------------------------------------------------------------------------------
     case "BESTMOVIES": {
-      // console.log("howdy soy reducer")
-      console.log(state.PelisAll);
       let pelis = [...state.PelisAll];
       let arreglar = pelis.sort((a, b) =>
         a.puntuación < b.puntuación ? 1 : b.puntuación < a.puntuación ? -1 : 0
       );
-      // console.log("arreglar",arreglar)
       let arregloFinal = arreglar.slice(0, 3);
       return {
         ...state,
         TopPelis: arregloFinal,
+      };
+    }
+    case "GETFUNCTIONS": {
+      return {
+        ...state,
+        FunctionsAll: action.payload.funcs,
       };
     }
 
@@ -232,7 +254,6 @@ const reducer = (state = initialState, action) => {
       };
     }
     case "POSTBUY": {
-      console.log('Retorno recibido', action.payload)
       return{
         ...state,
         cartUrl: [...action.payload]
@@ -245,6 +266,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         PelisAll: action.payload,
       };
+      
+       case "DELETEFUNCTION":
+      return {
+        ...state,
+        FunctionsAll: state.FunctionsAll.filter(e => e.id !== action.payload)
+      }
     case "DELETEMOVIE":
       return {
         ...state,
@@ -268,7 +295,6 @@ const reducer = (state = initialState, action) => {
     case "FILTER_REVIEWBYRATING":
       let comentariosByRating;
       if (action.payload === "asc") {
-        console.log(action.payload);
         comentariosByRating = state.PelisComments.sort(function (a, b) {
           if (a.puntuación < b.puntuación) {
             return -1;
@@ -280,7 +306,6 @@ const reducer = (state = initialState, action) => {
         });
       }
       if (action.payload === "des") {
-        console.log(action.payload);
         comentariosByRating = state.PelisComments.sort(function (a, b) {
           if (a.puntuación > b.puntuación) {
             return -1;
@@ -333,7 +358,6 @@ const reducer = (state = initialState, action) => {
       }
 
     case "UPDATE_USER": {
-      console.log('holaaa', action.payload)
       return {
         ...state,
         newPic: action.payload

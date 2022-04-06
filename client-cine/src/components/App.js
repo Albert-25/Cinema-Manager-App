@@ -49,8 +49,6 @@ import { Success } from "./CheckOuts/Success.js";
 import { Cancel } from "./CheckOuts/Cancel.js";
 import { Cart } from "./cart/Cart";
 
-const stringItems = localStorage.getItem("items");
-// const stringItems = true
 
 export const App = () => {
 
@@ -207,7 +205,7 @@ export const App = () => {
                 </PrivateComment>
               }
             />
-    
+
             <Route path="/" element={<Home />} />
             <Route path="/cancel" element={<Cancel />} />
             <Route path="/Success" element={<Success />} />

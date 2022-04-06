@@ -161,11 +161,12 @@ export const DetailedProduct = (id) => {
 };
 
 export function getAllReviewByIdOfMovie(id) {
+
    return async function (dispatch) {
       const json = await axios.get(`http://localhost:3001/comentarios/${id}`);
       return dispatch({
          type: "GET_REVIEW_BY_MOVIEID",
-         payload: json.data,
+         payload: json.data.comentarios,
       });
    };
 }

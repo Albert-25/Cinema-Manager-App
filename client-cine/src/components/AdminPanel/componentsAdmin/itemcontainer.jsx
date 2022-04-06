@@ -25,7 +25,7 @@ const items = {
 
 
 export default function ItemsContainer() {
-    const { user, currentUser } = useAuth();
+    const { user} = useAuth();
 
   let { state } = useContext(AdminContext)
   let { PelisAll, GenresAll, CastAll, ProductAll,PelisComments, FirebaseUsers, FunctionsAll } = useSelector(state => state)

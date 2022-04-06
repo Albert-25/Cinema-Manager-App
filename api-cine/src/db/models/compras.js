@@ -27,6 +27,10 @@ const Compra = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    verificado: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    }
   },
   { timestamps: false }
 );

@@ -8,7 +8,7 @@ import './sectionSelectBar.css'
 
 
 
-let status = ['peliculas', 'actores', 'generos','productos',"comments", 'usuarios', 'funciones']
+let status = ['peliculas', 'actores', 'generos','productos',"comentarios", 'usuarios', 'funciones', 'historial']
 
 
 export default function SelectSectionBar() {
@@ -18,7 +18,7 @@ export default function SelectSectionBar() {
   let {section}=state 
 
   const handleChange = (value) => {
-    if(value!=="comments" && PelisComments.length){
+    if(value!=="comentarios" && PelisComments.length){
       dispatchRedux(cleanMovieComments())
     }
     dispatch({ type: 'sectionSelect', payload:value})  
@@ -27,7 +27,7 @@ export default function SelectSectionBar() {
   return (
     <div className="section_admin_select_container">
        <Nav justify variant="tabs" activeKey={`${section}`}  onSelect={handleChange}>
-          {status.map(e=> <Nav.Item key={e+"fv"}>{PelisComments.length<1&& e=== "comments"?<Nav.Link eventKey={e} disabled>{e.toUpperCase()}</Nav.Link>:<Nav.Link eventKey={e}>{e.toUpperCase()}</Nav.Link>}</Nav.Item>)}
+          {status.map(e=> <Nav.Item key={e+"fv"}>{PelisComments.length<1&& e=== "comentarios"?<Nav.Link eventKey={e} disabled>{e.toUpperCase()}</Nav.Link>:<Nav.Link eventKey={e}>{e.toUpperCase()}</Nav.Link>}</Nav.Item>)}
         </Nav>
     </div>
   );

@@ -7,11 +7,8 @@ const getComentariosTotal = async (req, res) => {
 };
 const getComentariosByIdOfMovie = async (req, res) => {
    const { id } = req.params;
-   const comentarios = await Comentarios.findAll({ include: [Pelicula] });
-   const comentariosFiltrados = comentarios.filter(
-      (c) => c.Peliculas[0].id == id
-   );
-   res.send(comentariosFiltrados);
+   const comentarios = await Pelicula.findOne({ where:{id:id},include: [Comentarios] });
+   res.status(200).json({comentarios:comentarios.Comentarios});
 };
 
 const postComentario = async (req, res) => {

@@ -4,10 +4,14 @@ import { createUser } from "../../store/actions";
 
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
+import Swal from "sweetalert2";
+import { MdKeyboardBackspace } from "react-icons/md";
+
 import { Image } from "cloudinary-react";
 import { useDispatch } from "react-redux";
 
 const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
+
 
 export default function CreateUser() {
    const dispatch = useDispatch();
@@ -32,13 +36,24 @@ export default function CreateUser() {
     try {
       setError("");
       setLoading(true);
+      Swal.fire("Espera mientras el usuario es creado", "", "success");
       await dispatch(createUser(
        { correo: emailRef.current.value,
                password: passwordRef.current.value,
                rol: roles,
                nombre: nombreRef.current.value,
                imagen: picProfile}
-      ));
+      )).then((result) => {
+
+
+
+      Swal.fire("Usuario creado correctamente!", "", "success");
+      navigate("/admin");
+              
+            
+         });
+
+        
       navigate("/admin");
     } catch {
       setError("Failed to create an account");
@@ -67,6 +82,12 @@ export default function CreateUser() {
     <>
       <Card>
         <Card.Body>
+        <Link to="/admin" className="position-absolute top-0 start-10">
+            <Button>
+               <MdKeyboardBackspace className="me-3" />
+               <span>Regresar al Admin</span>
+            </Button>
+         </Link>
           <h2 className="text-center mb-4">Crear Usuario</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
@@ -96,15 +117,17 @@ export default function CreateUser() {
             }}
                 placeholder="Leave blank to keep the same"
               />
-              <button
-            type="button"
-            name="profilePic"
-            onClick={(event) => uploadImage(event)}
-          >
-            Subir Imagen
-          </button>
+             <Button
+                className="w-20"
+                name="profilePic"
+                style={{ marginTop: "1rem" }}
+                onClick={(event) => uploadImage(event)}
+                type="button"
+              >
+                Subir imágen
+              </Button>
           <br/>
-          {picProfile && <span>imagen cargada:</span>}
+          {picProfile && <span>Imágen actual::</span>}
           <br/>
           <Image
             style={{ width: 200 }}
@@ -113,8 +136,9 @@ export default function CreateUser() {
           />
             </Form.Group>
             <div className="form-group">
-            <select
+            <Form.Select
                 defaultValue={"DEFAULT"}
+                style={{ marginTop: "1rem" }}
                 name="Rol"
                 onChange={(evt) => setRoles(evt.target.value)}
                 required
@@ -128,9 +152,9 @@ export default function CreateUser() {
                 <option className="elemSelect" value="user">
                   Usuario
                 </option>
-              </select>
+              </Form.Select>
             </div>
-            <Button className="w-100" disabled={loading} type="submit">
+            <Button style={{ marginTop: "1rem" }} className="w-100" disabled={loading} type="submit">
               Crear Usuario
             </Button>
           </Form>

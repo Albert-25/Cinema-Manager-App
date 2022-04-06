@@ -11,13 +11,13 @@ import './itemcontainer.css';
 
 
 
-const Items = ({ nombre, titulo, genero, nombreProducto, id, image, handleDelete, stock, author, score, comment, correo, rol, nombreUsuario, sala, horario, pelicula, asientos, maxAsientos, fecha }) => {
+const Items = ({ nombre, titulo, genero, nombreProducto, id, image, handleDelete, stock, author, score, comment, correo, rol, nombreUsuario, sala, horario, pelicula, asientos, maxAsientos, fecha, ...props }) => {
   let { dispatch } = useContext(AdminContext)
   let dispatchRedux = useDispatch()
   let [opcomment, setOpComment] = useState(false)
   const handleToComments = (e) => {
     dispatchRedux(getAllReviewByIdOfMovie(parseInt(e.currentTarget.className.split(" ")[1])))
-    dispatch({ type: 'sectionSelect', payload: "comments" })
+    dispatch({ type: 'sectionSelect', payload: "comentarios" })
   }
 
   return (
@@ -45,6 +45,12 @@ const Items = ({ nombre, titulo, genero, nombreProducto, id, image, handleDelete
         {fecha && <span className="Item_movie_data_admin"><p><b>Fecha: </b>{fecha}</p></span>}
         {asientos && <span className="Item_movie_data_admin"><p><b>Asientos: </b>{asientos}</p></span>}
         {maxAsientos && <span className="Item_movie_data_admin"><p><b>Máximos asientos: </b>{maxAsientos}</p></span>}
+        
+        {props?.client && <span className="Item_movie_data_admin"><p><b>Cliente: </b>{props.client}</p></span>}
+        {props?.products && <span className="Item_movie_data_admin"><p><b>Productos: </b>{props.products}</p></span>}
+        {props?.total && <span className="Item_movie_data_admin"><p><b>total: </b>{props.total}</p></span>}
+        {props?.email && <span className="Item_movie_data_admin"><p><b>Correo: </b>{props.email}</p></span>}
+        {props?.verificado && <span className="Item_movie_data_admin"><p><b>VERIFICADO</b></p></span>}
 
 
 

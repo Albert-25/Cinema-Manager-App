@@ -7,7 +7,7 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   updatePassword,
-  onAuthStateChanged,
+  onAuthStateChanged
 } from "firebase/auth";
 
 import {
@@ -62,8 +62,18 @@ export function AuthProvider({ children }) {
   }
   function updateName(name, imagen, user) {
     const docuRef = doc(firestore, `usuarios/${user.uid}`);
+    setDoc(docuRef, { nombre: name || user.nombre, imagen: imagen || user.imagen, rol: user.rol, correo: user.email });
+    onAuthStateChanged(auth,(user)=>{
+      if(user){
+        setUserWithFirebaseAndRol(user)
+      }
+      setTimeout(function () {
+        setCurrentUser(user);
+        setLoading(false);
+      }, 1000);
+    })
     
-        setDoc(docuRef, { nombre: name || user.nombre, imagen: imagen || user.imagen, rol: user.rol, correo: user.email });}
+    }
 
   //No hay necesidad de setear al usuario porque Firebase te lo notifica con el siguiente método:
   async function getRol(uid) {
@@ -72,6 +82,15 @@ export function AuthProvider({ children }) {
     if(docuCifrada && docuCifrada.data()){const infoTotal = [docuCifrada.data().rol, docuCifrada.data().nombre, docuCifrada.data().imagen]
         return infoTotal;}
   }
+  // function updateName(name, imagen, user) {
+  //   const docuRef = doc(firestore, `usuarios/${user.uid}`);
+    
+  //       setDoc(docuRef, { nombre: name || user.nombre, imagen: imagen || user.imagen, rol: user.rol, correo: user.email });
+  //       setUserWithFirebaseAndRol(user);
+  //     }
+
+  //No hay necesidad de setear al usuario porque Firebase te lo notifica con el siguiente método:
+  
 
   async function setUserWithFirebaseAndRol(usuarioFirebase) {
     await getRol(usuarioFirebase.uid).then((rol) => {

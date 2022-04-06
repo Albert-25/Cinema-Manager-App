@@ -67,12 +67,12 @@ export default function Product({
    return (
       <>
          <Card
-            style={{ width: "20rem", marginLeft: "auto", marginRight: "auto" }}
+            style={{ maxHeight: "32rem", width: "20rem", marginLeft: "auto", marginRight: "auto" }}
          >
             <Card.Img
                variant="top"
                src={imagenProducto}
-               style={{ maxHeight: "200px", minHeight: "200px" }}
+               style={{ maxHeight: "300px", minHeight: "200px" }}
             />
             <Card.Body>
                <Card.Title>{nombreProducto}</Card.Title>
@@ -98,6 +98,7 @@ export default function Product({
                   disabled={cantidad <= 0 ? true : false}
                   onClick={() => addToCart()}
                   variant="primary"
+                   style={{ marginTop: "0.5rem" }}
                >
                   Añadir al carrito
                </Button>

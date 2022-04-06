@@ -148,6 +148,7 @@ const EditFunctions = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
+      console.log('llegando', inputs)
       console.log("hey", errors);
       if (errors.error === false) {
          console.log('Entramos')

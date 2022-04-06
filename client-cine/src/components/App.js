@@ -131,7 +131,7 @@ export const App = () => {
               }
             />
             <Route
-              path="/admin/createfunciones"
+              path="/admin/createfunction"
               element={
                 <PrivateRoute component={CreateFunciones} rol={"admin"}>
                   <CreateFunciones />

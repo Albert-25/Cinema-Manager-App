@@ -29,7 +29,7 @@ import PrivateUpdate from "./PrivateUpdate";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import ProductsPage from "./Products/ProductsPage.js";
-
+import EditProducts from "./EditProducts/EditProducts.jsx";
 import ReviewToUpdate from "./ReviewToUpdate/ReviewToUpdate.jsx";
 import Admin from "./AdminPanel/Admin.jsx";
 import { useDispatch } from "react-redux";
@@ -174,6 +174,17 @@ export const App = () => {
                 </PrivateRoute>
               }
             />
+
+            <Route
+              path="/admin/editproduct/:id"
+              element={
+                <PrivateRoute component={EditProducts} rol={"admin"}>
+                  <EditProducts />
+                </PrivateRoute>
+              }
+            />
+
+
             <Route
               path="/review/:id"
               element={

@@ -111,6 +111,14 @@ const reducer = (state = initialState, action) => {
         editInfo: action.payload.info,
       };
     }
+    case "EDITPRODUCTINFO": {
+      return {
+        ...state,
+        editInfo: action.payload.info,
+      };
+    }
+
+
     // ----------------------------------------------------------------------------------------------------
     case "BESTMOVIES": {
       let pelis = [...state.PelisAll];

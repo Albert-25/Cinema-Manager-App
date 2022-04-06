@@ -496,5 +496,41 @@ export const updateUser = (id, data) => {
   }
 }
 
+export const getProductInfo = (id) => {
+   return async (dispatch) => {
+      try {
+         const response = await axios.get(
+            `http://localhost:3001/productos/${id}`
+         );
+         if (response?.data) {
+            dispatch({
+               type: "EDITPRODUCTINFO",
+               payload: { info: response.data },
+            });
+         }
+      } catch (error) {
+         console.log(error);
+      }
+   };
+};
+
+export const editProduct = (id, data) => {
+   let body = {
+      Product: data
+   }
+   return async () => {
+      try {
+         axios.put(`http://localhost:3001/productos/${id}`, body);
+         Swal.fire("El producto fue editado!", "", "success");
+      } catch (error) {
+         Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `${error}`,
+         });
+      }
+   };
+
+};
 
 export const updateCart = (payload) => ({ type: "UPDATE_CART", payload });

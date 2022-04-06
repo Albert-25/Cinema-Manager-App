@@ -67,8 +67,8 @@ export const Success = () => {
                 Peliculitas.push(macaco.products[i])
               }
             }
-            console.log("Productitos:", Productitos)
-            console.log("Peliculitas:", Peliculitas)
+            // console.log("Productitos:", Productitos)
+            // console.log("Peliculitas:", Peliculitas)
             if (Productitos.length > 0) {
               for (let y = 0; y < Productitos.length; y++) {
                 console.log("for", Productitos[y])

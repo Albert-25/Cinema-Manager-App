@@ -58,9 +58,28 @@ export const Success = () => {
           setTimeout(function () {
             window.location.href = "http://localhost:3000/";
             // aqui poner lo de restar stock
-            for (let y = 0; y < macaco.products.length; y++) {
-              console.log("for", macaco.products[y])
-              axios.put("http://localhost:3001/productos/stock", macaco.products[y])
+            let Productitos = []
+            let Peliculitas = []
+            for (let i = 0; i < macaco.products.length; i++) {
+              if (macaco.products[i].imagenProducto) {
+                Productitos.push(macaco.products[i])
+              } else {
+                Peliculitas.push(macaco.products[i])
+              }
+            }
+            console.log("Productitos:", Productitos)
+            console.log("Peliculitas:", Peliculitas)
+            if (Productitos.length > 0) {
+              for (let y = 0; y < Productitos.length; y++) {
+                console.log("for", Productitos[y])
+                axios.put("http://localhost:3001/productos/stock", Productitos[y])
+              }
+            }
+            if (Peliculitas.length > 0) {
+              for (let y = 0; y < Peliculitas.length; y++) {
+                console.log("for", Peliculitas[y])
+                axios.put("http://localhost:3001/funcion/stock", Peliculitas[y])
+              }
             }
             // aqui poner lo de restar stock
             localStorage.removeItem("items");

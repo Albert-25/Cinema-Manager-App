@@ -16,14 +16,14 @@ export const Cart = () => {
     (pValue, cValue) => pValue + cValue.quantity * cValue.price,
     0
   );
-
+console.log("ASDHJKASHDKJLASHJDK",itemsCart)
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleClick = () => {
     var flag = true;
     for (let i = 0; i < itemsCart.length; i++) {
-      if (itemsCart[i].quantity < itemsCart[i].stock) {
+      if (itemsCart[i].quantity <= itemsCart[i].stock) {
         flag = true;
       } else {
         console.log("le pongo false unu");

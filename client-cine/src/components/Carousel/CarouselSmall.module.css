@@ -5,6 +5,7 @@
     overflow: hidden;
     position: relative;
     display: block;
+    top: 5vh;
 }
 
 .smallcarousel_track{

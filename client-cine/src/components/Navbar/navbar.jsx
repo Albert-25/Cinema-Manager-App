@@ -78,12 +78,12 @@ export default function NavBar() {
                         About
                      </Link>
                   </Nav.Item>
-                  /
+                  {/* /
                   <Nav.Item as="li">
                      <Link className="link_nav_items" to="/cart">
                         Cart
                      </Link>
-                  </Nav.Item>
+                  </Nav.Item> */}
                </Nav>
             ) : null}
          </Navbar>

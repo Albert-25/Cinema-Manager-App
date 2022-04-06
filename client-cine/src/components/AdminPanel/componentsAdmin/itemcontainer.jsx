@@ -5,7 +5,7 @@ import { useNavigate} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Stack, Spinner} from 'react-bootstrap';
 import { useAuth } from "../../../contexts/AuthContext";
-import { removeActors, removeMovie, removeGenres, removeProduct, deleteUser, deleteReview} from '../../../store/actions'
+import { removeActors, removeMovie, removeGenres, removeProduct, deleteUser, deleteReview, deleteFunction} from '../../../store/actions'
 import Swal from "sweetalert2";
 import Items from './items.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -63,7 +63,7 @@ export default function ItemsContainer() {
           state?.section === "comments" && dispatch(deleteReview(res))
 
 
-          state?.section === "funciones" && dispatch(deleteUser(res))
+          state?.section === "funciones" && dispatch(deleteFunction(res))
 
 
           state?.section === "usuarios" && dispatch(deleteUser(res))
@@ -98,7 +98,7 @@ export default function ItemsContainer() {
         {PelisComments.length<1&& state.section === "comments" && <Spinner animation="border" style={{margin:"0 auto"}} variant="secondary" />}
 
        
-        {FunctionsAll&& state.section ==="funciones"&& FunctionsAll.map(prod=><Items key={prod.id} id={prod.id} sala={prod.sala} horario={prod.horario} pelicula={prod.Peliculas[0].titulo} fecha={prod.fecha} asientos={prod.asientos} maxAsientos={prod.maxAsientos} />)}
+        {FunctionsAll&& state.section ==="funciones"&& FunctionsAll.map(prod=><Items key={prod.id} id={prod.id} sala={prod.sala} horario={prod.horario} pelicula={prod.Peliculas[0].titulo} fecha={prod.fecha} asientos={prod.asientos} maxAsientos={prod.maxAsientos} handleDelete={handleDelete}/>)}
       
 
 

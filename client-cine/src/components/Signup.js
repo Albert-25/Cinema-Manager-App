@@ -77,18 +77,18 @@ export default function Signup() {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Sign Up</h2>
+          <h2 className="text-center mb-4">Registro</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Dirección de e-mail</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
             <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Contraseña</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
             <Form.Group id="password-confirm">
-              <Form.Label>Confirm Password</Form.Label>
+              <Form.Label>Confirmar Contraseña</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
             <Form.Group id="text">
@@ -96,7 +96,7 @@ export default function Signup() {
               <Form.Control type="text" ref={nombreRef} required />
             </Form.Group>
           <Form.Group id="picture">
-              <Form.Label>Cambiar foto de perfil</Form.Label>
+              <Form.Label>Foto de perfil</Form.Label>
               <Form.Control
                 type="file"
                 name='profilePic'
@@ -122,14 +122,14 @@ export default function Signup() {
           />
             </Form.Group>
             <Button className="w-100" disabled={loading} type="submit">
-              Sign up
+              Registrarse
             </Button>
           </Form>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        Already have an account?
-        <Link to="/login">Log in</Link>
+      <div className="w-100 text-center mt-2" style={{color:"whitesmoke"}}>
+        Ya tienes una cuenta?   {"\t"}
+        <Link to="/login">Iniciar Sesión</Link>
       </div>
     </>
   );

@@ -158,7 +158,6 @@ const DetailsMovies = (props) => {
                   </div>
                   <div className="buttons mb-4">
                      <div className="div_lef">
-                        <p>Ordenar por rating:</p>
                         <Form.Select
                            className="filterByRating"
                            onChange={handleFilterRating}

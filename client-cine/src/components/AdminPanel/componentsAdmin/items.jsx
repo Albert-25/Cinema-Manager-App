@@ -50,6 +50,7 @@ const Items = ({ nombre, titulo, genero, nombreProducto, id, image, handleDelete
         {props?.products && <span className="Item_movie_data_admin"><p><b>Productos: </b>{props.products}</p></span>}
         {props?.total && <span className="Item_movie_data_admin"><p><b>total: </b>{props.total}</p></span>}
         {props?.email && <span className="Item_movie_data_admin"><p><b>Correo: </b>{props.email}</p></span>}
+        {props?.verificado && <span className="Item_movie_data_admin"><p><b>VERIFICADO</b></p></span>}
 
 
 

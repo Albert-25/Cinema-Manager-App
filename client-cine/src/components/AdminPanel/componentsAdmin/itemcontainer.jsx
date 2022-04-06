@@ -112,7 +112,7 @@ export default function ItemsContainer() {
         {FunctionsAll&& state.section ==="funciones"&& FunctionsAll.map(prod=><Items key={prod.id} id={prod.id} sala={prod.sala} horario={prod.horario} pelicula={prod.Peliculas[0].titulo} fecha={prod.fecha} asientos={prod.asientos} maxAsientos={prod.maxAsientos} />)}
 
         {FirebaseUsers&& state.section ==="usuarios"&& FirebaseUsers.map(prod=><Items key={prod.id} nombreUsuario={prod.nombre} image={prod.imagen}  id={prod.id} correo={prod.correo} rol={prod.rol} handleDelete={handleDelete}/>)}
-        {state.section ==="historial" && sales.map(sale=><Items key={sale.id} client={sale.Nombre} products={toString(sale.products)} total={sale.total} email={sale.correo}/>)}
+        {state.section ==="historial" && sales.map(sale=><Items key={sale.id} client={sale.Nombre} products={toString(sale.products)} total={sale.total} email={sale.correo} verificado={sale.verificado}/>)}
       </Stack>
     </div>
   );

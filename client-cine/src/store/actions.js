@@ -502,20 +502,6 @@ export const allUsers = (payload) => {
    };
 };
 
-/*export const createUser = (data) => {
-  console.log('executing')
-  return  (dispatch) => {
-  console.log('executing2')
-
-     axios.post(
-      `http://localhost:3001/firebase/create`,
-      data
-    );
-    return dispatch({
-
-    })
-  }
-}*/
 
 export const createUser = (payload) => {
   return async (dispatch) => {

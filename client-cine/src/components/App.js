@@ -48,9 +48,7 @@ import { EditItem } from "./editItem/EditItem.jsx";
 import { Success } from "./CheckOuts/Success.js";
 import { Cancel } from "./CheckOuts/Cancel.js";
 import { Cart } from "./cart/Cart";
-
-const stringItems = localStorage.getItem("items");
-// const stringItems = true
+import { CheckSale } from "./checksale/CheckSale.jsx";
 
 export const App = () => {
 
@@ -197,7 +195,14 @@ export const App = () => {
                 </PrivateRoute>
               }
             />
-
+            <Route
+              path="/admin/checksale/:uuid"
+              element={
+                <PrivateRoute component={CheckSale} rol={"admin"}>
+                  <CheckSale />
+                </PrivateRoute>
+              }
+            />
 
             <Route
               path="/review/:id"
@@ -207,7 +212,7 @@ export const App = () => {
                 </PrivateComment>
               }
             />
-    
+
             <Route path="/" element={<Home />} />
             <Route path="/cancel" element={<Cancel />} />
             <Route path="/Success" element={<Success />} />

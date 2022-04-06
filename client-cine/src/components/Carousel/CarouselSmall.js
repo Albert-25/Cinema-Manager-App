@@ -48,7 +48,7 @@ const CarouselSmall = () => {
                         ProxPelis.map(elm => {
                             return (<div className={Style.smallslider__content__item} key={elm.id}>
                                 <Link to={`MovieDetails/${elm.id}`}>
-                                <img src={elm.background} alt={elm.titulo}></img>
+                                    <img src={elm.background} alt={elm.titulo}></img>
                                 </Link>
 
                             </div>)
@@ -57,7 +57,7 @@ const CarouselSmall = () => {
                 </Slider>
             </section> : <section className={Style.smallslider}>
                 <h1 className={Style.smallslider__title}>
-                    Estrenos imperdibles!
+                    Proximos estrenos!
                 </h1>
                 <Slider className={Style.smallslider__content} slidesPerRow={5} wheel={true} adaptiveHeight={true}>
                     {

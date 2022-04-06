@@ -98,6 +98,26 @@ const crearFunciones = async (req, res, next) => {
   }
 };
 
+const stockController = async (req, res, next) => {
+  console.log("NECESITAMOS entrar aca, flaco")
+  console.log("Funciones: ", req.body)
+  try {
+    const salaInfo = await Funciones.findOne({
+      where: { priceID: req.body.priceID }
+    })
+    const [sala] = await Funciones.update({
+      asientos: salaInfo.asientos - req.body.quantity,
+    },
+      {where: { priceID: req.body.priceID } });
+    if (sala) {
+      console.log("Stock editado")
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
 const editarFuncion = async (req, res, next) => {
   console.log('buenas', req.body)
   const id = req.params.id;
@@ -136,4 +156,5 @@ module.exports = {
   crearFunciones,
   editarFuncion,
   eliminarFuncion,
+  stockController
 };

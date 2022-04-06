@@ -31,10 +31,10 @@ const EditFunctions = () => {
       fecha: "",
       horario: "",
       asientos: "",
-      maxAsientos: {movieData.maxAsientos},
+      maxAsientos: "",
       precio: "",
       detalle: "",
-      pelicula: {movieData.pelicula},
+      pelicula: "",
     },
   ]);
 
@@ -148,6 +148,9 @@ const EditFunctions = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
+      setInputs.pelicula(movieData.pelicula);
+      setInputs.maxAsientos(movieData.maxAsientos);
+
       console.log('llegando', inputs)
       console.log("hey", errors);
       if (errors.error === false) {

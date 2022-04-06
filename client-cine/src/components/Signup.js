@@ -135,12 +135,13 @@ export default function Signup() {
               Registrar cuenta
             </Button>
           </Form>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
+           <div className="w-100 text-center mt-2">
         ¿Ya tienes una cuenta?
         <Link to="/login">Ingresar</Link>
       </div>
+        </Card.Body>
+      </Card>
+     
     </>
   );
 }

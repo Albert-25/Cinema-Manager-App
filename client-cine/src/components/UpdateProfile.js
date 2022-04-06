@@ -161,6 +161,7 @@ export default function UpdateProfile() {
               >
                 Subir Imagen
               </button>
+              
               <br />
               {picProfile && <span>imagen cargada:</span>}
               <br />

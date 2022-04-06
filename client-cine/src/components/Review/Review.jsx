@@ -6,7 +6,6 @@ import { DivStar } from "./styled"
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import Swal from "sweetalert2"
 
 
 const Review = () => {
@@ -62,13 +61,6 @@ const Review = () => {
         if (puntuación == null) setErrorPuntuacion("es necesario calificar esta pelicula")
         if (!comentario.trim()) setError2Comentario("es necesario rellenar este campo")
         dispatch(postReview({ nombre, comentario, puntuación, id }))
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: '¡Comentario publicado!',
-            showConfirmButton: false,
-            timer: 1000
-          })
         dispatch(AllMovies())
         navigate(-1)
     }

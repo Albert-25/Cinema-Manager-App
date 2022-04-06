@@ -188,14 +188,31 @@ export const BestMovies = (arg) => {
 
 export const postReview = (payload) => {
    return async (dispatch) => {
-      const json = await axios.post(
-         "http://localhost:3001/comentarios",
-         payload
-      );
-      return dispatch({
-         type: "POST_REVIEW",
-         payload: json.data,
-      });
+      try {
+         const json = await axios.post(
+            "http://localhost:3001/comentarios",
+            payload
+         );
+         Swal.fire({
+               position: 'center',
+               icon: 'success',
+               title: '¡Comentario publicado!',
+               showConfirmButton: false,
+               timer: 1000
+             })
+         return dispatch({
+            type: "POST_REVIEW",
+            payload: json.data,
+         });
+      } catch (error) {
+         Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'No se pudo crear el comentario...',
+            showConfirmButton: false,
+            timer: 1000
+          })
+      }
    };
 };
 

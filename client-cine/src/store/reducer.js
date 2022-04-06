@@ -113,6 +113,16 @@ const reducer = (state = initialState, action) => {
         editInfo: action.payload.info,
       };
     }
+
+    case "EDITPRODUCTINFO": {
+      return {
+        ...state,
+        editInfo: action.payload.info,
+      };
+    }
+
+
+
     
     case "EDITFUNCTIONINFO": {
       return {
@@ -120,6 +130,7 @@ const reducer = (state = initialState, action) => {
         editFunctionInfo: action.payload.info,
       };
     }
+
     // ----------------------------------------------------------------------------------------------------
     case "BESTMOVIES": {
       let pelis = [...state.PelisAll];

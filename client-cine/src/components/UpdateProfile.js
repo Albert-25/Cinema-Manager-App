@@ -67,7 +67,7 @@ export default function UpdateProfile() {
 
 
                Swal.fire("Cambio guardado correctamente!", "", "success");
-      navigate("/admin");
+      navigate("/");
               
             } else if (result.isDenied) {
                Swal.fire("El cambio no se ha guardado", "", "info");
@@ -78,6 +78,13 @@ export default function UpdateProfile() {
       })
       .catch((e) => {
         setError("Failed to update account");
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Ocurrio un problema al actualizar los datos...',
+          showConfirmButton: false,
+          timer: 1500
+        })
       })
       .finally(() => {
         setLoading(false);
@@ -102,11 +109,11 @@ export default function UpdateProfile() {
     <Example show={show} setShow={setShow} pass={pass} />
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Update profile</h2>
+          <h2 className="text-center mb-4">Actualizar perfil</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Dirección de e-mail</Form.Label>
               <Form.Control
                 type="email"
                  
@@ -115,23 +122,23 @@ export default function UpdateProfile() {
               />
             </Form.Group>
             <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Contraseña</Form.Label>
               <Form.Control
                 type="password"
                 onChange={(e) => {
                   setPass(e.target.value);
                 }}
-                placeholder="Leave blank to keep the same"
+                placeholder="Deja en blanco para mantener sin cambios"
               />
             </Form.Group>
             <Form.Group id="password-confirm">
-              <Form.Label>Confirm Password</Form.Label>
+              <Form.Label>Confirmar Contraseña</Form.Label>
               <Form.Control
                 type="password"
                 onChange={(e) => {
                   setPassConfirm(e.target.value);
                 }}
-                placeholder="Leave blank to keep the same"
+                placeholder="Deja en blanco para mantener sin cambios"
               />
             </Form.Group>
             <Form.Group id="name">
@@ -141,7 +148,7 @@ export default function UpdateProfile() {
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
-                placeholder="Leave blank to keep the same"
+                placeholder="Deja en blanco para mantener sin cambios"
               />
             </Form.Group>
             <Form.Group id="picture">
@@ -152,16 +159,19 @@ export default function UpdateProfile() {
                 onChange={(event) => {
                   setSelectedImage(event.target.files[0]);
                 }}
-                placeholder="Leave blank to keep the same"
+                placeholder="Deja en blanco para mantener sin cambios"
               />
-              <button
-                type="button"
+               <Button
+                className="w-20"
                 name="profilePic"
+                style={{ marginTop: "1rem" }}
                 onClick={(event) => uploadImage(event)}
+                type="button"
               >
-                Subir Imagen
-              </button>
-              
+
+                Subir imágen
+              </Button>
+
               <br />
               {picProfile && <span>imagen cargada:</span>}
               <br />
@@ -172,13 +182,13 @@ export default function UpdateProfile() {
               />
             </Form.Group>
             <Button className="w-100" disabled={loading} type='submit'>
-              Update
+              Actualizar
             </Button>
           </Form>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        <Link to="/">Volver a Home</Link>
+        <Link to="/">Volver a Inicio</Link>
       </div>
     </>
   );

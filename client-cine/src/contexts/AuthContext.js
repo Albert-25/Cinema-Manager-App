@@ -7,7 +7,7 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   updatePassword,
-  onAuthStateChanged,
+  onAuthStateChanged
 } from "firebase/auth";
 
 import {
@@ -60,18 +60,34 @@ export function AuthProvider({ children }) {
   async function upPassword(password) {
     await updatePassword(auth, password)
   }
+  function updateName(name, imagen, user) {
+    const docuRef = doc(firestore, `usuarios/${user.uid}`);
+    setDoc(docuRef, { nombre: name || user.nombre, imagen: imagen || user.imagen, rol: user.rol, correo: user.email });
+    onAuthStateChanged(auth,(user)=>{
+      if(user){
+        setUserWithFirebaseAndRol(user)
+      }
+      setTimeout(function () {
+        setCurrentUser(user);
+        setLoading(false);
+      }, 1000);
+    })
+    
+    }
+
+  //No hay necesidad de setear al usuario porque Firebase te lo notifica con el siguiente método:
   async function getRol(uid) {
     const docuRef = doc(firestore, `usuarios/${uid}`);
     const docuCifrada = await getDoc(docuRef);
     if(docuCifrada && docuCifrada.data()){const infoTotal = [docuCifrada.data().rol, docuCifrada.data().nombre, docuCifrada.data().imagen]
         return infoTotal;}
   }
-  function updateName(name, imagen, user) {
-    const docuRef = doc(firestore, `usuarios/${user.uid}`);
+  // function updateName(name, imagen, user) {
+  //   const docuRef = doc(firestore, `usuarios/${user.uid}`);
     
-        setDoc(docuRef, { nombre: name || user.nombre, imagen: imagen || user.imagen, rol: user.rol, correo: user.email });
-        setUserWithFirebaseAndRol(user);
-      }
+  //       setDoc(docuRef, { nombre: name || user.nombre, imagen: imagen || user.imagen, rol: user.rol, correo: user.email });
+  //       setUserWithFirebaseAndRol(user);
+  //     }
 
   //No hay necesidad de setear al usuario porque Firebase te lo notifica con el siguiente método:
   

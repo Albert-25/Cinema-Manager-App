@@ -66,11 +66,11 @@ export default function Login() {
                <span>Volver a página principal</span>
             </Button>
          </Link>
-          <h2 className="text-center mb-4">Ingresar</h2>
+          <h2 className="text-center mb-4">Iniciar Sesión</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
-              <Form.Label>Correo</Form.Label>
+              <Form.Label>Dirección de e-mail</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
             <Form.Group id="password">
@@ -78,13 +78,8 @@ export default function Login() {
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
 
-            <Button
-              className="w-100"
-              disabled={loading}
-              type="submit"
-              style={{ marginTop: "1rem" }}
-            >
-              Ingresar
+            <Button className="w-100" disabled={loading} type="submit" style={{marginTop:"10px"}}>
+              Iniciar Sesión
             </Button>
           </Form>
           <div className="w-100 text-center mt-3">

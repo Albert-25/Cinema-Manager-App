@@ -79,16 +79,16 @@ export default function Signup() {
     <>
       <Card>
         <Card.Body>
-        <Link to="/" style={{ marginTop: "1rem" }} className="position-absolute top-0 start-10">
+          <Link to="/" style={{ marginTop: "1rem" }} className="position-absolute top-0 start-10">
             <Button>
-               <MdKeyboardBackspace className="me-3" />
-               <span>Volver a página principal</span>
+              <MdKeyboardBackspace className="me-3" />
+              <span>Volver a página principal</span>
             </Button>
-         </Link>
+          </Link>
           <h2 className="text-center mb-4">Registrarse</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
-              <Form.Label>Correo</Form.Label>
+              <Form.Label>Dirección de e-mail</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
             <Form.Group id="password">
@@ -96,7 +96,7 @@ export default function Signup() {
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
             <Form.Group id="password-confirm">
-              <Form.Label>Confirmar contraseña</Form.Label>
+              <Form.Label>Confirmar Contraseña</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
             <Form.Group id="text">
@@ -104,7 +104,7 @@ export default function Signup() {
               <Form.Control type="text" ref={nombreRef} required />
             </Form.Group>
             <Form.Group id="picture">
-              <Form.Label>Cambiar foto de perfil</Form.Label>
+              <Form.Label>Foto de perfil</Form.Label>
               <Form.Control
                 type="file"
                 name="profilePic"
@@ -132,16 +132,17 @@ export default function Signup() {
               />
             </Form.Group>
             <Button className="w-100" disabled={loading} type="submit">
-              Registrar cuenta
+              Registrarse
             </Button>
           </Form>
-           <div className="w-100 text-center mt-2">
-        ¿Ya tienes una cuenta?
-        <Link to="/login">Ingresar</Link>
-      </div>
+
+          <div className="w-100 text-center mt-2" style={{ color: "whitesmoke" }}>
+            ¿Ya tienes una cuenta?
+            <Link to="/login">Ingresar</Link>
+          </div>
         </Card.Body>
       </Card>
-     
+
     </>
   );
 }

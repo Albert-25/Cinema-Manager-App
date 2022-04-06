@@ -14,8 +14,10 @@ export default function AccountView() {
       await logout();
       if (!user?.rol) {
         navigate("/");
+        setTimeout(() => window.location.reload(), 1000)
       } else if (user?.rol) {
         navigate('/')
+        setTimeout(() => window.location.reload(), 1000)
       }
     } catch {
       Swal.fire({

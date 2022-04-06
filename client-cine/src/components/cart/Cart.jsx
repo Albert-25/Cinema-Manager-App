@@ -6,6 +6,7 @@ import { updateCart, postBuy } from "../../store/actions";
 import s from "./cart.module.css";
 import logo from "../../assets/cart.png";
 import ticket from "../../assets/ticket.png";
+import Swal from "sweetalert2";
 
 export const Cart = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,13 @@ export const Cart = () => {
       dispatch(postBuy(itemsCart));
       localStorage.setItem("compra", JSON.stringify(UrlBuy[0]));
     } else {
-      alert("Uno de tus produtos acaba de ponerse fuera de stock");
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'Uno de tus produtos acaba de ponerse fuera de stock',
+        showConfirmButton: false,
+        timer: 2000
+      })
     }
   };
 

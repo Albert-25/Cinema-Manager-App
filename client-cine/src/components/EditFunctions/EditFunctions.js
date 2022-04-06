@@ -21,38 +21,38 @@ const EditFunctions = () => {
    }, [dispatch]);
 
    const movieData = useSelector((state) => state.editFunctionInfo);
-  const Movies = useSelector((state) => state.PelisAll);
+   const Movies = useSelector((state) => state.PelisAll);
 
 
 
-  const [inputs, setInputs] = useState([
-    {
-      sala: "",
-      fecha: "",
-      horario: "",
-      asientos: "",
-      maxAsientos: "",
-      precio: "",
-      detalle: "",
-      pelicula: "",
-    },
-  ]);
+   const [inputs, setInputs] = useState([
+      {
+         sala: "",
+         fecha: "",
+         horario: "",
+         asientos: "",
+         maxAsientos: "",
+         precio: "",
+         detalle: "",
+         pelicula: "",
+      },
+   ]);
 
- const [errors, setErrors] = useState(
-    {
-      sala: "",
-      fecha: "",
-      horario: "",
-      asientos: "",
-      maxAsientos: "",
-      precio: "",
-      detalle: "",
-      pelicula: "",
-      error: false,
-    },
-  );
+   const [errors, setErrors] = useState(
+      {
+         sala: "",
+         fecha: "",
+         horario: "",
+         asientos: "",
+         maxAsientos: "",
+         precio: "",
+         detalle: "",
+         pelicula: "",
+         error: false,
+      },
+   );
 
-  const handleChange = (e) => {
+   const handleChange = (e) => {
       setInputs({
          ...inputs,
          [e.target.name]: e.target.value.trim(),
@@ -94,7 +94,7 @@ const EditFunctions = () => {
             ...inputs,
             asientos: movieData.asientos,
          });
-      }if (inputs.asientos > inputs.maxAsientos) {
+      } if (inputs.asientos > inputs.maxAsientos) {
          setInputs({
             ...inputs,
             asientos: movieData.asientos,
@@ -105,7 +105,7 @@ const EditFunctions = () => {
             ...inputs,
             maxAsientos: movieData.maxAsientos,
          });
-      }if (inputs.precio === "" && movieData.precio !== undefined) {
+      } if (inputs.precio === "" && movieData.precio !== undefined) {
          setInputs({
             ...inputs,
             precio: movieData.precio,
@@ -126,21 +126,12 @@ const EditFunctions = () => {
       console.log(inputs);
    };
 
-    const ChangeArrayMovies = (evt) => {
+   const ChangeArrayMovies = (evt) => {
       console.log(evt.target.value);
       setInputs({
          ...inputs,
          [evt.target.name]: evt.target.value,
       });
-      // setErrors(
-      //   validate(
-      //     {
-      //       ...inputs,
-      //     },
-      //     errors,
-      //     "genders"
-      //   )
-      // );
       document
          .getElementById(evt.target.value)
          .setAttribute("disabled", "disabled");
@@ -148,6 +139,9 @@ const EditFunctions = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
+      setInputs.pelicula(movieData.pelicula);
+      setInputs.maxAsientos(movieData.maxAsientos);
+
       console.log('llegando', inputs)
       console.log("hey", errors);
       if (errors.error === false) {
@@ -247,7 +241,7 @@ const EditFunctions = () => {
                      <Form.Label htmlFor="asientos">asientos:</Form.Label>
                      <Form.Control
                         type="number"
-                          min="0"
+                        min="0"
 
                         name="asientos"
                         id="asientos"
@@ -257,28 +251,14 @@ const EditFunctions = () => {
                      {errors.asientos ? <span>{errors.asientos}</span> : null}
                   </div>
                </Col>
-              <Col lg={5}>
-                  <div className="input__with__error">
-                     <Form.Label htmlFor="maxAsientos">maxAsientos:</Form.Label>
-                     <Form.Control
-                        type="number"
-                          min="0"
 
-                        name="maxAsientos"
-                        id="maxAsientos"
-                        onChange={(evt) => handleChange(evt)}
-                        placeholder={movieData.maxAsientos}
-                     />
-                     {errors.maxAsientos ? <span>{errors.maxAsientos}</span> : null}
-                  </div>
-               </Col>
                <Col lg={5}>
                   <div className="input__with__error">
                      <Form.Label htmlFor="precio">precio:</Form.Label>
                      <Form.Control
                         type="number"
                         min="0.00"
-                      step="any"
+                        step="any"
                         name="precio"
                         id="precio"
                         onChange={(evt) => handleChange(evt)}
@@ -300,51 +280,22 @@ const EditFunctions = () => {
                      {errors.detalle ? <span>{errors.detalle}</span> : null}
                   </div>
                </Col>
-               <Col md="5">
-          
-                   <div className="input__with__error">
-                     <Form.Select
-                        id="defaultGenres"
-                        name="genders"
-                        defaultValue={"DEFAULT"}
-                        onChange={(evt) => ChangeArrayMovies(evt)}
-                     >
-                        <option value="DEFAULT" disabled>
-                           Película
-                        </option>
-                        {Movies &&
-                           Movies.map((item, index) => {
-                              return (
-                                 <option
-                                    id={item.id}
-                                    className="elemSelect"
-                                    key={`${item.titulo}${index}`}
-                                    value={item.id}
-                                 >
-                                    {item.titulo}
-                                 </option>
-                              );
-                           })}
-                     </Form.Select>
-                     {errors.genders ? <span>{errors.genders}</span> : null}
-                  </div>
-                  
-                </Col>
+
             </Row>
             <Row className="justify-content-between mb-4">
-              
-               
+
+
             </Row>
             <Row className="justify-content-between mb-4">
-               
+
             </Row>
             <Row className="justify-content-between mb-4">
-               
+
             </Row>
 
             <Row className="justify-content-between mb-4">
             </Row>
-            
+
             <Form.Control
                type="submit"
                value="Editar pelicula"

@@ -16,6 +16,7 @@ const items = {
   actors: 'createactor',
   products: 'createproducto',
   users: 'createuser',
+  funciones: 'createfunction',
 }
 
 
@@ -23,7 +24,7 @@ export default function ItemsContainer() {
     const { user, currentUser } = useAuth();
 
   let { state } = useContext(AdminContext)
-  let { PelisAll, GenresAll, CastAll, ProductAll,PelisComments, FirebaseUsers } = useSelector(state => state)
+  let { PelisAll, GenresAll, CastAll, ProductAll,PelisComments, FirebaseUsers, FunctionsAll } = useSelector(state => state)
   const navigate = useNavigate()
   let dispatch = useDispatch()
   const handleDelete = (e) => {
@@ -61,6 +62,8 @@ export default function ItemsContainer() {
           state?.section === "products" && dispatch(removeProduct(res))
           state?.section === "comments" && dispatch(deleteReview(res))
           state?.section === "users" && dispatch(deleteUser(res))
+          state?.section === "funciones" && dispatch(deleteUser(res))
+
           Swal.fire(
             'Deleted!',
             'Your file has been deleted.',
@@ -90,6 +93,9 @@ export default function ItemsContainer() {
         {PelisComments.length>0&& state.section === "comments"&&PelisComments.map(e=><Items key={e.nombre+"sdad2"} author={e.nombre} comment={e.comentario} score={e.puntuacion} id={e.id} handleDelete={handleDelete} />)}
         {PelisComments.length<1&& state.section === "comments" && <Spinner animation="border" style={{margin:"0 auto"}} variant="secondary" />}
         {FirebaseUsers&& state.section ==="users"&& FirebaseUsers.map(prod=><Items key={prod.id} nombreUsuario={prod.nombre} image={prod.imagen}  id={prod.id} correo={prod.correo} rol={prod.rol} handleDelete={handleDelete}/>)}
+        {FunctionsAll&& state.section ==="funciones"&& FunctionsAll.map(prod=><Items key={prod.id} id={prod.id} sala={prod.sala} horario={prod.horario} pelicula={prod.Peliculas[0].titulo} fecha={prod.fecha} asientos={prod.asientos} maxAsientos={prod.maxAsientos} />)}
+      
+
       </Stack>
     </div>
   );

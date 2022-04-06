@@ -12,7 +12,7 @@ const getAll = async (req, res, next) => {
       req.json({ message: "no se encontró ninguna funcion en la base de datos" })
     }
   } catch (error) {
-    next(error);
+    console.log('error', error);
   }
 };
 
@@ -20,7 +20,6 @@ const getFuncion = async (req, res, next) => {
   let id = req.params.id;
   try {
     const func = await Funciones.findByPk(id, { include: [Pelicula] });
-    console.log("funcion totalera",func)
     if (func) return res.json(func);
     next();
   } catch (error) {
@@ -104,9 +103,10 @@ const crearFunciones = async (req, res, next) => {
 };
 
 const editarFuncion = async (req, res, next) => {
+  console.log('buenas', req.body)
   const id = req.params.id;
   try {
-    const [func] = await Funciones.update(req.body.funcion, {
+    const [func] = await Funciones.update(req.body, {
       where: { id: id },
     });
     if (func) {
@@ -116,7 +116,7 @@ const editarFuncion = async (req, res, next) => {
       });
     }
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 };
 

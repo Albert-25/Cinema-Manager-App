@@ -25,7 +25,7 @@ export default function NavBar() {
                   >
                      {currentUser && user?.rol === "admin"
                         ? `Admin: @${user.nombre}`
-                        : "Y el logo?"}
+                        : <img src='https://cdn-icons-png.flaticon.com/512/2809/2809590.png' alt='' style={{width: '2vw'}} /> }
                   </Link>
                </Navbar.Brand>
                <Nav className="me-end btn_menu_nav">

@@ -7,6 +7,7 @@ const initialState = {
 
   GenresAll: [],
   CastAll: [],
+  FunctionsAll: [],
 
   PelisFiltred: [],
   ProductFiltred: [],
@@ -31,6 +32,7 @@ const initialState = {
   // numberOfTickets: [],
   // costoTotalTickets: []
   editInfo: "",
+  editFunctionInfo: [], 
 };
 
 /*Película no encontrada*/
@@ -106,10 +108,16 @@ const reducer = (state = initialState, action) => {
       }
     }
     case "EDITMOVIEINFO": {
-      console.log(action.payload.info);
       return {
         ...state,
         editInfo: action.payload.info,
+      };
+    }
+    
+    case "EDITFUNCTIONINFO": {
+      return {
+        ...state,
+        editFunctionInfo: action.payload.info,
       };
     }
     // ----------------------------------------------------------------------------------------------------
@@ -125,6 +133,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         TopPelis: arregloFinal,
+      };
+    }
+    case "GETFUNCTIONS": {
+      return {
+        ...state,
+        FunctionsAll: action.payload.funcs,
       };
     }
 

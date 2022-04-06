@@ -6,7 +6,7 @@ import {cleanMovieComments} from './../../../store/actions.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './sectionSelectBar.css'
 
-let status = ['movies', 'actors', 'genres','products',"comments", 'users']
+let status = ['movies', 'actors', 'genres','products',"comments", 'users', 'funciones']
 
 export default function SelectSectionBar() {
   const {dispatch,state} = useContext(AdminContext)

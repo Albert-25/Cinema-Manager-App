@@ -132,15 +132,6 @@ const EditFunctions = () => {
          ...inputs,
          [evt.target.name]: evt.target.value,
       });
-      // setErrors(
-      //   validate(
-      //     {
-      //       ...inputs,
-      //     },
-      //     errors,
-      //     "genders"
-      //   )
-      // );
       document
          .getElementById(evt.target.value)
          .setAttribute("disabled", "disabled");

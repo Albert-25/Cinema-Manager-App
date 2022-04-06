@@ -11,22 +11,19 @@ const ProductDetail = (props) => {
     const dispatch = useDispatch();
     const detailed = useSelector((state) => state.ProductDetails);
 
-    console.log(detailed)
 
     useEffect(() => {
         dispatch(DetailedProduct(id));
     }, [id, dispatch]);
 
 
-
-    // console.log("la ide detalles : ", id)
     let Produuct = [];
     if (detailed[0]) {
         Produuct = detailed[0];
     }
 
     return (
-        <body className="Background__Product">
+        <div className="Background__Product">
             <div className="Product__titl">
                 {detailed.nombreProducto || Produuct.nombreProducto}
             </div>
@@ -47,23 +44,22 @@ const ProductDetail = (props) => {
                     </div>
                     <div className="Product__duracion">
                         <h5>Precio: </h5>
-                        {detailed.precio || Produuct.precio}
-                        {" "}dolares
+                        {detailed.precio || Produuct.precio} dolares
                     </div>
                     <div className="Product__clasificacion">
                         <h5>Stock: </h5>
-                        {detailed.stock || Produuct.stock}
-                        {" "} unidades
+                        {detailed.stock || Produuct.stock} unidades
                     </div>
-
                 </div>
             </div>
             <div className="container__button">
                 <Link to="/productpage" className="Product__rightdown">
-                    <button className="Product__rightdown__text">👉 Go back 👈</button>
+                    <button className="Product__rightdown__text">
+                        👉 Volver 👈
+                    </button>
                 </Link>
             </div>
-        </body>
+        </div>
     );
 };
 

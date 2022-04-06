@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import React, { useState } from "react";
 import "./Carousel.css"
 let axiliar = [{
-    id: 1,
+    id: 99998,
     titulo: "Movie Not found",
     sipnosis: "???",
-    poster: "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/4QNRHYDIZFEJTINRQFU5BSVHSA.jpg",
+    poster: "https://i.ytimg.com/vi/g13gs5a8HZ4/hqdefault.jpg",
     duracion: "???",
     pais: "???",
+    background: "https://i.ytimg.com/vi/g13gs5a8HZ4/hqdefault.jpg",
     clasificacion: "???",
     director: "???",
     puntuación: "???",
@@ -17,12 +18,12 @@ let axiliar = [{
     genero: ["???"]
 },
 {
-    id: 2,
+    id: 99999,
     titulo: "Movie Not found2",
     sipnosis: "???",
-    poster: "https://www.cinemascomics.com/wp-content/uploads/2019/02/habra-zootropolis-2-zootopia-2.jpg?mrf-size=m",
+    poster: "https://i.ytimg.com/vi/g13gs5a8HZ4/hqdefault.jpg",
     duracion: "???",
-    background: "https://www.cinemascomics.com/wp-content/uploads/2019/02/habra-zootropolis-2-zootopia-2.jpg?mrf-size=m",
+    background: "https://i.ytimg.com/vi/g13gs5a8HZ4/hqdefault.jpg",
     pais: "???",
     clasificacion: "???",
     director: "???",
@@ -30,12 +31,11 @@ let axiliar = [{
     distribuidora: "???",
     genero: ["???"]
 }]
-const Carousel = (AllMovies) => {
+const Carousel = () => {
 
     let AllPelis = useSelector((state) => state.PelisAll)
     let arregloFinal = AllPelis.sort((a, b) => a.puntuación < b.puntuación ? 1 : b.puntuación < a.puntuación ? -1 : 0)
     let BestTres = arregloFinal.slice(0,3)
-    console.log(BestTres)
 
 
 

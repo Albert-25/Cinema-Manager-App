@@ -1,95 +1,112 @@
-import React,{useContext} from 'react';
-import {BsPlusCircle,BsPencilFill,BsTrash} from 'react-icons/bs'
-import {AdminContext} from './../admincontext.jsx'
-
-import { useNavigate,Link } from 'react-router-dom';
-import {useSelector,useDispatch} from 'react-redux';
-import {Button,Stack,Image} from 'react-bootstrap';
-import {removeActors,removeMovie,removeGenres,removeProduct} from '../../../store/actions'
+import React, { useContext, useState, useEffect } from 'react';
+import { BsPlusCircle } from 'react-icons/bs'
+import { AdminContext } from './../admincontext.jsx'
+import { useNavigate} from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Button, Stack, Spinner} from 'react-bootstrap';
+import { useAuth } from "../../../contexts/AuthContext";
+import { removeActors, removeMovie, removeGenres, removeProduct, deleteUser, deleteReview, deleteFunction} from '../../../store/actions'
 import Swal from "sweetalert2";
+import Items from './items.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './itemcontainer.css';
-const items = {
-  movies: 'createmovies',
-  genres: 'creategenero',
-  actors: 'createactor',
-  products: 'createproducto'
-}
+import axios from "axios"
+import { toString } from "../../../utils/toString"
 
-const Items=({nombre,titulo,genero,nombreProducto,id,image,handleDelete,stock})=>{
-  return (
-    <div className="item_admin_stack">
-      <span className="item_admin_data_left">
-        {image&&<Image
-          className="image_item_Adm_movies"
-          src={image}
-          thumbnail
-          alt="Live from space album cover"
-         />}
-         {titulo&&<span className="Item_movie_data_admin"><p><b>Titulo: </b>{titulo}</p></span>}
-         {nombre&&<span className="Item_movie_data_admin"><p><b>Nombre: </b>{nombre}</p></span>}
-         {genero&&<span className="Item_movie_data_admin"><p><b>Genero: </b>{genero}</p></span>}
-        {nombreProducto&&<span className="Item_movie_data_admin"><p><b>Nombre: </b>{nombreProducto}</p></span>}
-        <h4>id: {id}</h4>
-      </span>  
-      <span className="item_admin_data_buttons_options" >
-        <Link to={`/admin/editpelicula/${id}`}><Button bsPrefix  className={`btn_options edit_option ${id}`} ><BsPencilFill style={{color:"blue",fontSize:"1.2em"}} /></Button></Link> <Button bsPrefix className={`btn_options delete_option ${id}`} id={id} onClick={handleDelete}><BsTrash style={{color:"red",fontSize:"1.2em"}} /></Button>
-      </span>
-  </div>)
+const { REACT_APP_BASE_URL } = process.env;
+const items = {
+  peliculas: 'createmovies',
+  generos: 'creategenero',
+  actores: 'createactor',
+  productos: 'createproducto',
+  usuarios: 'createuser',
+  funciones: 'createfunction',
 }
 
 
 export default function ItemsContainer() {
-  let {state}= useContext(AdminContext)
-  let {PelisAll,GenresAll,CastAll,ProductAll}= useSelector(state=>state)
+    const { user} = useAuth();
+
+  let { state } = useContext(AdminContext)
+  let { PelisAll, GenresAll, CastAll, ProductAll,PelisComments, FirebaseUsers, FunctionsAll } = useSelector(state => state)
   const navigate = useNavigate()
-  let dispatch=useDispatch()
+  let dispatch = useDispatch()
+  const [sales, setSales] = useState([])
+  useEffect(() => {
+    axios.get(`${REACT_APP_BASE_URL}/compras`)
+      .then(res => {
+        setSales(res.data)
+      })
+      .catch(err => console.error(err.data))
+  }, [])
   const handleDelete = (e) => {
-    let ev= new Promise((resolve,rejected)=>{
-      if(e.currentTarget.className.split(" ")[2]){
-        resolve(e.currentTarget.className.split(" ")[2])
-      }else{
+
+    let ev = new Promise((resolve, rejected) => {
+      if (e.currentTarget.className.split(" ")[1]) {
+        resolve(e.currentTarget.className.split(" ")[1])
+      } else {
         rejected("error")
       }
     })
-    ev.then(res=>{
-      Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
-       }).then((result) => {
-       if (result.isConfirmed) {
-        console.log(res,state.section)
-        state?.section === "actors" && dispatch(removeActors(res))
-        state?.section === "movies" && dispatch(removeMovie(res))
-        state?.section === "genres" && dispatch(removeGenres(res))
-        state?.section === "products" && dispatch(removeProduct(res))
+    ev.then(res => {
+      if(res === user.uid){
         Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-       )
-     }
-   })
+            'No puedes borrar tu propia cuenta',
+            'Si necesitas borrar esta cuenta, pide ayuda a otro administrador',
+            'error'
+          )
+       return 'Error'
 
-    },error=>console.log(error))
+      }
+      Swal.fire({
+        title: 'Estas seguro?',
+        text: "¡Este cambio no se puede revertir!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, ¡Bórralo!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          state?.section === "actores" && dispatch(removeActors(res))
+          state?.section === "peliculas" && dispatch(removeMovie(res))
+          state?.section === "generos" && dispatch(removeGenres(res))
+          state?.section === "productos" && dispatch(removeProduct(res))
+          state?.section === "comentarios" && dispatch(deleteReview(res))
+          state?.section === "funciones" && dispatch(deleteFunction(res))
+          state?.section === "usuarios" && dispatch(deleteUser(res))
+          Swal.fire(
+            'Borrado!',
+            'El elemento ha sido eliminado.',
+            'success'
+          )
+        }if(state?.section !== "usuarios"){
+        setTimeout(() => window.location.reload(), 1000)
+      }
+      })
+
+    }, error => console.log(typeof(error)))
   }
-  const handleCreate=()=>{ 
-    console.log(items[state.section])
+
+  const handleCreate = () => {
+
     navigate(`/admin/${items[state.section]}`)
-   }
+  }
+
   return (
     <div className="item_admin_container_all">
-    <Button bsPrefix className="item_admin_btn_create" onClick={handleCreate}> <BsPlusCircle className="btnCreateAdminM"/></Button>
+      {state.section !=="historial" ?<Button bsPrefix className="item_admin_btn_create" onClick={handleCreate}> <BsPlusCircle className="btnCreateAdminM" /></Button> : null}
       <Stack className="item_admin_stack_container" gap={2}>
-        {PelisAll && state.section==="movies" && PelisAll.map(movie=><Items key={movie.titulo} titulo={movie.titulo} image={movie.poster} id={movie.id} handleDelete={handleDelete} />)}
-        {GenresAll && state.section==="genres" && GenresAll.map(movie=><Items key={movie.genero+movie.id} genero={movie.genero}  id={movie.id} handleDelete={handleDelete}  />)}
-        {CastAll &&  state.section==="actors" && CastAll.map(movie=><Items key={movie.nombre+movie.id} nombre={movie.nombre}  id={movie.id} handleDelete={handleDelete}  />)}
-        {ProductAll&& state.section ==="products"&& ProductAll.map(prod=><Items key={prod.nombre+prod.id} nombreProducto={prod.nombreProducto} image={prod.imagenProducto}  id={prod.id} handleDelete={handleDelete} />)}
+        {PelisAll && state.section==="peliculas" && PelisAll.map(movie=><Items key={movie.titulo} titulo={movie.titulo} image={movie.poster} id={movie.id} handleDelete={handleDelete} />)}
+        {GenresAll && state.section==="generos" && GenresAll.map(movie=><Items key={movie.genero+movie.id} genero={movie.genero}  id={movie.id} handleDelete={handleDelete}  />)}
+        {CastAll &&  state.section==="actores" && CastAll.map(movie=><Items key={movie.nombre+movie.id} nombre={movie.nombre}  id={movie.id} handleDelete={handleDelete}  />)}
+        {ProductAll&& state.section ==="productos"&& ProductAll.map(prod=><Items key={prod.nombre+prod.id} nombreProducto={prod.nombreProducto} image={prod.imagenProducto}  id={prod.id} handleDelete={handleDelete} />)}
+        {PelisComments.length>0&& state.section === "comentarios"&&PelisComments.map(e=><Items key={e.nombre+"sdad2"} author={e.nombre} comment={e.comentario} score={e.puntuacion} id={e.id} handleDelete={handleDelete} />)}
+        {PelisComments.length<1&& state.section === "comentarios" && <Spinner animation="border" style={{margin:"0 auto"}} variant="secondary" />}
+
+        {FunctionsAll&& state.section ==="funciones"&& FunctionsAll.map(prod=><Items key={prod.id} id={prod.id} sala={prod.sala} horario={prod.horario} pelicula={prod.Peliculas[0].titulo} fecha={prod.fecha} asientos={prod.asientos} maxAsientos={prod.maxAsientos} />)}
+        {FirebaseUsers&& state.section ==="usuarios"&& FirebaseUsers.map(prod=><Items key={prod.id} nombreUsuario={prod.nombre} image={prod.imagen}  id={prod.id} correo={prod.correo} rol={prod.rol} handleDelete={handleDelete}/>)}
+        {state.section ==="historial" && sales.map(sale=><Items key={sale.id} client={sale.Nombre} products={toString(sale.products)} total={sale.total} email={sale.correo} verificado={sale.verificado}/>)}
       </Stack>
     </div>
   );

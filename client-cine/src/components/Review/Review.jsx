@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { postReview } from "../../store/actions"
+import { AllMovies, postReview } from "../../store/actions"
 import styles from "./Review.module.css"
 import { DivStar } from "./styled"
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import Swal from "sweetalert2"
 
 
 const Review = () => {
 
     let navigate = useNavigate();
     const id = useParams().id;
-    console.log(id)
     const dispatch = useDispatch()
     const [comentario, setComentario] = useState("")
     const [puntuación, setPuntuación] = useState()
@@ -21,12 +21,10 @@ const Review = () => {
     const [errorComentario, setErrorComentario] = useState("")
     const [error2Comentario, setError2Comentario] = useState("")
     // const nombre = "Anonimo";
-    const { user, currentUser } = useAuth();
+    const { user } = useAuth();
     let nombre = user && user.nombre ? user.nombre :"Anonimo"
-    console.log(user)
 
     const onChange = (e) => {
-        console.log(e.target.value)
         setComentario(e.target.value)
         setError2Comentario("")
     }
@@ -52,7 +50,10 @@ const Review = () => {
             case 5: {
                 setCalificacion("Excelente")
                 break
-            }
+            }default: {
+
+    }
+
         }
         setErrorPuntuacion("")
     }
@@ -61,11 +62,18 @@ const Review = () => {
         if (puntuación == null) setErrorPuntuacion("es necesario calificar esta pelicula")
         if (!comentario.trim()) setError2Comentario("es necesario rellenar este campo")
         dispatch(postReview({ nombre, comentario, puntuación, id }))
-        alert("¡Comentario publicado!")
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: '¡Comentario publicado!',
+            showConfirmButton: false,
+            timer: 1000
+          })
+        dispatch(AllMovies())
         navigate(-1)
     }
 
-    useEffect(() => {
+     useEffect(() => {
         if (comentario.length >= 601) {
             setErrorComentario("se permiten como maximo 600 carácteres")
         }
@@ -73,6 +81,15 @@ const Review = () => {
             setErrorComentario("")
         }
     })
+
+    /*useEffect(() => {
+        if (comentario.length >= 601) {
+            setErrorComentario("se permiten como maximo 600 carácteres")
+        }
+        else {
+            setErrorComentario("")
+        }
+    },[comentario.length])*/
 
     return (
         <div className={styles.container}>

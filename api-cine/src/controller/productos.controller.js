@@ -1,4 +1,5 @@
 const { Productos } = require("../db/models/productos");
+const stripe = require('stripe')(process.env.REACT_APP_SRIPE_PRIVATE_KEY);
 
 const getAll = async (req, res, next) => {
   try {
@@ -26,6 +27,7 @@ const getOne = async (req, res, next) => {
 
 const createProduct = async (req, res, next) => {
   const { Product } = req.body;
+
   try {
     if (Product.nombreProducto === "") {
       return res
@@ -41,7 +43,26 @@ const createProduct = async (req, res, next) => {
         .status(406)
         .json({ message: "El producto ingresado ya existe" });
     }
+
+
+    const stripeProduct = await stripe.products.create({
+      name: Product.nombreProducto,
+      images: [Product.imagenProducto],
+      description: Product.descripcion,
+    });
+
+    const stripePrice = await stripe.prices.create({
+      product: stripeProduct.id,
+      unit_amount: Product.precio,
+      currency: 'usd',
+      // recurring: {interval: 'month'},
+    });
+
+    Product.id = stripeProduct.id
+    Product.priceID = stripePrice.id
+
     let nuevo = await Productos.create(Product);
+
     if (nuevo) {
       res.json({ message: "producto creado correctamente", data: nuevo });
     }
@@ -50,11 +71,33 @@ const createProduct = async (req, res, next) => {
   }
 };
 
+const stockController = async (req, res, next) => {
+  console.log("NECESITAMOS entrar aca, flaco")
+  console.log("productos: ", req.body)
+  try {
+    const productInfo = await Productos.findOne({
+      where: { nombreProducto: req.body.name }
+    })
+    const [producto] = await Productos.update({
+      stock: productInfo.stock - req.body.quantity,
+    },
+      {where: { nombreProducto: req.body.name } });
+    if (producto) {
+      console.log("Stock editado")
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
 const editProduct = async (req, res, next) => {
   const id = req.params.id;
   const { Product } = req.body;
+  console.log("entre aca sin razon aparente equisde")
+  console.log("id", id)
   try {
-    if (Product.nombreProducto === "") {
+    if (Product && Product.nombreProducto === "") {
       return res
         .status(406)
         .json({ message: "El nombre del producto no puede ser vacío" });
@@ -83,6 +126,9 @@ const editProduct = async (req, res, next) => {
   }
 };
 
+
+
+
 const deleteProduct = async (req, res, next) => {
   const id = req.params.id;
   try {
@@ -104,4 +150,5 @@ module.exports = {
   createProduct,
   editProduct,
   deleteProduct,
+  stockController,
 };

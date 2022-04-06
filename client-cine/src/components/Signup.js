@@ -3,6 +3,8 @@ import { Card, Form, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
+import Swal from "sweetalert2";
+import { MdKeyboardBackspace } from "react-icons/md";
 import { Image } from "cloudinary-react";
 const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
@@ -12,24 +14,29 @@ export default function Signup() {
   const passwordConfirmRef = useRef();
 
   const nombreRef = useRef();
-  const imagenRef = useRef();
   const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [roles, setRoles] = useState("user");
   const navigate = useNavigate();
-  const [picProfile, setPicProfile] = useState("");
+  const [picProfile, setPicProfile] = useState(
+    "https://www.pngplay.com/wp-content/uploads/6/Film-Icon-Background-PNG-Image.png"
+  );
   const [selectedImage, setSelectedImage] = useState("");
   async function handleSubmit(e) {
     e.preventDefault();
-    
+
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      Swal.fire(
+        "Contraseñas distintas",
+        "Ambas contraseñas deben ser iguales",
+        "error"
+      );
       return setError("Passwords dont match");
     }
     try {
       setError("");
       setLoading(true);
-      console.log("recibidiro", roles);
       await signup(
         emailRef.current.value,
         passwordRef.current.value,
@@ -38,8 +45,15 @@ export default function Signup() {
         picProfile
       );
       navigate("/");
-    } catch {
-      setError("Failed to create an account");
+    } catch (e) {
+      setError("Error al crear una cuenta");
+      if (e.code === "auth/email-already-in-use") {
+        Swal.fire(
+          "Correo ya registrado",
+          "Este correo ya está asociado a una cuenta activa",
+          "error"
+        );
+      }
     }
 
     setLoading(false);
@@ -65,79 +79,68 @@ export default function Signup() {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Sign Up</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
+          <Link to="/" style={{ marginTop: "1rem" }} className="position-absolute top-0 start-10">
+            <Button>
+              <MdKeyboardBackspace className="me-3" />
+              <span>Volver a página principal</span>
+            </Button>
+          </Link>
+          <h2 className="text-center mb-4">Registrarse</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Dirección de e-mail</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
             <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Contraseña</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
             <Form.Group id="password-confirm">
-              <Form.Label>Confirm Password</Form.Label>
+              <Form.Label>Confirmar Contraseña</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
             <Form.Group id="text">
               <Form.Label>Nombre</Form.Label>
               <Form.Control type="text" ref={nombreRef} required />
             </Form.Group>
-          <Form.Group id="picture">
-              <Form.Label>Cambiar foto de perfil</Form.Label>
+            <Form.Group id="picture">
+              <Form.Label>Foto de perfil</Form.Label>
               <Form.Control
                 type="file"
-                name='profilePic'
+                name="profilePic"
                 onChange={(event) => {
-              setSelectedImage(event.target.files[0])
-            }}
+                  setSelectedImage(event.target.files[0]);
+                }}
                 placeholder="Leave blank to keep the same"
               />
-              <button
-            type="button"
-            name="profilePic"
-            onClick={(event) => uploadImage(event)}
-          >
-            Subir Imagen
-          </button>
-          <br/>
-          {picProfile && <span>imagen cargada:</span>}
-          <br/>
-          <Image
-            style={{ width: 200 }}
-            cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
-            publicId={picProfile}
-          />
-            </Form.Group>
-            <div className="form-group">
-            <select
-                defaultValue={"DEFAULT"}
-                name="Rol"
-                onChange={(evt) => setRoles(evt.target.value)}
-                required
+              <Button
+                className="w-20"
+                name="profilePic"
+                style={{ marginTop: "1rem" }}
+                onClick={(event) => uploadImage(event)}
+                type="button"
               >
-                <option className="elemSelect" value="DEFAULT" disabled>
-                  Seleccionar roles
-                </option>
-                <option className="elemSelect" value="admin" type="text">
-                  Admin
-                </option>
-                <option className="elemSelect" value="user">
-                  User
-                </option>
-              </select>
-            </div>
+                Subir imágen
+              </Button>
+              <br />
+              {picProfile && <span>Imagen cargada:</span>}
+              <br />
+              <Image
+                style={{ width: 200 }}
+                cloudName={REACT_APP_CLOUDINARY_CLOUDNAME}
+                publicId={picProfile}
+              />
+            </Form.Group>
             <Button className="w-100" disabled={loading} type="submit">
-              Sign up
+              Registrarse
             </Button>
           </Form>
+          <div className="w-100 text-center mt-2" style={{ color: "whitesmoke" }}>
+            ¿Ya tienes una cuenta?
+            <Link to="/login">Ingresar</Link>
+          </div>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        Already have an account?
-        <Link to="/login">Log in</Link>
-      </div>
     </>
   );
 }

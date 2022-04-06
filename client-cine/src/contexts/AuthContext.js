@@ -5,17 +5,14 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
   sendPasswordResetEmail,
-  updateEmail,
   updatePassword,
-  onAuthStateChanged,
+  onAuthStateChanged
 } from "firebase/auth";
 
 import {
   getFirestore,
   doc,
-  collection,
   setDoc,
   getDoc,
 } from "firebase/firestore";
@@ -32,6 +29,9 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [user, setUser] = useState(null);
+  const [itemsCarrito, setItemsCarrito] = useState([]);
+  const [id, setId] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
   async function signup(email, password, rol, nombre, imagen) {
@@ -42,7 +42,6 @@ export function AuthProvider({ children }) {
     ).then((usuarioFirebase) => {
       return usuarioFirebase;
     });
-    console.log(infoUsuario.user.uid);
     const docuRef = doc(firestore, `usuarios/${infoUsuario.user.uid}`);
     setDoc(docuRef, { correo: email, rol: rol, nombre: nombre, imagen: imagen });
   }
@@ -52,29 +51,46 @@ export function AuthProvider({ children }) {
   function logout() {
     return auth.signOut();
   }
-  function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email);
+  async function resetPassword(email) {
+    await sendPasswordResetEmail(auth, email);
   }
   function updateEmail(email) {
     return currentUser.updateEmail(email);
   }
-  async function updatePassword(password) {
-    // return currentUser.updatePassword(password);
-    await updatePassword(auth,password) 
+  async function upPassword(password) {
+    await updatePassword(auth, password)
   }
   function updateName(name, imagen, user) {
-    console.log(user)
     const docuRef = doc(firestore, `usuarios/${user.uid}`);
+    setDoc(docuRef, { nombre: name || user.nombre, imagen: imagen || user.imagen, rol: user.rol, correo: user.email });
+    onAuthStateChanged(auth,(user)=>{
+      if(user){
+        setUserWithFirebaseAndRol(user)
+      }
+      setTimeout(function () {
+        setCurrentUser(user);
+        setLoading(false);
+      }, 1000);
+    })
+    
+    }
 
-    setDoc(docuRef, {nombre: name || user.nombre, imagen :  imagen || user.imagen, rol: user.rol });
-  }
   //No hay necesidad de setear al usuario porque Firebase te lo notifica con el siguiente método:
   async function getRol(uid) {
     const docuRef = doc(firestore, `usuarios/${uid}`);
     const docuCifrada = await getDoc(docuRef);
-    const infoTotal = [docuCifrada.data().rol, docuCifrada.data().nombre, docuCifrada.data().imagen]
-    return infoTotal;
+    if(docuCifrada && docuCifrada.data()){const infoTotal = [docuCifrada.data().rol, docuCifrada.data().nombre, docuCifrada.data().imagen]
+        return infoTotal;}
   }
+  // function updateName(name, imagen, user) {
+  //   const docuRef = doc(firestore, `usuarios/${user.uid}`);
+    
+  //       setDoc(docuRef, { nombre: name || user.nombre, imagen: imagen || user.imagen, rol: user.rol, correo: user.email });
+  //       setUserWithFirebaseAndRol(user);
+  //     }
+
+  //No hay necesidad de setear al usuario porque Firebase te lo notifica con el siguiente método:
+  
 
   async function setUserWithFirebaseAndRol(usuarioFirebase) {
     await getRol(usuarioFirebase.uid).then((rol) => {
@@ -89,7 +105,20 @@ export function AuthProvider({ children }) {
     });
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
+    const unsuscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserWithFirebaseAndRol(user);
+      }
+      setTimeout(function () {
+        setCurrentUser(user);
+        setLoading(false);
+      }, 2000);
+    });
+    return unsuscribe;
+  });*/
+
+   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserWithFirebaseAndRol(user);
@@ -109,10 +138,14 @@ export function AuthProvider({ children }) {
     logout,
     resetPassword,
     updateEmail,
-    updatePassword,
+    upPassword,
     user,
     updateName,
     // listAllUsers
+    itemsCarrito, 
+    setItemsCarrito,
+    id,
+    setId
   };
   return (
     <AuthContext.Provider value={value}>

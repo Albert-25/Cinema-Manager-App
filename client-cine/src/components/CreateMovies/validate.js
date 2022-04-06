@@ -6,7 +6,6 @@ export function validate(input, stateErrors, name) {
       duracion: stateErrors.duracion,
       clasificacion: stateErrors.clasificacion,
       director: stateErrors.director,
-      puntuación: stateErrors.puntuación,
       pais: stateErrors.pais,
       distribuidora: stateErrors.distribuidora,
       trailer: stateErrors.trailer,
@@ -39,6 +38,9 @@ export function validate(input, stateErrors, name) {
       if (!input.duracion && input.duracion !== undefined) {
          errors.duracion = "Ingrese un numero para la duracion";
          errors.error = true;
+      } else if (!/^[0-9]+$/.test(input.duracion)) {
+         errors.duracion = "Solo puedes ingresar numeros";
+         errors.error = true;
       } else {
          errors.duracion = "";
       }
@@ -62,18 +64,12 @@ export function validate(input, stateErrors, name) {
       }
    }
 
-   if (name === "puntuación" || name === "submit") {
-      if (!input.puntuación && input.puntuación !== undefined) {
-         errors.puntuación = "La puntuacion de la pelicula es requerida";
-         errors.error = true;
-      } else {
-         errors.puntuación = "";
-      }
-   }
-
    if (name === "pais" || name === "submit") {
       if (!input.pais && input.pais !== undefined) {
          errors.pais = "El pais de origen del titulo es requerido";
+         errors.error = true;
+      } else if (!/^[a-z ,.'-]+$/i.test(input.pais)) {
+         errors.pais = "Nombre de pais invalido";
          errors.error = true;
       } else {
          errors.pais = "";
@@ -83,6 +79,9 @@ export function validate(input, stateErrors, name) {
    if (name === "director" || name === "submit") {
       if (!input.director && input.director !== undefined) {
          errors.director = "El nombre del director es requerido";
+         errors.error = true;
+      } else if (!/^[a-z ,.'-]+$/i.test(input.director)) {
+         errors.pais = "El nombre de director invalido";
          errors.error = true;
       } else {
          errors.director = "";
@@ -101,6 +100,13 @@ export function validate(input, stateErrors, name) {
    if (name === "trailer" || name === "submit") {
       if (!input.trailer && input.trailer !== undefined) {
          errors.trailer = "El trailer del titulo es requerido";
+         errors.error = true;
+      } else if (
+         !/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.test(
+            input.trailer
+         )
+      ) {
+         errors.trailer = "Ingrese la URL del trailer correctamente";
          errors.error = true;
       } else {
          errors.trailer = "";

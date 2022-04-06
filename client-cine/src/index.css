@@ -1,6 +1,7 @@
 /* ----- Customs Properties ----- */
 /* Para usarlas colocar var(--nombre-de-variable) en la propiedad que deseen. ej: border: thin solid var(--black-color); max-width: var(--max-width); en estos casos, var(--black-color) equivale a #000 y var(--max-width) equivale a 1200px */
-#root{
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+#root {
    background-color: #11072f;
 }
 :root {
@@ -31,4 +32,15 @@
    --breakpoint-md: 768px;
    --breakpoint-lg: 992px;
    --breakpoint-xl: 1200px;
+}
+
+body {
+   background-color: var(--first-color);
+   overflow-x: none;
+}
+
+.input__with__error span {
+   margin: auto;
+   color: #df1313;
+   letter-spacing: 1px;
 }

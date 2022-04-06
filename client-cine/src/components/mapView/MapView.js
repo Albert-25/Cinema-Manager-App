@@ -1,5 +1,5 @@
 import React from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
@@ -8,8 +8,6 @@ import "./MapView.css";
 
 const MapView = () => {
 	const center = [-30.743551942205695, -64.79012074048444];
-	const marker =
-		"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png";
 	return (
 		<MapContainer center={center} zoom={15}>
 			<TileLayer

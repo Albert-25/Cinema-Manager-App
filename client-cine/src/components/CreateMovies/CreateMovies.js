@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postMovies } from "../../store/actions";
 import "./CreateMovies.css";
-import { GetAllGenres, GetAllCast ,AllMovies} from "../../store/actions";
+import { AllMovies } from "../../store/actions";
 import { validate } from "./validate";
 import Swal from "sweetalert2";
 import Axios from "axios";
@@ -15,7 +15,7 @@ const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 const CreateMovies = () => {
    const Genres = useSelector((state) => state.GenresAll);
    const Cast = useSelector((state) => state.CastAll);
-   let dispatch= useDispatch()
+   let dispatch = useDispatch();
    const [inputs, setInputs] = useState({
       titulo: "",
       sinopsis: "",
@@ -24,10 +24,11 @@ const CreateMovies = () => {
       duracion: "",
       clasificacion: "",
       director: "",
-      puntuación: "",
       pais: "",
+      puntuación: 0,
       distribuidora: "",
       trailer: "",
+      proximoEstreno: false,
       genders: [],
       actors: [],
    });
@@ -44,9 +45,9 @@ const CreateMovies = () => {
       duracion: "",
       clasificacion: "",
       director: "",
-      puntuación: "",
       pais: "",
       distribuidora: "",
+      puntuación: "",
       trailer: "",
       genders: "",
       actors: "",
@@ -54,10 +55,19 @@ const CreateMovies = () => {
    });
 
    const handleChange = (e) => {
-      setInputs({
-         ...inputs,
-         [e.target.name]: e.target.value.trim(),
-      });
+      if (e.target.name !== "proximoEstreno") {
+         setInputs({
+            ...inputs,
+            [e.target.name]: e.target.value.trim(),
+         });
+      } else {
+         setInputs((prevInputs) => {
+            return {
+               ...prevInputs,
+               [e.target.name]: !inputs[e.target.name],
+            };
+         });
+      }
 
       setErrors(
          validate(
@@ -147,8 +157,8 @@ const CreateMovies = () => {
       if (errors.error === false) {
          Swal.fire({
             title: "¿Quieres guardar la pelicula?",
+            icon: "info",
             showDenyButton: true,
-            showCancelButton: true,
             confirmButtonText: "Guardar",
             denyButtonText: `No guardar`,
          }).then((result) => {
@@ -158,8 +168,9 @@ const CreateMovies = () => {
                document.getElementById("ChupaUnLimon").reset();
 
                Swal.fire("La pelicula fue agregada!", "", "success");
-               setTimeout(()=>{dispatch(AllMovies())},1000)
-
+               setTimeout(() => {
+                  dispatch(AllMovies());
+               }, 1000);
             } else if (result.isDenied) {
                Swal.fire("La pelicula no fue agregada", "", "info");
             }
@@ -182,7 +193,6 @@ const CreateMovies = () => {
          formData
       )
          .then((response) => {
-            console.log(response.data.url);
             setInputs({
                ...inputs,
                [event.target.name]: response.data.url,
@@ -198,8 +208,8 @@ const CreateMovies = () => {
       >
          <Link to="/admin" className="position-absolute top-0 start-0">
             <Button>
-               <MdKeyboardBackspace className="mr-3" />
-               <span style={{ marginLeft: "0.75rem" }}>Regresar al Admin</span>
+               <MdKeyboardBackspace className="me-3" />
+               <span>Regresar al Admin</span>
             </Button>
          </Link>
          <h2
@@ -216,7 +226,7 @@ const CreateMovies = () => {
                         type="text"
                         name="titulo"
                         onChange={(evt) => handleChange(evt)}
-                        placeholder="Titulo"
+                        placeholder="Título"
                      />
                      {errors.titulo ? <span>{errors.titulo}</span> : null}
                   </div>
@@ -267,7 +277,7 @@ const CreateMovies = () => {
                <Col md="5">
                   <div className="image_upload_background">
                      <Form.Label column sm="2">
-                        Background:
+                        Fondo:
                      </Form.Label>
                      <Form.Control
                         type="file"
@@ -316,7 +326,7 @@ const CreateMovies = () => {
                         min="0"
                         name="duracion"
                         onChange={(evt) => handleChange(evt)}
-                        placeholder="Duracion"
+                        placeholder="Duración"
                      />
                      {errors.duracion ? <span>{errors.duracion}</span> : null}
                   </div>
@@ -324,18 +334,18 @@ const CreateMovies = () => {
             </Row>
             <Row className="justify-content-between mb-4">
                <Col md="5">
-                  <div className="input__with__error">
-                     <Form.Control
-                        type="number"
-                        min="0"
-                        max="10"
-                        name="puntuación"
+                  <div className="form-check">
+                     <Form.Check
+                        class="form-check-input"
+                        id="flexCheckDefault"
+                        type="checkbox"
+                        name="proximoEstreno"
                         onChange={(evt) => handleChange(evt)}
-                        placeholder="Puntuación"
+                        placeholder="proximoEstreno"
                      />
-                     {errors.puntuación ? (
-                        <span>{errors.puntuación}</span>
-                     ) : null}
+                     <label class="form-check-label" for="flexCheckDefault">
+                        ¿Es próximo estreno?
+                     </label>
                   </div>
                </Col>
                <Col md="5">
@@ -386,7 +396,7 @@ const CreateMovies = () => {
                         onChange={(evt) => changeArrayGenders(evt)}
                      >
                         <option value="DEFAULT" disabled>
-                           Generos
+                           Géneros
                         </option>
                         {Genres.length &&
                            Genres.map((item, index) => {
@@ -414,7 +424,7 @@ const CreateMovies = () => {
                         onChange={(evt) => changeArrayCast(evt)}
                      >
                         <option value="DEFAULT" disabled>
-                           Cast
+                           Reparto
                         </option>
                         {Cast.length &&
                            Cast.map((item) => {

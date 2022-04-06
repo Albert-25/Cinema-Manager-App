@@ -1,9 +1,17 @@
 const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
+const { Pelicula } = require("./pelicula");
 
 const Productos = sequelize.define(
   "Productos",
   {
+    id:{
+      type: DataTypes.STRING,
+      primaryKey: true,
+    },
+    priceID:{
+      type: DataTypes.STRING,
+    },
     nombreProducto: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -32,5 +40,8 @@ const Productos = sequelize.define(
   },
   { timestamps: false }
 );
+
+Pelicula.belongsToMany(Productos, { through: "ProductosPelicula" });
+Productos.belongsToMany(Pelicula, { through: "ProductosPelicula" });
 
 module.exports = { Productos };

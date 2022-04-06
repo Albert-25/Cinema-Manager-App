@@ -1,13 +1,17 @@
 import React, { useRef, useState } from "react";
 import { Card, Form, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Link} from "react-router-dom";
+import Swal from "sweetalert2";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { Image } from "cloudinary-react";
 import Example from './PasswordVerification';
 const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
+
+
 export default function UpdateProfile() {
+    const navigate = useNavigate();
   const emailRef = useRef();
   const nameRef = useRef();
   const { user, currentUser, updateEmail, updateName } = useAuth();
@@ -50,7 +54,27 @@ export default function UpdateProfile() {
     }
     Promise.all(promises)
       .then(() => {
-        console.log('done');
+        if(pass === '' && passConfirm === ''){
+          Swal.fire({
+            title: "¿Quieres guardar los cambios?",
+            icon: "info",
+            showDenyButton: true,
+            confirmButtonText: "Guardar",
+            denyButtonText: `No guardar`,
+         }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+
+
+               Swal.fire("Cambio guardado correctamente!", "", "success");
+      navigate("/admin");
+              
+            } else if (result.isDenied) {
+               Swal.fire("El cambio no se ha guardado", "", "info");
+            }
+         });
+
+        }
       })
       .catch((e) => {
         setError("Failed to update account");

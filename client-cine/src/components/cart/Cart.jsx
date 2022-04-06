@@ -16,7 +16,6 @@ export const Cart = () => {
     (pValue, cValue) => pValue + cValue.quantity * cValue.price,
     0
   );
-console.log("ASDHJKASHDKJLASHJDK",itemsCart)
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 

@@ -19,7 +19,7 @@ const items = {
   generos: 'creategenero',
   actores: 'createactor',
   productos: 'createproducto',
-  users: 'createuser',
+  usuarios: 'createuser',
   funciones: 'createfunction',
 }
 
@@ -73,13 +73,8 @@ export default function ItemsContainer() {
           state?.section === "generos" && dispatch(removeGenres(res))
           state?.section === "productos" && dispatch(removeProduct(res))
           state?.section === "comments" && dispatch(deleteReview(res))
-
-
           state?.section === "funciones" && dispatch(deleteFunction(res))
-
-
           state?.section === "usuarios" && dispatch(deleteUser(res))
-
           Swal.fire(
             'Borrado!',
             'El elemento ha sido eliminado.',
@@ -108,9 +103,7 @@ export default function ItemsContainer() {
         {ProductAll&& state.section ==="productos"&& ProductAll.map(prod=><Items key={prod.nombre+prod.id} nombreProducto={prod.nombreProducto} image={prod.imagenProducto}  id={prod.id} handleDelete={handleDelete} />)}
         {PelisComments.length>0&& state.section === "comments"&&PelisComments.map(e=><Items key={e.nombre+"sdad2"} author={e.nombre} comment={e.comentario} score={e.puntuacion} id={e.id} handleDelete={handleDelete} />)}
         {PelisComments.length<1&& state.section === "comments" && <Spinner animation="border" style={{margin:"0 auto"}} variant="secondary" />}
-
         {FunctionsAll&& state.section ==="funciones"&& FunctionsAll.map(prod=><Items key={prod.id} id={prod.id} sala={prod.sala} horario={prod.horario} pelicula={prod.Peliculas[0].titulo} fecha={prod.fecha} asientos={prod.asientos} maxAsientos={prod.maxAsientos} />)}
-
         {FirebaseUsers&& state.section ==="usuarios"&& FirebaseUsers.map(prod=><Items key={prod.id} nombreUsuario={prod.nombre} image={prod.imagen}  id={prod.id} correo={prod.correo} rol={prod.rol} handleDelete={handleDelete}/>)}
         {state.section ==="historial" && sales.map(sale=><Items key={sale.id} client={sale.Nombre} products={toString(sale.products)} total={sale.total} email={sale.correo}/>)}
       </Stack>

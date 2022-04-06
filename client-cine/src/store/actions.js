@@ -54,7 +54,6 @@ export const GetAllFunctions = () => {
   return async (dispatch) => {
     const response = await axios.get(`http://localhost:3001/funcion`);
     if (response?.data) {
-      console.log(response.data)
       dispatch({
         type: "GETFUNCTIONS",
         payload: { funcs: response.data },

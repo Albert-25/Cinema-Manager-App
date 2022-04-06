@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { Image } from "cloudinary-react";
 import Example from './PasswordVerification';
-import Swal from "sweetalert2";
 const { REACT_APP_CLOUDINARY_CLOUDNAME } = process.env;
 
 
@@ -55,7 +54,6 @@ export default function UpdateProfile() {
     }
     Promise.all(promises)
       .then(() => {
-<<<<<<< HEAD
         if(pass === '' && passConfirm === ''){
           Swal.fire({
             title: "¿Quieres guardar los cambios?",
@@ -69,7 +67,7 @@ export default function UpdateProfile() {
 
 
                Swal.fire("Cambio guardado correctamente!", "", "success");
-      navigate("/admin");
+      navigate("/");
               
             } else if (result.isDenied) {
                Swal.fire("El cambio no se ha guardado", "", "info");
@@ -77,16 +75,6 @@ export default function UpdateProfile() {
          });
 
         }
-=======
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Los datos se actualizaron correctamente!',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        window.location.href = "http://localhost:3000/";
->>>>>>> aef36456c6df0de1b163ee9b0c7d6a8d9ae0763b
       })
       .catch((e) => {
         setError("Failed to update account");

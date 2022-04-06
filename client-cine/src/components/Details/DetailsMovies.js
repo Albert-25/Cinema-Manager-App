@@ -274,9 +274,13 @@ const DetailsMovies = (props) => {
                            )}
                         </div>
                      </div>
+                     <div className="Details__rightdown__container mb-4">
                      <Link to="/" className="Details__rightdown">
-                        <p className="Details__rightdown__text">👉 Volver 👈</p>
+                        <Button className="Details__rightdown__text">
+                           Volver al home
+                        </Button>
                      </Link>
+                  </div>
                   </div>
                </BodyBackground>
             </div>

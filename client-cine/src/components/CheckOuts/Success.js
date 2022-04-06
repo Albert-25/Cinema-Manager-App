@@ -54,8 +54,15 @@ export const Success = () => {
             showConfirmButton: false,
             timer: 2500,
           });
+          console.log("macaco", macaco)
           setTimeout(function () {
             window.location.href = "http://localhost:3000/";
+            // aqui poner lo de restar stock
+            for (let y = 0; y < macaco.products.length; y++) {
+              console.log("for", macaco.products[y])
+              axios.put("http://localhost:3001/productos/stock", macaco.products[y])
+            }
+            // aqui poner lo de restar stock
             localStorage.removeItem("items");
           }, 5000);
         },

@@ -71,11 +71,33 @@ const createProduct = async (req, res, next) => {
   }
 };
 
+const stockController = async (req, res, next) => {
+  console.log("NECESITAMOS entrar aca, flaco")
+  console.log("productos: ", req.body)
+  try {
+    const productInfo = await Productos.findOne({
+      where: { nombreProducto: req.body.name }
+    })
+    const [producto] = await Productos.update({
+      stock: productInfo.stock - req.body.quantity,
+    },
+      {where: { nombreProducto: req.body.name } });
+    if (producto) {
+      console.log("Stock editado")
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
 const editProduct = async (req, res, next) => {
   const id = req.params.id;
   const { Product } = req.body;
+  console.log("entre aca sin razon aparente equisde")
+  console.log("id", id)
   try {
-    if (Product.nombreProducto === "") {
+    if (Product && Product.nombreProducto === "") {
       return res
         .status(406)
         .json({ message: "El nombre del producto no puede ser vacío" });
@@ -104,23 +126,7 @@ const editProduct = async (req, res, next) => {
   }
 };
 
-const stockController = async (req, res, next) => {
-  // const id = req.params.id;
-  const { Product } = req.body;
-  try {
 
-    const [producto] = await Productos.update(Product, { where: { name: Product.name } });
-    if (producto) {
-      return res.json({
-        message: "producto editado correctamente",
-        data: await Productos.findByPk(id),
-      });
-    }
-    next();
-  } catch (error) {
-    next(error);
-  }
-};
 
 
 const deleteProduct = async (req, res, next) => {

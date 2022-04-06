@@ -13,9 +13,11 @@ const {
 
 router.get("/", getAll);
 router.post("/", createProduct);
+router.put("/stock", stockController)
 router.put("/:id", editProduct);
+
 router.delete("/:id", deleteProduct);
 router.get("/:id", getOne);
-router.get("/stock", stockController)
+
 
 module.exports = router;

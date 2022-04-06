@@ -5,7 +5,7 @@ import { BsTrash } from "react-icons/bs";
 import { updateCart, postBuy } from "../../store/actions";
 import s from "./cart.module.css";
 import logo from "../../assets/cart.png";
-import ticket from "../../assets/ticket.png"
+import ticket from "../../assets/ticket.png";
 
 export const Cart = () => {
   const dispatch = useDispatch();
@@ -21,8 +21,23 @@ export const Cart = () => {
   const handleShow = () => setShow(true);
 
   const handleClick = () => {
-    dispatch(postBuy(itemsCart));
-    localStorage.setItem("compra", JSON.stringify(UrlBuy[0]));
+    var flag = true;
+    for (let i = 0; i < itemsCart.length; i++) {
+      if (itemsCart[i].quantity < itemsCart[i].stock) {
+        flag = true;
+      } else {
+        console.log("le pongo false unu");
+        flag = false;
+        break;
+      }
+    }
+
+    if (flag === true) {
+      dispatch(postBuy(itemsCart));
+      localStorage.setItem("compra", JSON.stringify(UrlBuy[0]));
+    } else {
+      alert("Uno de tus produtos acaba de ponerse fuera de stock");
+    }
   };
 
   let variable = 1;
@@ -60,13 +75,22 @@ export const Cart = () => {
               return (
                 <div className={s.itemlist} key={item.id}>
                   <span className={s.imgticket}>
-                    <img src={item.imagenProducto ? item.imagenProducto : ticket} width="75px" height="50px" />
+                    <img
+                      src={item.imagenProducto ? item.imagenProducto : ticket}
+                      width="75px"
+                      height="50px"
+                    />
                   </span>
                   <span className={s.texto}>
-                    {item.quantity}{" und."} - {item.name} $ {item.quantity * item.price}
+                    {item.quantity}
+                    {" und."} - {item.name} $ {item.quantity * item.price}
                   </span>
                   <span className={s.buttonTrash}>
-                    <Button onClick={() => handleDelete(item.id, item.name)} variant="outline-danger" size="sm">
+                    <Button
+                      onClick={() => handleDelete(item.id, item.name)}
+                      variant="outline-danger"
+                      size="sm"
+                    >
                       <BsTrash />
                     </Button>
                   </span>

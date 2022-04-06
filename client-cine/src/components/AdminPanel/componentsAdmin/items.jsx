@@ -17,7 +17,7 @@ const Items = ({ nombre, titulo, genero, nombreProducto, id, image, handleDelete
   let [opcomment, setOpComment] = useState(false)
   const handleToComments = (e) => {
     dispatchRedux(getAllReviewByIdOfMovie(parseInt(e.currentTarget.className.split(" ")[1])))
-    dispatch({ type: 'sectionSelect', payload: "comments" })
+    dispatch({ type: 'sectionSelect', payload: "comentarios" })
   }
 
   return (

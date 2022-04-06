@@ -72,7 +72,7 @@ export default function ItemsContainer() {
           state?.section === "peliculas" && dispatch(removeMovie(res))
           state?.section === "generos" && dispatch(removeGenres(res))
           state?.section === "productos" && dispatch(removeProduct(res))
-          state?.section === "comments" && dispatch(deleteReview(res))
+          state?.section === "comentarios" && dispatch(deleteReview(res))
           state?.section === "funciones" && dispatch(deleteFunction(res))
           state?.section === "usuarios" && dispatch(deleteUser(res))
           Swal.fire(
@@ -101,8 +101,9 @@ export default function ItemsContainer() {
         {GenresAll && state.section==="generos" && GenresAll.map(movie=><Items key={movie.genero+movie.id} genero={movie.genero}  id={movie.id} handleDelete={handleDelete}  />)}
         {CastAll &&  state.section==="actores" && CastAll.map(movie=><Items key={movie.nombre+movie.id} nombre={movie.nombre}  id={movie.id} handleDelete={handleDelete}  />)}
         {ProductAll&& state.section ==="productos"&& ProductAll.map(prod=><Items key={prod.nombre+prod.id} nombreProducto={prod.nombreProducto} image={prod.imagenProducto}  id={prod.id} handleDelete={handleDelete} />)}
-        {PelisComments.length>0&& state.section === "comments"&&PelisComments.map(e=><Items key={e.nombre+"sdad2"} author={e.nombre} comment={e.comentario} score={e.puntuacion} id={e.id} handleDelete={handleDelete} />)}
-        {PelisComments.length<1&& state.section === "comments" && <Spinner animation="border" style={{margin:"0 auto"}} variant="secondary" />}
+        {PelisComments.length>0&& state.section === "comentarios"&&PelisComments.map(e=><Items key={e.nombre+"sdad2"} author={e.nombre} comment={e.comentario} score={e.puntuacion} id={e.id} handleDelete={handleDelete} />)}
+        {PelisComments.length<1&& state.section === "comentarios" && <Spinner animation="border" style={{margin:"0 auto"}} variant="secondary" />}
+
         {FunctionsAll&& state.section ==="funciones"&& FunctionsAll.map(prod=><Items key={prod.id} id={prod.id} sala={prod.sala} horario={prod.horario} pelicula={prod.Peliculas[0].titulo} fecha={prod.fecha} asientos={prod.asientos} maxAsientos={prod.maxAsientos} />)}
         {FirebaseUsers&& state.section ==="usuarios"&& FirebaseUsers.map(prod=><Items key={prod.id} nombreUsuario={prod.nombre} image={prod.imagen}  id={prod.id} correo={prod.correo} rol={prod.rol} handleDelete={handleDelete}/>)}
         {state.section ==="historial" && sales.map(sale=><Items key={sale.id} client={sale.Nombre} products={toString(sale.products)} total={sale.total} email={sale.correo} verificado={sale.verificado}/>)}

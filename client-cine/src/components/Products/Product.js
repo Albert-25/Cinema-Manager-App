@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Product.css";
 import { getItemsCart } from "../../utils/itemsCart";
 import { updateCart } from "../../store/actions";
+import Swal from "sweetalert2";
 
 
 export default function Product({
@@ -26,7 +27,13 @@ export default function Product({
     };
     const onClickMore = () => {
         if (cantidad >= disponibles && disponibles <= 0) {
-            alert("No hay mas productos disponibles")
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: 'No hay mas unidades disponibles',
+                showConfirmButton: false,
+                timer: 1500
+              })
         } else {
             setCantidad(cantidad + 1);
             setDisponibles(disponibles - 1)

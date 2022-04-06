@@ -18,7 +18,7 @@ export const CheckSale = () => {
         setOrder(res.data)
       })
       .catch(err => console.error(err.data))
-  }, [])
+  }, [uuid])
 
   const handleClick = async () => {
     if (order.Nombre.search('VERIFICADO') !== -1) {

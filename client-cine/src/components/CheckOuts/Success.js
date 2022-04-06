@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { getRetrive, postBuy, AllProducts } from "../../store/actions";
 import { useSelector, useDispatch } from "react-redux";
-import { useAuth } from "../../contexts/AuthContext";
+// import { useAuth } from "../../contexts/AuthContext";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 export const Success = () => {
   const dispatch = useDispatch();
-  const UrlBuy = useSelector((state) => state.cartUrl);
+  // const UrlBuy = useSelector((state) => state.cartUrl);
   const RetriveItems = useSelector((state) => state.Retrive);
-  const { itemsCarrito } = useAuth();
+  // const { itemsCarrito } = useAuth();
   var informacion = localStorage.getItem("compra");
 
   var contador = 1;
@@ -54,8 +54,34 @@ export const Success = () => {
             showConfirmButton: false,
             timer: 2500,
           });
+          console.log("macaco", macaco)
           setTimeout(function () {
             window.location.href = "http://localhost:3000/";
+            // aqui poner lo de restar stock
+            let Productitos = []
+            let Peliculitas = []
+            for (let i = 0; i < macaco.products.length; i++) {
+              if (macaco.products[i].imagenProducto) {
+                Productitos.push(macaco.products[i])
+              } else {
+                Peliculitas.push(macaco.products[i])
+              }
+            }
+            console.log("Productitos:", Productitos)
+            console.log("Peliculitas:", Peliculitas)
+            if (Productitos.length > 0) {
+              for (let y = 0; y < Productitos.length; y++) {
+                console.log("for", Productitos[y])
+                axios.put("http://localhost:3001/productos/stock", Productitos[y])
+              }
+            }
+            if (Peliculitas.length > 0) {
+              for (let y = 0; y < Peliculitas.length; y++) {
+                console.log("for", Peliculitas[y])
+                axios.put("http://localhost:3001/funcion/stock", Peliculitas[y])
+              }
+            }
+            // aqui poner lo de restar stock
             localStorage.removeItem("items");
           }, 5000);
         },
@@ -68,8 +94,10 @@ export const Success = () => {
             timer: 1000
           })
         }
+
       );
     });
+
     // -------------------------------------------------
   }
 

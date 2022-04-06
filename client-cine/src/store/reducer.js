@@ -266,6 +266,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         PelisAll: action.payload,
       };
+      
+       case "DELETEFUNCTION":
+      return {
+        ...state,
+        FunctionsAll: state.FunctionsAll.filter(e => e.id !== action.payload)
+      }
     case "DELETEMOVIE":
       return {
         ...state,

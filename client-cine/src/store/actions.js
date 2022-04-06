@@ -409,6 +409,22 @@ export const removeActors = (id) => {
          .catch((err) => console.log(err.response));
    };
 };
+export const deleteFunction = (id) => {
+   return (dispatch) => {
+      axios
+         .delete(`http://localhost:3001/funcion/${id}`)
+         .then((res) =>
+            dispatch({ type: "DELETEFUNCTION", payload: parseInt(id) })
+         )
+         .catch((re) => Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Error al eliminar pelicula!',
+        showConfirmButton: false,
+        timer: 1000
+      }));
+   };
+};
 export const removeMovie = (id) => {
    return (dispatch) => {
       axios

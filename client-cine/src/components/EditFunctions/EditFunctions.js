@@ -31,10 +31,10 @@ const EditFunctions = () => {
       fecha: "",
       horario: "",
       asientos: "",
-      maxAsientos: "",
+      maxAsientos: {movieData.maxAsientos},
       precio: "",
       detalle: "",
-      pelicula: "",
+      pelicula: {movieData.pelicula},
     },
   ]);
 
@@ -257,21 +257,7 @@ const EditFunctions = () => {
                      {errors.asientos ? <span>{errors.asientos}</span> : null}
                   </div>
                </Col>
-              <Col lg={5}>
-                  <div className="input__with__error">
-                     <Form.Label htmlFor="maxAsientos">maxAsientos:</Form.Label>
-                     <Form.Control
-                        type="number"
-                          min="0"
-
-                        name="maxAsientos"
-                        id="maxAsientos"
-                        onChange={(evt) => handleChange(evt)}
-                        placeholder={movieData.maxAsientos}
-                     />
-                     {errors.maxAsientos ? <span>{errors.maxAsientos}</span> : null}
-                  </div>
-               </Col>
+           
                <Col lg={5}>
                   <div className="input__with__error">
                      <Form.Label htmlFor="precio">precio:</Form.Label>
@@ -300,36 +286,7 @@ const EditFunctions = () => {
                      {errors.detalle ? <span>{errors.detalle}</span> : null}
                   </div>
                </Col>
-               <Col md="5">
-          
-                   <div className="input__with__error">
-                     <Form.Select
-                        id="defaultGenres"
-                        name="genders"
-                        defaultValue={"DEFAULT"}
-                        onChange={(evt) => ChangeArrayMovies(evt)}
-                     >
-                        <option value="DEFAULT" disabled>
-                           Película
-                        </option>
-                        {Movies &&
-                           Movies.map((item, index) => {
-                              return (
-                                 <option
-                                    id={item.id}
-                                    className="elemSelect"
-                                    key={`${item.titulo}${index}`}
-                                    value={item.id}
-                                 >
-                                    {item.titulo}
-                                 </option>
-                              );
-                           })}
-                     </Form.Select>
-                     {errors.genders ? <span>{errors.genders}</span> : null}
-                  </div>
-                  
-                </Col>
+        
             </Row>
             <Row className="justify-content-between mb-4">
               

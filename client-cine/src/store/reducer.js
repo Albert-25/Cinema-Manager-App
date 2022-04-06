@@ -122,13 +122,10 @@ const reducer = (state = initialState, action) => {
     }
     // ----------------------------------------------------------------------------------------------------
     case "BESTMOVIES": {
-      // console.log("howdy soy reducer")
-      console.log(state.PelisAll);
       let pelis = [...state.PelisAll];
       let arreglar = pelis.sort((a, b) =>
         a.puntuación < b.puntuación ? 1 : b.puntuación < a.puntuación ? -1 : 0
       );
-      // console.log("arreglar",arreglar)
       let arregloFinal = arreglar.slice(0, 3);
       return {
         ...state,
@@ -246,7 +243,6 @@ const reducer = (state = initialState, action) => {
       };
     }
     case "POSTBUY": {
-      console.log('Retorno recibido', action.payload)
       return{
         ...state,
         cartUrl: [...action.payload]
@@ -282,7 +278,6 @@ const reducer = (state = initialState, action) => {
     case "FILTER_REVIEWBYRATING":
       let comentariosByRating;
       if (action.payload === "asc") {
-        console.log(action.payload);
         comentariosByRating = state.PelisComments.sort(function (a, b) {
           if (a.puntuación < b.puntuación) {
             return -1;
@@ -294,7 +289,6 @@ const reducer = (state = initialState, action) => {
         });
       }
       if (action.payload === "des") {
-        console.log(action.payload);
         comentariosByRating = state.PelisComments.sort(function (a, b) {
           if (a.puntuación > b.puntuación) {
             return -1;
@@ -347,7 +341,6 @@ const reducer = (state = initialState, action) => {
       }
 
     case "UPDATE_USER": {
-      console.log('holaaa', action.payload)
       return {
         ...state,
         newPic: action.payload

@@ -3,6 +3,7 @@ import { Image, Dropdown } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import './accountview.css'
+import Swal from "sweetalert2"
 let iconAuxiliar = "https://png.pngtree.com/element_our/20190522/ourlarge/pngtree-little-yellow-chicken-cartoon-avatar-logo-icon-image_1075898.jpg"
 export default function AccountView() {
   let { user, logout } = useAuth();
@@ -17,7 +18,13 @@ export default function AccountView() {
         navigate('/')
       }
     } catch {
-      alert("Failed to Log out");
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Fallo al desloguear!',
+        showConfirmButton: false,
+        timer: 1000
+      })
     }
   }
   return (

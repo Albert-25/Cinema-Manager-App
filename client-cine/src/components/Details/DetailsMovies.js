@@ -38,21 +38,14 @@ const DetailsMovies = (props) => {
       dispatch(getAllReviewByIdOfMovie(id));
    }, [dispatch]);
 
-   /*useEffect(() => {
-        dispatch(DetailedMovie(id));
-        dispatch(getAllReviewByIdOfMovie(id));
-    }, [dispatch, id]);*/
-
    const handleFilterRating = (e) => {
       dispatch(filterReviewByRating(e.target.value));
    };
 
-   // console.log("la ide detalles : ", id)
    let Mooovie = [];
    if (detailed[0]) {
       Mooovie = detailed[0];
    }
-   console.log("DETAAAAILED", detailed)
    let GenArray =
       detailed.Generos && detailed.Generos.length
          ? detailed.Generos.map((e) => e.genero)
@@ -134,7 +127,7 @@ const DetailsMovies = (props) => {
                                     return <span key={a}>{a + ", "}</span>;
                                  })
                               ) : (
-                                 <span>No genres yet</span>
+                                 <span>No hay géneros para mostrar</span>
                               )}
                            </div>
                         </div>
@@ -150,7 +143,7 @@ const DetailsMovies = (props) => {
                                     return <span key={a}>{a + ", "}</span>;
                                  })
                               ) : (
-                                 <span>No genres yet</span>
+                                 <span>No hay actores para mostrar</span>
                               )}
                            </div>
                         </div>
@@ -164,13 +157,12 @@ const DetailsMovies = (props) => {
                   </div>
                   <div className="buttons">
                      <div className="div_lef">
-                        <div>Ordenar por rating:</div>
                         <Form.Select
                            className="filterByRating"
                            onChange={handleFilterRating}
                         >
                            <option selected disabled={true}>
-                              Select rating
+                              Ordenar por rating
                            </option>
                            <option value="asc">Ascendente</option>
                            <option value="des">Descendente</option>
@@ -183,14 +175,13 @@ const DetailsMovies = (props) => {
                   <div className="Details__rightdown__container">
                      <Link to="/" className="Details__rightdown">
                         <p className="Details__rightdown__text">
-                           👉 Go back 👈
+                           👉 Volver 👈
                         </p>
                      </Link>
                   </div>
                   <div className="comentarios">
                      <ReviewToShow id={id} />
                   </div>
-                  {/* {console.log(comentarios)} */}
                </div>
             </div>
          </div>
@@ -252,7 +243,7 @@ const DetailsMovies = (props) => {
                         </span>
                      </div>
                      <div className="Details__genero grid__child">
-                        <h4>Generos:</h4>
+                        <h4>Géneros:</h4>
                         <div className="Details__trailer">
                            {Array.isArray(GenArray) ? (
                               GenArray.map((a, i) => {
@@ -262,7 +253,7 @@ const DetailsMovies = (props) => {
                                  return <span key={a}>{a + ", "}</span>;
                               })
                            ) : (
-                              <span>No genres yet</span>
+                              <span>No hay géneros para mostrar</span>
                            )}
                         </div>
                      </div>
@@ -278,13 +269,13 @@ const DetailsMovies = (props) => {
                                  return <span key={a}>{a + ", "}</span>;
                               })
                            ) : (
-                              <span>No genres yet</span>
+                              <span>No hay actores para mostrar</span>
                            )}
                         </div>
                      </div>
                      <Link to="/" className="Details__rightdown">
                         <p className="Details__rightdown__text">
-                           👉 Go back 👈
+                           👉 Volver 👈
                         </p>
                      </Link>
                   </div>

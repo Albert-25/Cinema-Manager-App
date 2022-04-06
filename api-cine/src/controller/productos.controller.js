@@ -27,7 +27,6 @@ const getOne = async (req, res, next) => {
 
 const createProduct = async (req, res, next) => {
   const { Product } = req.body;
-  console.log("het, llegamos!")
 
   try {
     if (Product.nombreProducto === "") {
@@ -58,11 +57,9 @@ const createProduct = async (req, res, next) => {
       currency: 'usd',
       // recurring: {interval: 'month'},
     });
-    console.log("HOLA", stripePrice.id)
 
     Product.id = stripeProduct.id
     Product.priceID = stripePrice.id
-    console.log(Product)
 
     let nuevo = await Productos.create(Product);
 

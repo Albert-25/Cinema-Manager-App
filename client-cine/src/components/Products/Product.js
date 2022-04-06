@@ -64,45 +64,45 @@ export default function Product({
         dispatch(updateCart(arrayToSend));
     };
 
-    return (
-        <>
-            <Card
-                style={{ width: "20rem", marginLeft: "auto", marginRight: "auto" }}
-            >
-                <Card.Img
-                    variant="top"
-                    src={imagenProducto}
-                    style={{ maxHeight: "200px", minHeight: "200px" }}
-                />
-                <Card.Body>
-                    <Card.Title>{nombreProducto}</Card.Title>
-                    <Card.Text>Precio :{precio}</Card.Text>
-                    <Card.Text>Stock: {stock}!</Card.Text>
-                    <Link to={`Products/${id}`}>
-                        <Button className="me-3" variant="primary">
-                            Details
-                        </Button>
-                    </Link>
-                    <Button
-                        variant="outline-primary"
-                        disabled={cantidad <= 0 ? true : false}
-                        onClick={() => onClickLess()}
-                    >
-                        -
-                    </Button>
-                    <span className="fw-bolder me-1 ms-1"> {cantidad} </span>
-                    <Button onClick={() => onClickMore()} variant="outline-primary">
-                        +
-                    </Button>
-                    <Button
-                        disabled={cantidad <= 0 ? true : false}
-                        onClick={() => addToCart()}
-                        variant="primary"
-                    >
-                        add to cart
-                    </Button>
-                </Card.Body>
-                {/* <Card.ImgOverlay>
+   return (
+      <>
+         <Card
+            style={{ width: "20rem", marginLeft: "auto", marginRight: "auto" }}
+         >
+            <Card.Img
+               variant="top"
+               src={imagenProducto}
+               style={{ maxHeight: "200px", minHeight: "200px" }}
+            />
+            <Card.Body>
+               <Card.Title>{nombreProducto}</Card.Title>
+               <Card.Text>Precio :{precio}</Card.Text>
+               <Card.Text>Stock: {stock}!</Card.Text>
+               <Link to={`Products/${id}`}>
+                  <Button className="me-3" variant="primary">
+                     Detalles
+                  </Button>
+               </Link>
+               <Button
+                  variant="outline-primary"
+                  disabled={cantidad <= 0 ? true : false}
+                  onClick={() => onClickLess()}
+               >
+                  -
+               </Button>
+               <span className="fw-bolder me-1 ms-1"> {cantidad} </span>
+               <Button onClick={() => onClickMore()} variant="outline-primary">
+                  +
+               </Button>
+               <Button
+                  disabled={cantidad <= 0 ? true : false}
+                  onClick={() => addToCart()}
+                  variant="primary"
+               >
+                  Añadir al carrito
+               </Button>
+            </Card.Body>
+            {/* <Card.ImgOverlay>
                     <Card.Title>{nombreProducto}</Card.Title>
                     <Card.Text>
                         Precio :{precio}

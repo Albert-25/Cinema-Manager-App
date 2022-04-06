@@ -193,7 +193,6 @@ const CreateMovies = () => {
          formData
       )
          .then((response) => {
-            console.log(response.data.url);
             setInputs({
                ...inputs,
                [event.target.name]: response.data.url,
@@ -227,7 +226,7 @@ const CreateMovies = () => {
                         type="text"
                         name="titulo"
                         onChange={(evt) => handleChange(evt)}
-                        placeholder="Titulo"
+                        placeholder="Título"
                      />
                      {errors.titulo ? <span>{errors.titulo}</span> : null}
                   </div>
@@ -278,7 +277,7 @@ const CreateMovies = () => {
                <Col md="5">
                   <div className="image_upload_background">
                      <Form.Label column sm="2">
-                        Background:
+                        Fondo:
                      </Form.Label>
                      <Form.Control
                         type="file"
@@ -327,7 +326,7 @@ const CreateMovies = () => {
                         min="0"
                         name="duracion"
                         onChange={(evt) => handleChange(evt)}
-                        placeholder="Duracion"
+                        placeholder="Duración"
                      />
                      {errors.duracion ? <span>{errors.duracion}</span> : null}
                   </div>
@@ -345,7 +344,7 @@ const CreateMovies = () => {
                         placeholder="proximoEstreno"
                      />
                      <label class="form-check-label" for="flexCheckDefault">
-                        es proximo estreno?
+                        ¿Es próximo estreno?
                      </label>
                   </div>
                </Col>
@@ -397,7 +396,7 @@ const CreateMovies = () => {
                         onChange={(evt) => changeArrayGenders(evt)}
                      >
                         <option value="DEFAULT" disabled>
-                           Generos
+                           Géneros
                         </option>
                         {Genres.length &&
                            Genres.map((item, index) => {
@@ -425,7 +424,7 @@ const CreateMovies = () => {
                         onChange={(evt) => changeArrayCast(evt)}
                      >
                         <option value="DEFAULT" disabled>
-                           Cast
+                           Reparto
                         </option>
                         {Cast.length &&
                            Cast.map((item) => {

@@ -21,8 +21,6 @@ export const Cart = () => {
   const handleShow = () => setShow(true);
 
   const handleClick = () => {
-    alert("done");
-    console.log("items card:", itemsCart);
     dispatch(postBuy(itemsCart));
     localStorage.setItem("compra", JSON.stringify(UrlBuy[0]));
   };
@@ -35,7 +33,6 @@ export const Cart = () => {
     variable === 1
   ) {
     window.location.href = UrlBuy[0];
-    console.log("Datos de entrada:", UrlBuy);
     localStorage.setItem("compra", UrlBuy[1]);
     variable = variable - 1;
   }

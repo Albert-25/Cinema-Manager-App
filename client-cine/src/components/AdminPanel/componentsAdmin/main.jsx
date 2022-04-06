@@ -13,7 +13,7 @@ export default function  Main(){
 		<div className="main_container_panel_admin">
 		  <Button bsPrefix="main_back_to_home_btn"  onClick={()=>nagivate('/')}>
 		    <BsArrowLeftShort/>
-		    <span style={{fontSize:"18px"}}>home</span>
+		    <span style={{fontSize:"18px"}}>Inicio</span>
 		  </Button>
 		  <SelectSectionBar/>
 		  <div className="main_items_container_admin">

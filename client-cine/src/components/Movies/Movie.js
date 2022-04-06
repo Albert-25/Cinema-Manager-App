@@ -24,7 +24,6 @@ export default function Movie({
       puntuacionArray.length === 0 ? 1 : puntuacionArray.length;
 
    const promedioPuntuacion = sumaPuntuaciones / numeroPuntuaciones;
-   console.log(promedioPuntuacion);
    return (
       <>
          <Card
@@ -60,7 +59,7 @@ export default function Movie({
                </Card.Text>
                <Link to={`MovieDetails/${id}`}>
                   <Button className="me-3" variant="primary">
-                     Details
+                     Detalles
                   </Button>
                </Link>
                <Link to={`MovieDetails/${id}`}>

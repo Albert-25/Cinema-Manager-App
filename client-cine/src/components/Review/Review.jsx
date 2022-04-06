@@ -6,13 +6,13 @@ import { DivStar } from "./styled"
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import Swal from "sweetalert2"
 
 
 const Review = () => {
 
     let navigate = useNavigate();
     const id = useParams().id;
-    console.log(id)
     const dispatch = useDispatch()
     const [comentario, setComentario] = useState("")
     const [puntuación, setPuntuación] = useState()
@@ -23,10 +23,8 @@ const Review = () => {
     // const nombre = "Anonimo";
     const { user } = useAuth();
     let nombre = user && user.nombre ? user.nombre :"Anonimo"
-    console.log("soy el user",user)
 
     const onChange = (e) => {
-        console.log(e.target.value)
         setComentario(e.target.value)
         setError2Comentario("")
     }
@@ -64,7 +62,13 @@ const Review = () => {
         if (puntuación == null) setErrorPuntuacion("es necesario calificar esta pelicula")
         if (!comentario.trim()) setError2Comentario("es necesario rellenar este campo")
         dispatch(postReview({ nombre, comentario, puntuación, id }))
-        alert("¡Comentario publicado!")
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: '¡Comentario publicado!',
+            showConfirmButton: false,
+            timer: 1000
+          })
         dispatch(AllMovies())
         navigate(-1)
     }

@@ -13,7 +13,6 @@ const startSession = async (req, res) => {
         price: e.priceID,
         quantity: e.quantity
     }))
-    // console.log("Finale", Finale)
     const session = await stripe.checkout.sessions.create({
 
         line_items: Finale
@@ -27,16 +26,13 @@ const startSession = async (req, res) => {
     varrita.push(session.id)
     res.send(varrita)
 
-    // console.log("Sesion", session);
 
 }
 
 const RetriveSesion = async (req, res) => {
-    console.log("bicennnnnnnnnnn", req.params.id)
     const session = await stripe.checkout.sessions.retrieve(
         req.params.id
     );
-    console.log("sesioooooon",session)
     res.send(session)
 }
 
@@ -49,7 +45,6 @@ const insertProduct = async (req, res, next) => {
             description: req.body.description,
         });
         res.json(product.id);
-        console.log(product.id)
     } catch (err) {
         next(err);
     }

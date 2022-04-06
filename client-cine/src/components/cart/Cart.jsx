@@ -5,6 +5,7 @@ import { BsTrash } from "react-icons/bs";
 import { updateCart, postBuy } from "../../store/actions";
 import s from "./cart.module.css";
 import logo from "../../assets/cart.png";
+import ticket from "../../assets/ticket.png"
 
 export const Cart = () => {
   const dispatch = useDispatch();
@@ -61,12 +62,17 @@ export const Cart = () => {
             {itemsCart.map((item) => {
               return (
                 <div className={s.itemlist} key={item.id}>
-                  <span>
-                    {item.quantity} - {item.name} $ {item.quantity * item.price}
+                  <span className={s.imgticket}>
+                    <img src={item.imagenProducto ? item.imagenProducto : ticket} width="75px" height="50px" />
                   </span>
-                  <Button variant="outline-danger" size="sm">
-                    <BsTrash onClick={() => handleDelete(item.id, item.name)} />
-                  </Button>
+                  <span className={s.texto}>
+                    {item.quantity}{" und."} - {item.name} $ {item.quantity * item.price}
+                  </span>
+                  <span className={s.buttonTrash}>
+                    <Button onClick={() => handleDelete(item.id, item.name)} variant="outline-danger" size="sm">
+                      <BsTrash />
+                    </Button>
+                  </span>
                 </div>
               );
             })}

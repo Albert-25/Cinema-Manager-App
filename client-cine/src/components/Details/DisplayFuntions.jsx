@@ -21,15 +21,22 @@ export const DisplayFuntions = ({ funtions, nameMovie, posterMovie }) => {
   const handleChange = (e) => {
     const { name, value } = e.target
     if (value !== 'defalut') {
-      if (name !== 'confirm') {
+      if (name === 'confirm') {
+        setTicket(prev => ({
+          ...prev,
+          [name]: !ticket.confirm
+        }))
+      }
+      if (name === 'quantity' && value <= functionSelected.asientos) {
         setTicket(prev => ({
           ...prev,
           [name]: value
         }))
-      } else {
+      }
+      if (name === 'horario') {
         setTicket(prev => ({
           ...prev,
-          [name]: !ticket.confirm
+          [name]: value
         }))
       }
     }

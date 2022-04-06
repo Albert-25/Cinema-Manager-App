@@ -161,13 +161,15 @@ export default function UpdateProfile() {
                 }}
                 placeholder="Deja en blanco para mantener sin cambios"
               />
-              <button
-                type="button"
+               <Button
+                className="w-20"
                 name="profilePic"
+                style={{ marginTop: "1rem" }}
                 onClick={(event) => uploadImage(event)}
+                type="button"
               >
-                Subir Imagen
-              </button>
+                Subir imágen
+              </Button>
               <br />
               {picProfile && <span>imagen cargada:</span>}
               <br />

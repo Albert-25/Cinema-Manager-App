@@ -140,7 +140,6 @@ const CreateFunciones = () => {
           postFunciones(inputs, info.pelicula);
 
           document.getElementById("Panaino!").reset();
-          window.location.reload();
           // setTimeout(() => {
           //   dispatch(AllMovies());
           // }, 1000);

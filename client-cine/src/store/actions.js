@@ -384,10 +384,11 @@ export const getFunctionInfo = (id) => {
 };
 
 export const editMovie = (id, data) => {
-   return async () => {
+   return async (dispatch) => {
       try {
          axios.put(`http://localhost:3001/peliculas/${id}`, data);
          Swal.fire("La pelicula fue editada!", "", "success");
+         dispatch(AllMovies())
       } catch (error) {
          Swal.fire({
             icon: "error",
@@ -403,10 +404,11 @@ export const editMovie = (id, data) => {
 export const editFunction = (id, data) => {
 
    console.log("actiondata: " + JSON.stringify(data));
-   return async () => {
+   return async (dispatch) => {
       try {
          axios.put(`http://localhost:3001/funcion/${id}`, data);
          Swal.fire("La función ha sido editada!", "", "success");
+         dispatch(GetAllFunctions())
       } catch (error) {
          Swal.fire({
             icon: "error",
@@ -580,6 +582,7 @@ export const updateUser = (id, data) => {
       `http://localhost:3001/firebase/update/${id}`,
       data
     );
+    dispatch(allUsers())
     return dispatch({
       type: "UPDATE_USER",
       payload: json.data
@@ -609,10 +612,11 @@ export const editProduct = (id, data) => {
    let body = {
       Product: data
    }
-   return async () => {
+   return async (dispatch) => {
       try {
          axios.put(`http://localhost:3001/productos/${id}`, body);
          Swal.fire("El producto fue editado!", "", "success");
+         dispatch(AllProducts())
       } catch (error) {
          Swal.fire({
             icon: "error",

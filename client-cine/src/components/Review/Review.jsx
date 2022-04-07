@@ -9,6 +9,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import Swal from "sweetalert2";
 import { Button, Container, Form } from "react-bootstrap";
 
+
 const Review = () => {
    let navigate = useNavigate();
    const id = useParams().id;
@@ -73,13 +74,27 @@ const Review = () => {
       navigate(-1);
    };
 
-   useEffect(() => {
-      if (comentario.length >= 601) {
-         setErrorComentario("se permiten como maximo 600 carácteres");
-      } else {
-         setErrorComentario("");
-      }
-   });
+        }
+        setErrorPuntuacion("")
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (puntuación == null) setErrorPuntuacion("es necesario calificar esta pelicula")
+        if (!comentario.trim()) setError2Comentario("es necesario rellenar este campo")
+        dispatch(postReview({ nombre, comentario, puntuación, id }))
+        dispatch(AllMovies())
+        navigate(-1)
+    }
+
+     useEffect(() => {
+        if (comentario.length >= 601) {
+            setErrorComentario("se permiten como maximo 600 carácteres")
+        }
+        else {
+            setErrorComentario("")
+        }
+    })
+
 
    /*useEffect(() => {
         if (comentario.length >= 601) {

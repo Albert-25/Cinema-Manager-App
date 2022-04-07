@@ -46,7 +46,7 @@ export default function Movie({
                </Card.Text>
                <Card.Text>
                   <Button style={{ cursor: "auto" }}>
-                     {promedioPuntuacion}
+                     {promedioPuntuacion === 0? "Sin Puntuación" : promedioPuntuacion.toPrecision(2)}
                   </Button>{" "}
                   {Array(Math.round(promedioPuntuacion))
                      .fill(3)

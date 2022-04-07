@@ -62,9 +62,9 @@ export default function Movie({
                      Detalles
                   </Button>
                </Link>
-               <Link to={`MovieDetails/${id}`}>
+               {/* <Link to={`MovieDetails/${id}`}>
                   <Button variant="primary">Ticket</Button>
-               </Link>
+               </Link> */}
             </Card.Body>
          </Card>
          {/* <Link to={`MovieDetails/${id}`}>

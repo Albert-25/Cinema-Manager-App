@@ -5,6 +5,7 @@ import { useParams, useNavigate, useMatch } from "react-router-dom";
 import { Form, Col, Row, Container } from "react-bootstrap";
 import axios from "axios";
 const { REACT_APP_BASE_URL } = process.env;
+import { Link } from "react-router-dom";
 
 export function EditItem() {
   const dispatch = useDispatch();
@@ -46,6 +47,12 @@ export function EditItem() {
         minHeight: "100vh",
       }}
     >
+    <Link to="/admin" className="position-absolute top-0 start-10">
+            <Button>
+               <MdKeyboardBackspace className="me-3" />
+               <span>Regresar al Admin</span>
+            </Button>
+         </Link>
       <h2
         className="text-center mb-4"
         style={{ color: "var(--text-light-color)" }}

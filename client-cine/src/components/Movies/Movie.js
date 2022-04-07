@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { MdRule, MdPerson, MdStarRate } from "react-icons/md";
+import { DisplayFuntions } from "../Details/DisplayFuntions";
+import { useDispatch, useSelector } from "react-redux";
+import { DetailedMovie } from "../../store/actions";
 import "./Movie.css";
 
 export default function Movie({
@@ -12,6 +15,12 @@ export default function Movie({
    clasificacion,
    comments,
 }) {
+   const dispatch = useDispatch();
+   const detailed = useSelector((state) => state.PelisDetails);
+   let infoMovies = {};
+   if(detailed.id === id){
+      infoMovies = {...detailed};
+   }
    const puntuacionArray = comments && comments.map((c) => c.puntuación);
    const sumaPuntuaciones =
       puntuacionArray &&
@@ -19,7 +28,9 @@ export default function Movie({
          (contador, puntuación) => contador + puntuación,
          0
       );
-
+      useEffect(() => {
+         dispatch(DetailedMovie(id));
+      }, [dispatch]);
    const numeroPuntuaciones =
       puntuacionArray.length === 0 ? 1 : puntuacionArray.length;
 
@@ -46,7 +57,7 @@ export default function Movie({
                </Card.Text>
                <Card.Text>
                   <Button style={{ cursor: "auto" }}>
-                     {promedioPuntuacion}
+                     {promedioPuntuacion === 0? "Sin Puntuación" : promedioPuntuacion.toPrecision(2)}
                   </Button>{" "}
                   {Array(Math.round(promedioPuntuacion))
                      .fill(3)
@@ -62,9 +73,11 @@ export default function Movie({
                      Detalles
                   </Button>
                </Link>
-               <Link to={`MovieDetails/${id}`}>
+
+               {/* <Link to={`MovieDetails/${id}`}>
                   <Button variant="primary">Ticket</Button>
-               </Link>
+               </Link> */}
+
             </Card.Body>
          </Card>
          {/* <Link to={`MovieDetails/${id}`}>

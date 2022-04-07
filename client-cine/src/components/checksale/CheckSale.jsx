@@ -18,15 +18,15 @@ export const CheckSale = () => {
         setOrder(res.data)
       })
       .catch(err => console.error(err.data))
-  }, [])
+  }, [uuid])
 
   const handleClick = async () => {
-    if (order.Nombre.search('VERIFICADO') !== -1) {
+    if (order.verificado) {
       return navigate('/admin')
     }
     const body = {
       compra: {
-        Nombre: `${order.Nombre} -- VERIFICADO`
+        verificado: true
       }
     }
     try {
@@ -45,9 +45,9 @@ export const CheckSale = () => {
         <Card.Body>
           <Card.Title>Productos: {toString(order.products)}</Card.Title>
           <Card.Text>Total: $ {order.total}</Card.Text>
-          {order.Nombre.search('VERIFICADO') !== -1 ? <Card.Text>Ya fue verificada</Card.Text> : null}
+          {order.verificado ? <Card.Text>Ya fue verificada</Card.Text> : null}
           <Button variant="primary" onClick={handleClick}>
-            {order.Nombre.search('VERIFICADO') !== -1 ? 'Ver historial' : 'Verificar'}
+            {order.verificado ? 'Ver historial' : 'Verificar'}
           </Button>
         </Card.Body>
       </Card>

@@ -287,7 +287,7 @@ function CreateProduct() {
                      />
                      <Form.Control
                         type="submit"
-                        value="Crear pelicula"
+                        value="Crear producto"
                         onClick={(e) => handleClick(e)}
                         style={{ width: "40%", margin: "auto" }}
                      />

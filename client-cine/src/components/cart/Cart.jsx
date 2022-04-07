@@ -6,6 +6,7 @@ import { updateCart, postBuy } from "../../store/actions";
 import s from "./cart.module.css";
 import logo from "../../assets/cart.png";
 import ticket from "../../assets/ticket.png";
+import Swal from "sweetalert2";
 
 export const Cart = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,6 @@ export const Cart = () => {
     (pValue, cValue) => pValue + cValue.quantity * cValue.price,
     0
   );
-console.log("ASDHJKASHDKJLASHJDK",itemsCart)
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -36,7 +36,13 @@ console.log("ASDHJKASHDKJLASHJDK",itemsCart)
       dispatch(postBuy(itemsCart));
       localStorage.setItem("compra", JSON.stringify(UrlBuy[0]));
     } else {
-      alert("Uno de tus produtos acaba de ponerse fuera de stock");
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'Uno de tus produtos acaba de ponerse fuera de stock',
+        showConfirmButton: false,
+        timer: 2000
+      })
     }
   };
 

@@ -1,12 +1,8 @@
-*{
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 .calificacion {
-    margin-left: 10px;
+    margin-left: 1rem;
 }
 
-.container button{
+/* .container button{
     background-color: #151515;
     border: none;
     border-radius: 10px;
@@ -15,23 +11,20 @@
     cursor: pointer;
     margin: 30px 0px;
     margin-left: 120px;
-}
+} */
 
 .error{
     color: red;
-    font-size: 13px;
+    font-size: 1rem;
 }
-.container{
+.form{
     background-color:#F0F3F4;
-    display: flex;
-    justify-content: center;
+    width: auto;
     border: 1px solid black;
     border-radius: 5px;
-    margin-top: 250px;
-    margin-left: 700px;
-    margin-right: 700px;
+    padding: 2.5rem;
 }
 textarea{
-    width: 400px;
-    height: 100px;
+    width: 100%;
+    height: 150px;
 }

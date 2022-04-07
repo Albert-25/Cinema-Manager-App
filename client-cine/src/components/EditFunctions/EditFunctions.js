@@ -25,6 +25,7 @@ const EditFunctions = () => {
 
 
 
+
    const [inputs, setInputs] = useState([
       {
          sala: "",
@@ -37,6 +38,7 @@ const EditFunctions = () => {
          pelicula: "",
       },
    ]);
+
 
    const [errors, setErrors] = useState(
       {
@@ -139,8 +141,14 @@ const EditFunctions = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      setInputs.pelicula(movieData.pelicula);
-      setInputs.maxAsientos(movieData.maxAsientos);
+      setInputs({
+            ...inputs,
+            pelicula: movieData.pelicula,
+         });
+      setInputs({
+            ...inputs,
+            maxAsientos: movieData.maxAsientos,
+         });
 
       console.log('llegando', inputs)
       console.log("hey", errors);

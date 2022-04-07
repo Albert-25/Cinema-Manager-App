@@ -6,7 +6,7 @@ export function postMovies(inputs) {
       axios.post("http://localhost:3001/peliculas", inputs).then(
          (res) => {
             Swal.fire({
-               icon: "succes",
+               icon: "success",
                title: "Excelente!",
                text: "La pelicula fue agregada correctamente",
             });
@@ -54,7 +54,6 @@ export const GetAllFunctions = () => {
   return async (dispatch) => {
     const response = await axios.get(`http://localhost:3001/funcion`);
     if (response?.data) {
-      console.log(response.data)
       dispatch({
         type: "GETFUNCTIONS",
         payload: { funcs: response.data },
@@ -66,23 +65,31 @@ export const GetAllFunctions = () => {
 
 export const postFunciones = (funciones, peliculaId) => {
  
-   if (funciones.length > 1) {
-      let body = {
-         funciones: funciones,
-         peliculaId: peliculaId,
-      };
-      axios.post("http://localhost:3001/funcion/bulk", body);
+   try {
+      if (funciones.length > 1) {
+         let body = {
+            funciones: funciones,
+            peliculaId: peliculaId,
+         };
+         axios.post("http://localhost:3001/funcion/bulk", body);
+         Swal.fire({
+            icon: "success",
+            title: "Excelente!",
+            text: "La funcion se agrego satisfactoriamente",
+         });
+      } else {
+         let body = {
+            funcion: funciones[0],
+            peliculaId: peliculaId,
+         };
+         axios.post("http://localhost:3001/funcion", body);
+      }
+   } catch (error) {
       Swal.fire({
-         icon: "succes",
-         title: "Excelente!",
-         text: "La funcion se agrego satisfactoriamente",
-      });
-   } else {
-      let body = {
-         funcion: funciones[0],
-         peliculaId: peliculaId,
-      };
-      axios.post("http://localhost:3001/funcion", body);
+         icon: "error",
+         title: "Oops...",
+         text: "Porfavor, ingrese correctamente los datos y vuelva a intentar",
+       });
    }
 
 };
@@ -162,11 +169,12 @@ export const DetailedProduct = (id) => {
 };
 
 export function getAllReviewByIdOfMovie(id) {
+
    return async function (dispatch) {
       const json = await axios.get(`http://localhost:3001/comentarios/${id}`);
       return dispatch({
          type: "GET_REVIEW_BY_MOVIEID",
-         payload: json.data,
+         payload: json.data.comentarios,
       });
    };
 }
@@ -180,14 +188,31 @@ export const BestMovies = (arg) => {
 
 export const postReview = (payload) => {
    return async (dispatch) => {
-      const json = await axios.post(
-         "http://localhost:3001/comentarios",
-         payload
-      );
-      return dispatch({
-         type: "POST_REVIEW",
-         payload: json.data,
-      });
+      try {
+         const json = await axios.post(
+            "http://localhost:3001/comentarios",
+            payload
+         );
+         Swal.fire({
+               position: 'center',
+               icon: 'success',
+               title: '¡Comentario publicado!',
+               showConfirmButton: false,
+               timer: 1000
+             })
+         return dispatch({
+            type: "POST_REVIEW",
+            payload: json.data,
+         });
+      } catch (error) {
+         Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'No se pudo crear el comentario...',
+            showConfirmButton: false,
+            timer: 1000
+          })
+      }
    };
 };
 
@@ -243,7 +268,7 @@ export const uploadGenre = (info) => {
          .post("http://localhost:3001/generos", body)
          .then((res) => {
             Swal.fire({
-               icon: "succes",
+               icon: "success",
                title: "Excelente!",
                text: "Genero creado satisfactoriamente",
             });
@@ -269,7 +294,7 @@ export const uploadActor = (info) => {
       axios.post("http://localhost:3001/actores", body).then(
          (resp) => {
             Swal.fire({
-               icon: "succes",
+               icon: "success",
                title: "Excelente!",
                text: "Actor creado satisfactoriamente",
             });
@@ -305,7 +330,7 @@ export const uploadProduct = (info) => {
       axios.post("http://localhost:3001/productos", body).then(
          (res) => {
             Swal.fire({
-               icon: "succes",
+               icon: "success",
                title: "Excelente!",
                text: "Producto creado satisfactoriamente",
             });
@@ -448,7 +473,13 @@ export const removeGenres = (id) => {
          .then((res) =>
             dispatch({ type: "DELETEGENRE", payload: parseInt(id) })
          )
-         .catch((res) => alert(res.response.data));
+         .catch((res) => Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: res.response.data,
+            showConfirmButton: false,
+            timer: 1000
+          }));
    };
 };
 export const removeProduct = (id) => {
@@ -458,7 +489,13 @@ export const removeProduct = (id) => {
          .then((res) =>
             dispatch({ type: "DELETEPRODUCT", payload: parseInt(id) })
          )
-         .catch((res) => alert(res.response));
+         .catch((res) => Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: res.response,
+            showConfirmButton: false,
+            timer: 1000
+          }));
    };
 };
 export const cleanMovieComments = () => {

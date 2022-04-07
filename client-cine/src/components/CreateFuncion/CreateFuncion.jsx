@@ -113,6 +113,12 @@ const CreateFunciones = () => {
     });
   };
 
+  const handleClick = (e) => {
+    errors.map((el, index) => {
+      el = validate({ ...inputs[index] }, el, "submit");
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let finalCheck = false;
@@ -135,7 +141,6 @@ const CreateFunciones = () => {
 
           document.getElementById("Panaino!").reset();
           window.location.reload();
-          Swal.fire("Las funciones fueron agregadas!", "", "success");
           // setTimeout(() => {
           //   dispatch(AllMovies());
           // }, 1000);
@@ -326,6 +331,7 @@ const CreateFunciones = () => {
               </Row>
               {index === inputs.length - 1 && (
                 <Form.Control
+                  onClick={(e) => handleClick(e)}
                   type="submit"
                   value="Crear función(es)"
                   style={{ width: "50%", margin: "auto" }}

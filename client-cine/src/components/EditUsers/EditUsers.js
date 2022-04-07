@@ -157,7 +157,7 @@ const EditUsers = () => {
                />
                {errors.nombre ? <span>{errors.nombre}</span> : null}
             </div>
-            <Form.Label htmlFor="correo">Correo:</Form.Label>
+            /*<Form.Label htmlFor="correo">Correo:</Form.Label>
             <div className="input__with__error mb-4">
                <Form.Control
                   type="text"
@@ -167,7 +167,7 @@ const EditUsers = () => {
                   placeholder={userDetails.correo}
                />
                {errors.correo ? <span>{errors.correo}</span> : null}
-            </div>
+            </div>*/
             <div className="image_upload_profile">
                <Form.Label>Foto de perfil:</Form.Label>
                <Form.Control

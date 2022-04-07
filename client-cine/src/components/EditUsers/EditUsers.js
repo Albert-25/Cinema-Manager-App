@@ -25,15 +25,16 @@ const EditUsers = () => {
   }, [dispatch, id]);*/
 
    const userDetails = useSelector((state) => state.DetailedUser);
+   console.log('detalles', userDetails)
 
    const [imagesSelected, setImagesSelected] = useState({
       imagen: "",
    });
 
    const [inputs, setInputs] = useState({
-      imagen: "",
-      rol: "",
-      nombre: "",
+      imagen: userDetails.imagen,
+      rol: userDetails.rol,
+      nombre: userDetails.nombre,
    });
 
    const [errors] = useState({
@@ -53,18 +54,24 @@ const EditUsers = () => {
 
    const checkInputs = () => {
       if (inputs.nombre === "" && userDetails.nombre !== undefined) {
+
          setInputs({
             ...inputs,
             nombre: userDetails.nombre,
          });
+
       }
       if (inputs.rol === "" && userDetails.rol !== undefined) {
+
+
          setInputs({
             ...inputs,
             rol: userDetails.rol,
          });
       }
       if (inputs.imagen === "" && userDetails.imagen !== undefined) {
+      
+
          setInputs({
             ...inputs,
             imagen: userDetails.imagen,
@@ -74,7 +81,6 @@ const EditUsers = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      checkInputs();
       if (errors.error === false) {
          Swal.fire({
             title: "¿Quieres guardar los cambios?",
@@ -216,7 +222,7 @@ const EditUsers = () => {
                      Admin
                   </option>
                   <option name="user" className="elemSelect" value="user">
-                     Sser
+                     User
                   </option>
                </Form.Select>
 

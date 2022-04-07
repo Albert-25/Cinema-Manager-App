@@ -17,10 +17,8 @@ export default function Movie({
 }) {
    const dispatch = useDispatch();
    const detailed = useSelector((state) => state.PelisDetails);
-   console.log(detailed);
    let infoMovies = {};
    if(detailed.id === id){
-      console.log("entre" + titulo);
       infoMovies = {...detailed};
    }
    const puntuacionArray = comments && comments.map((c) => c.puntuación);

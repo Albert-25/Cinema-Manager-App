@@ -40,7 +40,7 @@ password: password,
 
 
 const editUsers = async (req, res, next) => {
-    const id = req.params.id;
+  const id = req.params.id;
  const doc = await db.collection('usuarios').doc(`${id}`).get()
  res.json({
   id: doc.id,
@@ -50,7 +50,7 @@ const editUsers = async (req, res, next) => {
       rol: doc.data().rol,
 
  })
- res.send(doc)
+ //res.send(doc)
 }
 
 const deleteUser = async (req, res, next) => {
@@ -61,6 +61,7 @@ const deleteUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
     const id = req.params.id;
+
 
   await db.collection('usuarios').doc(`${id}`).update(req.body)
 

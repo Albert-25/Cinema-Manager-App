@@ -75,12 +75,11 @@ export default function Movie({
                      Detalles
                   </Button>
                </Link>
-               {infoMovies && infoMovies.Funciones && infoMovies.Funciones.length !== 0 ? (
-               <DisplayFuntions
-                  funtions={infoMovies.Funciones}
-                  nameMovie={infoMovies.titulo}
-               />
-            ) : null}
+
+               {/* <Link to={`MovieDetails/${id}`}>
+                  <Button variant="primary">Ticket</Button>
+               </Link> */}
+
             </Card.Body>
          </Card>
          {/* <Link to={`MovieDetails/${id}`}>

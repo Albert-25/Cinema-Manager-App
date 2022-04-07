@@ -56,7 +56,29 @@ const Review = () => {
       }
       setErrorPuntuacion("");
    };
-  
+
+   // const handleSubmit = (e) => {
+   //    e.preventDefault();
+   //    if (puntuación == null)
+   //       setErrorPuntuacion("es necesario calificar esta pelicula");
+   //    if (!comentario.trim())
+   //       setError2Comentario("es necesario rellenar este campo");
+   //    dispatch(postReview({ nombre, comentario, puntuación, id }));
+   //    Swal.fire({
+   //       position: "center",
+   //       icon: "success",
+   //       title: "¡Comentario publicado!",
+   //       showConfirmButton: false,
+   //       timer: 1000,
+   //    });
+   //    dispatch(AllMovies());
+   //    navigate(-1);
+   // };
+
+   //      }
+   //      setErrorPuntuacion("")
+   //  }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         if (puntuación == null) setErrorPuntuacion("es necesario calificar esta pelicula")
@@ -154,7 +176,7 @@ const Review = () => {
             </div>
             <div className={styles.error}>{errorComentario}</div>
             <div className={styles.error}>{error2Comentario}</div>
-            <Button className="mx-auto">Publicar comentario</Button>
+            <Button type="submit" className="mx-auto">Publicar comentario</Button>
          </form>
       </Container>
    );
